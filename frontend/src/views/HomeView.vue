@@ -1,5 +1,5 @@
 <template>
   <main>
-    <h1>Home page</h1>
+    <h1 class="h-[100vh]">Home page</h1>
   </main>
 </template>
