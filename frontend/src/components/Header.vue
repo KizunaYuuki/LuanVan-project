@@ -1,5 +1,5 @@
 <template>
-    <header class="bg-white sticky top-0 border-b-[1.5px] border-[#0f172a1a]">
+    <header class="bg-white sticky top-0 border-b-[1.5px] border-[#0f172a1a] z-[9999]">
         <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
             <div class="flex lg:flex-1">
                 <RouterLink to="/"
