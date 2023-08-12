@@ -10,23 +10,10 @@ const pool = mysql.createPool({
 
 pool.getConnection()
     .then(async (connection) => {
-        console.log('Hệ thống đã kết nối thành công với MySQL.');
-
-        // Ví dụ truy vấn
-        const query = 'SELECT * FROM notes';
-        try {
-            const results = await connection.query(query);
-            // console.log('Kết quả truy vấn: ', results);
-            connection.release(); // Trả kết nối vào pool sau khi sử dụng xong
-            pool.end(); // Đóng pool sau khi sử dụng xong (nếu không cần kết nối nữa)
-        } catch (err) {
-            console.error('Lỗi truy vấn: ', err);
-            connection.release(); // Trả kết nối vào pool nếu xảy ra lỗi
-            pool.end(); // Đóng pool nếu xảy ra lỗi
-        }
+        console.log('Server đã kết nối thành công với MySQL.');
     })
     .catch((err) => {
-        console.error('Lỗi kết nối: ', err);
+        console.error('Lỗi kết nối khi kết nối với MySQL: ', err);
         pool.end(); // Đóng pool nếu không thể kết nối
     });
 

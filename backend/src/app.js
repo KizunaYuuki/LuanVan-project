@@ -3,10 +3,9 @@ const app = express()
 app.use(express.json())
 
 import { config } from 'dotenv'
-config()
+config();
 
-import mysql from 'mysql2'
-import { getNote, getNotes, createNote } from '../backend/models/db.js'
+import { getNote, getNotes, createNote } from '../src/models/db.js'
 
 const port = process.env.PORT
 
@@ -38,7 +37,7 @@ app.use((err, req, res, next) => {
 
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`API Server listening on port ${port}`)
 })
 
 
