@@ -1,7 +1,7 @@
-import { config } from 'dotenv'
-config()
+const dotenv = require("dotenv"); 
+dotenv.config();
 
-export const dbconfig = {
+const dbconfig = {
     app: {
         port: process.env.PORT || 3000,
     },
@@ -12,3 +12,6 @@ export const dbconfig = {
         DB: process.env.MYSQL_DATABASE || "notes_app"
     }
 };
+module.exports = {
+    dbconfig
+}

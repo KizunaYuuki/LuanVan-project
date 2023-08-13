@@ -1,5 +1,5 @@
-import mysql from 'mysql2'
-import { dbconfig } from '../config/db.config.js'
+const mysql = require('mysql2');
+const { dbconfig } = require("../config/db.config.js")
 
 const pool = mysql.createPool({
     host: dbconfig.db.HOST,
@@ -17,12 +17,12 @@ pool.getConnection()
         pool.end(); // Đóng pool nếu không thể kết nối
     });
 
-export async function getNotes() {
+async function getNotes() {
     const [rows] = await pool.query("select * from notes")
     return rows
 }
 
-export async function getNote(id) {
+async function getNote(id) {
     const [rows] = await pool.query(`
     SELECT * 
     FROM notes
@@ -31,7 +31,7 @@ export async function getNote(id) {
     return rows[0]
 }
 
-export async function createNote(title, contents) {
+async function createNote(title, contents) {
     const [result] = await pool.query(`
     INSERT INTO notes (title, contents)
     VALUES (?, ?)
@@ -39,3 +39,9 @@ export async function createNote(title, contents) {
     const id = result.insertId;
     return getNote(id);
 }
+
+module.exports = {
+    getNote,
+    getNotes,
+    createNote,
+};
