@@ -1,22 +1,33 @@
-// import './assets/main.css'
+import { createAuth0 } from "@auth0/auth0-vue";
+import { createApp } from "vue";
+import { createPinia } from 'pinia';
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-
-import App from './App.vue'
-import router from './router'
-import './assets/tailwind.css'
+import App from "./App.vue";
+import "./assets/css/styles.css";
+import router from "./router";
+// Tam thoi bo tailwind
+// import './assets/tailwind.css'
 import VueGtag from "vue-gtag-next";
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(createPinia())
-app.use(router)
-
-app.use(VueGtag, {
-    property: [
-        { id: 'G-T117TRW8PB', default: true }
-      ]
-});
+app
+    .use(createPinia())
+    .use(router)
+    .use(
+        createAuth0({
+            domain: import.meta.env.VITE_AUTH0_DOMAIN,
+            clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
+            authorizationParams: {
+                audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+                redirect_uri: import.meta.env.VITE_AUTH0_CALLBACK_URL,
+            },
+        })
+    )
+    .use(VueGtag, {
+        property: [
+            { id: 'G-T117TRW8PB', default: true }
+        ]
+    });
 
 app.mount('#app')
