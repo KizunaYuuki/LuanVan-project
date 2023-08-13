@@ -1,16 +1,17 @@
 <template>
-    <!-- <Header></Header> -->
-
-    <!-- <button @click="clickEventTest">Send Data to G4</button> -->
-    <!-- Noi dung trang -->
-    <!-- <RouterView /> -->
-
-    <!-- <Footer></Footer> -->
-    
+    <!-- Wait auth0 load -->
     <div v-if="isLoading" class="page-layout">
         <PageLoader />
     </div>
-    <router-view v-else />
+    <div v-else>
+        <Header></Header>
+
+        <button @click="clickEventTest">Send Data to G4</button>
+        <!-- Noi dung trang -->
+        <RouterView />
+
+        <Footer></Footer>
+    </div>
 </template>    
 
 <script setup>

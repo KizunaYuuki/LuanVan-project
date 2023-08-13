@@ -5,8 +5,7 @@ import { createPinia } from 'pinia';
 import App from "./App.vue";
 import "./assets/css/styles.css";
 import router from "./router";
-// Tam thoi bo tailwind
-// import './assets/tailwind.css'
+import './assets/tailwind.css'
 import VueGtag from "vue-gtag-next";
 
 const app = createApp(App);

@@ -19,9 +19,9 @@ const router = createRouter({
             component: HomePage,
         },
         {
-            path: '/homepage',
-            name: 'homepage',
-            component: HomePage,
+            path: '/test',
+            name: 'test',
+            component: HomeView,
         },
         {
             path: '/about',
