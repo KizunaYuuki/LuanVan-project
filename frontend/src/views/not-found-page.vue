@@ -1,7 +1,7 @@
 <template>
   <PageLayout>
     <div class="content-layout">
-      <h1 id="page-title" class="content__title">Not Found</h1>
+      <h1 id="page-title" class="content__title text-[red]">Not Found</h1>
     </div>
   </PageLayout>
 </template>

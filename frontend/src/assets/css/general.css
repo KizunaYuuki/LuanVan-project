@@ -31,6 +31,10 @@ body {
   overflow-y: scroll;
 }
 
+header, footer, button, * {
+    font-family: var(--font-secondary);
+}
+
 h1,
 h2,
 h3,
