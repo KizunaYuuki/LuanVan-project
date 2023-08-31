@@ -6,7 +6,7 @@
     <div v-else>
         <Header></Header>
 
-        <button @click="clickEventTest">Send Data to G4</button>
+        <!-- <button @click="clickEventTest">Send Data to G4</button> -->
         <!-- Noi dung trang -->
         <RouterView />
 

@@ -17,11 +17,28 @@ const router = createRouter({
             path: '/',
             name: 'home',
             component: HomePage,
+            meta: {
+                title: "Trang chủ",
+            }
         },
         {
             path: '/test',
             name: 'test',
             component: HomeView,
+        },
+        {
+            path: '/cart',
+            name: 'Cart',
+            component: () => import('../views/Cart.vue'),
+        },
+        {
+            path: `/services/:id`,
+            name: 'Service Details',
+            component: () => import('../views/ServiceDetails.vue'),
+            props: true,
+            meta: {
+                title: "Chi tiết dịch vụ",
+            }
         },
         {
             path: '/about',
@@ -51,6 +68,9 @@ const router = createRouter({
             name: "profile",
             component: ProfilePage,
             beforeEnter: authGuard,
+            meta: {
+                title: "Quản lý thông tin cá nhân",
+            }
         },
         {
             path: "/public",
@@ -80,6 +100,13 @@ const router = createRouter({
             component: NotFoundPage,
         },
     ]
+})
+
+// Xử lý title 
+router.beforeEach(async (to, from, next) => {
+    document.title = to.meta?.title ?? 'Web Application'
+
+    next();
 })
 
 export default router
