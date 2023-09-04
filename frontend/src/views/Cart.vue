@@ -1,6 +1,6 @@
 <template>
     <main>
-        <section class="flex flex-col max-w-[1024px] mx-auto my-[16px] border border-[#dadce0] rounded-[4px]">
+        <section class="flex flex-col max-w-[1024px] mx-auto my-[16px] border border-[#dadce0] rounded-[4px] min-h-[calc(100vh-112px)]">
             <ul>
                 <!-- Nội dụng -->
                 <li>
@@ -40,8 +40,13 @@
                         </div>
                     </div>
                 </li>
-                                
+
             </ul>
         </section>
     </main>
 </template>
+
+<script setup>
+import { onMounted, ref } from "vue";
+import { useAuth0 } from "@auth0/auth0-vue";
+</script>
