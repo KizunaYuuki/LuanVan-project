@@ -1,5 +1,5 @@
 <template>
-    <div ref="card" :id="test" class="card rounded-[8px] bg-white" @mouseleave="handleMouseLeave" @mousemove="handleMouseMove">
+    <div ref="card" :id="test" class="card rounded-[8px] bg-white hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms]" @mouseleave="handleMouseLeave" @mousemove="handleMouseMove">
         <!-- Hinh anh -->
         <div class="card-img bg-[#1118271a]">
             <div class="part-hidden" style="padding-top:35%"></div>
