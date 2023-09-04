@@ -4,6 +4,25 @@
         <PageLoader />
     </div>
     <div v-else>
+        <!-- Background -->
+        <div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+        </div>
+        
         <Header></Header>
 
         <!-- <button @click="clickEventTest">Send Data to G4</button> -->
