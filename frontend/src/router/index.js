@@ -1,7 +1,6 @@
 import { authGuard } from "@auth0/auth0-vue";
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import HomePage from "@/views/home-page.vue";
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
 
 const NotFoundPage = () => import("@/views/not-found-page.vue");
 const ProfilePage = () => import("@/views/profile-page.vue");
@@ -15,8 +14,8 @@ const router = createRouter({
     routes: [
         {
             path: '/',
-            name: 'home',
-            component: HomePage,
+            name: 'Home',
+            component: HomeView,
             meta: {
                 title: "Trang chủ",
             }
@@ -25,11 +24,27 @@ const router = createRouter({
             path: '/test',
             name: 'test',
             component: HomeView,
+            meta: {
+                title: "Test",
+            }
         },
         {
             path: '/cart',
             name: 'Cart',
             component: () => import('../views/Cart.vue'),
+            beforeEnter: authGuard,
+            meta: {
+                title: "Giỏ hàng",
+            }
+        },
+        {
+            path: '/register-service',
+            name: 'Register Service',
+            component: () => import('../views/RegisterService.vue'),
+            beforeEnter: authGuard,
+            meta: {
+                title: "Đăng ký dịch vụ",
+            }
         },
         {
             path: `/services/:id`,
@@ -46,7 +61,10 @@ const router = createRouter({
             // route level code-splitting
             // this generates a separate chunk (About.[hash].js) for this route
             // which is lazy-loaded when the route is visited.
-            component: () => import('../views/AboutView.vue')
+            component: () => import('../views/AboutView.vue'),
+            meta: {
+                title: "Thông tin về chúng tôi",
+            }
         },
         {
             path: '/track',
@@ -98,6 +116,9 @@ const router = createRouter({
             path: "/:catchAll(.*)",
             name: "Not Found",
             component: NotFoundPage,
+            meta: {
+                title: "Not Found",
+            }
         },
     ]
 })
