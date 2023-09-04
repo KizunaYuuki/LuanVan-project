@@ -3,7 +3,7 @@
         <h1 class="text-[24px] text-[#202124] font-[500] text-center">Khám phá những dịch vụ của chúng tôi</h1>
 
         <!-- Gợi ý dịch vụ -->
-        <div class="py-6">
+        <div class="py-6 bg-[#0096fa0d] hover:scale-[1.01] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
             <h2 class="text-[24px] text-[#202124] font-[500] text-center mb-[16px]">Những dịch vụ vận chuyển được gợi ý dành
                 riêng cho bạn</h2>
             <section class="flex flex-wrap content-center justify-center items-center">
@@ -15,7 +15,7 @@
         </div>
 
         <!-- Vận chuyển quốc tế -->
-        <div class="py-6 bg-[#FFF7F5]">
+        <div class="py-6 bg-[#FFF7F50d] hover:scale-[1.01] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
             <h2 class="text-[24px] text-[#202124] font-[500] text-center mb-[16px]">Vận chuyển hàng hoá Quốc tế</h2>
             <section class="flex flex-wrap content-center justify-center items-center">
                 <freightProductCard></freightProductCard>
@@ -26,7 +26,7 @@
         </div>
 
         <!-- Vận chuyển trong nước -->
-        <div class="bg-[#0096fa0d] py-6">
+        <div class="bg-[#0096fa0d] py-6 hover:scale-[1.01] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
             <h2 class="text-[24px] text-[#202124] font-[500] text-center mb-[16px]">Những dịch vụ vận chuyển hàng hoá phổ
                 biến - Trong nước</h2>
             <section class="flex flex-wrap content-center justify-center items-center">
