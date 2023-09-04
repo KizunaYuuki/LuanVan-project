@@ -1,10 +1,10 @@
 <template>
     <header class="bg-white sticky top-0 border-b-[1.5px] border-[#0f172a1a] z-[9999]">
-        <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+        <nav class="max-w-[1280px] mx-auto flex items-center justify-between py-[12px] lg:px-8" aria-label="Global">
             <div class="flex lg:flex-1">
                 <RouterLink to="/"
-                    class="-m-1.5 p-1.5 text-[1rem] font-[700] tracking-[.125rem] text-[#0097f9] subpixel-antialiased hover:underline hover:underline-offset-[2px]">
-                    <span class="sr-only">Your Company</span>
+                    class="min-[1024px]:-m-1.5 p-1.5 text-[1rem] font-[700] tracking-[.125rem] text-[#0097f9] subpixel-antialiased hover:underline hover:underline-offset-[2px]">
+                    <span class="sr-only">Moving Service</span>
                     <!-- <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt=""> -->
                     Moving Service
                 </RouterLink>
@@ -20,17 +20,17 @@
                     </svg>
                 </button>
             </div>
-            <div class="hidden lg:flex lg:gap-x-12">
+            <div class="hidden lg:flex lg:gap-x-12 items-center">
                 <div class="relative">
                     <button type="button" class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900"
                         aria-expanded="false">
-                        Product
-                        <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor"
+                        Dịch vụ
+                        <!-- <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor"
                             aria-hidden="true">
                             <path fill-rule="evenodd"
                                 d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
                                 clip-rule="evenodd" />
-                        </svg>
+                        </svg> -->
                     </button>
 
                     <!--
@@ -43,7 +43,7 @@
             From: "opacity-100 translate-y-0"
             To: "opacity-0 translate-y-1"
         -->
-                    <div
+                    <!-- <div
                         class="hidden absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                         <div class="p-4">
                             <div
@@ -161,16 +161,36 @@
                                 Contact sales
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
-
-                <RouterLink to="/moving" class="text-sm font-semibold leading-6 text-gray-900">Vận chuyển</RouterLink>
-                <RouterLink to="/track" class="text-sm font-semibold leading-6 text-gray-900">Theo dõi</RouterLink>
-                <RouterLink to="/support" class="text-sm font-semibold leading-6 text-gray-900">Hỗ trợ</RouterLink>
+                <RouterLink to="/cart" class="text-sm font-semibold leading-6 text-gray-900">Giỏ hàng</RouterLink>
+                <RouterLink to="/track" class="text-sm font-semibold leading-6 text-gray-900"
+                    title="Quản lý đơn hàng của bạn">Theo dõi</RouterLink>
+                <!-- Thanh tìm kiếm -->
+                <div class="bg-white text-sm relative pointer-events-auto flex rounded-[0.5rem] ring-1 ring-slate-900/10 hover:ring-[#0096fa] focus:outline-none shadow-sm">
+                    <input class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-[32px] focus:outline-none rounded-[0.5rem]" type="text" placeholder="Quick search...">
+                    <button class="w-[32px] h-[32px] flex flex-wrap items-center content-center justify-center">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            class="flex-none text-slate-300 dark:text-slate-400 hover:text-[#0096fa]" aria-hidden="true">
+                            <path d="m19 19-3.5-3.5"></path>
+                            <circle cx="11" cy="11" r="6"></circle>
+                        </svg>
+                    </button>
+                </div>
             </div>
             <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-                <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Đăng nhập <span
-                        aria-hidden="true">&rarr;</span></a>
+
+                <template v-if="!isAuthenticated">
+                    <SignupButton class="mr-[16px]" />
+                    <LoginButton />
+                </template>
+                <template v-if="isAuthenticated">
+                    <RouterLink to="/cart" class="mr-[16px] my-[8px] inline-flex items-center px-[8px] py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-[#0096faee] hover:bg-[#0096fa] hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms]">Giỏ hàng
+                        <span class="ml-[8px] min-w-[20px] h-[20px] text-[12px] text-[#6c757d] bg-[#e9ecef] rounded inline-flex items-center justify-center content-center">4</span>
+                    </RouterLink>
+                    <LogoutButton />
+                </template>
             </div>
         </nav>
         <!-- Mobile menu, show/hide based on menu open state. -->
@@ -233,11 +253,9 @@
                                         sales</a>
                                 </div>
                             </div>
-                            <RouterLink to="/moving"
-                                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                                Vận chuyển</RouterLink>
                             <RouterLink to="/track"
-                                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                title="Quản lý đơn hàng - Khách hàng">
                                 Theo dõi</RouterLink>
                             <RouterLink to="/support"
                                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
@@ -245,7 +263,8 @@
                         </div>
                         <div class="py-6">
                             <a href="#"
-                                class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Đăng nhập</a>
+                                class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Đăng
+                                nhập</a>
                         </div>
                     </div>
                 </div>
@@ -256,6 +275,12 @@
 
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import LoginButton from "@/components/buttons/login-button.vue";
+import LogoutButton from "@/components/buttons/logout-button.vue";
+import SignupButton from "@/components/buttons/signup-button.vue";
+import { useAuth0 } from "@auth0/auth0-vue";
+
+const { isAuthenticated } = useAuth0();
 
 function mobileMenuToggle() {
     const mobileMenu = document.getElementById('mobileMenu');
