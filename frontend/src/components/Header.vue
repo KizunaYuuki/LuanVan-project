@@ -1,174 +1,70 @@
 <template>
-    <header class="bg-white sticky top-0 border-b-[1.5px] border-[#0f172a1a] z-[9999]">
-        <nav class="max-w-[1280px] mx-auto flex items-center justify-between py-[12px] lg:px-8" aria-label="Global">
+    <header class="bg-white sticky top-0 z-[9998]">
+        <!-- PC -->
+        <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
             <div class="flex lg:flex-1">
                 <RouterLink to="/"
                     class="min-[1024px]:-m-1.5 p-1.5 text-[1rem] font-[700] tracking-[.125rem] text-[#0097f9] subpixel-antialiased hover:underline hover:underline-offset-[2px]">
                     <span class="sr-only">Moving Service</span>
-                    <!-- <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt=""> -->
                     Moving Service
                 </RouterLink>
             </div>
             <div class="flex lg:hidden">
-                <button type="button" @click="mobileMenuToggle"
-                    class="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+                <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                    @click="mobileMenuOpen = true">
                     <span class="sr-only">Open main menu</span>
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                        aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                    </svg>
+                    <Bars3Icon class="h-6 w-6" aria-hidden="true" />
                 </button>
             </div>
-            <div class="hidden lg:flex lg:gap-x-12 items-center">
-                <div class="relative">
-                    <button type="button" class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900"
-                        aria-expanded="false">
-                        Dịch vụ
-                        <!-- <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor"
-                            aria-hidden="true">
-                            <path fill-rule="evenodd"
-                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                                clip-rule="evenodd" />
-                        </svg> -->
-                    </button>
+            <PopoverGroup class="hidden lg:flex lg:gap-x-12 items-center">
+                <Popover class="relative">
+                    <PopoverButton class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+                        Product
+                        <ChevronDownIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
+                    </PopoverButton>
 
-                    <!--
-          'Product' flyout menu, show/hide based on flyout menu state.
+                    <transition enter-active-class="transition ease-out duration-200"
+                        enter-from-class="opacity-0 translate-y-1" enter-to-class="opacity-100 translate-y-0"
+                        leave-active-class="transition ease-in duration-150" leave-from-class="opacity-100 translate-y-0"
+                        leave-to-class="opacity-0 translate-y-1">
+                        <PopoverPanel
+                            class="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+                            <div class="p-4">
+                                <div v-for="item in products" :key="item.name"
+                                    class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">
+                                    <div
+                                        class="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                                        <component :is="item.icon" class="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                                            aria-hidden="true" />
+                                    </div>
+                                    <div class="flex-auto">
+                                        <a :href="item.href" class="block font-semibold text-gray-900">
+                                            {{ item.name }}
+                                            <span class="absolute inset-0" />
+                                        </a>
+                                        <p class="mt-1 text-gray-600">{{ item.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
+                                <a v-for="item in callsToAction" :key="item.name" :href="item.href"
+                                    class="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100">
+                                    <component :is="item.icon" class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
+                                    {{ item.name }}
+                                </a>
+                            </div>
+                        </PopoverPanel>
+                    </transition>
+                </Popover>
 
-          Entering: "transition ease-out duration-200"
-            From: "opacity-0 translate-y-1"
-            To: "opacity-100 translate-y-0"
-          Leaving: "transition ease-in duration-150"
-            From: "opacity-100 translate-y-0"
-            To: "opacity-0 translate-y-1"
-        -->
-                    <!-- <div
-                        class="hidden absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
-                        <div class="p-4">
-                            <div
-                                class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">
-                                <div
-                                    class="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                                    <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none"
-                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
-                                    </svg>
-                                </div>
-                                <div class="flex-auto">
-                                    <a href="#" class="block font-semibold text-gray-900">
-                                        Analytics
-                                        <span class="absolute inset-0"></span>
-                                    </a>
-                                    <p class="mt-1 text-gray-600">Get a better understanding of your traffic</p>
-                                </div>
-                            </div>
-                            <div
-                                class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">
-                                <div
-                                    class="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                                    <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none"
-                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59" />
-                                    </svg>
-                                </div>
-                                <div class="flex-auto">
-                                    <a href="#" class="block font-semibold text-gray-900">
-                                        Engagement
-                                        <span class="absolute inset-0"></span>
-                                    </a>
-                                    <p class="mt-1 text-gray-600">Speak directly to your customers</p>
-                                </div>
-                            </div>
-                            <div
-                                class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">
-                                <div
-                                    class="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                                    <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none"
-                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M7.864 4.243A7.5 7.5 0 0119.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 004.5 10.5a7.464 7.464 0 01-1.15 3.993m1.989 3.559A11.209 11.209 0 008.25 10.5a3.75 3.75 0 117.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 01-3.6 9.75m6.633-4.596a18.666 18.666 0 01-2.485 5.33" />
-                                    </svg>
-                                </div>
-                                <div class="flex-auto">
-                                    <a href="#" class="block font-semibold text-gray-900">
-                                        Security
-                                        <span class="absolute inset-0"></span>
-                                    </a>
-                                    <p class="mt-1 text-gray-600">Your customers’ data will be safe and secure</p>
-                                </div>
-                            </div>
-                            <div
-                                class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">
-                                <div
-                                    class="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                                    <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none"
-                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
-                                    </svg>
-                                </div>
-                                <div class="flex-auto">
-                                    <a href="#" class="block font-semibold text-gray-900">
-                                        Integrations
-                                        <span class="absolute inset-0"></span>
-                                    </a>
-                                    <p class="mt-1 text-gray-600">Connect with third-party tools</p>
-                                </div>
-                            </div>
-                            <div
-                                class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">
-                                <div
-                                    class="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                                    <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none"
-                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-                                    </svg>
-                                </div>
-                                <div class="flex-auto">
-                                    <a href="#" class="block font-semibold text-gray-900">
-                                        Automations
-                                        <span class="absolute inset-0"></span>
-                                    </a>
-                                    <p class="mt-1 text-gray-600">Build strategic funnels that will convert</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-                            <a href="#"
-                                class="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100">
-                                <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M2 10a8 8 0 1116 0 8 8 0 01-16 0zm6.39-2.908a.75.75 0 01.766.027l3.5 2.25a.75.75 0 010 1.262l-3.5 2.25A.75.75 0 018 12.25v-4.5a.75.75 0 01.39-.658z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                Watch demo
-                            </a>
-                            <a href="#"
-                                class="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100">
-                                <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                Contact sales
-                            </a>
-                        </div>
-                    </div> -->
-                </div>
-                <RouterLink to="/cart" class="text-sm font-semibold leading-6 text-gray-900">Giỏ hàng</RouterLink>
                 <RouterLink to="/track" class="text-sm font-semibold leading-6 text-gray-900"
                     title="Quản lý đơn hàng của bạn">Theo dõi</RouterLink>
                 <!-- Thanh tìm kiếm -->
-                <div class="bg-white text-sm relative pointer-events-auto flex rounded-[0.5rem] ring-1 ring-slate-900/10 hover:ring-[#0096fa] focus:outline-none shadow-sm">
-                    <input class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-[32px] focus:outline-none rounded-[0.5rem]" type="text" placeholder="Quick search...">
+                <div
+                    class="bg-white text-sm relative pointer-events-auto flex rounded-[0.5rem] ring-1 ring-slate-900/10 hover:ring-[#0096fa] focus:outline-none shadow-sm">
+                    <input
+                        class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-[32px] focus:outline-none rounded-[0.5rem]"
+                        type="text" placeholder="Quick search...">
                     <button class="w-[32px] h-[32px] flex flex-wrap items-center content-center justify-center">
                         <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round"
@@ -178,99 +74,204 @@
                         </svg>
                     </button>
                 </div>
-            </div>
+            </PopoverGroup>
             <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-
                 <template v-if="!isAuthenticated">
                     <SignupButton class="mr-[16px]" />
                     <LoginButton />
                 </template>
                 <template v-if="isAuthenticated">
-                    <RouterLink to="/cart" class="mr-[16px] my-[8px] inline-flex items-center px-[8px] py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-[#0096faee] hover:bg-[#0096fa] hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms]">Giỏ hàng
-                        <span class="ml-[8px] min-w-[20px] h-[20px] text-[12px] text-[#6c757d] bg-[#e9ecef] rounded inline-flex items-center justify-center content-center">4</span>
-                    </RouterLink>
+                    <!-- Cart -->
+                    <button @click="open = true" class="group -m-2 flex items-center p-2 mr-[4px] hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
+                        <svg class="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" fill="none"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z">
+                            </path>
+                        </svg>
+                        <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">1</span>
+                        <span class="sr-only">items in cart, view bag</span>
+                    </button>
                     <LogoutButton />
                 </template>
             </div>
         </nav>
-        <!-- Mobile menu, show/hide based on menu open state. -->
-        <div class="lg:hidden hidden" id="mobileMenu" role="dialog" aria-modal="false">
-            <!-- Background backdrop, show/hide based on slide-over state. -->
-            <div class="fixed inset-0 z-10"></div>
-            <div
+        <!-- Mobile -->
+        <Dialog as="div" class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
+            <div class="fixed inset-0 z-10" />
+            <DialogPanel
                 class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                 <div class="flex items-center justify-between">
-                    <a href="#" class="-m-1.5 p-1.5">
-                        <span class="sr-only">Your Company</span>
-                        <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                            alt="">
-                    </a>
-                    <button type="button" @click="mobileMenuToggle" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+                    <RouterLink to="/"
+                        class="-m-1.5 p-1.5 text-[1rem] text-[#0097f9] subpixel-antialiased hover:underline hover:underline-offset-[2px]">
+                        <span class="sr-only">Moving Service</span>
+                        Moving Service
+                    </RouterLink>
+                    <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = false">
                         <span class="sr-only">Close menu</span>
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                            aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
+                        <XMarkIcon class="h-6 w-6" aria-hidden="true" />
                     </button>
                 </div>
                 <div class="mt-6 flow-root">
                     <div class="-my-6 divide-y divide-gray-500/10">
                         <div class="space-y-2 py-6">
-                            <div class="-mx-3">
-                                <button type="button"
-                                    class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                    aria-controls="disclosure-1" aria-expanded="false">
+                            <Disclosure as="div" class="-mx-3" v-slot="{ open }">
+                                <DisclosureButton
+                                    class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                                     Product
-                                    <!--
-                  Expand/collapse icon, toggle classes based on menu open state.
-
-                  Open: "rotate-180", Closed: ""
-                -->
-                                    <svg class="h-5 w-5 flex-none" viewBox="0 0 20 20" fill="currentColor"
-                                        aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                                <!-- 'Product' sub-menu, show/hide based on menu state. -->
-                                <div class="mt-2 space-y-2" id="disclosure-1">
-                                    <a href="#"
-                                        class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">Analytics</a>
-                                    <a href="#"
-                                        class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">Engagement</a>
-                                    <a href="#"
-                                        class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">Security</a>
-                                    <a href="#"
-                                        class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">Integrations</a>
-                                    <a href="#"
-                                        class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">Automations</a>
-                                    <a href="#"
-                                        class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">Watch
-                                        demo</a>
-                                    <a href="#"
-                                        class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">Contact
-                                        sales</a>
-                                </div>
-                            </div>
+                                    <ChevronDownIcon :class="[open ? 'rotate-180' : '', 'h-5 w-5 flex-none']"
+                                        aria-hidden="true" />
+                                </DisclosureButton>
+                                <DisclosurePanel class="mt-2 space-y-2">
+                                    <DisclosureButton v-for="item in [...products, ...callsToAction]" :key="item.name"
+                                        as="a" :href="item.href"
+                                        class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                                        {{ item.name }}</DisclosureButton>
+                                </DisclosurePanel>
+                            </Disclosure>
                             <RouterLink to="/track"
                                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                title="Quản lý đơn hàng - Khách hàng">
-                                Theo dõi</RouterLink>
-                            <RouterLink to="/support"
-                                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                                Hỗ trợ</RouterLink>
+                                title="Quản lý đơn hàng của bạn">Theo dõi</RouterLink>
+                            <template v-if="isAuthenticated">
+                                <button @click="open = true"
+                                    class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                                    Giỏ hàng
+                                </button>
+                            </template>
+                            <!-- Thanh tìm kiếm -->
+                            <div
+                                class="bg-white text-sm relative pointer-events-auto flex justify-between rounded-[0.5rem] ring-1 ring-slate-900/10 hover:ring-[#0096fa] focus:outline-none shadow-sm">
+                                <input
+                                    class="flex items-center w-72 text-left space-x-3 px-4 h-[32px] focus:outline-none rounded-[0.5rem]"
+                                    type="text" placeholder="Quick search...">
+                                <button class="w-[32px] h-[32px] flex flex-wrap items-center content-center justify-center">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="flex-none text-slate-300 dark:text-slate-400 hover:text-[#0096fa]"
+                                        aria-hidden="true">
+                                        <path d="m19 19-3.5-3.5"></path>
+                                        <circle cx="11" cy="11" r="6"></circle>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                         <div class="py-6">
-                            <a href="#"
-                                class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Đăng
-                                nhập</a>
+                            <template v-if="!isAuthenticated">
+                                <button @click="handleLogin"
+                                    class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Đăng
+                                    nhập</button>
+                            </template>
+                            <template v-if="isAuthenticated">
+                                <button @click="handleLogout"
+                                    class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Đăng
+                                    xuất</button>
+                            </template>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </DialogPanel>
+        </Dialog>
     </header>
+
+    <TransitionRoot class="z-[9999]" as="template" :show="open">
+        <Dialog as="div" class="relative z-10" @close="open = false">
+            <TransitionChild as="template" enter="ease-in-out duration-500" enter-from="opacity-0" enter-to="opacity-100"
+                leave="ease-in-out duration-500" leave-from="opacity-100" leave-to="opacity-0">
+                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+            </TransitionChild>
+
+            <div class="fixed inset-0 overflow-hidden">
+                <div class="absolute inset-0 overflow-hidden">
+                    <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+                        <TransitionChild as="template" enter="transform transition ease-in-out duration-500 sm:duration-700"
+                            enter-from="translate-x-full" enter-to="translate-x-0"
+                            leave="transform transition ease-in-out duration-500 sm:duration-700" leave-from="translate-x-0"
+                            leave-to="translate-x-full">
+                            <DialogPanel class="pointer-events-auto w-screen max-w-md">
+                                <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                                    <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
+                                        <div class="flex items-start justify-between">
+                                            <DialogTitle class="text-lg font-medium text-gray-900">Shopping cart
+                                            </DialogTitle>
+                                            <div class="ml-3 flex h-7 items-center">
+                                                <button type="button"
+                                                    class="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
+                                                    @click="open = false">
+                                                    <span class="absolute -inset-0.5" />
+                                                    <span class="sr-only">Close panel</span>
+                                                    <XMarkIcon class="h-6 w-6" aria-hidden="true" />
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-8">
+                                            <div class="flow-root">
+                                                <ul role="list" class="-my-6 divide-y divide-gray-200">
+                                                    <li v-for="product in cartProducts" :key="product.id" class="flex py-6">
+                                                        <div
+                                                            class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                                            <img :src="product.imageSrc" :alt="product.imageAlt"
+                                                                class="h-full w-full object-cover object-center" />
+                                                        </div>
+
+                                                        <div class="ml-4 flex flex-1 flex-col">
+                                                            <div>
+                                                                <div
+                                                                    class="flex justify-between text-base font-medium text-gray-900">
+                                                                    <h3>
+                                                                        <a :href="product.href">{{ product.name }}</a>
+                                                                    </h3>
+                                                                    <p class="ml-4">{{ product.price }}</p>
+                                                                </div>
+                                                                <p class="mt-1 text-sm text-gray-500">{{ product.color }}
+                                                                </p>
+                                                            </div>
+                                                            <div class="flex flex-1 items-end justify-between text-sm">
+                                                                <p class="text-gray-500">Qty {{ product.quantity }}</p>
+
+                                                                <div class="flex">
+                                                                    <button type="button"
+                                                                        class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
+                                        <div class="flex justify-between text-base font-medium text-gray-900">
+                                            <p>Subtotal</p>
+                                            <p>$262.00</p>
+                                        </div>
+                                        <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.
+                                        </p>
+                                        <div class="mt-6">
+                                            <a href="#"
+                                                class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>
+                                        </div>
+                                        <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
+                                            <p>
+                                                or
+                                                <button type="button"
+                                                    class="font-medium text-indigo-600 hover:text-indigo-500"
+                                                    @click="open = false">
+                                                    Continue Shopping
+                                                    <span aria-hidden="true"> &rarr;</span>
+                                                </button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </DialogPanel>
+                        </TransitionChild>
+                    </div>
+                </div>
+            </div>
+        </Dialog>
+    </TransitionRoot>
 </template>
 
 <script setup>
@@ -279,7 +280,79 @@ import LoginButton from "@/components/buttons/login-button.vue";
 import LogoutButton from "@/components/buttons/logout-button.vue";
 import SignupButton from "@/components/buttons/signup-button.vue";
 import { useAuth0 } from "@auth0/auth0-vue";
+import { ref } from 'vue'
+import {
+    Dialog,
+    DialogPanel,
+    DialogTitle,
+    Disclosure,
+    TransitionChild,
+    TransitionRoot,
+    DisclosureButton,
+    DisclosurePanel,
+    Popover,
+    PopoverButton,
+    PopoverGroup,
+    PopoverPanel,
+} from '@headlessui/vue'
+import {
+    ArrowPathIcon,
+    Bars3Icon,
+    ChartPieIcon,
+    CursorArrowRaysIcon,
+    FingerPrintIcon,
+    SquaresPlusIcon,
+    XMarkIcon,
+} from '@heroicons/vue/24/outline'
+import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
+// Login
+const { loginWithRedirect } = useAuth0();
+const handleLogin = () => {
+    loginWithRedirect({
+        appState: {
+            target: window.location.pathname,
+        },
+    });
+};
 
+const { logout } = useAuth0();
+
+const handleLogout = () =>
+    logout({
+        logoutParams: {
+            returnTo: window.location.origin,
+        }
+    });
+
+// San pham trong gio hang
+const cartProducts = [
+    {
+        id: 1,
+        name: 'Throwback Hip Bag',
+        href: '#',
+        color: 'Salmon',
+        price: '$90.00',
+        quantity: 1,
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
+        imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
+    },
+    {
+        id: 2,
+        name: 'Medium Stuff Satchel',
+        href: '#',
+        color: 'Blue',
+        price: '$32.00',
+        quantity: 1,
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
+        imageAlt:
+            'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
+    },
+    // More products...
+]
+// Trạng thái đóng mở Giỏ hàng
+const open = ref(false)
+
+// Xác thực người dùng đã đăng nhập chưa 
 const { isAuthenticated } = useAuth0();
 
 function mobileMenuToggle() {
@@ -297,5 +370,20 @@ function mobileMenuToggle() {
         mobileMenu.setAttribute('aria-modal', 'true');
     }
 }
+
+// Danh sách sản phẩm
+const products = [
+    { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
+    { name: 'Engagement', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
+    { name: 'Security', description: 'Your customers’ data will be safe and secure', href: '#', icon: FingerPrintIcon },
+    { name: 'Integrations', description: 'Connect with third-party tools', href: '#', icon: SquaresPlusIcon },
+    { name: 'Automations', description: 'Build strategic funnels that will convert', href: '#', icon: ArrowPathIcon },
+]
+const callsToAction = [
+    { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
+    { name: 'Contact sales', href: '#', icon: PhoneIcon },
+]
+
+const mobileMenuOpen = ref(false)
 
 </script>
