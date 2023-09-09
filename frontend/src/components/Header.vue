@@ -1,12 +1,12 @@
 <template>
     <header class="bg-white sticky top-0 z-[9998]">
         <!-- PC -->
-        <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+        <nav class="mx-auto flex max-w-7xl items-center justify-between p-[16px] lg:px-[16px]" aria-label="Global">
             <div class="flex lg:flex-1">
                 <RouterLink to="/"
                     class="min-[1024px]:-m-1.5 p-1.5 text-[1rem] font-[700] tracking-[.125rem] text-[#0097f9] subpixel-antialiased hover:underline hover:underline-offset-[2px]">
-                    <span class="sr-only">Moving Service</span>
-                    Moving Service
+                    <span class="sr-only">Freight service</span>
+                    Freight service
                 </RouterLink>
             </div>
             <div class="flex lg:hidden">
@@ -104,8 +104,8 @@
                 <div class="flex items-center justify-between">
                     <RouterLink to="/"
                         class="-m-1.5 p-1.5 text-[1rem] text-[#0097f9] subpixel-antialiased hover:underline hover:underline-offset-[2px]">
-                        <span class="sr-only">Moving Service</span>
-                        Moving Service
+                        <span class="sr-only">Freight service</span>
+                        Freight service
                     </RouterLink>
                     <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = false">
                         <span class="sr-only">Close menu</span>
@@ -173,6 +173,7 @@
         </Dialog>
     </header>
 
+    <!-- Shopping Carts - Slide-over -->
     <TransitionRoot class="z-[9999]" as="template" :show="open">
         <Dialog as="div" class="relative z-10" @close="open = false">
             <TransitionChild as="template" enter="ease-in-out duration-500" enter-from="opacity-0" enter-to="opacity-100"
@@ -182,7 +183,7 @@
 
             <div class="fixed inset-0 overflow-hidden">
                 <div class="absolute inset-0 overflow-hidden">
-                    <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+                    <div class="pointer-events-none fixed inset-y-0 right-0 flex pl-10">
                         <TransitionChild as="template" enter="transform transition ease-in-out duration-500 sm:duration-700"
                             enter-from="translate-x-full" enter-to="translate-x-0"
                             leave="transform transition ease-in-out duration-500 sm:duration-700" leave-from="translate-x-0"
