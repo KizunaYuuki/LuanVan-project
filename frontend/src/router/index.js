@@ -21,23 +21,6 @@ const router = createRouter({
             }
         },
         {
-            path: '/test',
-            name: 'test',
-            component: HomeView,
-            meta: {
-                title: "Test",
-            }
-        },
-        {
-            path: '/cart',
-            name: 'Cart',
-            component: () => import('../views/Cart.vue'),
-            beforeEnter: authGuard,
-            meta: {
-                title: "Giỏ hàng",
-            }
-        },
-        {
             path: '/register-service',
             name: 'Register Service',
             component: () => import('../views/RegisterService.vue'),
@@ -70,6 +53,10 @@ const router = createRouter({
             path: '/track',
             name: 'track',
             // component: () => import('../views/AboutView.vue')
+            beforeEnter: authGuard,
+            meta: {
+                title: "Quản lý Đơn hàng",
+            }
         },
         {
             path: '/support',
