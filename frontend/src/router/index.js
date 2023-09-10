@@ -21,6 +21,14 @@ const router = createRouter({
             }
         },
         {
+            path: '/search',
+            name: 'Trang tìm kiếm',
+            component: () => import('../views/search-page.vue'),
+            meta: {
+                title: "Trang tìm kiếm",
+            }
+        },
+        {
             path: '/register-service',
             name: 'Register Service',
             component: () => import('../views/RegisterService.vue'),
@@ -52,10 +60,19 @@ const router = createRouter({
         {
             path: '/track',
             name: 'track',
-            // component: () => import('../views/AboutView.vue')
+            component: () => import('../views/order-manage-user.vue'),
             beforeEnter: authGuard,
             meta: {
                 title: "Quản lý Đơn hàng",
+            }
+        },
+        {
+            path: '/compare',
+            name: 'Compare',
+            component: () => import('../views/compare-page.vue'),
+            beforeEnter: authGuard,
+            meta: {
+                title: "So sánh dịch vụ",
             }
         },
         {
