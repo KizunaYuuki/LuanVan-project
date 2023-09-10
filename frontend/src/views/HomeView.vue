@@ -1,6 +1,8 @@
 <template>
     <main>
-        <h1 class="text-[24px] text-[#202124] font-[500] text-center">Khám phá những dịch vụ của chúng tôi</h1>
+        <!-- Băng rôn khuyến mãi -->
+        <banner></banner>
+        <!-- <h1 class="text-[24px] text-[#202124] font-[500] text-center">Khám phá những dịch vụ của chúng tôi</h1> -->
 
         <!-- Gợi ý dịch vụ -->
         <div class="py-6 bg-[#0096fa0d] hover:scale-[1.01] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
@@ -54,6 +56,7 @@ import { ref } from "vue";
 import { useGtag } from "vue-gtag-next";
 import freightProductCard from "../components/cards/freight-product-card.vue";
 import domesticCard from "../components/cards/domestic-card.vue";
+import banner from "../components/banner.vue";
 const { pageview } = useGtag()
 const track = () => {
     pageview({ page_path: "/test" });
