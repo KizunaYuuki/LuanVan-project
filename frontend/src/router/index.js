@@ -70,7 +70,6 @@ const router = createRouter({
             path: '/compare',
             name: 'Compare',
             component: () => import('../views/compare-page.vue'),
-            beforeEnter: authGuard,
             meta: {
                 title: "So sánh dịch vụ",
             }

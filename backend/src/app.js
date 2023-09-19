@@ -5,10 +5,14 @@ const express = require("express");
 const helmet = require("helmet");
 const nocache = require("nocache");
 const { messagesRouter } = require("./messages/messages.router");
+const { usersRouter } = require("./routes/users.router.js");
+const { statusRouter } = require("./routes/status.router.js");
+const { cartsRouter } = require("./routes/carts.router.js");
 const { errorHandler } = require("./middleware/error.middleware");
 const { notFoundHandler } = require("./middleware/not-found.middleware");
-const { getNote, getNotes, createNote } = require("./models/db")
+const { getNote, getNotes, createNote } = require("./models/db");
 
+const fs = require('fs');
 dotenv.config();
 
 if (!(process.env.PORT && process.env.CLIENT_ORIGIN_URL)) {
@@ -80,6 +84,25 @@ app.post("/notes", async (req, res) => {
     res.status(201).send(note);
 })
 
+// Thông tin về tỉnh vùng miền của Việt Nam để tính giá dịch vụ theo bảng giá của nhà cung cấp
+app.get("/address", async (req, res) => {
+    fs.readFile('./src/public/VietNameAddress.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Lỗi khi đọc file JSON:', err);
+            return;
+        }
+
+        // Nếu không có lỗi, data chứa nội dung của tệp JSON dưới dạng chuỗi.
+        try {
+            const jsonObject = JSON.parse(data);
+            console.log('Đối tượng JSON:', jsonObject);
+            res.status(201).send(jsonObject);
+        } catch (parseError) {
+            console.error('Lỗi khi phân tích nội dung JSON:', parseError);
+        }
+    });
+})
+
 app.use((err, req, res, next) => {
     console.error(err.stack)
     res.status(500).send('Something broke!')
@@ -87,6 +110,9 @@ app.use((err, req, res, next) => {
 
 app.use("/api", apiRouter);
 apiRouter.use("/messages", messagesRouter);
+apiRouter.use("/user", usersRouter);
+apiRouter.use("/status", statusRouter);
+apiRouter.use("/cart", cartsRouter);
 
 app.use(errorHandler);
 app.use(notFoundHandler);

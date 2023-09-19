@@ -41,6 +41,7 @@ async function createNote(title, contents) {
 }
 
 module.exports = {
+    pool,
     getNote,
     getNotes,
     createNote,
