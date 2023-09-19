@@ -1,7 +1,7 @@
 <template>
     <header class="bg-white sticky top-0 z-[9998]">
         <!-- PC -->
-        <nav class="mx-auto flex max-w-7xl items-center justify-between p-[16px] lg:px-[16px]" aria-label="Global">
+        <nav class="mx-auto flex max-w-[1280px] items-center justify-between p-[16px] lg:px-[32px]" aria-label="Global">
             <div class="flex lg:flex-1">
                 <RouterLink to="/"
                     class="min-[1024px]:-m-1.5 p-1.5 text-[1rem] font-[700] tracking-[.125rem] text-[#0097f9] subpixel-antialiased hover:underline hover:underline-offset-[2px]">
@@ -17,7 +17,7 @@
                 </button>
             </div>
             <PopoverGroup class="hidden lg:flex lg:gap-x-12 items-center">
-                <Popover class="relative">
+                <Popover class="relative hidden">
                     <PopoverButton class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
                         Product
                         <ChevronDownIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
@@ -56,11 +56,12 @@
                         </PopoverPanel>
                     </transition>
                 </Popover>
-
+                <RouterLink to="/track" class="text-sm font-semibold leading-6 text-gray-900"
+                    title="Quản lý đơn hàng của bạn">Sản phẩm</RouterLink>
                 <RouterLink to="/track" class="text-sm font-semibold leading-6 text-gray-900"
                     title="Quản lý đơn hàng của bạn">Theo dõi</RouterLink>
                 <!-- Thanh tìm kiếm -->
-                <div
+                <!-- <div
                     class="bg-white text-sm relative pointer-events-auto flex rounded-[0.5rem] ring-1 ring-slate-900/10 hover:ring-[#0096fa] focus:outline-none shadow-sm">
                     <input
                         class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-[32px] focus:outline-none rounded-[0.5rem]"
@@ -73,7 +74,7 @@
                             <circle cx="11" cy="11" r="6"></circle>
                         </svg>
                     </button>
-                </div>
+                </div> -->
             </PopoverGroup>
             <div class="hidden lg:flex lg:flex-1 lg:justify-end">
                 <template v-if="!isAuthenticated">
@@ -82,7 +83,8 @@
                 </template>
                 <template v-if="isAuthenticated">
                     <!-- Cart -->
-                    <button @click="open = true" class="group -m-2 flex items-center p-2 mr-[4px] hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
+                    <button @click="open = true"
+                        class="group -m-2 flex items-center p-2 mr-[4px] hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
                         <svg class="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" fill="none"
                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -139,7 +141,7 @@
                                 </button>
                             </template>
                             <!-- Thanh tìm kiếm -->
-                            <div
+                            <!-- <div
                                 class="bg-white text-sm relative pointer-events-auto flex justify-between rounded-[0.5rem] ring-1 ring-slate-900/10 hover:ring-[#0096fa] focus:outline-none shadow-sm">
                                 <input
                                     class="flex items-center w-72 text-left space-x-3 px-4 h-[32px] focus:outline-none rounded-[0.5rem]"
@@ -153,7 +155,7 @@
                                         <circle cx="11" cy="11" r="6"></circle>
                                     </svg>
                                 </button>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="py-6">
                             <template v-if="!isAuthenticated">
@@ -192,7 +194,7 @@
                                 <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                                     <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                                         <div class="flex items-start justify-between">
-                                            <DialogTitle class="text-lg font-medium text-gray-900">Shopping cart
+                                            <DialogTitle class="text-lg font-medium text-gray-900">Giỏ hàng
                                             </DialogTitle>
                                             <div class="ml-3 flex h-7 items-center">
                                                 <button type="button"
@@ -205,7 +207,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="mt-8">
+                                        <!-- <div class="mt-8">
                                             <div class="flow-root">
                                                 <ul role="list" class="-my-6 divide-y divide-gray-200">
                                                     <li v-for="product in cartProducts" :key="product.id" class="flex py-6">
@@ -239,10 +241,10 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
 
-                                    <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
+                                    <!-- <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
                                         <div class="flex justify-between text-base font-medium text-gray-900">
                                             <p>Subtotal</p>
                                             <p>$262.00</p>
@@ -264,7 +266,7 @@
                                                 </button>
                                             </p>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </DialogPanel>
                         </TransitionChild>

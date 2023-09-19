@@ -1,17 +1,3 @@
-<!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
 <template>
     <div class="bg-white">
         <div>
@@ -85,14 +71,14 @@
 
             <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
-                    <h1 class="text-4xl font-bold tracking-tight text-gray-900">Nhà cung cấp</h1>
+                    <h1 class="text-xl font-bold tracking-tight text-gray-900 hidden md:block">Vận chuyển hàng hoá</h1>
 
                     <div class="flex items-center">
                         <Menu as="div" class="relative inline-block text-left">
                             <div>
                                 <MenuButton
                                     class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                                    Sort
+                                    Sắp xếp
                                     <ChevronDownIcon
                                         class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                                         aria-hidden="true" />
@@ -135,7 +121,7 @@
 
                     <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
                         <!-- Filters -->
-                        <form class="hidden lg:block">
+                        <!-- <form class="hidden lg:block">
                             <h3 class="sr-only">Categories</h3>
                             <ul role="list"
                                 class="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900">
@@ -169,7 +155,7 @@
                                     </div>
                                 </DisclosurePanel>
                             </Disclosure>
-                        </form>
+                        </form> -->
 
                         <!-- Product grid -->
                         <div class="lg:col-span-3">
