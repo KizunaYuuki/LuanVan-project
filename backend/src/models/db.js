@@ -17,32 +17,6 @@ pool.getConnection()
         pool.end(); // Đóng pool nếu không thể kết nối
     });
 
-async function getNotes() {
-    const [rows] = await pool.query("select * from notes")
-    return rows
-}
-
-async function getNote(id) {
-    const [rows] = await pool.query(`
-    SELECT * 
-    FROM notes
-    WHERE id = ?
-    `, [id])
-    return rows[0]
-}
-
-async function createNote(title, contents) {
-    const [result] = await pool.query(`
-    INSERT INTO notes (title, contents)
-    VALUES (?, ?)
-    `, [title, contents])
-    const id = result.insertId;
-    return getNote(id);
-}
-
 module.exports = {
-    pool,
-    getNote,
-    getNotes,
-    createNote,
+    pool
 };

@@ -1,55 +1,55 @@
 const express = require("express");
 const { validateAccessToken } = require("../middleware/auth0.middleware.js");
 
-const { getCarts, getCartById, createCart, deleteCartById } = require("../controllers/carts.controller.js");
+const {
+    getCarts,
+    getCartsByServiceId,
+    getCartsByUserId,
+    getCartById,
+    deleteCartById,
+    createCart } = require("../controllers/carts.controller.js");
 
 const cartsRouter = express.Router();
 
-// Tạo giỏ hàng
+// Tạo carts
 cartsRouter.post("/", validateAccessToken, async (req, res) => {
-    const { userId, serviceId } = req.body;
-    const cart = await createCart(userId, serviceId);
-    res.status(201).json(cart);
+    const { user_id, service_id } = req.body;
+    const result = await createCart(user_id, service_id);
+    res.status(201).json(result);
 });
 
-// async function createCart(userId, serviceId) {
-//     const [result] = await pool.query(`
-//     INSERT INTO users(user_id, service_id)
-//     VALUES (?, ?)
-//     `, [userId, serviceId])
-//     const id = result.insertId;
-//     return getCartById(id);
-// }
+// Lấy tất cả carts
+cartsRouter.get("/", validateAccessToken, async (req, res) => {
+    const result = await getCarts();
+    res.status(201).json(result);
+});
 
-// // Xác thực quyền qua role
-// cartsRouter.post("/auth-role", validateAccessToken, async (req, res) => {
-//     const { email } = req.body;
-//     const role = await getRoleByEmail(email);
-//     res.status(200).json(role);
-// });
+// Lay cac carts cua mot service theo serviceId
+cartsRouter.get("/service/:id", validateAccessToken, async (req, res) => {
+    const id = req.params.id;
+    const result = await getCartsByServiceId(id);
+    res.status(200).json(result);
+});
 
-// // Kiểm tra trạng thái của người dùng
-// cartsRouter.post("/check-status", validateAccessToken, (req, res) => {
-//     res.status(200).json('Kiểm tra trạng thái của người dùng');
-// });
+// Lay cac carts cua mot user theo userId
+cartsRouter.get("/user/:id", validateAccessToken, async (req, res) => {
+    const id = req.params.id;
+    const result = await getCartsByUserId(id);
+    res.status(200).json(result);
+});
 
-// // Cập nhật thông tin người dùng
-// cartsRouter.put("/update-user", validateAccessToken, (req, res) => {
-//     res.status(200).json('Cập nhật thông tin người dùng');
-// });
+// Lay mot carts theo id
+cartsRouter.get("/:id", validateAccessToken, async (req, res) => {
+    const id = req.params.id;
+    const result = await getCartById(id);
+    res.status(200).json(result);
+});
 
-// // Tìm người dùng theo email
-// cartsRouter.post("/", validateAccessToken, async (req, res) => {
-//     const { email } = req.body;
-//     const user = await getUserByEmail(email);
-//     res.status(200).json(user);
-// });
-
-// // Tìm người dùng theo id
-// cartsRouter.get("/:id", validateAccessToken, async (req, res) => {
-//     const id = req.params.id;
-//     const user = await getUserById(id);
-//     res.status(200).json(user);
-// });
+// Xoa mot carts theo id
+cartsRouter.delete("/:id", validateAccessToken, async (req, res) => {
+    const id = req.params.id;
+    const result = await deleteCartById(id);
+    res.status(200).json(result);
+});
 
 module.exports = { cartsRouter };

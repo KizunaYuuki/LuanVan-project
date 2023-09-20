@@ -6,11 +6,18 @@ const helmet = require("helmet");
 const nocache = require("nocache");
 const { messagesRouter } = require("./messages/messages.router");
 const { usersRouter } = require("./routes/users.router.js");
+const { providersRouter } = require("./routes/providers.router.js");
+const { serviceTypesRouter } = require("./routes/serviceTypes.router.js");
+const { servicesRouter } = require("./routes/services.router.js");
+const { priceListsRouter } = require("./routes/priceLists.router.js");
 const { statusRouter } = require("./routes/status.router.js");
+const { ordersRouter } = require("./routes/orders.router.js");
+const { packagesRouter } = require("./routes/packages.router.js");
+const { reviewsRouter } = require("./routes/reviews.router.js");
 const { cartsRouter } = require("./routes/carts.router.js");
+
 const { errorHandler } = require("./middleware/error.middleware");
 const { notFoundHandler } = require("./middleware/not-found.middleware");
-const { getNote, getNotes, createNote } = require("./models/db");
 
 const fs = require('fs');
 dotenv.config();
@@ -67,23 +74,6 @@ app.get('/', cors(), (req, res) => {
     res.send('Hello World!')
 })
 
-app.get('/notes', async (req, res) => {
-    const notes = await getNotes();
-    res.send(notes)
-})
-
-app.get("/notes/:id", async (req, res) => {
-    const id = req.params.id;
-    const note = await getNote(id);
-    res.send(note);
-})
-
-app.post("/notes", async (req, res) => {
-    const { title, contents } = req.body;
-    const note = await createNote(title, contents);
-    res.status(201).send(note);
-})
-
 // Thông tin về tỉnh vùng miền của Việt Nam để tính giá dịch vụ theo bảng giá của nhà cung cấp
 app.get("/address", async (req, res) => {
     fs.readFile('./src/public/VietNameAddress.json', 'utf8', (err, data) => {
@@ -111,8 +101,16 @@ app.use((err, req, res, next) => {
 app.use("/api", apiRouter);
 apiRouter.use("/messages", messagesRouter);
 apiRouter.use("/user", usersRouter);
-apiRouter.use("/status", statusRouter);
+apiRouter.use("/provider", providersRouter);
+apiRouter.use("/service-type", serviceTypesRouter);
+apiRouter.use("/service", servicesRouter); 
+apiRouter.use("/price-list", priceListsRouter);
+apiRouter.use("/status", statusRouter); 
+apiRouter.use("/order", ordersRouter);
+apiRouter.use("/package", packagesRouter);
+apiRouter.use("/review", reviewsRouter);
 apiRouter.use("/cart", cartsRouter);
+
 
 app.use(errorHandler);
 app.use(notFoundHandler);

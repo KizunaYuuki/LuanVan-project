@@ -1,5 +1,11 @@
 const { pool } = require("../models/db.js");
 
+// Lay tat ca status
+async function getAllStatus() {
+    const [rows] = await pool.query("select * from status order by id")
+    return rows
+}
+
 async function getStatusById(id) {
     const [rows] = await pool.query(`
     SELECT * 
@@ -32,6 +38,7 @@ async function createStatus(name) {
 }
 
 module.exports = {
+    getAllStatus,
     getStatusById,
     createStatus,
     deleteStatusById
