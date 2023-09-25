@@ -27,14 +27,14 @@ async function getOrderById(id) {
 }
 
 // Cap nhat trang thai mot don hang theo id
-async function updateOrderById(payment_type, id) {
+async function updateOrderById(payment_id, id) {
     try {
         const [rows] = await pool.query(`
     UPDATE orders
-    SET payment_type = ?
+    SET payment_id = ?
     WHERE id = ?
-    `, [payment_type, id])
-        return "Cập nhật Đơn hàng thành công"
+    `, [payment_id, id])
+        return "Cập nhật Trạng thái đơn hàng thành công"
     } catch (error) {
         return error;
     }
@@ -55,11 +55,11 @@ async function deleteOrderById(id) {
 }
 
 // Tao don hang
-async function createOrders(user_id, status_id, serivce_id, total_amount, payment_type, email, phone) {
+async function createOrders(user_id, status_id, serivce_id, payment_id, total_amount, email, phone) {
     const [result] = await pool.query(`
-    INSERT INTO orders (user_id, status_id, serivce_id, total_amount, payment_type, email, phone)
+    INSERT INTO orders (user_id, status_id, serivce_id, payment_id, total_amount, email, phone)
     VALUES (?, ?, ?, ?, ?, ?, ?)
-    `, [user_id, status_id, serivce_id, total_amount, payment_type, email, phone])
+    `, [user_id, status_id, serivce_id, payment_id, total_amount, email, phone])
     const id = result.insertId;
     return getOrderById(id);
 }

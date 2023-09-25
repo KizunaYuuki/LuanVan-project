@@ -13,8 +13,8 @@ const ordersRouter = express.Router();
 
 // Tạo order
 ordersRouter.post("/", validateAccessToken, async (req, res) => {
-    const { user_id, status_id, serivce_id, total_amount, payment_type, email, phone } = req.body;
-    const orders = await createOrders(user_id, status_id, serivce_id, total_amount, payment_type, email, phone);
+    const { user_id, status_id, serivce_id, payment_id, total_amount, email, phone } = req.body;
+    const orders = await createOrders(user_id, status_id, serivce_id, payment_id, total_amount, email, phone);
     res.status(201).json(orders);
 });
 
@@ -41,8 +41,8 @@ ordersRouter.get("/:id", validateAccessToken, async (req, res) => {
 // Cap nhat trang thai mot don hang theo id
 ordersRouter.put("/:id", validateAccessToken, async (req, res) => {
     const id = req.params.id;
-    const { payment_type } = req.body;
-    const orders = await updateOrderById(payment_type, id);
+    const { payment_id } = req.body;
+    const orders = await updateOrderById(payment_id, id);
     res.status(200).json(orders);
 });
 

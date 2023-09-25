@@ -27,13 +27,13 @@ async function getServiceById(id) {
 }
 
 // Cap nhat mot services theo id
-async function updateServiceById(service_type_id, name, description, id) {
+async function updateServiceById(service_type_id, name, description, delivery_date, weight, price, id) {
     try {
         const [rows] = await pool.query(`
     UPDATE services
-    SET service_type_id = ?, name = ?, description = ?
+    SET service_type_id = ?, name = ?, description = ?, delivery_date = ?, weight = ?, price = ?
     WHERE id = ?
-    `, [service_type_id, name, description, id])
+    `, [service_type_id, name, description, delivery_date, weight, price, id])
         return "Cập nhật Loại dịch vụ thành công"
     } catch (error) {
         return error;
@@ -55,12 +55,12 @@ async function deleteServiceById(id) {
 }
 
 // Tao services
-async function createService(service_type_id, name, description) {
+async function createService(service_type_id, name, description, delivery_date, weight, price) {
     const [result] = await pool.query(`
     INSERT INTO services 
-    (service_type_id, name, description)
-    VALUES (?, ?, ?)
-    `, [service_type_id, name, description])
+    (service_type_id, name, description, delivery_date, weight, price)
+    VALUES (?, ?, ?, ?, ?, ?)
+    `, [service_type_id, name, description, delivery_date, weight, price])
     const id = result.insertId;
     return getServiceById(id);
 }

@@ -13,13 +13,13 @@ const servicesRouter = express.Router();
 
 // Tạo services
 servicesRouter.post("/", validateAccessToken, async (req, res) => {
-    const { service_type_id, name, description } = req.body;
-    const result = await createService(service_type_id, name, description);
+    const { service_type_id, name, description, delivery_date, weight, price } = req.body;
+    const result = await createService(service_type_id, name, description, delivery_date, weight, price);
     res.status(201).json(result);
 });
 
 // Lấy tất cả services
-servicesRouter.get("/", validateAccessToken, async (req, res) => {
+servicesRouter.get("/", async (req, res) => {
     const result = await getServices();
     res.status(201).json(result);
 });
@@ -41,8 +41,8 @@ servicesRouter.get("/:id", validateAccessToken, async (req, res) => {
 // Cap nhat mot services theo id
 servicesRouter.put("/:id", validateAccessToken, async (req, res) => {
     const id = req.params.id;
-    const { service_type_id, name, description } = req.body;
-    const result = await updateServiceById(service_type_id, name, description, id);
+    const { service_type_id, name, description, delivery_date, weight, price } = req.body;
+    const result = await updateServiceById(service_type_id, name, description, delivery_date, weight, price, id);
     res.status(200).json(result);
 });
 
