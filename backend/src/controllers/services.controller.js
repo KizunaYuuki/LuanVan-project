@@ -2,7 +2,12 @@ const { pool } = require("../models/db.js");
 
 // Lay tat ca services
 async function getServices() {
-    const [rows] = await pool.query("select * from services")
+    // const [rows] = await pool.query("select * from services")
+    const [rows] = await pool.query(`SELECT services.id as service_id, services.name as service_name, services.description, services.delivery_date, services.weight, services.price,
+    providers.id, providers.name as provider_name, providers.image
+    FROM services
+    JOIN service_types ON services.service_type_id = service_types.id
+    JOIN providers ON service_types.providers_id = providers.id`)
     return rows
 }
 
