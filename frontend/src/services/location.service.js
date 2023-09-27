@@ -2,12 +2,13 @@ import { callExternalApi } from "./external-api.service";
 
 const apiServerUrl = import.meta.env.VITE_API_SERVER_URL;
 
-export const getServices = async () => {
+export const getLocations = async (accessToken) => {
     const config = {
-        url: `${apiServerUrl}/api/service`,
+        url: `${apiServerUrl}/api/location`,
         method: "GET",
         headers: {
             "content-type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
         },
     };
 
@@ -38,15 +39,15 @@ export const getServiceById = async (accessToken, service_id) => {
 };
 
 
-export const createService = async (accessToken, serviceData) => {
+export const createLocation = async (accessToken, LocationData) => {
     const config = {
-        url: `${apiServerUrl}/api/service`,
+        url: `${apiServerUrl}/api/location`,
         method: "POST",
         headers: {
             "content-type": "application/json",
             Authorization: `Bearer ${accessToken}`,
         },
-        data: serviceData,
+        data: LocationData,
     };
 
     const { data, error } = await callExternalApi({ config });
@@ -84,24 +85,6 @@ export const deteleService = async (accessToken, service_id) => {
             "content-type": "application/json",
             Authorization: `Bearer ${accessToken}`,
         }
-    };
-
-    const { data, error } = await callExternalApi({ config });
-
-    return {
-        data: data || null,
-        error,
-    };
-};
-
-export const getAdminResource = async (accessToken) => {
-    const config = {
-        url: `${apiServerUrl}/api/messages/admin`,
-        method: "GET",
-        headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-        },
     };
 
     const { data, error } = await callExternalApi({ config });

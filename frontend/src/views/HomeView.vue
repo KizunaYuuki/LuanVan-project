@@ -164,7 +164,7 @@
 
             <!-- Filters -->
             <div class="m-[16px] flex justify-start mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="relative rounded-[16px] shadow-sm hover:text-[#1a73e8] hover:bg-[white]">
+                <div class="relative rounded-[16px] shadow-sm hover:text-[#1a73e8] bg-[white]">
                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                         <span class="sm:text-sm">
                             <svg width="18" height="18" viewBox="0 0 24 24" focusable="false"
@@ -301,12 +301,81 @@
                         </Menu>
                     </div>
                 </div>
+
+                <!-- Bảng dịch vụ -->
+                <!-- content -->
+                <div class="mt-[1rem] flow-root">
+                    <div class="overflow-x-auto">
+                        <div class="align-middle min-w-[100%] inline-block">
+                            <table
+                                class="bg-[white] min-w-[100%] indent-0 border rounded-[8px] border-separate border-spacing-0 table-fixed">
+                                <thead>
+                                    <tr class="">
+                                        <th scope="col"
+                                            class="pl-[1rem] min-[640px]:pl-0 text-[#70757a] font-[600] text-[12px] leading-[1.25rem] text-left pr-[.75rem] py-[.875rem]">
+                                            Nhà cung cấp dịch vụ</th>
+                                        <th scope="col"
+                                            class="min-[640px]:pl-0 text-[#70757a] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            Thời gian vận chuyển</th>
+                                        <th scope="col"
+                                            class="min-[640px]:pl-0 text-[#111827] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            Khối lượng</th>
+                                        <th scope="col"
+                                            class="min-[640px]:pl-0 text-[#111827] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            Giá dịch vụ</th>
+                                        <th scope="col"
+                                            class="min-[640px]:pl-0 text-[#70757a] font-[600] text-[12px] leading-[1.25rem] text-left pr-[1rem] py-[.875rem] relative">
+                                            <span class="sr-only">Xoá</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="">
+                                    <tr class="mx-[4px]" v-for="service in services">
+                                        <td
+                                            class="border-[#dadce0] border-t pl-[1rem] min-[640px]:pl-0 text-[#111827] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
+                                            {{ service.provider_name }}</td>
+                                        <td
+                                            class="border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                            {{ service.delivery_date }}</td>
+                                        <td
+                                            class="border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                            &le; {{ service.weight }} <span>kg</span></td>
+                                        <td
+                                            class="border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                            {{ (service.price).toLocaleString('vi-VN', {
+                                                style: 'currency',
+                                                currency: 'VND'
+                                            }) }}</td>
+                                        <td
+                                            class="border-[#dadce0] border-t min-[640px]:pr-0 font-[500] text-[.875rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative">
+                                            <div class="float-right">
+                                                <!-- :to="`/services/${service.id}`" -->
+                                                <RouterLink :to="{
+                                                    name: 'Service Details',
+                                                    params: { id: service.service_id },
+                                                }"
+                                                    class="text-[#0096fa] inherit py-[17px]" target="_blank">
+                                                    <div
+                                                        class="bg-[#e8f0fe] box-border rounded-[8px] text-[#1a73e8] inline-block text-[12px] leading-[20px] py-[6px] px-[10px] text-center w-[124px]">
+                                                        Truy cập</div>
+                                                    <span class="sr-only">Truy cập</span>
+                                                </RouterLink>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 </template>
 
 <script setup>
+import { RouterLink, RouterView } from 'vue-router'
 import { ref } from "vue";
 import {
     Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions, Dialog, DialogPanel, Disclosure, DisclosureButton, DisclosurePanel,
@@ -396,4 +465,102 @@ const sortOptions = [
     { name: 'Giá: Cao đến thấp', href: '#', current: false },
 ]
 
+
+import { getServices, createService, updateService, deteleService, getServiceById } from "@/services/service.service";
+import { useAuth0 } from "@auth0/auth0-vue";
+
+const services = ref("");
+
+const getServicesAxios = async () => {
+    const { data, error } = await getServices();
+
+    if (data) {
+        services.value = data;
+    }
+
+    if (error) {
+        services.value = JSON.stringify(error, null, 2);
+    }
+    console.log(services.value);
+};
+
+getServicesAxios();
+
+const testService = {
+    "service_type_id": "1",
+    "name": "Dich vu chuyen phat nhanh",
+    "description": "Chat luong",
+    "delivery_date": "1-2 ngay",
+    "weight": 4,
+    "price": 200000
+}
+
+// const createServiceAxios = async () => {
+//     const { getAccessTokenSilently } = useAuth0();
+//     const accessToken = await getAccessTokenSilently();
+//     const { data, error } = await createService(accessToken, testService);
+
+//     if (data) {
+//         // message.value = JSON.stringify(data, null, 2);
+//         services.value = data;
+//     }
+
+//     if (error) {
+//         services.value = JSON.stringify(error, null, 2);
+//     }
+//     console.log(services.value);
+// };
+// createServiceAxios()
+const service_id = 1
+// const updateServiceAxios = async () => {
+//     const { getAccessTokenSilently } = useAuth0();
+//     const accessToken = await getAccessTokenSilently();
+//     const { data, error } = await updateService(accessToken, testService, service_id);
+
+//     if (data) {
+//         // message.value = JSON.stringify(data, null, 2);
+//         services.value = data;
+//     }
+
+//     if (error) {
+//         services.value = JSON.stringify(error, null, 2);
+//     }
+//     console.log(services.value);
+// };
+// updateServiceAxios()
+
+
+// const deleteServiceAxios = async () => {
+//     const { getAccessTokenSilently } = useAuth0();
+//     const accessToken = await getAccessTokenSilently();
+//     const { data, error } = await deteleService(accessToken, service_id);
+
+//     if (data) {
+//         // message.value = JSON.stringify(data, null, 2);
+//         services.value = data;
+//     }
+
+//     if (error) {
+//         services.value = JSON.stringify(error, null, 2);
+//     }
+//     console.log(services.value);
+// };
+// deleteServiceAxios()
+
+// const getServiceAxios = async () => {
+//     const { getAccessTokenSilently } = useAuth0();
+//     const accessToken = await getAccessTokenSilently();
+//     const { data, error } = await getServiceById(accessToken, service_id);
+
+//     if (data) {
+//         // message.value = JSON.stringify(data, null, 2);
+//         services.value = data;
+//     }
+
+//     if (error) {
+//         services.value = JSON.stringify(error, null, 2);
+//     }
+//     console.log(services.value);
+// };
+// getServiceAxios()
 </script>

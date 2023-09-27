@@ -104,6 +104,25 @@ const router = createRouter({
             component: ProtectedPage,
             beforeEnter: authGuard,
         },
+
+        // Các trang của Management
+        {
+            path: '/testing',
+            name: 'test',
+            component: () => import('../views/manage/ServicePage.vue'),
+            beforeEnter: authGuard,
+            meta: {
+                title: "test",
+            }
+        },
+        {
+            path: '/management',
+            name: 'Home Page - Management',
+            component: () => import('../views/manage/HomeView.vue'),
+            meta: {
+                title: "Trang chủ - Quản lý",
+            }
+        },
         {
             path: "/admin",
             name: "admin",

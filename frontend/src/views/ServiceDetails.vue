@@ -17,7 +17,7 @@
                         <li class="text-sm">
                             <a :href="product.href" aria-current="page"
                                 class="font-medium text-gray-500 hover:text-gray-600">{{
-                                    product.name }}</a>
+                                    product.name }} {{ this.id }}</a>
                         </li>
                     </ol>
                 </nav>
@@ -347,6 +347,10 @@ import domesticCard from "../components/cards/domestic-card.vue";
 import { StarIcon } from '@heroicons/vue/20/solid'
 import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
 import menuButton from "../components/buttons/menu-button.vue";
+
+const props = defineProps({
+    id: Number
+})
 
 const product = {
     name: 'FedEx Vận chuyển quốc tế',

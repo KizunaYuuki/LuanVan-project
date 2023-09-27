@@ -2,12 +2,31 @@ import { callExternalApi } from "./external-api.service";
 
 const apiServerUrl = import.meta.env.VITE_API_SERVER_URL;
 
-export const getServices = async () => {
+export const getServiceTypesByProviderId = async (accessToken, provider_id) => {
     const config = {
-        url: `${apiServerUrl}/api/service`,
+        url: `${apiServerUrl}/api/service-type/provider/${provider_id}`,
         method: "GET",
         headers: {
             "content-type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+        },
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
+
+export const getProviders = async (accessToken) => {
+    const config = {
+        url: `${apiServerUrl}/api/provider`,
+        method: "GET",
+        headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
         },
     };
 
@@ -84,24 +103,6 @@ export const deteleService = async (accessToken, service_id) => {
             "content-type": "application/json",
             Authorization: `Bearer ${accessToken}`,
         }
-    };
-
-    const { data, error } = await callExternalApi({ config });
-
-    return {
-        data: data || null,
-        error,
-    };
-};
-
-export const getAdminResource = async (accessToken) => {
-    const config = {
-        url: `${apiServerUrl}/api/messages/admin`,
-        method: "GET",
-        headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-        },
     };
 
     const { data, error } = await callExternalApi({ config });

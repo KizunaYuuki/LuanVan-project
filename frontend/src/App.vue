@@ -29,7 +29,7 @@
         <!-- Noi dung trang -->
         <RouterView />
 
-        <Footer></Footer>
+        <!-- <Footer></Footer> -->
     </div>
 </template>    
 

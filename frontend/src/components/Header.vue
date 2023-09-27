@@ -1,5 +1,5 @@
 <template>
-    <header class="bg-white sticky top-0 z-[9998]">
+    <header class="bg-white z-[9998]">
         <!-- PC -->
         <nav class="mx-auto flex max-w-[1280px] items-center justify-between p-[16px] lg:px-[32px]" aria-label="Global">
             <div class="flex lg:flex-1">
