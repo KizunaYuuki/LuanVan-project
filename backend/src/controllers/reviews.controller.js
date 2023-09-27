@@ -9,9 +9,11 @@ async function getReviews() {
 // Lay cac reviews cua mot service theo serviceId
 async function getReviewsByServiceId(id) {
     const [rows] = await pool.query(`
-    SELECT * 
+    SELECT reviews.id as review_id, reviews.comment, reviews.rate, reviews.created as reviews_created, 
+    users.name, users.email
     FROM reviews
-    WHERE service_id = ?
+    JOIN users ON reviews.user_id = users.id
+    WHERE reviews.service_id = ? ORDER BY reviews.created DESC
     `, [id])
     return rows
 }

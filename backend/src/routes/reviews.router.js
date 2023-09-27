@@ -26,7 +26,7 @@ reviewsRouter.get("/", validateAccessToken, async (req, res) => {
 });
 
 // Lay cac reviews cua mot service theo serviceId
-reviewsRouter.get("/service/:id", validateAccessToken, async (req, res) => {
+reviewsRouter.get("/service/:id", async (req, res) => {
     const id = req.params.id;
     const result = await getReviewsByServiceId(id);
     res.status(200).json(result);

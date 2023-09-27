@@ -31,8 +31,8 @@ servicesRouter.get("/service-type/:id", validateAccessToken, async (req, res) =>
     res.status(200).json(result);
 });
 
-// Lay mot services theo id
-servicesRouter.get("/:id", validateAccessToken, async (req, res) => {
+// Lay mot service theo id
+servicesRouter.get("/:id", async (req, res) => {
     const id = req.params.id;
     const result = await getServiceById(id);
     res.status(200).json(result);
