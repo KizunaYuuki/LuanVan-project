@@ -2,60 +2,18 @@
     <main>
         <div class="bg-[#ffffffbe]">
             <div class="pt-6">
-                <nav aria-label="Breadcrumb">
-                    <ol role="list" class="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-                        <li v-for="breadcrumb in product.breadcrumbs" :key="breadcrumb.id">
-                            <div class="flex items-center">
-                                <a :href="breadcrumb.href" class="mr-2 text-sm font-medium text-gray-900">{{ breadcrumb.name
-                                }}</a>
-                                <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true"
-                                    class="h-5 w-4 text-gray-300">
-                                    <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                                </svg>
-                            </div>
-                        </li>
-                        <li class="text-sm">
-                            <a :href="product.href" aria-current="page"
-                                class="font-medium text-gray-500 hover:text-gray-600">{{
-                                    product.name }} {{ this.id }}</a>
-                        </li>
-                    </ol>
-                </nav>
-
-                <!-- Image gallery -->
-                <!-- <div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-                    <div class="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
-                        <img :src="product.images[0].src" :alt="product.images[0].alt"
-                            class="h-full w-full object-cover object-center" />
-                    </div>
-                    <div class="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-                        <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-                            <img :src="product.images[1].src" :alt="product.images[1].alt"
-                                class="h-full w-full object-cover object-center" />
-                        </div>
-                        <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-                            <img :src="product.images[2].src" :alt="product.images[2].alt"
-                                class="h-full w-full object-cover object-center" />
-                        </div>
-                    </div>
-                    <div class="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
-                        <img :src="product.images[3].src" :alt="product.images[3].alt"
-                            class="h-full w-full object-cover object-center" />
-                    </div>
-                </div> -->
-
                 <!-- Product info -->
                 <div
                     class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
                     <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-                        <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{ product.name }}</h1>
+                        <h1 v-if="service" class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{
+                            service.service_name }}</h1>
                     </div>
 
-                    <!-- Options -->
                     <div class="mt-4 lg:row-span-3 lg:mt-0">
-                        <h2 class="sr-only">Product information</h2>
-                        <p class="text-3xl tracking-tight text-gray-900">
-                            {{ (860000).toLocaleString('vi-VN', {
+                        <h2 class="sr-only">Thông tin dịch vụ</h2>
+                        <p v-if="service" class="text-3xl tracking-tight text-gray-900">
+                            {{ (service.price).toLocaleString('vi-VN', {
                                 style: 'currency',
                                 currency: 'VND'
                             }) }}
@@ -67,16 +25,13 @@
                             <div class="flex items-center">
                                 <div class="flex items-center">
                                     <StarIcon v-for="rating in [0, 1, 2, 3, 4]" :key="rating"
-                                        :class="[reviews.average > rating ? 'text-gray-900' : 'text-gray-200', 'h-5 w-5 flex-shrink-0']"
+                                        :class="[reviewsCal.average > rating ? 'text-gray-900' : 'text-gray-200', 'h-5 w-5 flex-shrink-0']"
                                         aria-hidden="true" />
                                 </div>
-                                <p class="sr-only">{{ reviews.average }} out of 5 stars</p>
-                                <!-- <a :href="reviews.href"
-                                    class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">{{
-                                        reviews.totalCount }} đánh giá</a> -->
+                                <p class="sr-only">{{ reviewsCal.average }} out of 5 stars</p>
                                 <a href="#reviews"
                                     class="ml-3 text-sm font-medium text-[#0095f9a7] hover:text-[#0097f9] hover:underline">
-                                    {{ reviews.totalCount }} đánh giá
+                                    {{ reviewsCal.totalCount }} đánh giá
                                 </a>
                             </div>
                         </div>
@@ -153,22 +108,21 @@
                         <!-- Thông tin dịch vụ -->
                         <section class="flex flex-wrap content-center">
                             <div class="text-[#757575]">
-                                <!-- Tên dịch vụ -->
-                                <!-- <h1 class="text-[30px] font-[500]">FedEx Vận chuyển quốc tế</h1> -->
-
                                 <div class="text-[16px] my-[24px] leading-loose">
                                     <h2 class="font-[500]">Thông tin dịch vụ</h2>
-                                    <div class="mt-4">
+                                    <div v-if="service" class="mt-4">
                                         <ul role="list" class="list-disc space-y-2 pl-4 text-gray-700">
                                             <li class="">
                                                 Nhà cung cấp:
-                                                <span class="text-[#0096fa] font-[500] hover:underline">FedEX</span>
+                                                <span class="text-[#0096fa] font-[500] hover:underline">{{
+                                                    service.provider_name }}</span>
                                             </li>
                                             <li class="">
-                                                Thời gian: <span class="font-[500]">1 -> 2 ngày</span>
+                                                Thời gian: <span class="font-[500]">{{ service.delivery_date }}</span>
                                             </li>
                                             <li class="">
-                                                Khối lượng: <span class="font-[500]">&le; 68kg</span>
+                                                Khối lượng: <span class="font-[500]">&le; {{ service.weight }}
+                                                    <span>kg</span></span>
                                             </li>
                                             <li class="">
                                                 Nơi gởi hàng: <span class="font-[500]">Đà Lạt</span>
@@ -184,41 +138,19 @@
 
                         <!-- Description and details -->
                         <div>
-                            <h3 class="sr-only">Description</h3>
+                            <h3 class="sr-only">Mô tả</h3>
 
-                            <div class="space-y-6">
-                                <p class="text-base text-gray-900">{{ product.description }}</p>
-                            </div>
-                        </div>
-
-                        <div class="mt-10 text-[16px]">
-                            <h3 class="font-medium text-gray-900">Điểm nổi bật</h3>
-
-                            <div class="mt-4">
-                                <ul role="list" class="list-disc space-y-2 pl-4">
-                                    <li v-for="highlight in product.highlights" :key="highlight" class="text-gray-400">
-                                        <span class="text-gray-600">{{ highlight }}</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Chi tiet -->
-                        <div class="mt-10 text-[16px]">
-                            <h2 class="font-medium text-gray-900">Chi tiết</h2>
-
-                            <div class="mt-4 space-y-6">
-                                <p class="text-gray-600">{{ product.details }}</p>
+                            <div v-if="service" class="space-y-6">
+                                <p class="text-base text-gray-900">{{ service.description }}</p>
                             </div>
                         </div>
 
                         <!-- Bình luận - Đánh giá -->
-                        <section id="reviews"
-                            class="mt-[32px] pt-[32px] flex flex-wrap content-center items-center border-t">
+                        <section id="reviews" class="mt-[32px] pt-[32px] border-t">
                             <div class="text-[#757575]">
                                 <div class="mb-[16px]">
                                     <h1 class="text-[24px] font-[500] py-[8px] flex justify-between">Xếp hạng và Đánh giá
-                                        <button
+                                        <button @click="openWriteReviewModal = true"
                                             class="hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms] my-[8px] inline-flex items-center px-[8px] py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-[#0096faee] hover:bg-[#0096fa]">
                                             <span class="inline-flex items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -232,7 +164,7 @@
                                     </h1>
                                     <span class="text-[18px] text-[#757575] font-[500] inline-flex py-[8px]">
                                         <span class="mr-[4px]">{{
-                                            (4.7).toLocaleString('vi-VN', {
+                                            (reviewsCal.average || 0).toLocaleString('vi-VN', {
                                                 minimumFractionDigits: 1, // Số chữ số thập phân tối thiểu
                                                 maximumFractionDigits: 1, // Số chữ số thập phân tối đa
                                             }) }}</span>
@@ -244,30 +176,33 @@
                                         </svg>
                                         <span class="ml-[4px] overflow-hidden text-ellipsis whitespace-nowrap">
                                             ({{
-                                                (117).toLocaleString('vi-VN')
+                                                (reviewsCal.totalCount).toLocaleString('vi-VN')
                                             }}) đánh giá</span>
                                     </span>
 
                                     <h2 class="text-[16px] py-[8px]">Xếp hạng theo</h2>
                                     <div class="inline-block">
-                                        <div
-                                            class="text-[12px] text-[#1558d6] h-[36px] inline-flex items-center px-[12px] rounded-full border border-[#d2e3fc] hover:bg-[#d2e3fc] mr-[6px] my-[6px] bg-[#e8f0fe]">
+                                        <button @click="newestSort()"
+                                            :class="{ 'border-[#d2e3fc] hover:bg-[#d2e3fc] text-[#1558d6] mr-[6px] my-[6px] bg-[#e8f0fe]': isNewest }"
+                                            class="text-[12px] h-[36px] inline-flex items-center px-[12px] rounded-full border mr-[6px] my-[6px] hover:bg-[#f8f9fa]">
                                             <span>Mới nhất</span>
-                                        </div>
-                                        <div
+                                        </button>
+                                        <button @click="highestPriceSort()"
+                                            :class="{ 'border-[#d2e3fc] hover:bg-[#d2e3fc] text-[#1558d6] mr-[6px] my-[6px] bg-[#e8f0fe]': isHightestPrice }"
                                             class="text-[12px] h-[36px] inline-flex items-center px-[12px] rounded-full border mr-[6px] my-[6px] hover:bg-[#f8f9fa]">
                                             <span>Cao nhất</span>
-                                        </div>
-                                        <div
+                                        </button>
+                                        <button @click="lowestPriceSort()"
+                                            :class="{ 'border-[#d2e3fc] hover:bg-[#d2e3fc] text-[#1558d6] mr-[6px] my-[6px] bg-[#e8f0fe]': isLowestPrice }"
                                             class="text-[12px] h-[36px] inline-flex items-center px-[12px] rounded-full border mr-[6px] my-[6px] hover:bg-[#f8f9fa]">
                                             <span>Thấp nhất</span>
-                                        </div>
+                                        </button>
                                     </div>
                                 </div>
 
                                 <!-- Comment -->
                                 <div class="my-[4px]">
-                                    <div>
+                                    <div v-for="review in reviews">
                                         <h2 class="text-[16px] font-[600] flex items-center justify-between py-[8px]">
                                             <div class="flex items-end">
                                                 <span class="mr-[8px]">
@@ -279,56 +214,153 @@
                                                     </svg>
 
                                                 </span>
-                                                Xuân Hà Phạm
+                                                <span>{{ review.name }}</span>
                                             </div>
-                                            <menuButton></menuButton>
+                                            <Menu as="div" class="relative inline-block text-left">
+                                                <div>
+                                                    <MenuButton
+                                                        class="inline-flex w-full justify-center gap-x-1.5 rounded-full px-3 py-3 text-sm font-semibold hover:shadow-sm hover:bg-[#cfcfcf]">
+                                                        <svg width="24" height="24"
+                                                            class="fill-current text-[#70757a] cursor-pointer"
+                                                            focusable="false" xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 24 24">
+                                                            <path
+                                                                d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z">
+                                                            </path>
+                                                        </svg>
+                                                        <!-- <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" /> -->
+                                                    </MenuButton>
+                                                </div>
+
+                                                <transition enter-active-class="transition ease-out duration-100"
+                                                    enter-from-class="transform opacity-0 scale-95"
+                                                    enter-to-class="transform opacity-100 scale-100"
+                                                    leave-active-class="transition ease-in duration-75"
+                                                    leave-from-class="transform opacity-100 scale-100"
+                                                    leave-to-class="transform opacity-0 scale-95">
+                                                    <MenuItems
+                                                        class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                        <div class="py-1">
+                                                            <MenuItem v-slot="{ active }">
+                                                            <a href="#"
+                                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Báo
+                                                                bài đánh giá vi phạm</a>
+                                                            </MenuItem>
+                                                        </div>
+                                                        <div class="py-1"
+                                                            v-if="isAuthenticated && user.email === review.email">
+                                                            <MenuItem v-slot="{ active }">
+                                                            <a href="#"
+                                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Xoá</a>
+                                                            </MenuItem>
+                                                        </div>
+                                                    </MenuItems>
+                                                </transition>
+                                            </Menu>
                                         </h2>
-                                        <div>
-                                            <span></span>
-                                            <span>một tuần trước</span>
+                                        <div class="flex items-center">
+                                            <span>
+                                                <div class="flex items-center">
+                                                    <StarIcon v-for="rating in [0, 1, 2, 3, 4]" :key="rating"
+                                                        :class="[review.rate > rating ? 'text-gray-900' : 'text-gray-200', 'h-5 w-5 flex-shrink-0']"
+                                                        aria-hidden="true" />
+                                                </div>
+                                            </span>
+                                            <span class="ml-3">
+                                                {{ formatDistanceToNow(
+                                                    new Date(review.reviews_created),
+                                                    { includeSeconds: true, locale: vi },
+                                                ) }} trước
+                                            </span>
                                             <span
                                                 class="text-[12px] h-[24px] inline-flex items-center px-[12px] rounded-[4px] border m-[6px] hover:bg-[#f8f9fa]">Mới</span>
                                         </div>
-                                        <p>Dịch vụ gọn rẽ với giá khá tốt, đặc biệt nhân viên rất thân thiện. 9/10</p>
-                                    </div>
-                                    <div>
-                                        <h2 class="text-[16px] font-[600] flex items-center justify-between py-[8px]">
-                                            <div class="flex items-end">
-                                                <span class="mr-[8px]">
-                                                    <svg class="border fill-current text-[#70757a] inline-block rounded-full ring-2 ring-white"
-                                                        width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z">
-                                                        </path>
-                                                    </svg>
-                                                </span>
-                                                Xuân Hà Phạm
-                                            </div>
-                                            <menuButton></menuButton>
-                                        </h2>
-                                        <div>
-                                            <span></span>
-                                            <span>một tuần trước</span>
-                                            <span
-                                                class="text-[12px] h-[24px] inline-flex items-center px-[12px] rounded-[4px] border m-[6px] hover:bg-[#f8f9fa]">Mới</span>
-                                        </div>
-                                        <p>Mình ghé thăm vào tháng 08, trời Hà Nội khá là oi, đi dạo Hồ Hoàn Kiểm cả buổi
-                                            sáng
-                                            lẫn buổi
-                                            chiều
-                                            điều cảm thấy oi - Nhưng vẻ đẹp của Hồ Hoàn Kiểm vẫn y như sách giáo khoa</p>
+                                        <p>{{ review.comment }}</p>
                                     </div>
                                 </div>
                             </div>
                         </section>
                     </div>
-
                 </div>
             </div>
         </div>
 
+        <!-- Modal write review -->
+        <TransitionRoot as="template" :show="openWriteReviewModal">
+            <Dialog as="div" class="relative z-10" @close="openWriteReviewModal = false">
+                <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
+                    leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
+                    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                </TransitionChild>
+
+                <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+                    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                        <TransitionChild as="template" enter="ease-out duration-300"
+                            enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                            enter-to="opacity-100 translate-y-0 sm:scale-100" leave="ease-in duration-200"
+                            leave-from="opacity-100 translate-y-0 sm:scale-100"
+                            leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+                            <DialogPanel
+                                class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                                <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                                    <div class="">
+                                        <!-- <div
+                                            class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                                            <ExclamationTriangleIcon class="h-6 w-6 text-red-600" aria-hidden="true" />
+                                        </div> -->
+                                        <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                                            <DialogTitle as="h3" class="text-[24px] font-semibold leading-6 text-gray-900">
+                                                Viết đánh giá</DialogTitle>
+
+                                            <div class="mt-2">
+                                                <!-- Content Review Form -->
+                                                <form>
+                                                    <div class="space-y-12">
+                                                        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                                                            <div class="col-span-full">
+                                                                <!-- Đánh giá  -->
+                                                                <div
+                                                                    class="form-group fs-6 mb-2 d-flex justify-content-end">
+                                                                    <star-rating :show-rating="false" :increment="1"
+                                                                        v-model:rating="review.rate" :star-size="32" />
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-span-full">
+                                                                <label for="about"
+                                                                    class="block text-sm font-medium leading-6 text-gray-900">Bình
+                                                                    luận</label>
+                                                                <div class="mt-2">
+                                                                    <textarea v-model="review.comment" id="about"
+                                                                        name="about" rows="3"
+                                                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                                                </div>
+                                                                <p class="mt-3 text-sm leading-6 text-gray-600">Viết suy
+                                                                    nghĩ của bạn về dịch vụ này.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                                    <button @submit="submitCreateReviewHandle(review)" type="button"
+                                        class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">Submit</button>
+                                    <button type="button"
+                                        class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                                        @click="openWriteReviewModal = false" ref="cancelButtonRef">Huỷ</button>
+                                </div>
+                            </DialogPanel>
+                        </TransitionChild>
+                    </div>
+                </div>
+            </Dialog>
+        </TransitionRoot>
+
         <!-- Goi y dich vu - San pham tuong tu -->
-        <div class="bg-[#0096fa0d] py-6">
+        <!-- <div class="bg-[#0096fa0d] py-6">
             <h2 class="text-[24px] text-[#202124] font-[500] text-center mb-[16px]">Những dịch vụ tương tự</h2>
             <section class="flex flex-wrap content-center justify-center items-center">
                 <domesticCard></domesticCard>
@@ -336,7 +368,7 @@
                 <domesticCard></domesticCard>
                 <domesticCard></domesticCard>
             </section>
-        </div>
+        </div> -->
     </main>
 </template>
 
@@ -345,12 +377,172 @@ import { RouterLink, RouterView } from 'vue-router'
 import { ref } from "vue";
 import domesticCard from "../components/cards/domestic-card.vue";
 import { StarIcon } from '@heroicons/vue/20/solid'
-import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
+import { ExclamationTriangleIcon } from '@heroicons/vue/24/outline'
+import {
+    RadioGroup, RadioGroupLabel, RadioGroupOption, Menu, MenuButton, MenuItem, MenuItems,
+    Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot
+} from '@headlessui/vue'
 import menuButton from "../components/buttons/menu-button.vue";
+import { getServiceById } from "@/services/service.service";
+import { createReview, getReviewsByServiceId } from "@/services/review.service";
+import { useAuth0 } from "@auth0/auth0-vue";
+import { format } from "date-fns";
+import { vi } from 'date-fns/locale'
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import StarRating from 'vue-star-rating';
 
+const openWriteReviewModal = ref(true)
+
+// login if loggin yet
+const { loginWithRedirect } = useAuth0();
+const handleLogin = () => {
+    loginWithRedirect({
+        appState: {
+            target: window.location.pathname,
+        },
+    });
+};
+
+// Xác thực người dùng đã đăng nhập chưa 
+const { isAuthenticated } = useAuth0();
+
+// get the token
+const { getAccessTokenSilently } = useAuth0();
+
+// get the information user
+const { user } = useAuth0();
+const code = user ? JSON.stringify(user.value, null, 2) : "";
+console.log(user);
 const props = defineProps({
-    id: Number
+    id: Number // Service Id
 })
+
+// variables
+const isNewest = ref(true);
+const isHightestPrice = ref(false);
+const isLowestPrice = ref(false);
+
+const service = ref();
+const reviews = ref([]);
+const unOrderReviews = ref();
+const review = ref(
+    {
+        user_id: 1,
+        service_id: 1,
+        rate: 0,
+        comment: "Not a service too good but not bad"
+    }
+);
+const reviewsCal = ref(
+    {
+        href: '#',
+        average: 0,
+        totalCount: ""
+    }
+);
+
+const getServiceByIdAxios = async (id) => {
+    const { data, error } = await getServiceById(id);
+
+    if (data) {
+        service.value = data;
+        console.log(service.value);
+    }
+
+    if (error) {
+        // result.value = JSON.stringify(error, null, 2);
+    }
+};
+
+const createReviewAxios = async (reviewData) => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await createReview(accessToken, reviewData);
+    if (data) {
+        review.value = data;
+        console.log(review.value);
+    }
+    if (error) {
+        // result.value = JSON.stringify(error, null, 2);
+    }
+};
+
+const getReviewByServiceIdAxios = async (id) => {
+    const { data, error } = await getReviewsByServiceId(id);
+
+    if (data) {
+        reviews.value = data;
+        unOrderReviews.value = data;
+        console.log(reviews.value);
+        reviewsCal.value.totalCount = data.length;
+
+        data.forEach((element) => {
+            reviewsCal.value.average = element.rate + reviewsCal.value.average;
+        });
+        reviewsCal.value.average = reviewsCal.value.average / data.length;
+        console.log(reviewsCal.value)
+    }
+
+    if (error) {
+        // result.value = JSON.stringify(error, null, 2);
+    }
+};
+
+const newestSort = async (root) => {
+    if (isNewest.value === false) {
+
+        reviews.value = unOrderReviews.value;
+
+        // update status
+        isLowestPrice.value = false;
+        isNewest.value = true;
+        isHightestPrice.value = false;
+    }
+};
+
+const highestPriceSort = async () => {
+    if (isHightestPrice.value === false) {
+
+        reviews.value = unOrderReviews.value;
+        reviews.value = reviews.value.toSorted((a, b) => b.rate - a.rate);
+
+        // update status
+        isLowestPrice.value = false;
+        isNewest.value = false;
+        isHightestPrice.value = true;
+    }
+};
+
+const lowestPriceSort = async () => {
+    if (isLowestPrice.value === false) {
+
+        reviews.value = unOrderReviews.value;
+        reviews.value = reviews.value.toSorted((a, b) => a.rate - b.rate);
+
+        // update status
+        isLowestPrice.value = true;
+        isNewest.value = false;
+        isHightestPrice.value = false;
+    }
+};
+
+
+const submitCreateReviewHandle = async (reviewData) => {
+    // edit data
+    reviewData.user_id = this.id;
+    reviewData.service_id = this.id;
+
+    // loggin if loggin yet exists
+    if (!isAuthenticated.value) {
+        handleLogin();
+        return
+    }
+
+    createReviewAxios(reviewData)
+};
+
+// run function
+getServiceByIdAxios(props.id);
+getReviewByServiceIdAxios(props.id);
 
 const product = {
     name: 'FedEx Vận chuyển quốc tế',
@@ -404,8 +596,9 @@ const product = {
     details:
         'Các dịch vụ FedEx Vận chuyển quốc tế có thể thay đổi theo thời gian và địa điểm cụ thể. Để biết thông tin cụ thể và cập nhật nhất, bạn nên liên hệ trực tiếp với FedEx hoặc truy cập trang web của họ.',
 }
-const reviews = { href: '#', average: 4, totalCount: 117 }
 
-const selectedColor = ref(product.colors[0])
-const selectedSize = ref(product.sizes[2])
+// const selectedColor = ref(product.colors[0])
+// const selectedSize = ref(product.sizes[2])
+
+// Viết hàm lấy id user theo email, và hoàn thành tạo review
 </script>

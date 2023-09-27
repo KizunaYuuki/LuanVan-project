@@ -393,6 +393,13 @@ import freightProductCard from "../components/cards/freight-product-card.vue";
 import domesticCard from "../components/cards/domestic-card.vue";
 import banner from "../components/banner.vue";
 
+import { useAuth0 } from "@auth0/auth0-vue";
+
+const { user } = useAuth0();
+
+const code = user ? JSON.stringify(user.value, null, 2) : "";
+console.log(user);
+
 const { pageview } = useGtag()
 const track = () => {
     pageview({ page_path: "/test" });
@@ -467,7 +474,6 @@ const sortOptions = [
 
 
 import { getServices, createService, updateService, deteleService, getServiceById } from "@/services/service.service";
-import { useAuth0 } from "@auth0/auth0-vue";
 
 const services = ref("");
 
