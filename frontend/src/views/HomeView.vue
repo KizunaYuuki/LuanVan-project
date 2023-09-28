@@ -353,8 +353,7 @@
                                                 <RouterLink :to="{
                                                     name: 'Service Details',
                                                     params: { id: service.service_id },
-                                                }"
-                                                    class="text-[#0096fa] inherit py-[17px]" target="_blank">
+                                                }" class="text-[#0096fa] inherit py-[17px]">
                                                     <div
                                                         class="bg-[#e8f0fe] box-border rounded-[8px] text-[#1a73e8] inline-block text-[12px] leading-[20px] py-[6px] px-[10px] text-center w-[124px]">
                                                         Truy cập</div>
