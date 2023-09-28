@@ -124,11 +124,11 @@
                                                 Khối lượng: <span class="font-[500]">&le; {{ service.weight }}
                                                     <span>kg</span></span>
                                             </li>
-                                            <li class="">
-                                                Nơi gởi hàng: <span class="font-[500]">Đà Lạt</span>
+                                            <li class="" v-if="from">
+                                                Gởi hàng từ: <span class="font-[500]">{{ from.district }}, {{ from.province }}</span>
                                             </li>
-                                            <li class="">
-                                                Nơi nhận hàng: <span class="font-[500]">TP. Hồ Chí Minh</span>
+                                            <li class="" v-if="to">
+                                                Gởi hàng đến: <span class="font-[500]">{{ to.district }}, {{ to.province }}</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -150,7 +150,7 @@
                             <div class="text-[#757575]">
                                 <div class="mb-[16px]">
                                     <h1 class="text-[24px] font-[500] py-[8px] flex justify-between">Xếp hạng và Đánh giá
-                                        <button @click="openWriteReviewModal = true"
+                                        <button @click="openReviewForm()"
                                             class="hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms] my-[8px] inline-flex items-center px-[8px] py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-[#0096faee] hover:bg-[#0096fa]">
                                             <span class="inline-flex items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -346,7 +346,7 @@
                                     </div>
                                 </div>
                                 <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                    <button @submit="submitCreateReviewHandle(review)" type="button"
+                                    <button @click="submitCreateReviewHandle(review, user_id)" type="button"
                                         class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">Submit</button>
                                     <button type="button"
                                         class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
@@ -358,17 +358,6 @@
                 </div>
             </Dialog>
         </TransitionRoot>
-
-        <!-- Goi y dich vu - San pham tuong tu -->
-        <!-- <div class="bg-[#0096fa0d] py-6">
-            <h2 class="text-[24px] text-[#202124] font-[500] text-center mb-[16px]">Những dịch vụ tương tự</h2>
-            <section class="flex flex-wrap content-center justify-center items-center">
-                <domesticCard></domesticCard>
-                <domesticCard></domesticCard>
-                <domesticCard></domesticCard>
-                <domesticCard></domesticCard>
-            </section>
-        </div> -->
     </main>
 </template>
 
@@ -390,8 +379,10 @@ import { format } from "date-fns";
 import { vi } from 'date-fns/locale'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import StarRating from 'vue-star-rating';
+import { getUserByEmail } from "@/services/user.service";
+import { getLocationsByServicId } from "@/services/location.service";
 
-const openWriteReviewModal = ref(true)
+const openWriteReviewModal = ref(false)
 
 // login if loggin yet
 const { loginWithRedirect } = useAuth0();
@@ -411,8 +402,6 @@ const { getAccessTokenSilently } = useAuth0();
 
 // get the information user
 const { user } = useAuth0();
-const code = user ? JSON.stringify(user.value, null, 2) : "";
-console.log(user);
 const props = defineProps({
     id: Number // Service Id
 })
@@ -422,9 +411,13 @@ const isNewest = ref(true);
 const isHightestPrice = ref(false);
 const isLowestPrice = ref(false);
 
+const to = ref('');
+const from = ref('');
+
 const service = ref();
 const reviews = ref([]);
 const unOrderReviews = ref();
+const user_id = ref('');
 const review = ref(
     {
         user_id: 1,
@@ -454,6 +447,26 @@ const getServiceByIdAxios = async (id) => {
     }
 };
 
+const getLocationsByServicIdAxios = async (service_id) => {
+    const { data, error } = await getLocationsByServicId(service_id);
+
+    if (data) {
+        data.forEach(element => {
+            if (element.type === "TO") {
+                to.value = element;
+            }
+            else {
+                from.value = element;
+            }
+        });
+    }
+
+    if (error) {
+        console.log(error);
+    }
+};
+getLocationsByServicIdAxios(props.id);
+
 const createReviewAxios = async (reviewData) => {
     const accessToken = await getAccessTokenSilently();
     const { data, error } = await createReview(accessToken, reviewData);
@@ -464,6 +477,7 @@ const createReviewAxios = async (reviewData) => {
     if (error) {
         // result.value = JSON.stringify(error, null, 2);
     }
+    openWriteReviewModal.value = false;
 };
 
 const getReviewByServiceIdAxios = async (id) => {
@@ -487,7 +501,7 @@ const getReviewByServiceIdAxios = async (id) => {
     }
 };
 
-const newestSort = async (root) => {
+const newestSort = async () => {
     if (isNewest.value === false) {
 
         reviews.value = unOrderReviews.value;
@@ -525,11 +539,30 @@ const lowestPriceSort = async () => {
     }
 };
 
-
-const submitCreateReviewHandle = async (reviewData) => {
+const getUserByEmailAxios = async (user) => {
     // edit data
-    reviewData.user_id = this.id;
-    reviewData.service_id = this.id;
+    const userData = {
+        email: user.value?.email
+    }
+
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await getUserByEmail(accessToken, userData);
+
+    if (data) {
+        user_id.value = data.id;
+        console.log(data);
+        console.log(user_id.value);
+    }
+
+    if (error) {
+        console.log(error.message);
+    }
+};
+
+const submitCreateReviewHandle = async (reviewData, user_id) => {
+    // edit data
+    reviewData.user_id = user_id;
+    reviewData.service_id = props.id;
 
     // loggin if loggin yet exists
     if (!isAuthenticated.value) {
@@ -540,65 +573,18 @@ const submitCreateReviewHandle = async (reviewData) => {
     createReviewAxios(reviewData)
 };
 
+const openReviewForm = async () => {
+    // loggin if loggin yet exists
+    if (!isAuthenticated.value) {
+        handleLogin();
+    } else {
+        openWriteReviewModal.value = true
+    }
+
+};
+
 // run function
 getServiceByIdAxios(props.id);
 getReviewByServiceIdAxios(props.id);
-
-const product = {
-    name: 'FedEx Vận chuyển quốc tế',
-    price: '$192',
-    href: '#',
-    breadcrumbs: [
-        { id: 1, name: 'Quốc tế', href: '#' },
-        // { id: 2, name: 'Clothing', href: '#' },
-    ],
-    images: [
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
-            alt: 'Two each of gray, white, and black shirts laying flat.',
-        },
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
-            alt: 'Model wearing plain black basic tee.',
-        },
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
-            alt: 'Model wearing plain gray basic tee.',
-        },
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
-            alt: 'Model wearing plain white basic tee.',
-        },
-    ],
-    colors: [
-        { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
-        { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
-        { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
-    ],
-    sizes: [
-        { name: 'XXS', inStock: false },
-        { name: 'XS', inStock: true },
-        { name: 'S', inStock: true },
-        { name: 'M', inStock: true },
-        { name: 'L', inStock: true },
-        { name: 'XL', inStock: true },
-        { name: '2XL', inStock: true },
-        { name: '3XL', inStock: true },
-    ],
-    description:
-        'Dịch vụ Giao hàng nhanh quốc tế (FedEx International Priority): Đây là dịch vụ ưu tiên giúp bạn gửi hàng hóa quốc tế một cách nhanh chóng. FedEx cam kết giao hàng đến nơi chỉ trong vài ngày làm việc, tùy thuộc vào điểm đến.',
-    highlights: [
-        'Tính nhanh chóng và ưu tiên: FedEx International Priority cam kết giao hàng nhanh chóng trong vài ngày làm việc, giúp bạn đáp ứng các khâu thời gian cố định cho giao hàng quốc tế.',
-        'Tính hiệu quả chi phí: Dịch vụ FedEx International Economy cung cấp một lựa chọn tiết kiệm chi phí cho các cuộc giao hàng quốc tế không cần gấp.',
-        'Dịch vụ đặc biệt: FedEx cung cấp các giải pháp vận chuyển hàng hóa đặc biệt cho hàng quý giá, hàng hóa cồng kềnh và hàng nặng.',
-        'Tính tin cậy: FedEx là một trong những thương hiệu được tin dùng và có danh tiếng trong ngành vận chuyển quốc tế, với nhiều năm kinh nghiệm trong việc đảm bảo an toàn và đáng tin cậy trong vận chuyển hàng hóa.',
-    ],
-    details:
-        'Các dịch vụ FedEx Vận chuyển quốc tế có thể thay đổi theo thời gian và địa điểm cụ thể. Để biết thông tin cụ thể và cập nhật nhất, bạn nên liên hệ trực tiếp với FedEx hoặc truy cập trang web của họ.',
-}
-
-// const selectedColor = ref(product.colors[0])
-// const selectedSize = ref(product.sizes[2])
-
-// Viết hàm lấy id user theo email, và hoàn thành tạo review
+getUserByEmailAxios(user);
 </script>
