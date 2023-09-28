@@ -25,7 +25,7 @@ locationsRouter.get("/", async (req, res) => {
 });
 
 // Lay cac locations cua mot service theo serviceId
-locationsRouter.get("/service/:id", validateAccessToken, async (req, res) => {
+locationsRouter.get("/service/:id", async (req, res) => {
     const id = req.params.id;
     const result = await getLocationsByServicId(id);
     res.status(200).json(result);

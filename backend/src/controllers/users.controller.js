@@ -1,5 +1,9 @@
 const { pool } = require("../models/db.js");
 
+async function getUsers() {
+    const [rows] = await pool.query(`select * from users order by id`)
+    return rows
+}
 
 async function getUserById(id) {
     const [rows] = await pool.query(`
@@ -11,6 +15,7 @@ async function getUserById(id) {
 }
 
 async function getUserByEmail(email) {
+    console.log(email);
     const [rows] = await pool.query(`
     SELECT * 
     FROM users
@@ -72,5 +77,6 @@ module.exports = {
     getRoleByEmail,
     getStatusByEmail,
     validateStatus,
-    validateRole
+    validateRole,
+    getUsers
 };

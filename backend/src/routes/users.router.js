@@ -1,12 +1,20 @@
 const express = require("express");
 const { validateAccessToken } = require("../middleware/auth0.middleware.js");
 
-const { getUserById, getUserByEmail, getRoleByEmail, createUser } = require("../controllers/users.controller.js");
+const { 
+    getUserById,
+    createUser,
+    getUserByEmail,
+    getRoleByEmail,
+    getStatusByEmail,
+    validateStatus,
+    validateRole,
+    getUsers } = require("../controllers/users.controller.js");
 
 const usersRouter = express.Router();
 
 // Đăng ký người dùng
-usersRouter.post("/register", validateAccessToken, async (req, res) => {
+usersRouter.post("/", validateAccessToken, async (req, res) => {
     const { name, email } = req.body;
     // Theo mặc định tài khoản mới tạo sẽ có role là 1, chỉ có quyền của Khách hàng
     // status mặc định là 1, cho biết tài khoản được kích hoạt/mở
@@ -17,7 +25,7 @@ usersRouter.post("/register", validateAccessToken, async (req, res) => {
 });
 
 // Xác thực quyền qua role
-usersRouter.post("/auth-role", validateAccessToken, async (req, res) => {
+usersRouter.get("/auth-role", validateAccessToken, async (req, res) => {
     const { email } = req.body;
     const role = await getRoleByEmail(email);
     res.status(200).json(role);
@@ -34,7 +42,7 @@ usersRouter.put("/update-user", validateAccessToken, (req, res) => {
 });
 
 // Tìm người dùng theo email
-usersRouter.post("/", validateAccessToken, async (req, res) => {
+usersRouter.post("/email", validateAccessToken, async (req, res) => {
     const { email } = req.body;
     const user = await getUserByEmail(email);
     res.status(200).json(user);
