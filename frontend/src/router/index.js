@@ -29,9 +29,9 @@ const router = createRouter({
             }
         },
         {
-            path: '/register-service',
-            name: 'Register Service',
-            component: () => import('../views/RegisterService.vue'),
+            path: '/order',
+            name: 'Create Order',
+            component: () => import('../views/Order.vue'),
             beforeEnter: authGuard,
             meta: {
                 title: "Đăng ký dịch vụ",

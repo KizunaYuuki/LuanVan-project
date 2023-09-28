@@ -6,10 +6,10 @@
             <div class="bg-white">
 
                 <!-- Form Đăng ký dịch vụ -->
-                <form action="POST" class="min-[1024px]:py-[64px] py-[16px]">
+                <form class="min-[1024px]:py-[64px] py-[16px]">
 
                     <!-- Buoc 1 Dien Thong tin -->
-                    <div class="">
+                    <div v-if="fillInformStep" class="">
                         <!-- Nav Steps - Thông tin dịch vụ -->
                         <div class="bg-[#fff] rounded-[0.375rem] min-[1024px]:block hidden">
                             <div class="mx-auto px-[2rem]">
@@ -19,9 +19,9 @@
                                         <li class="relative flex flex-1">
                                             <a href="#" class="flex w-full items-center">
                                                 <span
-                                                    class="flex items-center py-[1rem] px-[1.5rem] text-[#0096fa] font-[500]">
+                                                    class="flex items-center py-[.5rem] px-[1.5rem] text-[#0096fa] font-[500]">
                                                     <span
-                                                        class="flex items-center justify-center content-center border-[2px] border-[#0096fa] w-[2.5rem] h-[2.5rem] rounded-full">
+                                                        class="flex items-center justify-center content-center border-[2px] border-[#0096fa] w-[2rem] h-[2rem] rounded-full">
                                                         <span class="">01</span>
                                                     </span>
                                                     <span class="ml-[16px]">Thông Tin Dịch Vụ</span>
@@ -38,11 +38,11 @@
                                             </div>
                                         </li>
                                         <li class="relative flex flex-1">
-                                            <a href="#" class=" flex items-center py-[1rem] px-[1.5rem]">
+                                            <a href="#" class=" flex items-center py-[.5rem] px-[1.5rem]">
                                                 <span
                                                     class="flex items-center text-[#6b7280] font-[500] hover:text-[#111827]">
                                                     <span
-                                                        class="flex items-center justify-center content-center border-[2px] border-[#d1d5db] hover:border-[#747981b7] w-[2.5rem] h-[2.5rem] rounded-full">
+                                                        class="flex items-center justify-center content-center border-[2px] border-[#d1d5db] hover:border-[#747981b7] w-[2rem] h-[2rem] rounded-full">
                                                         <span class="">02</span>
                                                     </span>
                                                     <span class="ml-[16px]">Thanh Toán</span>
@@ -59,11 +59,11 @@
                                             </div>
                                         </li>
                                         <li class="relative flex flex-1">
-                                            <a href="#" class=" flex items-center py-[1rem] px-[1.5rem]">
+                                            <a href="#" class=" flex items-center py-[.5rem] px-[1.5rem]">
                                                 <span
                                                     class="flex items-center text-[#6b7280] font-[500] hover:text-[#111827]">
                                                     <span
-                                                        class="flex items-center justify-center content-center border-[2px] border-[#d1d5db] hover:border-[#747981b7] w-[2.5rem] h-[2.5rem] rounded-full">
+                                                        class="flex items-center justify-center content-center border-[2px] border-[#d1d5db] hover:border-[#747981b7] w-[2rem] h-[2rem] rounded-full">
                                                         <span class="">03</span>
                                                     </span>
                                                     <span class="ml-[16px]">Hoàn Thành</span>
@@ -80,53 +80,40 @@
                             <div class="space-y-12 mx-auto max-w-2xl">
                                 <!-- Thông tin cá nhân -->
                                 <div class="border-b border-gray-900/10 pb-12">
-                                    <h2 class="text-base font-semibold leading-7 text-gray-900">Thông tin cá nhân</h2>
+                                    <h2 class="text-base font-semibold leading-7 text-gray-900">Thông tin liên hệ</h2>
                                     <p class="mt-1 text-sm leading-6 text-gray-600">Sử dụng những thông tin mà chúng tôi
                                         có thể liên hệ được với bạn khi cần thiết. <br /> Những thông tin có ký hiệu
                                         <strong class="text-[red]">*</strong> là thông tin bắt buộc phải nhập.
                                     </p>
 
                                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                                        <div class="sm:col-span-3">
+                                        <div class="sm:col-span-2">
                                             <label for="first-name"
                                                 class="block text-sm font-medium leading-6 text-gray-900">Tên<strong
                                                     class="text-[red] ml-[8px]">*</strong></label>
                                             <div class="mt-2">
                                                 <input type="text" name="first-name" id="first-name"
                                                     autocomplete="given-name"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                                    class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
 
-                                        <div class="sm:col-span-3">
-                                            <label for="last-name"
-                                                class="block text-sm font-medium leading-6 text-gray-900">Họ</label>
-                                            <div class="mt-2">
-                                                <input type="text" name="last-name" id="last-name"
-                                                    autocomplete="family-name"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                            </div>
-                                        </div>
-
-                                        <div class="sm:col-span-4">
-                                            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Địa
-                                                chỉ
+                                        <div class="sm:col-span-2">
+                                            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">
                                                 Email<strong class="text-[red] ml-[8px]">*</strong></label>
                                             <div class="mt-2">
                                                 <input id="email" name="email" type="email" autocomplete="email"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                                    class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
 
-
-
-                                        <div class="sm:col-span-4">
+                                        <div class="sm:col-span-2">
                                             <label for="tel" class="block text-sm font-medium leading-6 text-gray-900">Số
                                                 điện
-                                                thoại<strong class="text-[red] ml-[8px]">*</strong></label>
+                                                thoại<strong class="text-[red] ml-[8px]"></strong></label>
                                             <div class="mt-2">
                                                 <input id="tel" name="tel" type="tel" autocomplete="tel"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                                    class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
                                     </div>
@@ -142,55 +129,42 @@
                                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                         <div class="sm:col-span-2 sm:col-start-1">
                                             <label for="height"
-                                                class="block text-sm font-medium leading-6 text-gray-900">Chiều dài</label>
+                                                class="block text-sm font-medium leading-6 text-gray-900">Chiều dài
+                                                (<span class="text-[#0096fa]">cm</span>)</label>
                                             <div class="mt-2">
                                                 <input type="text" name="height" id="height" autocomplete="height"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                                    class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
 
                                         <div class="sm:col-span-2">
                                             <label for="width"
-                                                class="block text-sm font-medium leading-6 text-gray-900">Chiều rộng</label>
+                                                class="block text-sm font-medium leading-6 text-gray-900">Chiều rộng
+                                                (<span class="text-[#0096fa]">cm</span>)</label>
                                             <div class="mt-2">
                                                 <input type="text" name="width" id="width" autocomplete="width"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                                    class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
 
                                         <div class="sm:col-span-2">
                                             <label for="length"
-                                                class="block text-sm font-medium leading-6 text-gray-900">Chiều cao</label>
+                                                class="block text-sm font-medium leading-6 text-gray-900">Chiều cao
+                                                (<span class="text-[#0096fa]">cm</span>)</label>
                                             <div class="mt-2">
                                                 <input type="text" name="length" id="length" autocomplete="length"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                                    class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
 
                                         <div class="sm:col-span-2">
                                             <label for="volume"
-                                                class="block text-sm font-medium leading-6 text-gray-900">Khối lượng Lô hàng
+                                                class="block text-sm font-medium leading-6 text-gray-900">Trọng lượng Lô
+                                                hàng
                                                 (<span class="text-[#0096fa]">Kg</span>)</label>
                                             <div class="mt-2">
                                                 <input type="text" name="volume" id="volume" autocomplete="volume"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-span-full flex">
-                                            <div class="">
-                                                <h1 class="text-sm font-medium leading-6 text-gray-900">Hình thức vận
-                                                    chuyển:
-                                                    <span class="text-sm leading-6 text-[#0096fa]">Vận chuyển nhanh</span>
-                                                </h1>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-span-full flex">
-                                            <div class="">
-                                                <h1 class="text-sm font-medium leading-6 text-gray-900">Loại lô hàng:
-                                                    <span class="text-sm leading-6 text-[#0096fa]">Lô hàng nhỏ (Khối lượng tối đa: 38Kg)</span>
-                                                </h1>
+                                                    class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
                                     </div>
@@ -204,24 +178,13 @@
                                         điểm cụ thể mà nhân viên vận chuyển đến để lấy lô hàng của bạn.</p>
                                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
-                                        <div class="col-span-full">
-                                            <label for="street-address"
-                                                class="block text-sm font-medium leading-6 text-gray-900">Tên
-                                                đường</label>
-                                            <div class="mt-2">
-                                                <input type="text" name="street-address" id="street-address"
-                                                    autocomplete="street-address"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                            </div>
-                                        </div>
-
                                         <div class="sm:col-span-2 sm:col-start-1">
                                             <label for="city" class="block text-sm font-medium leading-6 text-gray-900">Tỉnh
                                                 / Thành
                                                 phố</label>
                                             <div class="mt-2">
                                                 <input type="text" name="city" id="city" autocomplete="address-level2"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                                    class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
 
@@ -231,7 +194,7 @@
                                                 Huyện</label>
                                             <div class="mt-2">
                                                 <input type="text" name="region" id="region" autocomplete="address-level1"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                                    class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
 
@@ -240,22 +203,9 @@
                                                 Phường</label>
                                             <div class="mt-2">
                                                 <input type="text" name="ward" id="ward" autocomplete="address-level3"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                                    class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
-
-                                        <div class="sm:col-span-2">
-                                            <label for="postal-code"
-                                                class="block text-sm font-medium leading-6 text-gray-900">ZIP /
-                                                Mã bưu
-                                                chính</label>
-                                            <div class="mt-2">
-                                                <input type="text" name="postal-code" id="postal-code"
-                                                    autocomplete="postal-code"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                            </div>
-                                        </div>
-
                                     </div>
                                 </div>
 
@@ -268,25 +218,13 @@
                                         địa chỉ rất quan trọng để đảm bảo rằng hàng hóa sẽ
                                         đến đúng địa điểm đích mà bạn muốn.</p>
                                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-
-                                        <div class="col-span-full">
-                                            <label for="street-address"
-                                                class="block text-sm font-medium leading-6 text-gray-900">Tên
-                                                đường</label>
-                                            <div class="mt-2">
-                                                <input type="text" name="street-address" id="street-address"
-                                                    autocomplete="street-address"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                            </div>
-                                        </div>
-
                                         <div class="sm:col-span-2 sm:col-start-1">
                                             <label for="city" class="block text-sm font-medium leading-6 text-gray-900">Tỉnh
                                                 / Thành
                                                 phố</label>
                                             <div class="mt-2">
                                                 <input type="text" name="city" id="city" autocomplete="address-level2"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                                    class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
 
@@ -296,7 +234,7 @@
                                                 Huyện</label>
                                             <div class="mt-2">
                                                 <input type="text" name="region" id="region" autocomplete="address-level1"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                                    class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
 
@@ -305,95 +243,10 @@
                                                 Phường</label>
                                             <div class="mt-2">
                                                 <input type="text" name="ward" id="ward" autocomplete="address-level3"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                                    class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
-
-                                        <div class="sm:col-span-2">
-                                            <label for="postal-code"
-                                                class="block text-sm font-medium leading-6 text-gray-900">ZIP /
-                                                Mã bưu
-                                                chính</label>
-                                            <div class="mt-2">
-                                                <input type="text" name="postal-code" id="postal-code"
-                                                    autocomplete="postal-code"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                            </div>
-                                        </div>
-
                                     </div>
-                                    <!-- <div class="mt-10 space-y-10">
-                                            <fieldset>
-                                                <legend class="text-sm font-semibold leading-6 text-gray-900">By Email
-                                                </legend>
-                                                <div class="mt-6 space-y-6">
-                                                    <div class="relative flex gap-x-3">
-                                                        <div class="flex h-6 items-center">
-                                                            <input id="comments" name="comments" type="checkbox"
-                                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                                                        </div>
-                                                        <div class="text-sm leading-6">
-                                                            <label for="comments"
-                                                                class="font-medium text-gray-900">Comments</label>
-                                                            <p class="text-gray-500">Get notified when someones posts a
-                                                                comment on a posting.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="relative flex gap-x-3">
-                                                        <div class="flex h-6 items-center">
-                                                            <input id="candidates" name="candidates" type="checkbox"
-                                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                                                        </div>
-                                                        <div class="text-sm leading-6">
-                                                            <label for="candidates"
-                                                                class="font-medium text-gray-900">Candidates</label>
-                                                            <p class="text-gray-500">Get notified when a candidate applies
-                                                                for a job.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="relative flex gap-x-3">
-                                                        <div class="flex h-6 items-center">
-                                                            <input id="offers" name="offers" type="checkbox"
-                                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                                                        </div>
-                                                        <div class="text-sm leading-6">
-                                                            <label for="offers"
-                                                                class="font-medium text-gray-900">Offers</label>
-                                                            <p class="text-gray-500">Get notified when a candidate accepts
-                                                                or rejects an offer.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </fieldset>
-                                            <fieldset>
-                                                <legend class="text-sm font-semibold leading-6 text-gray-900">Push
-                                                    Notifications</legend>
-                                                <p class="mt-1 text-sm leading-6 text-gray-600">These are delivered via SMS
-                                                    to your mobile phone.</p>
-                                                <div class="mt-6 space-y-6">
-                                                    <div class="flex items-center gap-x-3">
-                                                        <input id="push-everything" name="push-notifications" type="radio"
-                                                            class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                                                        <label for="push-everything"
-                                                            class="block text-sm font-medium leading-6 text-gray-900">Everything</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-x-3">
-                                                        <input id="push-email" name="push-notifications" type="radio"
-                                                            class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                                                        <label for="push-email"
-                                                            class="block text-sm font-medium leading-6 text-gray-900">Same
-                                                            as email</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-x-3">
-                                                        <input id="push-nothing" name="push-notifications" type="radio"
-                                                            class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                                                        <label for="push-nothing"
-                                                            class="block text-sm font-medium leading-6 text-gray-900">No
-                                                            push notifications</label>
-                                                    </div>
-                                                </div>
-                                            </fieldset>
-                                        </div> -->
                                 </div>
                             </div>
                         </div>
@@ -401,20 +254,22 @@
                         <!-- Button -->
                         <div class="px-4">
                             <div class="space-y-12 mx-auto max-w-2xl">
-                                <div class="mt-6 flex items-center justify-end gap-x-6">
-                                    <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Huỷ lô
-                                        hàng</button>
-                                    <button type="submit"
+                                <div class="flex items-center justify-end gap-x-6">
+                                    <RouterLink to="/"
+                                        class="text-sm font-semibold leading-6 text-gray-900">
+                                        Về Trang chủ
+                                    </RouterLink>
+                                    <button @click="paymentStep = !paymentStep, fillInformStep = !fillInformStep"
+                                        type="button"
                                         class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Tiếp
                                         tục</button>
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <!-- Buoc 2 Thanh toán -->
-                    <div class="hidden">
+                    <div v-if="paymentStep" class="">
                         <!-- Nav Steps - Thanh toán -->
                         <div class="bg-[#fff] rounded-[0.375rem] min-[1024px]:block hidden">
                             <div class="mx-auto px-[2rem]">
@@ -423,9 +278,9 @@
                                         class="list-decimal ms-px me-px flex flex-wrap rounded-[4px] border-[1px]">
                                         <li class="relative flex flex-1">
                                             <a href="#" class="flex w-full items-center">
-                                                <span class="flex items-center py-[1rem] px-[1.5rem] font-[500]">
+                                                <span class="flex items-center py-[.5rem] px-[1.5rem] font-[500]">
                                                     <span
-                                                        class="flex items-center justify-center content-center bg-[#0096fa] w-[2.5rem] h-[2.5rem] rounded-full">
+                                                        class="flex items-center justify-center content-center bg-[#0096fa] w-[2rem] h-[2rem] rounded-full">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                             viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                                                             class="text-[#fff]">
@@ -449,10 +304,11 @@
                                             </div>
                                         </li>
                                         <li class="relative flex flex-1">
-                                            <a href="#" class="flex items-center py-[1rem] px-[1.5rem]" aria-current="step">
+                                            <a href="#" class="flex items-center py-[.5rem] px-[1.5rem]"
+                                                aria-current="step">
                                                 <span class="flex items-center text-[#0096fa] font-[500]">
                                                     <span
-                                                        class="flex items-center justify-center content-center border-[2px] border-[#0096fa] w-[2.5rem] h-[2.5rem] rounded-full">
+                                                        class="flex items-center justify-center content-center border-[2px] border-[#0096fa] w-[2rem] h-[2rem] rounded-full">
                                                         <span class="">02</span>
                                                     </span>
                                                     <span class="ml-[16px]">Thanh Toán</span>
@@ -469,11 +325,11 @@
                                             </div>
                                         </li>
                                         <li class="relative flex flex-1">
-                                            <a href="#" class=" flex items-center py-[1rem] px-[1.5rem]">
+                                            <a href="#" class=" flex items-center py-[.5rem] px-[1.5rem]">
                                                 <span
                                                     class="flex items-center text-[#6b7280] font-[500] hover:text-[#111827]">
                                                     <span
-                                                        class="flex items-center justify-center content-center border-[2px] border-[#d1d5db] hover:border-[#747981b7] w-[2.5rem] h-[2.5rem] rounded-full">
+                                                        class="flex items-center justify-center content-center border-[2px] border-[#d1d5db] hover:border-[#747981b7] w-[2rem] h-[2rem] rounded-full">
                                                         <span class="">03</span>
                                                     </span>
                                                     <span class="ml-[16px]">Hoàn Thành</span>
@@ -558,9 +414,9 @@
                         <div class="px-4">
                             <div class="space-y-12 mx-auto max-w-2xl">
                                 <div class="mt-6 flex items-center justify-end gap-x-6">
-                                    <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Huỷ lô
-                                        hàng</button>
-                                    <button type="submit"
+                                    <button @click="fillInformStep = !fillInformStep, paymentStep = !paymentStep"
+                                        type="button" class="text-sm font-semibold leading-6 text-gray-900">Trở lại</button>
+                                    <button @click="completeStep = !completeStep, paymentStep = !paymentStep" type="button"
                                         class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Đăng
                                         ký</button>
                                 </div>
@@ -569,7 +425,7 @@
                     </div>
 
                     <!-- Buoc 3 Hoàn thành - Xem lại thông tin dịch vụ vừa mới đăng ký -->
-                    <div class="">
+                    <div v-if="completeStep" class="">
                         <!-- Nav Steps - Hoàn thành -->
                         <div class="bg-[#fff] rounded-[0.375rem] min-[1024px]:block hidden">
                             <div class="mx-auto px-[2rem]">
@@ -578,9 +434,9 @@
                                         class="list-decimal ms-px me-px flex flex-wrap rounded-[4px] border-[1px]">
                                         <li class="relative flex flex-1">
                                             <a href="#" class="flex w-full items-center">
-                                                <span class="flex items-center py-[1rem] px-[1.5rem] font-[500]">
+                                                <span class="flex items-center py-[.5rem] px-[1.5rem] font-[500]">
                                                     <span
-                                                        class="flex items-center justify-center content-center bg-[#0096fa] w-[2.5rem] h-[2.5rem] rounded-full">
+                                                        class="flex items-center justify-center content-center bg-[#0096fa] w-[2rem] h-[2rem] rounded-full">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                             viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                                                             class="text-[#fff]">
@@ -605,9 +461,9 @@
                                         </li>
                                         <li class="relative flex flex-1">
                                             <a href="#" class="flex w-full items-center">
-                                                <span class="flex items-center py-[1rem] px-[1.5rem] font-[500]">
+                                                <span class="flex items-center py-[.5rem] px-[1.5rem] font-[500]">
                                                     <span
-                                                        class="flex items-center justify-center content-center bg-[#0096fa] w-[2.5rem] h-[2.5rem] rounded-full">
+                                                        class="flex items-center justify-center content-center bg-[#0096fa] w-[2rem] h-[2rem] rounded-full">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                             viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                                                             class="text-[#fff]">
@@ -631,10 +487,10 @@
                                             </div>
                                         </li>
                                         <li class="relative flex flex-1">
-                                            <a href="#" class="flex items-center py-[1rem] px-[1.5rem]">
+                                            <a href="#" class="flex items-center py-[.5rem] px-[1.5rem]">
                                                 <span class="flex items-center text-[#0096fa] font-[500]">
                                                     <span
-                                                        class="flex items-center justify-center content-center border-[2px] border-[#0096fa] w-[2.5rem] h-[2.5rem] rounded-full">
+                                                        class="flex items-center justify-center content-center border-[2px] border-[#0096fa] w-[2rem] h-[2rem] rounded-full">
                                                         <span class="">03</span>
                                                     </span>
                                                     <span class="ml-[16px]">Hoàn Thành</span>
@@ -730,11 +586,14 @@
 import { onMounted, ref } from "vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 import { RouterLink, RouterView } from 'vue-router'
+
+const fillInformStep = ref(true);
+const paymentStep = ref(false);
+const completeStep = ref(false);
 </script>
 
 <style scoped>
 ol {
     margin-block-start: 1em;
     margin-block-end: 1em;
-}
-</style>
+}</style>
