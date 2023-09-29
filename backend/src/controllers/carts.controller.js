@@ -19,9 +19,12 @@ async function getCartsByServiceId(id) {
 // Lay cac carts cua mot user theo userId
 async function getCartsByUserId(id) {
     const [rows] = await pool.query(`
-    SELECT * 
+    SELECT services.id as service_id, carts.id as cart_id, services.name as service_name, providers.image as image, providers.name as provider_name, services.price as service_price
     FROM carts
-    WHERE user_id = ?
+    JOIN services ON carts.service_id = services.id
+    JOIN service_types ON services.service_type_id = service_types.id
+    JOIN providers ON service_types.providers_id = providers.id
+    WHERE user_id = ? ORDER BY carts.id
     `, [id])
     return rows
 }
@@ -52,13 +55,23 @@ async function deleteCartById(id) {
 
 // Tao carts
 async function createCart(user_id, service_id) {
-    const [result] = await pool.query(`
-    INSERT INTO carts 
-    (user_id, service_id)
-    VALUES (?, ?)
+    const [check] = await pool.query(`
+    SELECT * 
+    FROM carts
+    WHERE carts.user_id = ? AND carts.service_id = ?
     `, [user_id, service_id])
-    const id = result.insertId;
-    return getCartById(id);
+    console.log(check[0]);
+    if (!check[0]) {
+        const [result] = await pool.query(`
+        INSERT INTO carts 
+        (user_id, service_id)
+        VALUES (?, ?)
+        `, [user_id, service_id])
+        const id = result.insertId;
+        return getCartById(id);
+    } else {
+        return "Giỏ hàng đã tồn tại";
+    }
 }
 
 module.exports = {
