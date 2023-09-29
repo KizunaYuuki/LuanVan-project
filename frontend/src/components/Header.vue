@@ -83,7 +83,7 @@
                 </template>
                 <template v-if="isAuthenticated">
                     <!-- Cart -->
-                    <button @click="open = true"
+                    <button @click="cartOpen = true"
                         class="group -m-2 flex items-center p-2 mr-[4px] hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
                         <svg class="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" fill="none"
                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -91,7 +91,8 @@
                                 d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z">
                             </path>
                         </svg>
-                        <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">1</span>
+                        <span v-if="carts" class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800"> {{
+                            carts.length }} </span>
                         <span class="sr-only">items in cart, view bag</span>
                     </button>
                     <LogoutButton />
@@ -135,7 +136,7 @@
                                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                 title="Quản lý đơn hàng của bạn">Theo dõi</RouterLink>
                             <template v-if="isAuthenticated">
-                                <button @click="open = true"
+                                <button @click="cartOpen = true"
                                     class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                                     Giỏ hàng
                                 </button>
@@ -176,8 +177,8 @@
     </header>
 
     <!-- Shopping Carts - Slide-over -->
-    <TransitionRoot class="z-[9999]" as="template" :show="open">
-        <Dialog as="div" class="relative z-10" @close="open = false">
+    <TransitionRoot class="z-[9999]" as="template" :show="cartOpen">
+        <Dialog as="div" class="relative z-10" @close="cartOpen = false">
             <TransitionChild as="template" enter="ease-in-out duration-500" enter-from="opacity-0" enter-to="opacity-100"
                 leave="ease-in-out duration-500" leave-from="opacity-100" leave-to="opacity-0">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
@@ -199,7 +200,7 @@
                                             <div class="ml-3 flex h-7 items-center">
                                                 <button type="button"
                                                     class="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
-                                                    @click="open = false">
+                                                    @click="cartOpen = false">
                                                     <span class="absolute -inset-0.5" />
                                                     <span class="sr-only">Close panel</span>
                                                     <XMarkIcon class="h-6 w-6" aria-hidden="true" />
@@ -207,41 +208,54 @@
                                             </div>
                                         </div>
 
-                                        <!-- <div class="mt-8">
+                                        <div class="mt-8">
                                             <div class="flow-root">
                                                 <ul role="list" class="-my-6 divide-y divide-gray-200">
-                                                    <li v-for="product in cartProducts" :key="product.id" class="flex py-6">
-                                                        <div
-                                                            class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                                            <img :src="product.imageSrc" :alt="product.imageAlt"
-                                                                class="h-full w-full object-cover object-center" />
-                                                        </div>
-
-                                                        <div class="ml-4 flex flex-1 flex-col">
-                                                            <div>
-                                                                <div
-                                                                    class="flex justify-between text-base font-medium text-gray-900">
-                                                                    <h3>
-                                                                        <a :href="product.href">{{ product.name }}</a>
-                                                                    </h3>
-                                                                    <p class="ml-4">{{ product.price }}</p>
-                                                                </div>
-                                                                <p class="mt-1 text-sm text-gray-500">{{ product.color }}
-                                                                </p>
+                                                    <li v-for="cart in carts" :key="cart.id">
+                                                        <RouterLink :to="{
+                                                            name: 'Service Details',
+                                                            params: { id: cart.service_id },
+                                                        }"  class="flex py-6">
+                                                            <div
+                                                                class="flex items-center h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                                                <img :src="cart.image"
+                                                                    class="w-full flex-shrink-0 bg-[#607d8b]" />
                                                             </div>
-                                                            <div class="flex flex-1 items-end justify-between text-sm">
-                                                                <p class="text-gray-500">Qty {{ product.quantity }}</p>
 
-                                                                <div class="flex">
-                                                                    <button type="button"
-                                                                        class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
+                                                            <div class="ml-4 flex flex-1 flex-col">
+                                                                <div>
+                                                                    <div
+                                                                        class="flex justify-between text-base font-medium text-gray-900">
+                                                                        <h3>
+                                                                            <a :href="cart.href">{{ cart.service_name }}</a>
+                                                                        </h3>
+                                                                        <p class="ml-4">{{
+                                                                            (cart.service_price).toLocaleString('vi-VN',
+                                                                                {
+                                                                                    style: 'currency',
+                                                                                    currency: 'VND'
+                                                                                }) }}</p>
+                                                                    </div>
+                                                                    <p class="mt-1 text-sm text-gray-500">{{
+                                                                        cart.provider_name
+                                                                    }}</p>
+                                                                </div>
+                                                                <div class="flex flex-1 items-end justify-between text-sm">
+                                                                    <!-- <p class="text-gray-500">Qty {{ cart.quantity }}</p> -->
+
+                                                                    <div class="flex">
+                                                                        <button @click.prevent="deteleCartAxios(cart.cart_id)"
+                                                                            type="button"
+                                                                            class="font-medium text-[#0096fab7] hover:text-[#0096fa]">Xoá</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </RouterLink>
+
                                                     </li>
                                                 </ul>
                                             </div>
-                                        </div> -->
+                                        </div>
                                     </div>
 
                                     <!-- <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
@@ -260,7 +274,7 @@
                                                 or
                                                 <button type="button"
                                                     class="font-medium text-indigo-600 hover:text-indigo-500"
-                                                    @click="open = false">
+                                                    @click="cartOpen = false">
                                                     Continue Shopping
                                                     <span aria-hidden="true"> &rarr;</span>
                                                 </button>
@@ -278,7 +292,7 @@
 </template>
 
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink } from 'vue-router'
 import LoginButton from "@/components/buttons/login-button.vue";
 import LogoutButton from "@/components/buttons/logout-button.vue";
 import SignupButton from "@/components/buttons/signup-button.vue";
@@ -307,7 +321,9 @@ import {
     SquaresPlusIcon,
     XMarkIcon,
 } from '@heroicons/vue/24/outline'
-import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
+import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid';
+import { getUserByEmail } from "@/services/user.service";
+import { getCartsByUserId, deteleCart } from "@/services/cart.service";
 // Login
 const { loginWithRedirect } = useAuth0();
 const handleLogin = () => {
@@ -336,7 +352,7 @@ const cartProducts = [
         color: 'Salmon',
         price: '$90.00',
         quantity: 1,
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-cart-01.jpg',
         imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
     },
     {
@@ -346,33 +362,17 @@ const cartProducts = [
         color: 'Blue',
         price: '$32.00',
         quantity: 1,
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-cart-02.jpg',
         imageAlt:
             'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
     },
     // More products...
 ]
 // Trạng thái đóng mở Giỏ hàng
-const open = ref(false)
+const cartOpen = ref(false);
 
 // Xác thực người dùng đã đăng nhập chưa 
 const { isAuthenticated } = useAuth0();
-
-function mobileMenuToggle() {
-    const mobileMenu = document.getElementById('mobileMenu');
-    const ariaModalMobileMenu = mobileMenu.getAttribute('aria-modal');
-
-    // Neu menu open thi open menu
-    if (ariaModalMobileMenu === 'true') {
-        mobileMenu.classList.add('hidden');
-        mobileMenu.setAttribute('aria-modal', 'false');
-    }
-    // Nguoc lai
-    else {
-        mobileMenu.classList.remove('hidden');
-        mobileMenu.setAttribute('aria-modal', 'true');
-    }
-}
 
 // Danh sách sản phẩm
 const products = [
@@ -386,7 +386,66 @@ const callsToAction = [
     { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
     { name: 'Contact sales', href: '#', icon: PhoneIcon },
 ]
+// variables
+const user_id = ref();
+const carts = ref();
 
 const mobileMenuOpen = ref(false)
+// get the information user
+const { user } = useAuth0();
+// get the token
+const { getAccessTokenSilently } = useAuth0();
 
+const getUserByEmailAxios = async (user) => {
+    // edit data
+    const userData = {
+        email: user.value?.email
+    }
+
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await getUserByEmail(accessToken, userData);
+
+
+    if (data) {
+        user_id.value = data.id;
+        getCartsByUserIdAxios(data.id);
+        console.log(data);
+        console.log(user_id.value);
+    }
+
+    if (error) {
+        console.log(error.message);
+    }
+};
+
+const getCartsByUserIdAxios = async (user_id) => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await getCartsByUserId(accessToken, user_id);
+
+    if (data) {
+        carts.value = data;
+        console.log(data);
+    }
+
+    if (error) {
+        console.log(error.message);
+    }
+};
+
+const deteleCartAxios = async (cart_id) => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await deteleCart(accessToken, cart_id);
+
+    if (data) {
+        console.log(data);
+        // edit cart data
+        carts.value = carts.value.filter((element) => element.cart_id !== cart_id);
+    }
+
+    if (error) {
+        console.log(error.message);
+    }
+};
+// run function
+getUserByEmailAxios(user)
 </script>

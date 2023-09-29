@@ -1,11 +1,12 @@
 <template>
+    <Header></Header>
     <main>
         <!-- Băng rôn khuyến mãi -->
         <banner></banner>
         <!-- <h1 class="text-[24px] text-[#202124] font-[500] text-center">Khám phá những dịch vụ của chúng tôi</h1> -->
 
         <!-- Gợi ý dịch vụ -->
-        <!-- <div class="py-6 bg-[#0096fa0d] hover:scale-[1.01] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
+        <div class="py-6 bg-[#0096fa0d] hover:scale-[1.01] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
             <h2 class="text-[24px] text-[#202124] font-[500] text-center mb-[16px]">Những dịch vụ vận chuyển được gợi ý dành
                 riêng cho bạn</h2>
             <section class="flex flex-wrap content-center justify-center items-center">
@@ -14,7 +15,7 @@
                 <domesticCard></domesticCard>
                 <domesticCard></domesticCard>
             </section>
-        </div> -->
+        </div>
 
         <!-- Vận chuyển quốc tế -->
         <!-- <div class="py-6 bg-[#FFF7F50d] hover:scale-[1.01] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
@@ -391,8 +392,8 @@ import { useGtag } from "vue-gtag-next";
 import freightProductCard from "../components/cards/freight-product-card.vue";
 import domesticCard from "../components/cards/domestic-card.vue";
 import banner from "../components/banner.vue";
-
 import { useAuth0 } from "@auth0/auth0-vue";
+import Header from '../components/Header.vue';
 
 const { user } = useAuth0();
 

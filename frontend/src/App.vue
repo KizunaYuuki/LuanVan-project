@@ -23,7 +23,7 @@
             <div class="firefly"></div>
         </div>
         
-        <Header></Header>
+        <!-- <Header></Header> -->
 
         <!-- <button @click="clickEventTest">Send Data to G4</button> -->
         <!-- Noi dung trang -->

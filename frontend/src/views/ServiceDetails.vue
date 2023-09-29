@@ -96,7 +96,7 @@
                                 <button type="button"
                                     class="mt-10 flex w-[100%] items-center justify-center border border-transparent px-[16px] py-[8px] font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 leading-6 text-base shadow rounded-md bg-[#0096faee] hover:bg-[#0096fa]">Đăng
                                     ký dịch vụ</button>
-                                <button type="button"
+                                <button @click="createCartAxios(user_id)" type="button"
                                     class="mt-10 flex w-[100%] items-center justify-center border border-transparent px-[16px] py-[8px] font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 leading-6 text-base shadow rounded-md bg-[#0096faee] hover:bg-[#0096fa]">Thêm
                                     vào giỏ hàng</button>
                             </div>
@@ -125,10 +125,12 @@
                                                     <span>kg</span></span>
                                             </li>
                                             <li class="" v-if="from">
-                                                Gởi hàng từ: <span class="font-[500]">{{ from.district }}, {{ from.province }}</span>
+                                                Gởi hàng từ: <span class="font-[500]">{{ from.district }}, {{ from.province
+                                                }}</span>
                                             </li>
                                             <li class="" v-if="to">
-                                                Gởi hàng đến: <span class="font-[500]">{{ to.district }}, {{ to.province }}</span>
+                                                Gởi hàng đến: <span class="font-[500]">{{ to.district }}, {{ to.province
+                                                }}</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -381,6 +383,7 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import StarRating from 'vue-star-rating';
 import { getUserByEmail } from "@/services/user.service";
 import { getLocationsByServicId } from "@/services/location.service";
+import { createCart } from "@/services/cart.service";
 
 const openWriteReviewModal = ref(false)
 
@@ -465,7 +468,7 @@ const getLocationsByServicIdAxios = async (service_id) => {
         console.log(error);
     }
 };
-getLocationsByServicIdAxios(props.id);
+
 
 const createReviewAxios = async (reviewData) => {
     const accessToken = await getAccessTokenSilently();
@@ -559,6 +562,30 @@ const getUserByEmailAxios = async (user) => {
     }
 };
 
+const createCartAxios = async (user_id) => {
+    // loggin if loggin yet exists
+    if (!isAuthenticated.value) {
+        handleLogin();
+    } else {
+        // edit data
+        const cartData = {
+            user_id: user_id,
+            service_id: props.id
+        }
+
+        const accessToken = await getAccessTokenSilently();
+        const { data, error } = await createCart(accessToken, cartData);
+
+        if (data) {
+            console.log(data);
+        }
+
+        if (error) {
+            console.log(error.message);
+        }
+    }
+};
+
 const submitCreateReviewHandle = async (reviewData, user_id) => {
     // edit data
     reviewData.user_id = user_id;
@@ -580,11 +607,11 @@ const openReviewForm = async () => {
     } else {
         openWriteReviewModal.value = true
     }
-
 };
 
 // run function
 getServiceByIdAxios(props.id);
 getReviewByServiceIdAxios(props.id);
 getUserByEmailAxios(user);
+getLocationsByServicIdAxios(props.id);
 </script>
