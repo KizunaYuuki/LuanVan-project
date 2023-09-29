@@ -1,4 +1,5 @@
 <template>
+    <Header></Header>
     <main>
         <div class="bg-[#ffffffbe]">
             <div class="pt-6">
@@ -364,6 +365,7 @@
 </template>
 
 <script setup>
+import Header from '../components/Header.vue';
 import { RouterLink, RouterView } from 'vue-router'
 import { ref } from "vue";
 import domesticCard from "../components/cards/domestic-card.vue";
@@ -426,7 +428,7 @@ const review = ref(
         user_id: 1,
         service_id: 1,
         rate: 0,
-        comment: "Not a service too good but not bad"
+        comment: ""
     }
 );
 const reviewsCal = ref(
@@ -587,15 +589,15 @@ const createCartAxios = async (user_id) => {
 };
 
 const submitCreateReviewHandle = async (reviewData, user_id) => {
-    // edit data
-    reviewData.user_id = user_id;
-    reviewData.service_id = props.id;
-
     // loggin if loggin yet exists
     if (!isAuthenticated.value) {
         handleLogin();
         return
     }
+
+    // edit data
+    reviewData.user_id = user_id;
+    reviewData.service_id = props.id;
 
     createReviewAxios(reviewData)
 };

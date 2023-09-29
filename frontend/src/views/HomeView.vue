@@ -6,7 +6,7 @@
         <!-- <h1 class="text-[24px] text-[#202124] font-[500] text-center">Khám phá những dịch vụ của chúng tôi</h1> -->
 
         <!-- Gợi ý dịch vụ -->
-        <div class="py-6 bg-[#0096fa0d] hover:scale-[1.01] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
+        <!-- <div class="py-6 bg-[#0096fa0d] hover:scale-[1.01] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
             <h2 class="text-[24px] text-[#202124] font-[500] text-center mb-[16px]">Những dịch vụ vận chuyển được gợi ý dành
                 riêng cho bạn</h2>
             <section class="flex flex-wrap content-center justify-center items-center">
@@ -15,7 +15,7 @@
                 <domesticCard></domesticCard>
                 <domesticCard></domesticCard>
             </section>
-        </div>
+        </div> -->
 
         <!-- Vận chuyển quốc tế -->
         <!-- <div class="py-6 bg-[#FFF7F50d] hover:scale-[1.01] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
@@ -134,32 +134,32 @@
                 </div>
 
 
-                <!-- Khối lượng lô hàng -->
-                <div class="relative rounded-md shadow-sm h-[56px] lg:ml-[8px] ml-0 my-[8px]">
-                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                        <span class="text-gray-500 sm:text-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false"
-                                class="text-inherit fill-current" viewBox="0 0 512 512">
-                                <path
-                                    d="M128 176a128 128 0 1 1 256 0 128 128 0 1 1 -256 0zM391.8 64C359.5 24.9 310.7 0 256 0S152.5 24.9 120.2 64H64C28.7 64 0 92.7 0 128V448c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H391.8zM296 224c0-10.6-4.1-20.2-10.9-27.4l33.6-78.3c3.5-8.1-.3-17.5-8.4-21s-17.5 .3-21 8.4L255.7 184c-22 .1-39.7 18-39.7 40c0 22.1 17.9 40 40 40s40-17.9 40-40z" />
-                            </svg>
-                        </span>
+                <!-- Loại dịch vụ và Khối lượng lô hàng -->
+                <div>
+                    <div class="relative rounded-md shadow-sm h-[56px] lg:ml-[8px] ml-0 my-[8px]">
+                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                            <span class="pointer-events-none">
+                                <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+                            </span>
+                        </div>
+                        <input type="text"
+                            class="font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
+                            placeholder="" value="Vận chuyển nhanh" />
                     </div>
-                    <input type="text"
-                        class="font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
-                        placeholder="" value="2000" />
-                </div>
-
-                <!-- Loại dịch vụ -->
-                <div class="relative rounded-md shadow-sm h-[56px] lg:ml-[8px] ml-0 my-[8px]">
-                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                        <span class="pointer-events-none">
-                            <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-                        </span>
+                    <div class="relative rounded-md shadow-sm h-[44px] lg:ml-[8px] ml-0 my-[8px]">
+                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                            <span class="text-gray-500 sm:text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false"
+                                    class="text-inherit fill-current" viewBox="0 0 512 512">
+                                    <path
+                                        d="M128 176a128 128 0 1 1 256 0 128 128 0 1 1 -256 0zM391.8 64C359.5 24.9 310.7 0 256 0S152.5 24.9 120.2 64H64C28.7 64 0 92.7 0 128V448c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H391.8zM296 224c0-10.6-4.1-20.2-10.9-27.4l33.6-78.3c3.5-8.1-.3-17.5-8.4-21s-17.5 .3-21 8.4L255.7 184c-22 .1-39.7 18-39.7 40c0 22.1 17.9 40 40 40s40-17.9 40-40z" />
+                                </svg>
+                            </span>
+                        </div>
+                        <input type="text"
+                            class="font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
+                            placeholder="" value="2000" />
                     </div>
-                    <input type="text"
-                        class="font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
-                        placeholder="" value="Vận chuyển nhanh" />
                 </div>
             </div>
 
@@ -317,10 +317,13 @@
                                             Nhà cung cấp dịch vụ</th>
                                         <th scope="col"
                                             class="min-[640px]:pl-0 text-[#70757a] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            Tên dịch vụ</th>
+                                        <th scope="col"
+                                            class="min-[640px]:pl-0 text-[#70757a] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                             Thời gian vận chuyển</th>
                                         <th scope="col"
                                             class="min-[640px]:pl-0 text-[#111827] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                            Khối lượng</th>
+                                            Trọng lượng</th>
                                         <th scope="col"
                                             class="min-[640px]:pl-0 text-[#111827] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                             Giá dịch vụ</th>
@@ -331,39 +334,61 @@
                                     </tr>
                                 </thead>
                                 <tbody class="">
-                                    <tr class="mx-[4px]" v-for="service in services">
-                                        <td
-                                            class="border-[#dadce0] border-t pl-[1rem] min-[640px]:pl-0 text-[#111827] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                            {{ service.provider_name }}</td>
-                                        <td
-                                            class="border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
-                                            {{ service.delivery_date }}</td>
-                                        <td
-                                            class="border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
-                                            &le; {{ service.weight }} <span>kg</span></td>
-                                        <td
-                                            class="border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
-                                            {{ (service.price).toLocaleString('vi-VN', {
-                                                style: 'currency',
-                                                currency: 'VND'
-                                            }) }}</td>
-                                        <td
-                                            class="border-[#dadce0] border-t min-[640px]:pr-0 font-[500] text-[.875rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative">
-                                            <div class="float-right">
-                                                <!-- :to="`/services/${service.id}`" -->
-                                                <RouterLink :to="{
-                                                    name: 'Service Details',
-                                                    params: { id: service.service_id },
-                                                }" class="text-[#0096fa] inherit py-[17px]">
-                                                    <div
-                                                        class="bg-[#e8f0fe] box-border rounded-[8px] text-[#1a73e8] inline-block text-[12px] leading-[20px] py-[6px] px-[10px] text-center w-[124px]">
-                                                        Truy cập</div>
-                                                    <span class="sr-only">Truy cập</span>
-                                                </RouterLink>
-                                            </div>
+                                    <template v-for="service in services" :key="service.service_id">
+                                        <tr class="mx-[4px]">
+                                            <td
+                                                class="flex items-center border-[#dadce0] border-t pl-[1rem] min-[640px]:pl-0 text-[#111827] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
+                                                <img :src="service.image" alt="" class="h-5 w-5 flex-shrink-0 rounded-full bg-slate-400 mr-2"/>
+                                                <span>{{ service.provider_name }}</span></td>
+                                            <td
+                                                class="border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                {{ service.service_name }}</td>
+                                            <td
+                                                class="border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                {{ service.delivery_date }}</td>
+                                            <td
+                                                class="border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                {{ service.weight }} <span>kg</span></td>
+                                            <td
+                                                class="border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                {{ (service.price).toLocaleString('vi-VN', {
+                                                    style: 'currency',
+                                                    currency: 'VND'
+                                                }) }}</td>
+                                            <td
+                                                class="flex justify-between border-[#dadce0] border-t min-[640px]:pr-0 font-[500] text-[.875rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative">
+                                                <div class="float-left">
+                                                    <RouterLink :to="{
+                                                        name: 'Service Details',
+                                                        params: { id: service.service_id },
+                                                    }" class="text-[#0096fa] inherit py-[17px]">
+                                                        <div
+                                                            class="bg-[#e8f0fe] box-border rounded-[8px] text-[#1a73e8] inline-block text-[12px] leading-[20px] py-[6px] px-[10px] text-center w-[124px]">
+                                                            Truy cập</div>
+                                                        <span class="sr-only">Truy cập</span>
+                                                    </RouterLink>
+                                                </div>
+                                                <div class="float-right">
+                                                    <button @click="service.append = !service.append">
+                                                        <svg focusable="false" width="24" height="24" viewBox="0 0 24 24"
+                                                            class="fill-current text-[#0096fa]">
+                                                            <path
+                                                                d="M12 16.41l-6.71-6.7 1.42-1.42 5.29 5.3 5.29-5.3 1.42 1.42z">
+                                                            </path>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
 
-                                        </td>
-                                    </tr>
+                                        <tr v-if="service.append" class="mx-[4px] relative">
+                                            <div class="p-[16px] overflow-hidden">
+                                                <div>
+                                                    2 Đánh giá
+                                                </div>
+                                            </div>
+                                        </tr>
+                                    </template>
                                 </tbody>
                             </table>
                         </div>
@@ -463,7 +488,6 @@ const priceSelected = ref(priceFilter[0])
 const timeSelected = ref(timeFilter[0])
 
 
-
 const sortOptions = [
     // { name: 'Phổ biến nhất', href: '#', current: true },
     { name: 'Đánh giá tốt nhất', href: '#', current: false },
@@ -482,6 +506,9 @@ const getServicesAxios = async () => {
 
     if (data) {
         services.value = data;
+        for (let i = 0; services.value.length > i; i++) {
+            services.value[0].append = false;
+        }
     }
 
     if (error) {
