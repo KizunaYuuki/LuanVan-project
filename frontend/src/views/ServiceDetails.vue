@@ -383,7 +383,7 @@ import { format } from "date-fns";
 import { vi } from 'date-fns/locale'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import StarRating from 'vue-star-rating';
-import { getUserByEmail } from "@/services/user.service";
+import { getUserByEmail, createUser } from "@/services/user.service";
 import { getLocationsByServicId } from "@/services/location.service";
 import { createCart } from "@/services/cart.service";
 
@@ -547,7 +547,8 @@ const lowestPriceSort = async () => {
 const getUserByEmailAxios = async (user) => {
     // edit data
     const userData = {
-        email: user.value?.email
+        email: user.value?.email,
+        name: user.value?.name
     }
 
     const accessToken = await getAccessTokenSilently();
@@ -557,6 +558,13 @@ const getUserByEmailAxios = async (user) => {
         user_id.value = data.id;
         console.log(data);
         console.log(user_id.value);
+    } else {
+        const { data, error } = await createUser(accessToken, userData);
+        if (data) {
+            user_id.value = data.id;
+            console.log(data);
+            console.log(user_id.value);
+        }
     }
 
     if (error) {

@@ -76,7 +76,7 @@ export const getReviewById = async (accessToken, service_id) => {
 };
 
 
-export const createReview = async (accessToken, reviewData) => {
+export const createUser = async (accessToken, userData) => {
     const config = {
         url: `${apiServerUrl}/api/user`,
         method: "POST",
@@ -84,7 +84,7 @@ export const createReview = async (accessToken, reviewData) => {
             "content-type": "application/json",
             Authorization: `Bearer ${accessToken}`,
         },
-        data: reviewData,
+        data: userData,
     };
 
     const { data, error } = await callExternalApi({ config });
