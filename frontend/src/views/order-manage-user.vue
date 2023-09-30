@@ -1,53 +1,169 @@
 <template>
+    <Header></Header>
     <main>
         <div class="bg-[#ffffffbe] py-[2.5rem]">
-            <div class="mx-auto max-w-[1280px]">
-                <div class="px-[14px]">
+            <div class="mx-auto lg:max-w-[1024px]">
+                <div class="">
                     <div class="flex items-center">
                         <div class="flex-auto">
                             <h1 class="text-[#111827] leading-[1.5rem] font-[600] text-[16px]">Đơn hàng của bạn</h1>
-                            <p class="text-[#374151] text-[.875rem] leading-[1.25rem] mt-[.5rem]">Hiển thị danh sách tất cả đơn hàng đã đăng ký</p>
+                            <p class="text-[#374151] text-[.875rem] leading-[1.25rem] mt-[.5rem]">Hiển thị danh sách tất cả
+                                đơn hàng</p>
                         </div>
                         <div class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[4rem] mt-[1rem]">
-                            <button type="button" class="text-[#fff] font-[600] text-[.875rem] leading-[1.25rem] text-center py-[.5rem] px-[.75rem] bg-[#0096fa] rounded-[.375rem]">Xuất đơn hàng</button>
+                            <!-- <button type="button"
+                                class="text-[#fff] font-[600] text-[.875rem] leading-[1.25rem] text-center py-[.5rem] px-[.75rem] bg-[#0096fa] rounded-[.375rem]">Xuất
+                                đơn hàng</button> -->
                         </div>
                     </div>
                     <div class="flex justify-end">
                         <div class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[4rem] mt-[1rem]">
-                            <orderManageMenu></orderManageMenu>
+                            <Menu as="div" class="relative inline-block text-left">
+                                <div>
+                                    <MenuButton
+                                        class="inline-flex w-full justify-center gap-x-1.5 text-sm text-gray-900 shadow-sm hover:bg-[#e6e6e685] font-[600] text-[.875rem] leading-[1.25rem] text-center py-[.5rem] px-[.75rem] bg-[#e6e6e6] rounded-[.375rem]">
+                                        Tuỳ chọn
+                                        <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+                                    </MenuButton>
+                                </div>
+
+                                <transition enter-active-class="transition ease-out duration-100"
+                                    enter-from-class="transform opacity-0 scale-95"
+                                    enter-to-class="transform opacity-100 scale-100"
+                                    leave-active-class="transition ease-in duration-75"
+                                    leave-from-class="transform opacity-100 scale-100"
+                                    leave-to-class="transform opacity-0 scale-95">
+                                    <MenuItems
+                                        class="absolute right-0 z-10 mt-2 w-[9rem] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                        <div class="py-1">
+                                            <MenuItem v-slot="{ active }">
+                                            <button @click="Nofilter()"
+                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Tất
+                                                cả</button>
+                                            </MenuItem>
+
+                                        </div>
+                                        <div class="py-1">
+                                            <MenuItem v-slot="{ active }">
+                                            <button @click="DaDangKyfilter()"
+                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Đã
+                                                đăng ký</button>
+                                            </MenuItem>
+                                            <MenuItem v-slot="{ active }">
+                                            <button @click="HuyBofilter()"
+                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Huỷ
+                                                bỏ</button>
+                                            </MenuItem>
+                                            <MenuItem v-slot="{ active }">
+                                            <button @click="HoanThanhfilter()"
+                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Hoàn
+                                                thành</button>
+                                            </MenuItem>
+                                            <MenuItem v-slot="{ active }">
+                                            <button @click="DaXacNhanfilter()"
+                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Đã
+                                                xác nhận</button>
+                                            </MenuItem>
+                                        </div>
+                                    </MenuItems>
+                                </transition>
+                            </Menu>
                         </div>
                     </div>
                     <div class="mt-[1rem] flow-root">
-                        <div class="overflow-x-auto">
+                        <div class="">
                             <div class="align-middle min-w-[100%] inline-block">
                                 <table class="min-w-[100%] indent-0 border-collapse bg-[#e6e6e6] rounded-[8px]">
                                     <thead>
                                         <tr class="border-b-[4px] border-[white]">
-                                            <th scope="col" class="pl-[1rem] min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left pr-[.75rem] py-[.875rem]">Mã Đơn hàng</th>
-                                            <th scope="col" class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">Tên Khách hàng</th>
-                                            <th scope="col" class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">Thực hiện bởi</th>
-                                            <th scope="col" class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">Giá đơn hàng</th>
-                                            <th scope="col" class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">Trạng thái đơn hàng</th>
-                                            <th scope="col" class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left pr-[1rem] py-[.875rem] relative"><span class="sr-only">Xoá</span></th>
+                                            <th scope="col"
+                                                class="pl-[1rem] min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left pr-[.75rem] py-[.875rem]">
+                                                Mã Đơn hàng</th>
+                                            <th scope="col"
+                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                Email</th>
+                                            <th scope="col"
+                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                Số điện thoại liên hệ</th>
+                                            <th scope="col"
+                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                Ngày tạo</th>
+                                            <th scope="col"
+                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                Giá đơn hàng</th>
+                                            <th scope="col"
+                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                Trạng thái đơn hàng</th>
+                                            <th scope="col"
+                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left pr-[1rem] py-[.875rem] relative">
+                                                <span class="sr-only">Xoá</span>
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody class="">
-                                        <tr class="mx-[4px] border-b-[4px] border-[white]">
-                                            <td class="pl-[1rem] min-[640px]:pl-0 text-[#111827] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">1</td>
-                                            <td class="text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">Front-end Developer</td>
-                                            <td class="text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">FedEx</td>
-                                            <td class="text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">860000Đ</td>
-                                            <td class="text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">Đã giao</td>
-                                            <td class="min-[640px]:pr-0 font-[500] text-[.875rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative"><a href="#" class="text-[#0096fa] inherit">Edit<span class="sr-only">, Lindsay Walton</span></a>
-                                            </td>
-                                        </tr>
-                                        <tr class="">
-                                            <td class="pl-[1rem] min-[640px]:pl-0 text-[#111827] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">1</td>
-                                            <td class="text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">Front-end Developer</td>
-                                            <td class="text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">FedEx</td>
-                                            <td class="text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">860000Đ</td>
-                                            <td class="text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">Đã giao</td>
-                                            <td class="min-[640px]:pr-0 font-[500] text-[.875rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative"><a href="#" class="text-[#0096fa] inherit">Edit<span class="sr-only">, Lindsay Walton</span></a>
+                                        <tr v-for="order in orders" :key="order.order_id"
+                                            class="mx-[4px] border-b-[4px] border-[white]">
+                                            <td
+                                                class="pl-[1rem] min-[640px]:pl-0 text-[#111827] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
+                                                {{ order.order_id }}</td>
+                                            <td
+                                                class="text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                {{ order.email }}</td>
+                                            <td
+                                                class="text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                {{ order.phone }}</td>
+                                            <td
+                                                class="text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                {{ format(new Date(order.order_created), 'MM/dd/yyyy') }}</td>
+                                            <td
+                                                class="text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                {{ order.total_amount }}</td>
+                                            <td
+                                                class="text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                {{ order.status_name }}</td>
+                                            <td
+                                                class="min-[640px]:pr-0 font-[500] text-[.875rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative">
+                                                <Menu as="div" class="relative inline-block text-left">
+                                                    <div>
+                                                        <MenuButton
+                                                            class="inline-flex w-full justify-center gap-x-1.5 rounded-full px-3 py-3 text-sm font-semibold hover:shadow-sm hover:bg-[#cfcfcf]">
+                                                            <svg width="24" height="24"
+                                                                class="fill-current text-[#70757a] cursor-pointer"
+                                                                focusable="false" xmlns="http://www.w3.org/2000/svg"
+                                                                viewBox="0 0 24 24">
+                                                                <path
+                                                                    d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z">
+                                                                </path>
+                                                            </svg>
+                                                            <!-- <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" /> -->
+                                                        </MenuButton>
+                                                    </div>
+
+                                                    <transition enter-active-class="transition ease-out duration-100"
+                                                        enter-from-class="transform opacity-0 scale-95"
+                                                        enter-to-class="transform opacity-100 scale-100"
+                                                        leave-active-class="transition ease-in duration-75"
+                                                        leave-from-class="transform opacity-100 scale-100"
+                                                        leave-to-class="transform opacity-0 scale-95">
+                                                        <MenuItems
+                                                            class="absolute right-0 z-10 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                            <div class="py-1" v-if="order.status_name === 'Đã đăng ký'">
+                                                                <MenuItem v-slot="{ active }">
+                                                                <button @click="cancelOrderAxios(order.order_id)"
+                                                                    :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Huỷ
+                                                                    đơn hàng</button>
+                                                                </MenuItem>
+                                                            </div>
+                                                            <div class="py-1" v-if="true">
+                                                                <MenuItem v-slot="{ active }">
+                                                                <button @click="deteleOrderAxios(order.order_id)"
+                                                                    :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Xoá
+                                                                    đơn hàng</button>
+                                                                </MenuItem>
+                                                            </div>
+                                                        </MenuItems>
+                                                    </transition>
+                                                </Menu>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -59,9 +175,177 @@
             </div>
         </div>
     </main>
-
 </template>
 
 <script setup>
-import orderManageMenu from '../components/drop-downs/order-manage-menu.vue';
+import { ChevronDownIcon } from '@heroicons/vue/20/solid'
+import Header from '../components/Header.vue';
+import { onMounted, ref } from "vue";
+import { useAuth0 } from "@auth0/auth0-vue";
+import { RouterLink } from 'vue-router'
+import { getOrdersByUserId, cancelOrder, deteleOrder } from "@/services/order.service";
+import { getUserByEmail, createUser } from "@/services/user.service";
+import { format } from "date-fns";
+import { vi } from 'date-fns/locale'
+import {
+    RadioGroup, RadioGroupLabel, RadioGroupOption, Menu, MenuButton, MenuItem, MenuItems,
+    Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot
+} from '@headlessui/vue'
+
+// variables
+const fillInformStep = ref(true);
+const paymentStep = ref(true);
+const completeStep = ref(true);
+const user_id = ref('');
+const orders = ref('');
+const order_root = ref('');
+
+// get the token
+const { getAccessTokenSilently } = useAuth0();
+
+// get the information user
+const { user } = useAuth0();
+
+const getOrdersByUserIdAxios = async (user_id) => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await getOrdersByUserId(accessToken, user_id);
+    console.log(user_id);
+
+    if (data) {
+        orders.value = data;
+        order_root.value = data;
+        console.log(orders.value)
+    }
+
+    if (error) {
+        console.log(error)
+    }
+};
+
+const cancelOrderAxios = async (order_id) => {
+    // edit data
+    let orderData = {
+        status_id: 2
+    }
+
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await cancelOrder(accessToken, orderData, order_id);
+
+    if (data) {
+        console.log(data);
+        for (let i = 0; i < orders.value.length; i++) {
+            if (orders.value[i].order_id == order_id) {
+                orders.value[i].status_name = "Huỷ bỏ";
+                order_root.value[i].status_name = "Huỷ bỏ";
+            }
+        }
+    }
+
+    if (error) {
+        console.log(error)
+    }
+};
+
+const deteleOrderAxios = async (order_id) => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await deteleOrder(accessToken, order_id);
+
+    if (data) {
+        console.log(data);
+        let tempOrders = orders.value;
+        let tempOrder_root = order_root.value;
+        orders.value = [];
+        for (let i = 0; i < tempOrders.length; i++) {
+            if (tempOrders[i].order_id !== order_id) {
+                orders.value.push(tempOrders[i])
+            }
+        }
+
+        order_root.value = [];
+        for (let i = 0; i < tempOrder_root.length; i++) {
+            if (tempOrder_root[i].order_id !== order_id) {
+                order_root.value.push(tempOrder_root[i])
+            }
+        }
+    }
+
+    if (error) {
+        console.log(error)
+    }
+};
+
+const getUserByEmailAxios = async (user) => {
+    // edit data
+    const userData = {
+        email: user.value?.email,
+        name: user.value?.name
+    }
+
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await getUserByEmail(accessToken, userData);
+
+    if (data) {
+        user_id.value = data.id;
+        console.log(data);
+        console.log(user_id.value);
+        getOrdersByUserIdAxios(data.id)
+    } else {
+        const { data, error } = await createUser(accessToken, userData);
+        if (data) {
+            user_id.value = data.id;
+            console.log(data);
+            console.log(user_id.value);
+            getOrdersByUserIdAxios(data.id)
+        }
+    }
+
+    if (error) {
+        console.log(error.message);
+    }
+};
+
+// filter
+const DaDangKyfilter = () => {
+    orders.value = [];
+    for (let i = 0; i < order_root.value.length; i++) {
+        if (order_root.value[i].status_name === 'Đã đăng ký') {
+            orders.value.push(order_root.value[i])
+        }
+    }
+};
+const HuyBofilter = async () => {
+    orders.value = [];
+    for (let i = 0; i < order_root.value.length; i++) {
+        if (order_root.value[i].status_name === 'Huỷ bỏ') {
+            orders.value.push(order_root.value[i])
+        }
+    }
+};
+const HoanThanhfilter = async () => {
+    orders.value = [];
+    for (let i = 0; i < order_root.value.length; i++) {
+        if (order_root.value[i].status_name === 'Hoàn thành') {
+            orders.value.push(order_root.value[i])
+        }
+    }
+};
+const DaXacNhanfilter = async () => {
+    orders.value = [];
+    for (let i = 0; i < order_root.value.length; i++) {
+        if (order_root.value[i].status_name === 'Đã xác nhận') {
+            orders.value.push(order_root.value[i])
+        }
+    }
+
+    // !important not run????????
+    // orders.value = order_root.value.filter((element) => {
+    //     element.status_name = 'Đã xác nhận';
+    // });
+};
+const Nofilter = async () => {
+    orders.value = order_root.value;
+};
+
+// run function
+getUserByEmailAxios(user)
 </script>

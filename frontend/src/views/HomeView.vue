@@ -54,7 +54,7 @@
         <div class="min-h-[80vh]">
 
             <!-- Input -->
-            <div class="m-[16px] flex justify-center flex-wrap">
+            <div class="m-[16px] flex justify-between flex-wrap max-w-5xl mx-auto">
 
                 <!-- Gửi từ -->
                 <div>
@@ -164,7 +164,7 @@
             </div>
 
             <!-- Filters -->
-            <div class="m-[16px] flex justify-start mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="m-[16px] flex justify-start mx-auto max-w-5xl">
                 <div class="relative rounded-[16px] shadow-sm hover:text-[#1a73e8] bg-[white]">
                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                         <span class="sm:text-sm">
@@ -265,7 +265,7 @@
             </div>
 
             <!-- Content - Dich vụ lọc được -->
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-5xl">
                 <div
                     class="flex items-baseline lg:justify-between justify-end border-b border-gray-200 pb-6 pt-[24px] bg-[white] px-[8px] rounded-[4px]">
                     <h1 class="text-xl font-bold tracking-tight text-gray-900 hidden md:block">Vận chuyển hàng hoá</h1>
