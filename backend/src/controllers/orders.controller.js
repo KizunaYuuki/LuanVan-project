@@ -72,11 +72,11 @@ async function deleteOrderById(id) {
 }
 
 // Tao don hang
-async function createOrders(user_id, status_id, serivce_id, payment_id, total_amount, email, phone) {
+async function createOrders(user_id, status_id, service_id, payment_id, total_amount, email, phone, user_name) {
     const [result] = await pool.query(`
-    INSERT INTO orders (user_id, status_id, serivce_id, payment_id, total_amount, email, phone)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
-    `, [user_id, status_id, serivce_id, payment_id, total_amount, email, phone])
+    INSERT INTO orders (user_id, status_id, service_id, payment_id, total_amount, email, phone, user_name)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    `, [user_id, status_id, service_id, payment_id, total_amount, email, phone, user_name])
     const id = result.insertId;
     return getOrderById(id);
 }
