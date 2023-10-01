@@ -29,7 +29,7 @@
         </div> -->
 
         <!-- Vận chuyển trong nước -->
-        <!-- <div class="bg-[#0096fa0d] py-6 hover:scale-[1.01] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
+        <div class="bg-[#0096fa0d] py-6 hover:scale-[1.01] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
             <h2 class="text-[24px] text-[#202124] font-[500] text-center mb-[16px]">Những dịch vụ vận chuyển hàng hoá phổ
                 biến - Trong nước</h2>
             <section class="flex flex-wrap content-center justify-center items-center">
@@ -38,7 +38,7 @@
                 <domesticCard></domesticCard>
                 <domesticCard></domesticCard>
             </section>
-        </div> -->
+        </div>
 
         <!-- Đăng ký dịch vụ -->
         <!-- <div class="py-6 bg-[#FFF7F5]">
@@ -335,22 +335,26 @@
                                 </thead>
                                 <tbody class="">
                                     <template v-for="service in services" :key="service.service_id">
-                                        <tr class="mx-[4px]">
+                                        <tr v-if="service" class="mx-[4px]">
                                             <td
-                                                class="flex items-center border-[#dadce0] border-t pl-[1rem] min-[640px]:pl-0 text-[#111827] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                                <img :src="service.image" alt="" class="h-5 w-5 flex-shrink-0 rounded-full bg-slate-400 mr-2"/>
-                                                <span>{{ service.provider_name }}</span></td>
+                                                class="text-ellipsis border-[#dadce0] border-t pl-[1rem] min-[640px]:pl-0 text-[#111827] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
+                                                <div class="flex items-center text-ellipsis">
+                                                    <img :src="service.image" alt=""
+                                                        class="h-5 w-5 flex-shrink-0 rounded-full bg-slate-400 mr-2" />
+                                                    <span>{{ service.provider_name }}</span>
+                                                </div>
+                                            </td>
                                             <td
-                                                class="border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                class="text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
                                                 {{ service.service_name }}</td>
                                             <td
-                                                class="border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                class="text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
                                                 {{ service.delivery_date }}</td>
                                             <td
-                                                class="border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                class="text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
                                                 {{ service.weight }} <span>kg</span></td>
                                             <td
-                                                class="border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                class="text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
                                                 {{ (service.price).toLocaleString('vi-VN', {
                                                     style: 'currency',
                                                     currency: 'VND'
@@ -381,12 +385,57 @@
                                             </td>
                                         </tr>
 
-                                        <tr v-if="service.append" class="mx-[4px] relative">
-                                            <div class="p-[16px] overflow-hidden">
+                                        <tr v-if="service.append" class="mx-auto text-[12px]">
+
+                                            <td>
+                                                Từ Ha Noi
+                                                Đến Can Tho
+                                            </td>
+
+                                            <td class="px-[16px]" v-if="service?.totalCount">
                                                 <div>
-                                                    2 Đánh giá
+                                                    <div :data-tooltip="service.totalCount"
+                                                        class="tooltip text-[12px] text-[#757575] inline-flex items-center">
+                                                        <span class="mr-[4px]">{{
+                                                            (parseFloat(service.average_rate)).toLocaleString('vi-VN', {
+                                                                minimumFractionDigits: 1, // Số chữ số thập phân tối thiểu
+                                                                maximumFractionDigits: 1, // Số chữ số thập phân tối đa
+                                                            }) }}</span>
+                                                        <svg width="14" height="14" class="fill-current text-[#fbbc04]"
+                                                            data-testid="star-svg" preserveAspectRatio="none"
+                                                            viewBox="0 0 24 24">
+                                                            <path
+                                                                d="m12 20.6-5.86 3.23c-.7.38-1.57.1-1.94-.63-.15-.3-.2-.63-.14-.95l1.12-6.82L.43 10.6a1.55 1.55 0 0 1-.02-2.13c.22-.23.5-.39.82-.43l6.55-1 2.93-6.2a1.4 1.4 0 0 1 2.58 0l2.93 6.2 6.55 1a1.5 1.5 0 0 1 1.21 1.7c-.04.32-.19.63-.41.86l-4.75 4.83 1.12 6.82c.14.81-.39 1.59-1.17 1.73-.3.05-.63 0-.9-.15L12 20.6Z">
+                                                            </path>
+                                                        </svg>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </td>
+
+                                            <td class="">
+                                                <!-- Them vao gio -->
+                                                <button @click.prevent="true"
+                                                    class="inline-flex items-center justify-center shrink-0 flex-row py-[12px] px-[16px] m-[4px] h-[40px] w-[40px] z-10 text-white rounded-[100px] hover:bg-[#ebeff5]">
+                                                    <span class="w-[24px] h-[24px] inline-block shrink-0 relative">
+                                                        <!-- <svg width="24" height="24" aria-hidden="true"
+                                                            class="fill-current text-[#d83737]" preserveAspectRatio="none"
+                                                            viewBox="0 0 24 24">
+                                                            <path
+                                                                d="M15.7 3c-1.4 0-2.6.4-3.7 1.2a6.1 6.1 0 0 0-8.2.8 7 7 0 0 0 0 9.2c.7 1 1.5 1.7 2.9 3l2.8 2.4.8.7c.5.5 1 .7 1.7.7.6 0 1.2-.2 1.7-.6 2-1.7 5.3-4.7 6.6-6.2a7 7 0 0 0-.1-9.2 6.2 6.2 0 0 0-4.5-2m0 1.8c1.1 0 2.3.5 3.2 1.4a5 5 0 0 1 0 6.8 88.2 88.2 0 0 1-6.9 6.2l-.6-.2-.8-.7L8 15.8c-1.4-1.2-2-2-2.8-2.8a5 5 0 0 1 0-6.8 4.5 4.5 0 0 1 6.5 0l.4.5.4-.5c1-.9 2-1.4 3.3-1.4">
+                                                            </path>
+                                                        </svg> -->
+
+                                                        <svg width="24" height="24" aria-hidden="true"
+                                                            class="fill-current text-[#ffd2d2] w-full h-full"
+                                                            preserveAspectRatio="none" viewBox="0 0 24 24">
+                                                            <path
+                                                                d="M15.3 4.1c-1.2 0-2.3.4-3.3 1a5.6 5.6 0 00-7.4.7 6 6 0 000 8.2c.7.7 1.3 1.4 2.6 2.5l2.5 2.2.7.6a2.4 2.4 0 003.2 0c1.7-1.4 4.7-4 5.8-5.3a6 6 0 000-8.2 5.6 5.6 0 00-4.1-1.7">
+                                                            </path>
+                                                        </svg>
+                                                    </span>
+                                                </button>
+                                            </td>
+
                                         </tr>
                                     </template>
                                 </tbody>
@@ -597,3 +646,50 @@ const service_id = 1
 // };
 // getServiceAxios()
 </script>
+
+<style scoped>
+.tooltip {
+    position: relative;
+}
+
+.tooltip::before,
+.tooltip::after {
+    --scale: 0;
+    --arrow-size: 10px;
+    --tooltip-color: #333;
+
+    position: absolute;
+    top: -.25rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(var(--translate-y, 0)) scale(var(--scale));
+    transition: 150ms transform;
+    transform-origin: bottom center;
+}
+
+.tooltip::before {
+    --translate-y: calc(-100% - var(--arrow-size));
+
+    content: attr(data-tooltip) " đánh giá";
+    color: white;
+    padding: .25rem;
+    border-radius: .3rem;
+    text-align: center;
+    width: max-content;
+    /* max-width: 70px; */
+    background: var(--tooltip-color);
+}
+
+.tooltip:hover::before,
+.tooltip:hover::after {
+    --scale: 1;
+}
+
+.tooltip::after {
+    --translate-y: calc(-1 * var(--arrow-size));
+
+    content: '';
+    border: var(--arrow-size) solid transparent;
+    border-top-color: var(--tooltip-color);
+    transform-origin: top center;
+}
+</style>
