@@ -1,7 +1,7 @@
 <template>
     <Header></Header>
     <main>
-        <div class="content-layout">
+        <div class="content-layout max-w-[1024px] mx-auto px-0">
             <div class="content__body">
                 <!-- <p id="page-description">
                 <span>You can use the <strong>ID Token</strong> to get the profile

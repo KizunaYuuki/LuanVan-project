@@ -335,7 +335,7 @@
                                 </thead>
                                 <tbody class="">
                                     <template v-for="service in services" :key="service.service_id">
-                                        <tr v-if="service" class="mx-[4px]">
+                                        <tr v-if="service" class="mx-[4px] hover:shadow hover:bg-[#0096fa0d]">
                                             <td
                                                 class="text-ellipsis border-[#dadce0] border-t pl-[1rem] min-[640px]:pl-0 text-[#111827] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
                                                 <div class="flex items-center text-ellipsis">
@@ -365,9 +365,9 @@
                                                     <RouterLink :to="{
                                                         name: 'Service Details',
                                                         params: { id: service.service_id },
-                                                    }" class="text-[#0096fa] inherit py-[17px]">
+                                                    }" class="text-[#0096fa] inherit py-[17px] hover:text-[#0060fa]">
                                                         <div
-                                                            class="bg-[#e8f0fe] box-border rounded-[8px] text-[#1a73e8] inline-block text-[12px] leading-[20px] py-[6px] px-[10px] text-center w-[124px]">
+                                                            class="bg-[#e8f0fe] box-border rounded-[8px] inline-block text-[12px] leading-[20px] py-[6px] px-[10px] text-center w-[124px]">
                                                             Truy cập</div>
                                                         <span class="sr-only">Truy cập</span>
                                                     </RouterLink>

@@ -1,4 +1,6 @@
 <template>
+    <Header></Header>
+    <button @click="createOrderAxios(order)">test</button>
     <main>
         <section
             class="flex flex-col max-w-[calc(1280px-64px)] mx-auto my-[16px] min-h-[calc(100vh)] min-[1280]:px-[0px] px-[8px]">
@@ -6,13 +8,13 @@
             <div class="bg-white">
 
                 <!-- Form Đăng ký dịch vụ -->
-                <form class="min-[1024px]:py-[64px] py-[16px]">
+                <form class="max-w-5xl min-[1024px]:py-[64px] py-[16px] mx-auto">
 
                     <!-- Buoc 1 Dien Thong tin -->
                     <div v-if="fillInformStep" class="">
                         <!-- Nav Steps - Thông tin dịch vụ -->
                         <div class="bg-[#fff] rounded-[0.375rem] min-[1024px]:block hidden">
-                            <div class="mx-auto px-[2rem]">
+                            <div class="mx-auto">
                                 <nav aria-label="Progress">
                                     <ol role="list"
                                         class="list-decimal ms-px me-px flex flex-wrap rounded-[4px] border-[1px]">
@@ -76,7 +78,7 @@
                         </div>
 
                         <!-- Noi dung -->
-                        <div class="max-w-7xl mx-auto px-4 sm:px-6 min-[1024px]:py-[64px] py-[16px] lg:px-8">
+                        <div class="max-w-5xl mx-auto px-4 sm:px-6 min-[1024px]:py-[64px] py-[16px] lg:px-8">
                             <div class="space-y-12 mx-auto max-w-2xl">
                                 <!-- Thông tin cá nhân -->
                                 <div class="border-b border-gray-900/10 pb-12">
@@ -88,11 +90,11 @@
 
                                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                         <div class="sm:col-span-2">
-                                            <label for="first-name"
+                                            <label for="name"
                                                 class="block text-sm font-medium leading-6 text-gray-900">Tên<strong
                                                     class="text-[red] ml-[8px]">*</strong></label>
                                             <div class="mt-2">
-                                                <input type="text" name="first-name" id="first-name"
+                                                <input v-model="order.user_name" type="text" name="name" id="name"
                                                     autocomplete="given-name"
                                                     class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
@@ -102,7 +104,8 @@
                                             <label for="email" class="block text-sm font-medium leading-6 text-gray-900">
                                                 Email<strong class="text-[red] ml-[8px]">*</strong></label>
                                             <div class="mt-2">
-                                                <input id="email" name="email" type="email" autocomplete="email"
+                                                <input v-model="order.email" id="email" name="email" type="email"
+                                                    autocomplete="email"
                                                     class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
@@ -110,9 +113,11 @@
                                         <div class="sm:col-span-2">
                                             <label for="tel" class="block text-sm font-medium leading-6 text-gray-900">Số
                                                 điện
-                                                thoại<strong class="text-[red] ml-[8px]"></strong></label>
+                                                thoại<strong class="text-[red] ml-[8px]"></strong>
+                                            </label>
                                             <div class="mt-2">
-                                                <input id="tel" name="tel" type="tel" autocomplete="tel"
+                                                <input v-model="order.phone" id="tel" name="tel" type="tel"
+                                                    autocomplete="tel"
                                                     class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
@@ -122,8 +127,12 @@
                                 <!-- Thông tin Lô hàng -->
                                 <div class="border-b border-gray-900/10 pb-12">
                                     <h2 class="text-base font-semibold leading-7 text-gray-900">Thông tin Lô hàng</h2>
-                                    <p class="mt-1 text-sm leading-6 text-gray-600">Những thông tin này liên quan trực tiếp
-                                        đến giá dịch vụ
+                                    <p class="mt-1 text-sm leading-6 text-gray-600">Trọng lượng khối hàng liên quan trực
+                                        tiếp đến giá dịch vụ. <br />
+                                        <span class="text-[#0096fa]">Trọng lượng = Chiều Dài x Chiều Rộng x Chiều Cao :
+                                            5000</span> <br />
+                                        Trọng lượng sẽ được tính tự động nếu bạn nhập đầy đủ giá trị Chiều Dài, Chiều Rộng
+                                        và Chiều Cao
                                     </p>
 
                                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -132,7 +141,8 @@
                                                 class="block text-sm font-medium leading-6 text-gray-900">Chiều dài
                                                 (<span class="text-[#0096fa]">cm</span>)</label>
                                             <div class="mt-2">
-                                                <input type="text" name="height" id="height" autocomplete="height"
+                                                <input v-model="packageData.height" type="text" name="height" id="height"
+                                                    autocomplete="height"
                                                     class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
@@ -142,35 +152,65 @@
                                                 class="block text-sm font-medium leading-6 text-gray-900">Chiều rộng
                                                 (<span class="text-[#0096fa]">cm</span>)</label>
                                             <div class="mt-2">
-                                                <input type="text" name="width" id="width" autocomplete="width"
+                                                <input v-model="packageData.width" type="text" name="width" id="width"
+                                                    autocomplete="width"
                                                     class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
 
                                         <div class="sm:col-span-2">
-                                            <label for="length"
+                                            <label for="lenght"
                                                 class="block text-sm font-medium leading-6 text-gray-900">Chiều cao
                                                 (<span class="text-[#0096fa]">cm</span>)</label>
                                             <div class="mt-2">
-                                                <input type="text" name="length" id="length" autocomplete="length"
+                                                <input v-model="packageData.lenght" type="text" name="lenght" id="lenght"
+                                                    autocomplete="lenght"
                                                     class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
 
                                         <div class="sm:col-span-2">
                                             <label for="volume"
-                                                class="block text-sm font-medium leading-6 text-gray-900">Trọng lượng Lô
+                                                class="block text-sm font-medium leading-6 text-gray-900">Trọng lượng Gói
                                                 hàng
-                                                (<span class="text-[#0096fa]">Kg</span>)</label>
-                                            <div class="mt-2">
-                                                <input type="text" name="volume" id="volume" autocomplete="volume"
-                                                    class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                                (<span class="text-[#0096fa]">Kg</span>)
+                                                <strong class="text-[red] ml-[8px]">*</strong></label>
+                                            <div class="mt-2 flex items-center">
+                                                <input v-model="packageData.weight" type="text" name="volume" id="volume"
+                                                    autocomplete="volume"
+                                                    class="pl-[14px] block w-full rounded-l-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                                <span
+                                                    class="px-4 bg-gray-300 whitespace-nowrap rounded-r-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 ">&le;
+                                                    500</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="sm:col-span-2">
+                                            <label for="price" class="block text-sm font-medium leading-6 text-gray-900">Giá
+                                                trị Gói hàng
+                                                (<span class="text-[#0096fa]">VND</span>)</label>
+                                            <div class="mt-2 flex items-center">
+                                                <input v-model="packageData.price" type="text" name="price" id="price"
+                                                    autocomplete="price"
+                                                    class="pl-[14px] block w-full rounded-l-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="sm:col-span-full">
+                                            <label for="description"
+                                                class="block text-sm font-medium leading-6 text-gray-900">Mô tả về gói
+                                                hàng</label>
+                                            <div class="mt-2 flex items-center">
+                                                <input v-model="packageData.description" type="text" name="description"
+                                                    id="description" autocomplete="description"
+                                                    class="pl-[14px] block w-full rounded-l-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Bạn vận chuyển lô hàng từ đâu? -->
+                                <!-- Bạn vận chuyển lô hàng từ đâu? FROM -->
                                 <div class="border-b border-gray-900/10 pb-12">
                                     <h2 class="text-base font-semibold leading-7 text-gray-900">Bạn vận chuyển lô hàng
                                         từ đâu?</h2>
@@ -179,37 +219,42 @@
                                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
                                         <div class="sm:col-span-2 sm:col-start-1">
-                                            <label for="city" class="block text-sm font-medium leading-6 text-gray-900">Tỉnh
+                                            <label for="provinceFROM"
+                                                class="block text-sm font-medium leading-6 text-gray-900">Tỉnh
                                                 / Thành
-                                                phố</label>
+                                                phố<strong class="text-[red] ml-[8px]">*</strong></label>
                                             <div class="mt-2">
-                                                <input type="text" name="city" id="city" autocomplete="address-level2"
+                                                <input v-model="addressFrom.province" type="text" name="provinceFROM"
+                                                    id="provinceFROM" autocomplete="address-level2"
                                                     class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
 
                                         <div class="sm:col-span-2">
-                                            <label for="region"
+                                            <label for="districtFROM"
                                                 class="block text-sm font-medium leading-6 text-gray-900">Quận /
-                                                Huyện</label>
+                                                Huyện<strong class="text-[red] ml-[8px]">*</strong></label>
                                             <div class="mt-2">
-                                                <input type="text" name="region" id="region" autocomplete="address-level1"
+                                                <input v-model="addressFrom.district" type="text" name="districtFROM"
+                                                    id="districtFROM" autocomplete="address-level1"
                                                     class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
 
                                         <div class="sm:col-span-2">
-                                            <label for="ward" class="block text-sm font-medium leading-6 text-gray-900">Xã /
-                                                Phường</label>
+                                            <label for="wardFROM"
+                                                class="block text-sm font-medium leading-6 text-gray-900">Xã /
+                                                Phường<strong class="text-[red] ml-[8px]">*</strong></label>
                                             <div class="mt-2">
-                                                <input type="text" name="ward" id="ward" autocomplete="address-level3"
+                                                <input v-model="addressFrom.ward" type="text" name="wardFROM" id="wardFROM"
+                                                    autocomplete="address-level3"
                                                     class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Lô hàng của bạn gửi đi đâu? -->
+                                <!-- Lô hàng của bạn gửi đi đâu? TO -->
                                 <div class="border-b border-gray-900/10 pb-12">
                                     <h2 class="text-base font-semibold leading-7 text-gray-900">Lô hàng của bạn gửi đi
                                         đâu?</h2>
@@ -219,30 +264,35 @@
                                         đến đúng địa điểm đích mà bạn muốn.</p>
                                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                         <div class="sm:col-span-2 sm:col-start-1">
-                                            <label for="city" class="block text-sm font-medium leading-6 text-gray-900">Tỉnh
+                                            <label for="provinceTO"
+                                                class="block text-sm font-medium leading-6 text-gray-900">Tỉnh
                                                 / Thành
-                                                phố</label>
+                                                phố<strong class="text-[red] ml-[8px]">*</strong></label>
                                             <div class="mt-2">
-                                                <input type="text" name="city" id="city" autocomplete="address-level2"
+                                                <input v-model="addressTo.province" type="text" name="provinceTO"
+                                                    id="provinceTO" autocomplete="address-level2"
                                                     class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
 
                                         <div class="sm:col-span-2">
-                                            <label for="region"
+                                            <label for="districtTO"
                                                 class="block text-sm font-medium leading-6 text-gray-900">Quận /
-                                                Huyện</label>
+                                                Huyện<strong class="text-[red] ml-[8px]">*</strong></label>
                                             <div class="mt-2">
-                                                <input type="text" name="region" id="region" autocomplete="address-level1"
+                                                <input v-model="addressTo.district" type="text" name="districtTO"
+                                                    id="districtTO" autocomplete="address-level1"
                                                     class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
 
                                         <div class="sm:col-span-2">
-                                            <label for="ward" class="block text-sm font-medium leading-6 text-gray-900">Xã /
-                                                Phường</label>
+                                            <label for="wardTO" class="block text-sm font-medium leading-6 text-gray-900">Xã
+                                                /
+                                                Phường<strong class="text-[red] ml-[8px]">*</strong></label>
                                             <div class="mt-2">
-                                                <input type="text" name="ward" id="ward" autocomplete="address-level3"
+                                                <input v-model="addressTo.ward" type="text" name="wardTO" id="wardTO"
+                                                    autocomplete="address-level3"
                                                     class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                             </div>
                                         </div>
@@ -255,8 +305,7 @@
                         <div class="px-4">
                             <div class="space-y-12 mx-auto max-w-2xl">
                                 <div class="flex items-center justify-end gap-x-6">
-                                    <RouterLink to="/"
-                                        class="text-sm font-semibold leading-6 text-gray-900">
+                                    <RouterLink to="/" class="text-sm font-semibold leading-6 text-gray-900">
                                         Về Trang chủ
                                     </RouterLink>
                                     <button @click="paymentStep = !paymentStep, fillInformStep = !fillInformStep"
@@ -366,7 +415,8 @@
                                                         </span>
                                                     </div>
                                                     <div class="">
-                                                        <input class="w-[18px] h-[18px]" type="radio" name="pay" id="cash">
+                                                        <input v-model="order.payment_id" value="1"
+                                                            class="w-[18px] h-[18px]" type="radio" name="pay" id="cash">
                                                     </div>
                                                 </label>
 
@@ -380,31 +430,25 @@
                                                         </span>
                                                     </div>
                                                     <div>
-                                                        <input class="w-[18px] h-[18px]" type="radio" name="pay"
-                                                            id="paypal">
+                                                        <input v-model="order.payment_id" value="2"
+                                                            class="w-[18px] h-[18px]" type="radio" name="pay" id="paypal">
                                                     </div>
                                                 </label>
                                             </div>
                                         </div>
 
                                         <div class="col-span-full">
-                                            <div class="flex justify-center">
+                                            <div v-if="order.payment_id === '1'" class="flex justify-center">
                                                 <h1>Bạn đã chọn thành toán bằng <span class="text-[#0096fa]">Tiền
                                                         mặt</span>, Click Đăng ký để hoàn thành đăng ký dịch vụ.</h1>
                                             </div>
-                                            <div class="flex justify-center">
+                                            <div v-if="order.payment_id === '2'" class="flex justify-center">
                                                 <h1>Một bước nữa thôi, thanh toán bằng <span
                                                         class="text-[#0096fa]">Paypal</span> để
                                                     hoàn thành đăng ký dịch
                                                     vụ.</h1>
                                             </div>
-
-                                            <div class="flex justify-center">
-                                                <h1>Dịch vụ (Đơn hàng) bạn đã đăng ký sẽ được xét duyệt trong vòng <span
-                                                        class="text-[#0096fa]">24h</span></h1>
-                                            </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -550,9 +594,11 @@
                                                 </h1>
                                             </div>
 
-
+                                            <div class="flex justify-center">
+                                                <h1>Dịch vụ (Đơn hàng) bạn đã đăng ký sẽ được xét duyệt trong vòng <span
+                                                        class="text-[#0096fa]">24h</span></h1>
+                                            </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -585,15 +631,127 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { useAuth0 } from "@auth0/auth0-vue";
+import Header from '../components/Header.vue';
 import { RouterLink, RouterView } from 'vue-router'
+
+import { getUserByEmail, createUser } from "@/services/user.service";
+import { createOrder } from "@/services/order.service";
+import { createAddress } from "@/services/address.service";
+import { createPackage } from "@/services/package.service";
+
+// get the information user
+const { user } = useAuth0();
+
+// get the token
+const { getAccessTokenSilently } = useAuth0();
 
 const fillInformStep = ref(true);
 const paymentStep = ref(false);
 const completeStep = ref(false);
+const user_id = ref();
+
+const order = ref(
+    {
+        user_id: 1,
+        status_id: 1,
+        service_id: 1,
+        payment_id: 0,
+        total_amount: 10005000,
+        email: '',
+        phone: '0332006710',
+        user_name: 'test user'
+    },
+);
+const packageData = ref(
+    {
+        order_id: '',
+        lenght: 1,
+        width: 1,
+        height: 1,
+        weight: 500,
+        price: 10000,
+        description: '',
+    }
+);
+
+const addressFrom = ref(
+    {
+        order_id: '',
+        province: "Ha Noi",
+        district: "Quan 1",
+        ward: "",
+        type: "FROM"
+    }
+);
+
+const addressTo = ref(
+    {
+        order_id: '',
+        province: "Ha Noi",
+        district: "Quan 1",
+        ward: "",
+        type: "TO"
+    }
+);
+
+const getUserByEmailAxios = async (user) => {
+    // edit data
+    const userData = {
+        email: user.value?.email,
+        name: user.value?.name
+    }
+
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await getUserByEmail(accessToken, userData);
+
+    if (data) {
+        user_id.value = data.id;
+        console.log(data);
+        console.log(user_id.value);
+    } else {
+        const { data, error } = await createUser(accessToken, userData);
+        if (data) {
+            user_id.value = data.id;
+            console.log(data);
+            console.log(user_id.value);
+        }
+    }
+
+    if (error) {
+        console.log(error.message);
+    }
+};
+
+const createOrderAxios = async (orderData) => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await createOrder(accessToken, orderData);
+    if (data) {
+        console.log(data);
+
+        // edit data
+        addressFrom.value.order_id = data.id;
+        addressTo.value.order_id = data.id;
+        packageData.value.order_id = data.id;
+
+        // Tao Package
+        await createPackage(accessToken, packageData.value);
+
+        // Tao address
+        await createAddress(accessToken, addressFrom.value);
+        await createAddress(accessToken, addressTo.value);
+    }
+    if (error) {
+        console.log(error);
+    }
+};
+
+// run function
+getUserByEmailAxios(user);
 </script>
 
 <style scoped>
 ol {
     margin-block-start: 1em;
     margin-block-end: 1em;
-}</style>
+}
+</style>

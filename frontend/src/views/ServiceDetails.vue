@@ -253,8 +253,8 @@
                                                         <div class="py-1"
                                                             v-if="isAuthenticated && user.email === review.email">
                                                             <MenuItem v-slot="{ active }">
-                                                            <a href="#"
-                                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Xoá</a>
+                                                            <button @click="deteleReviewAxios(review.review_id)"
+                                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Xoá</button>
                                                             </MenuItem>
                                                         </div>
                                                     </MenuItems>
@@ -377,7 +377,7 @@ import {
 } from '@headlessui/vue'
 import menuButton from "../components/buttons/menu-button.vue";
 import { getServiceById } from "@/services/service.service";
-import { createReview, getReviewsByServiceId } from "@/services/review.service";
+import { createReview, getReviewsByServiceId, deteleReview } from "@/services/review.service";
 import { useAuth0 } from "@auth0/auth0-vue";
 import { format } from "date-fns";
 import { vi } from 'date-fns/locale'
@@ -438,6 +438,32 @@ const reviewsCal = ref(
         totalCount: ""
     }
 );
+
+const deteleReviewAxios = async (id) => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await deteleReview(accessToken, id);
+
+    // loggin if loggin yet exists
+    if (!isAuthenticated.value) {
+        handleLogin();
+        return
+    }
+
+    if (data) {
+        console.log(data);
+        let tempData = reviews.value
+        reviews.value = []
+        for (let i = 0; i < tempData.length; i++) {
+            if (tempData[i].review_id !== id) {
+                reviews.value.push(tempData[i])
+            }
+        }
+    }
+
+    if (error) {
+        console.log(error);
+    }
+};
 
 const getServiceByIdAxios = async (id) => {
     const { data, error } = await getServiceById(id);
