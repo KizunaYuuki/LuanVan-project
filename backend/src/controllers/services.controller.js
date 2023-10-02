@@ -33,7 +33,7 @@ async function getServicesByServiceTypeId(id) {
 async function getServiceById(id) {
     const [rows] = await pool.query(`
     SELECT services.id as service_id, services.name as service_name, services.description, services.delivery_date, services.weight, services.price,
-    providers.id, providers.name as provider_name, providers.image
+    providers.id as provider_id, providers.name as provider_name, providers.image
     FROM services
     JOIN service_types ON services.service_type_id = service_types.id
     JOIN providers ON service_types.providers_id = providers.id
