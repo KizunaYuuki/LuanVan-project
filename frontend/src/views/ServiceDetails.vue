@@ -1,4 +1,4 @@
-<template>
+<template v-if="service">
     <Header></Header>
     <main>
         <div class="bg-[#ffffffbe]">
@@ -7,7 +7,7 @@
                 <div
                     class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
                     <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-                        <h1 v-if="service" class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{
+                        <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{
                             service.service_name }}</h1>
                     </div>
 
@@ -93,10 +93,18 @@
                                 </RadioGroup>
                             </div> -->
 
+                            <!-- Button -->
                             <div class="">
-                                <button type="button"
-                                    class="mt-10 flex w-[100%] items-center justify-center border border-transparent px-[16px] py-[8px] font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 leading-6 text-base shadow rounded-md bg-[#0096faee] hover:bg-[#0096fa]">Đăng
-                                    ký dịch vụ</button>
+                                <RouterLink :to="{
+                                    name: 'Create Order',
+                                    params: { 
+                                        service_id: props.id,
+                                     },
+                                }" class="mt-10 flex w-[100%] items-center justify-center border border-transparent px-[16px] py-[8px] font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 leading-6 text-base shadow rounded-md bg-[#0096faee] hover:bg-[#0096fa]">
+                                    <div
+                                        class="">
+                                        Đăng ký dịch vụ</div>
+                                </RouterLink>
                                 <button @click="createCartAxios(user_id)" type="button"
                                     class="mt-10 flex w-[100%] items-center justify-center border border-transparent px-[16px] py-[8px] font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 leading-6 text-base shadow rounded-md bg-[#0096faee] hover:bg-[#0096fa]">Thêm
                                     vào giỏ hàng</button>
@@ -366,7 +374,7 @@
 
 <script setup>
 import Header from '../components/Header.vue';
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink } from 'vue-router'
 import { ref } from "vue";
 import domesticCard from "../components/cards/domestic-card.vue";
 import { StarIcon } from '@heroicons/vue/20/solid'
@@ -408,7 +416,7 @@ const { getAccessTokenSilently } = useAuth0();
 // get the information user
 const { user } = useAuth0();
 const props = defineProps({
-    id: Number // Service Id
+    id: '' // Service Id
 })
 
 // variables

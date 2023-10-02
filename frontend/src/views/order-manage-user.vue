@@ -77,7 +77,7 @@
                                     <thead>
                                         <tr class="border-b-[4px] border-[white]">
                                             <th scope="col"
-                                                class="pl-[1rem] min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left pr-[.75rem] py-[.875rem]">
+                                                class="pl-[1rem] text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left pr-[.75rem] py-[.875rem]">
                                                 Mã Đơn hàng</th>
                                             <th scope="col"
                                                 class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
@@ -104,7 +104,7 @@
                                         <tr v-for="order in orders" :key="order.order_id"
                                             class="mx-[4px] border-b-[4px] border-[white]">
                                             <td
-                                                class="pl-[1rem] min-[640px]:pl-0 text-[#111827] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
+                                                class="pl-[1rem] text-[#111827] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
                                                 {{ order.order_id }}</td>
                                             <td
                                                 class="text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">

@@ -29,10 +29,11 @@ const router = createRouter({
             }
         },
         {
-            path: '/order',
+            path: '/order/services/:service_id',
             name: 'Create Order',
             component: () => import('../views/Order.vue'),
             beforeEnter: authGuard,
+            props: true,
             meta: {
                 title: "Đăng ký dịch vụ",
             }

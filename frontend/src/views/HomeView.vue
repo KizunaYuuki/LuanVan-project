@@ -313,22 +313,22 @@
                                 <thead>
                                     <tr class="">
                                         <th scope="col"
-                                            class="pl-[1rem] min-[640px]:pl-0 text-[#70757a] font-[600] text-[12px] leading-[1.25rem] text-left pr-[.75rem] py-[.875rem]">
+                                            class="text-[#70757a] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                             Nhà cung cấp dịch vụ</th>
                                         <th scope="col"
-                                            class="min-[640px]:pl-0 text-[#70757a] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            class="text-[#70757a] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                             Tên dịch vụ</th>
                                         <th scope="col"
-                                            class="min-[640px]:pl-0 text-[#70757a] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            class="text-[#70757a] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                             Thời gian vận chuyển</th>
                                         <th scope="col"
-                                            class="min-[640px]:pl-0 text-[#111827] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            class="text-[#111827] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                             Trọng lượng</th>
                                         <th scope="col"
-                                            class="min-[640px]:pl-0 text-[#111827] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            class="text-[#111827] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                             Giá dịch vụ</th>
                                         <th scope="col"
-                                            class="min-[640px]:pl-0 text-[#70757a] font-[600] text-[12px] leading-[1.25rem] text-left pr-[1rem] py-[.875rem] relative">
+                                            class="text-[#70757a] font-[600] text-[12px] leading-[1.25rem] text-left pr-[1rem] py-[.875rem] relative">
                                             <span class="sr-only">Xoá</span>
                                         </th>
                                     </tr>
@@ -337,7 +337,7 @@
                                     <template v-for="service in services" :key="service.service_id">
                                         <tr v-if="service" class="mx-[4px] hover:shadow hover:bg-[#0096fa0d]">
                                             <td
-                                                class="text-ellipsis border-[#dadce0] border-t pl-[1rem] min-[640px]:pl-0 text-[#111827] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
+                                                class="text-ellipsis border-[#dadce0] border-t px-[.75rem] text-[#111827] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
                                                 <div class="flex items-center text-ellipsis">
                                                     <img :src="service.image" alt=""
                                                         class="h-5 w-5 flex-shrink-0 rounded-full bg-slate-400 mr-2" />
