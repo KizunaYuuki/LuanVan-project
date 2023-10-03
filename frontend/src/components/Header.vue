@@ -4,9 +4,8 @@
         <nav class="mx-auto flex max-w-[1280px] items-center justify-between p-[16px] lg:px-[32px]" aria-label="Global">
             <div class="flex lg:flex-1">
                 <RouterLink to="/"
-                    class="min-[1024px]:-m-1.5 p-1.5 text-[1rem] font-[700] tracking-[.125rem] text-[#0097f9] subpixel-antialiased hover:underline hover:underline-offset-[2px]">
-                    <span class="sr-only">Freight service</span>
-                    Freight service
+                    class="min-[1024px]:-m-1.5 p-1.5 text-[1.25rem] font-[700] tracking-[.125rem] text-[#0097f9] subpixel-antialiased hover:underline hover:underline-offset-[2px]">
+                    BestChoice
                 </RouterLink>
             </div>
             <div class="flex lg:hidden">
@@ -56,25 +55,10 @@
                         </PopoverPanel>
                     </transition>
                 </Popover>
+                <RouterLink to="/profile" class="text-sm font-semibold leading-6 text-gray-900"
+                    title="Quản lý đơn hàng của bạn">Thông tin tài khoản</RouterLink>
                 <RouterLink to="/track" class="text-sm font-semibold leading-6 text-gray-900"
-                    title="Quản lý đơn hàng của bạn">Sản phẩm</RouterLink>
-                <RouterLink to="/track" class="text-sm font-semibold leading-6 text-gray-900"
-                    title="Quản lý đơn hàng của bạn">Theo dõi</RouterLink>
-                <!-- Thanh tìm kiếm -->
-                <!-- <div
-                    class="bg-white text-sm relative pointer-events-auto flex rounded-[0.5rem] ring-1 ring-slate-900/10 hover:ring-[#0096fa] focus:outline-none shadow-sm">
-                    <input
-                        class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-[32px] focus:outline-none rounded-[0.5rem]"
-                        type="text" placeholder="Quick search...">
-                    <button class="w-[32px] h-[32px] flex flex-wrap items-center content-center justify-center">
-                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round"
-                            class="flex-none text-slate-300 dark:text-slate-400 hover:text-[#0096fa]" aria-hidden="true">
-                            <path d="m19 19-3.5-3.5"></path>
-                            <circle cx="11" cy="11" r="6"></circle>
-                        </svg>
-                    </button>
-                </div> -->
+                    title="Quản lý đơn hàng của bạn">Theo dõi đơn hàng</RouterLink>
             </PopoverGroup>
             <div class="hidden lg:flex lg:flex-1 lg:justify-end">
                 <template v-if="!isAuthenticated">
@@ -132,31 +116,18 @@
                                         {{ item.name }}</DisclosureButton>
                                 </DisclosurePanel>
                             </Disclosure>
-                            <RouterLink to="/track"
+                            <RouterLink to="/profile"
                                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                title="Quản lý đơn hàng của bạn">Theo dõi</RouterLink>
+                                title="Thông tin tài khoản">Thông tin tài khoản</RouterLink>
+                            <RouterLink to="/track"
+                                class="t-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                title="Theo dõi đơn hàng">Theo dõi đơn hàng</RouterLink>
                             <template v-if="isAuthenticated">
                                 <button @click="cartOpen = true"
                                     class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                                     Giỏ hàng
                                 </button>
                             </template>
-                            <!-- Thanh tìm kiếm -->
-                            <!-- <div
-                                class="bg-white text-sm relative pointer-events-auto flex justify-between rounded-[0.5rem] ring-1 ring-slate-900/10 hover:ring-[#0096fa] focus:outline-none shadow-sm">
-                                <input
-                                    class="flex items-center w-72 text-left space-x-3 px-4 h-[32px] focus:outline-none rounded-[0.5rem]"
-                                    type="text" placeholder="Quick search...">
-                                <button class="w-[32px] h-[32px] flex flex-wrap items-center content-center justify-center">
-                                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="flex-none text-slate-300 dark:text-slate-400 hover:text-[#0096fa]"
-                                        aria-hidden="true">
-                                        <path d="m19 19-3.5-3.5"></path>
-                                        <circle cx="11" cy="11" r="6"></circle>
-                                    </svg>
-                                </button>
-                            </div> -->
                         </div>
                         <div class="py-6">
                             <template v-if="!isAuthenticated">
@@ -215,7 +186,7 @@
                                                         <RouterLink :to="{
                                                             name: 'Service Details',
                                                             params: { id: cart.service_id },
-                                                        }"  class="flex py-6">
+                                                        }" class="flex py-6">
                                                             <div
                                                                 class="flex items-center h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                                                 <img :src="cart.image"
@@ -244,7 +215,8 @@
                                                                     <!-- <p class="text-gray-500">Qty {{ cart.quantity }}</p> -->
 
                                                                     <div class="flex">
-                                                                        <button @click.prevent="deteleCartAxios(cart.cart_id)"
+                                                                        <button
+                                                                            @click.prevent="deteleCartAxios(cart.cart_id)"
                                                                             type="button"
                                                                             class="font-medium text-[#0096fab7] hover:text-[#0096fa]">Xoá</button>
                                                                     </div>

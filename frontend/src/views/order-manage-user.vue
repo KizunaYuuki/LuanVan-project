@@ -209,16 +209,16 @@ const { user } = useAuth0();
 const getOrdersByUserIdAxios = async (user_id) => {
     const accessToken = await getAccessTokenSilently();
     const { data, error } = await getOrdersByUserId(accessToken, user_id);
-    console.log(user_id);
+    // console.log(user_id);
 
     if (data) {
         orders.value = data;
         order_root.value = data;
-        console.log(orders.value)
+        // console.log(orders.value)
     }
 
     if (error) {
-        console.log(error)
+        // console.log(error)
     }
 };
 
@@ -232,7 +232,7 @@ const cancelOrderAxios = async (order_id) => {
     const { data, error } = await cancelOrder(accessToken, orderData, order_id);
 
     if (data) {
-        console.log(data);
+        // console.log(data);
         for (let i = 0; i < orders.value.length; i++) {
             if (orders.value[i].order_id == order_id) {
                 orders.value[i].status_name = "Huỷ bỏ";
@@ -242,7 +242,7 @@ const cancelOrderAxios = async (order_id) => {
     }
 
     if (error) {
-        console.log(error)
+        // console.log(error)
     }
 };
 
@@ -251,7 +251,7 @@ const deteleOrderAxios = async (order_id) => {
     const { data, error } = await deteleOrder(accessToken, order_id);
 
     if (data) {
-        console.log(data);
+        // console.log(data);
         let tempOrders = orders.value;
         let tempOrder_root = order_root.value;
         orders.value = [];
@@ -270,7 +270,7 @@ const deteleOrderAxios = async (order_id) => {
     }
 
     if (error) {
-        console.log(error)
+        // console.log(error)
     }
 };
 
@@ -286,21 +286,11 @@ const getUserByEmailAxios = async (user) => {
 
     if (data) {
         user_id.value = data.id;
-        console.log(data);
-        console.log(user_id.value);
         getOrdersByUserIdAxios(data.id)
-    } else {
-        const { data, error } = await createUser(accessToken, userData);
-        if (data) {
-            user_id.value = data.id;
-            console.log(data);
-            console.log(user_id.value);
-            getOrdersByUserIdAxios(data.id)
-        }
-    }
-
+        // console.log(data);
+    } 
     if (error) {
-        console.log(error.message);
+        // console.log(error.message);
     }
 };
 

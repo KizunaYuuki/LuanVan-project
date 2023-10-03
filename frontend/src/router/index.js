@@ -117,6 +117,14 @@ const router = createRouter({
             }
         },
         {
+            path: '/A',
+            name: 'A',
+            component: () => import('../views/paypay.vue'),
+            meta: {
+                title: "test",
+            }
+        },
+        {
             path: '/management',
             name: 'Home Page - Management',
             component: () => import('../views/manage/HomeView.vue'),

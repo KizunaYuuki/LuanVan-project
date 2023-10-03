@@ -372,7 +372,7 @@
                                                         <span class="sr-only">Truy cập</span>
                                                     </RouterLink>
                                                 </div>
-                                                <div class="float-right">
+                                                <div class="flex items-center mr-2">
                                                     <button @click="service.append = !service.append">
                                                         <svg focusable="false" width="24" height="24" viewBox="0 0 24 24"
                                                             class="fill-current text-[#0096fa]">
