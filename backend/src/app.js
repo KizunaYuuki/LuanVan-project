@@ -18,6 +18,7 @@ const { packagesRouter } = require("./routes/packages.router.js");
 const { reviewsRouter } = require("./routes/reviews.router.js");
 const { cartsRouter } = require("./routes/carts.router.js");
 const { locationsRouter } = require("./routes/locations.router.js");
+const axios = require('axios');
 
 const { errorHandler } = require("./middleware/error.middleware");
 const { notFoundHandler } = require("./middleware/not-found.middleware");
@@ -77,6 +78,12 @@ app.use(
 app.get('/', cors(), (req, res) => {
     res.send('Hello World!')
 })
+
+// Lấy dữ liệu chuyển đổi USD/VND từ Google Finance 
+app.get('/google-finance', async (req, res) => {
+    const { data } = await axios.get('https://www.google.com/finance/quote/USD-VND?hl=vi');
+    res.send(data);
+});
 
 // Thông tin về tỉnh vùng miền của Việt Nam để tính giá dịch vụ theo bảng giá của nhà cung cấp
 app.get("/address", async (req, res) => {
