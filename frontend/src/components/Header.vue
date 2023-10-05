@@ -1,63 +1,24 @@
 <template>
-    <header class="bg-white z-[9998]">
+    <header class="bg-[#f5f5f7] z-[9998]">
         <!-- PC -->
-        <nav class="mx-auto flex max-w-[1280px] items-center justify-between p-[16px] lg:px-[32px]" aria-label="Global">
+        <nav class="mx-auto flex max-w-6xl items-center justify-between py-[4px]" aria-label="Global">
             <div class="flex lg:flex-1">
                 <RouterLink to="/"
-                    class="min-[1024px]:-m-1.5 p-1.5 text-[1.25rem] font-[700] tracking-[.125rem] text-[#0097f9] subpixel-antialiased hover:underline hover:underline-offset-[2px]">
+                    class="lg:p-0 p-[10px] text-[1.25rem] font-[700] tracking-[.125rem] text-[#0096fa] subpixel-antialiased hover:underline hover:underline-offset-[2px]">
                     BestChoice
                 </RouterLink>
             </div>
             <div class="flex lg:hidden">
-                <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                <button type="button" class="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
                     @click="mobileMenuOpen = true">
                     <span class="sr-only">Open main menu</span>
                     <Bars3Icon class="h-6 w-6" aria-hidden="true" />
                 </button>
             </div>
             <PopoverGroup class="hidden lg:flex lg:gap-x-12 items-center">
-                <Popover class="relative hidden">
-                    <PopoverButton class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
-                        Product
-                        <ChevronDownIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
-                    </PopoverButton>
-
-                    <transition enter-active-class="transition ease-out duration-200"
-                        enter-from-class="opacity-0 translate-y-1" enter-to-class="opacity-100 translate-y-0"
-                        leave-active-class="transition ease-in duration-150" leave-from-class="opacity-100 translate-y-0"
-                        leave-to-class="opacity-0 translate-y-1">
-                        <PopoverPanel
-                            class="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
-                            <div class="p-4">
-                                <div v-for="item in products" :key="item.name"
-                                    class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">
-                                    <div
-                                        class="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                                        <component :is="item.icon" class="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
-                                            aria-hidden="true" />
-                                    </div>
-                                    <div class="flex-auto">
-                                        <a :href="item.href" class="block font-semibold text-gray-900">
-                                            {{ item.name }}
-                                            <span class="absolute inset-0" />
-                                        </a>
-                                        <p class="mt-1 text-gray-600">{{ item.description }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-                                <a v-for="item in callsToAction" :key="item.name" :href="item.href"
-                                    class="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100">
-                                    <component :is="item.icon" class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
-                                    {{ item.name }}
-                                </a>
-                            </div>
-                        </PopoverPanel>
-                    </transition>
-                </Popover>
-                <RouterLink to="/profile" class="text-sm font-semibold leading-6 text-gray-900"
+                <RouterLink to="/profile" class="text-[.95rem] font-semibold leading-6 text-[#0096fa]"
                     title="Quản lý đơn hàng của bạn">Thông tin tài khoản</RouterLink>
-                <RouterLink to="/track" class="text-sm font-semibold leading-6 text-gray-900"
+                <RouterLink to="/track" class="text-[.94rem] font-semibold leading-6 text-[#0096fa]"
                     title="Quản lý đơn hàng của bạn">Theo dõi đơn hàng</RouterLink>
             </PopoverGroup>
             <div class="hidden lg:flex lg:flex-1 lg:justify-end">
@@ -68,7 +29,7 @@
                 <template v-if="isAuthenticated">
                     <!-- Cart -->
                     <button @click="cartOpen = true"
-                        class="group -m-2 flex items-center p-2 mr-[4px] hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
+                        class="group flex items-center p-2 mr-[4px] hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
                         <svg class="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" fill="none"
                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -90,11 +51,11 @@
                 class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                 <div class="flex items-center justify-between">
                     <RouterLink to="/"
-                        class="-m-1.5 p-1.5 text-[1rem] text-[#0097f9] subpixel-antialiased hover:underline hover:underline-offset-[2px]">
+                        class="p-1.5 text-[1rem] text-[#0097f9] subpixel-antialiased hover:underline hover:underline-offset-[2px]">
                         <span class="sr-only">Freight service</span>
                         Freight service
                     </RouterLink>
-                    <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = false">
+                    <button type="button" class="rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = false">
                         <span class="sr-only">Close menu</span>
                         <XMarkIcon class="h-6 w-6" aria-hidden="true" />
                     </button>
@@ -102,25 +63,11 @@
                 <div class="mt-6 flow-root">
                     <div class="-my-6 divide-y divide-gray-500/10">
                         <div class="space-y-2 py-6">
-                            <Disclosure as="div" class="-mx-3" v-slot="{ open }">
-                                <DisclosureButton
-                                    class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                                    Product
-                                    <ChevronDownIcon :class="[open ? 'rotate-180' : '', 'h-5 w-5 flex-none']"
-                                        aria-hidden="true" />
-                                </DisclosureButton>
-                                <DisclosurePanel class="mt-2 space-y-2">
-                                    <DisclosureButton v-for="item in [...products, ...callsToAction]" :key="item.name"
-                                        as="a" :href="item.href"
-                                        class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                                        {{ item.name }}</DisclosureButton>
-                                </DisclosurePanel>
-                            </Disclosure>
                             <RouterLink to="/profile"
                                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                 title="Thông tin tài khoản">Thông tin tài khoản</RouterLink>
                             <RouterLink to="/track"
-                                class="t-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                 title="Theo dõi đơn hàng">Theo dõi đơn hàng</RouterLink>
                             <template v-if="isAuthenticated">
                                 <button @click="cartOpen = true"
@@ -170,7 +117,7 @@
                                             </DialogTitle>
                                             <div class="ml-3 flex h-7 items-center">
                                                 <button type="button"
-                                                    class="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
+                                                    class="relative p-2 text-gray-400 hover:text-gray-500"
                                                     @click="cartOpen = false">
                                                     <span class="absolute -inset-0.5" />
                                                     <span class="sr-only">Close panel</span>

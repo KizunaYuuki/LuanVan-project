@@ -29,7 +29,7 @@
         </div> -->
 
         <!-- Vận chuyển trong nước -->
-        <div class="bg-[#0096fa0d] py-6 hover:scale-[1.01] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
+        <!-- <div class="bg-[#0096fa0d] py-6 hover:scale-[1.01] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
             <h2 class="text-[24px] text-[#202124] font-[500] text-center mb-[16px]">Những dịch vụ vận chuyển hàng hoá phổ
                 biến - Trong nước</h2>
             <section class="flex flex-wrap content-center justify-center items-center">
@@ -38,7 +38,7 @@
                 <domesticCard></domesticCard>
                 <domesticCard></domesticCard>
             </section>
-        </div>
+        </div> -->
 
         <!-- Đăng ký dịch vụ -->
         <!-- <div class="py-6 bg-[#FFF7F5]">
@@ -54,10 +54,12 @@
         <div class="min-h-[80vh]">
 
             <!-- Input -->
-            <div class="m-[16px] flex justify-between flex-wrap max-w-5xl mx-auto">
+            <div
+                class="bg-[#e8f0fe] p-4 m-[16px] flex justify-between flex-wrap max-w-5xl mx-auto text-[#06c] rounded-lg">
 
                 <!-- Gửi từ -->
                 <div>
+                    <span>Gửi từ</span>
                     <!-- Tỉnh -->
                     <div class="relative rounded-md shadow-sm h-[56px] ml-0 my-[8px]">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center ml-3">
@@ -70,9 +72,9 @@
                                 </svg>
                             </span>
                         </div>
-                        <input type="text"
-                            class="font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
-                            placeholder="" value="Hồ Chí Minh" />
+                        <input v-model="filter.province_from" type="text"
+                            class="hover:border-[#9aa0a6] font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-[#d2e3fc] outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
+                            placeholder="Tỉnh/Thành Phố" />
                     </div>
 
                     <!-- Huyện -->
@@ -87,17 +89,18 @@
                                 </svg>
                             </span>
                         </div>
-                        <input type="text"
-                            class="font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
-                            placeholder="" value="Quận 1" />
+                        <input v-model="filter.district_from" type="text"
+                            class="hover:border-[#9aa0a6] font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-[#d2e3fc] outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
+                            placeholder="Quận/Huyện" />
                     </div>
                 </div>
 
 
                 <!-- Gửi đến -->
                 <div>
+                    <span>Gửi đến</span>
                     <!-- Tỉnh -->
-                    <div class="relative rounded-md shadow-sm h-[56px] lg:ml-[8px] ml-0 my-[8px]">
+                    <div class="relative rounded-md shadow-sm h-[56px] ml-0 my-[8px]">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <span class="text-gray-500 sm:text-sm">
                                 <svg width="24" height="24" viewBox="0 0 24 24" focusable="false"
@@ -109,13 +112,13 @@
                                 </svg>
                             </span>
                         </div>
-                        <input type="text"
-                            class="font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
-                            placeholder="" value="Hậu giang" />
+                        <input v-model="filter.province_to" type="text"
+                            class="hover:border-[#9aa0a6] font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-[#d2e3fc] outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
+                            placeholder="Tỉnh/Thành Phố" />
                     </div>
 
                     <!-- Huyện -->
-                    <div class="relative rounded-md shadow-sm h-[44px] lg:ml-[8px] ml-0 my-[8px]">
+                    <div class="relative rounded-md shadow-sm h-[44px] ml-0 my-[8px]">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <span class="text-gray-500 sm:text-sm">
                                 <svg width="24" height="24" viewBox="0 0 24 24" focusable="false"
@@ -127,16 +130,17 @@
                                 </svg>
                             </span>
                         </div>
-                        <input type="text"
-                            class="font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
-                            placeholder="" value="Phụng hiệp" />
+                        <input v-model="filter.district_to" type="text"
+                            class="hover:border-[#9aa0a6] font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-[#d2e3fc] outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
+                            placeholder="Quận/Huyện" />
                     </div>
                 </div>
 
 
                 <!-- Loại dịch vụ và Khối lượng lô hàng -->
                 <div>
-                    <div class="relative rounded-md shadow-sm h-[56px] lg:ml-[8px] ml-0 my-[8px]">
+                    <span>Trọng lượng</span>
+                    <!-- <div class="relative rounded-md shadow-sm h-[56px] lg:ml-[8px] ml-0 my-[8px]">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <span class="pointer-events-none">
                                 <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -145,8 +149,8 @@
                         <input type="text"
                             class="font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
                             placeholder="" value="Vận chuyển nhanh" />
-                    </div>
-                    <div class="relative rounded-md shadow-sm h-[44px] lg:ml-[8px] ml-0 my-[8px]">
+                    </div> -->
+                    <div class="relative rounded-md shadow-sm h-[56px] ml-0 my-[8px]">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <span class="text-gray-500 sm:text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false"
@@ -156,15 +160,15 @@
                                 </svg>
                             </span>
                         </div>
-                        <input type="text"
-                            class="font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
-                            placeholder="" value="2000" />
+                        <input v-model="filter.weight" type="number"
+                            class="hover:border-[#9aa0a6] placeholder:text-[#d2e3fc] font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
+                            placeholder="Trọng lượng gói hàng (Kg)" />
                     </div>
                 </div>
             </div>
 
             <!-- Filters -->
-            <div class="m-[16px] flex justify-start mx-auto max-w-5xl">
+            <div class="bg-[#fbfbfd] rounded-lg m-[16px] flex justify-start mx-auto max-w-5xl">
                 <div class="relative rounded-[16px] shadow-sm hover:text-[#1a73e8] bg-[white]">
                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                         <span class="sm:text-sm">
@@ -200,15 +204,14 @@
                             leave-to-class="opacity-0">
                             <ListboxOptions
                                 class="absolute z-10 mt-1 max-h-56 w-max overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                <ListboxOption as="template" v-for="person in priceFilter" :key="person.id" :value="person"
-                                    v-slot="{ active, selected }">
-                                    <li
+                                <ListboxOption as="template" v-for="priceFilter in priceFilters" :key="priceFilter.id"
+                                    :value="priceFilter" v-slot="{ active, selected }">
+                                    <li @click="priceFilterHandle(priceFilter)"
                                         :class="[active ? 'bg-indigo-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pr-9']">
                                         <div class="flex items-center">
-                                            <!-- <img :src="person.avatar" alt="" class="h-5 w-5 flex-shrink-0 rounded-full" /> -->
                                             <span
                                                 :class="[selected ? 'font-semibold' : 'font-normal', 'ml-3 block truncate']">{{
-                                                    person.name }}</span>
+                                                    priceFilter.name }}</span>
                                         </div>
 
                                         <span v-if="selected"
@@ -223,13 +226,11 @@
                 </Listbox>
 
                 <!-- time filter -->
-                <Listbox as="div" v-model="timeSelected" class="w-max ml-[8px]">
-                    <!-- <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">Assigned to</ListboxLabel> -->
+                <!-- <Listbox as="div" v-model="timeSelected" class="w-max ml-[8px]">
                     <div class="relative">
                         <ListboxButton
                             class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
                             <span class="flex items-center">
-                                <!-- <img :src="selected.avatar" alt="" class="h-5 w-5 flex-shrink-0 rounded-full" /> -->
                                 <span class="block truncate">{{ timeSelected.name }}</span>
                             </span>
                             <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
@@ -246,7 +247,6 @@
                                     <li
                                         :class="[active ? 'bg-indigo-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pr-9']">
                                         <div class="flex items-center">
-                                            <!-- <img :src="person.avatar" alt="" class="h-5 w-5 flex-shrink-0 rounded-full" /> -->
                                             <span
                                                 :class="[selected ? 'font-semibold' : 'font-normal', 'ml-3 block truncate']">{{
                                                     person.name }}</span>
@@ -261,13 +261,13 @@
                             </ListboxOptions>
                         </transition>
                     </div>
-                </Listbox>
+                </Listbox> -->
             </div>
 
             <!-- Content - Dich vụ lọc được -->
             <div class="mx-auto max-w-5xl">
                 <div
-                    class="flex items-baseline lg:justify-between justify-end border-b border-gray-200 pb-6 pt-[24px] bg-[white] px-[8px] rounded-[4px]">
+                    class="bg-[#f2f2f2] flex items-baseline lg:justify-between justify-end border-b border-gray-200 pb-6 pt-[24px] bg-[white] px-[8px] rounded-[4px]">
                     <h1 class="text-xl font-bold tracking-tight text-gray-900 hidden md:block">Vận chuyển hàng hoá</h1>
 
                     <div class="flex items-center">
@@ -291,10 +291,29 @@
                                 <MenuItems
                                     class="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <div class="py-1">
-                                        <MenuItem v-for="option in sortOptions" :key="option.name" v-slot="{ active }">
-                                        <a :href="option.href"
-                                            :class="[option.current ? 'font-medium text-gray-900' : 'text-gray-500', active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm']">{{
-                                                option.name }}</a>
+                                        <MenuItem v-slot="{ active }">
+                                        <button @click="bestRatingfilter()"
+                                            :class="[true ? 'font-medium text-gray-900' : 'text-gray-500', active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm']">
+                                            Đánh giá tốt nhất
+                                        </button>
+                                        </MenuItem>
+                                        <MenuItem v-slot="{ active }">
+                                        <button @click="newestfilter()"
+                                            :class="[true ? 'font-medium text-gray-900' : 'text-gray-500', active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm']">
+                                            Mới nhất
+                                        </button>
+                                        </MenuItem>
+                                        <MenuItem v-slot="{ active }">
+                                        <button @click="priceLowToHighfilter()"
+                                            :class="[true ? 'font-medium text-gray-900' : 'text-gray-500', active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm']">
+                                            Giá: Thấp đến cao
+                                        </button>
+                                        </MenuItem>
+                                        <MenuItem v-slot="{ active }">
+                                        <button @click="priceHighToLowfilter()"
+                                            :class="[true ? 'font-medium text-gray-900' : 'text-gray-500', active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm']">
+                                            Giá: Cao đến thấp
+                                        </button>
                                         </MenuItem>
                                     </div>
                                 </MenuItems>
@@ -313,31 +332,37 @@
                                 <thead>
                                     <tr class="">
                                         <th scope="col"
-                                            class="text-[#70757a] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                            Nhà cung cấp dịch vụ</th>
+                                            class="text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            Nhà cung cấp</th>
                                         <th scope="col"
-                                            class="text-[#70757a] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            class="text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                             Tên dịch vụ</th>
                                         <th scope="col"
-                                            class="text-[#70757a] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            class="text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                             Thời gian vận chuyển</th>
                                         <th scope="col"
-                                            class="text-[#111827] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            class="text-[#111827] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                             Trọng lượng</th>
                                         <th scope="col"
-                                            class="text-[#111827] font-[600] text-[12px] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            class="text-[#111827] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                             Giá dịch vụ</th>
                                         <th scope="col"
-                                            class="text-[#70757a] font-[600] text-[12px] leading-[1.25rem] text-left pr-[1rem] py-[.875rem] relative">
+                                            class="text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left pr-[1rem] py-[.875rem] relative">
                                             <span class="sr-only">Xoá</span>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody class="">
                                     <template v-for="service in services" :key="service.service_id">
-                                        <tr v-if="service" class="mx-[4px] hover:shadow hover:bg-[#0096fa0d]">
+                                        <tr v-if="service &&
+                                            (removeVietnameseTones(service.province_from).toLowerCase()).includes(removeVietnameseTones(filter.province_from).toLowerCase()) &&
+                                            (removeVietnameseTones(service.district_from).toLowerCase()).includes(removeVietnameseTones(filter.district_from).toLowerCase()) &&
+                                            (removeVietnameseTones(service.province_to).toLowerCase()).includes(removeVietnameseTones(filter.province_to).toLowerCase()) &&
+                                            (removeVietnameseTones(service.district_to).toLowerCase()).includes(removeVietnameseTones(filter.district_to).toLowerCase()) &&
+                                            ((filter.weight === '') || (filter.weight && (filter.weight >= service.weight)))"
+                                            class="mx-[4px] hover:shadow hover:bg-[#0096fa0d]">
                                             <td
-                                                class="text-ellipsis border-[#dadce0] border-t px-[.75rem] text-[#111827] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
+                                                class="text-ellipsis border-[#dadce0] border-t px-[.75rem] text-[#111827] font-[500] text-[.95rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
                                                 <div class="flex items-center text-ellipsis">
                                                     <img :src="service.image" alt=""
                                                         class="h-5 w-5 flex-shrink-0 rounded-full bg-slate-400 mr-2" />
@@ -345,29 +370,29 @@
                                                 </div>
                                             </td>
                                             <td
-                                                class="text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                class="text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
                                                 {{ service.service_name }}</td>
                                             <td
-                                                class="text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                class="text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
                                                 {{ service.delivery_date }}</td>
                                             <td
-                                                class="text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                class="text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
                                                 {{ service.weight }} <span>kg</span></td>
-                                            <td
-                                                class="text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.875rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                            <td v-if="service?.price"
+                                                class="text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
                                                 {{ (service.price).toLocaleString('vi-VN', {
                                                     style: 'currency',
                                                     currency: 'VND'
                                                 }) }}</td>
                                             <td
-                                                class="flex justify-between border-[#dadce0] border-t min-[640px]:pr-0 font-[500] text-[.875rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative">
+                                                class="flex justify-between border-[#dadce0] border-t min-[640px]:pr-0 font-[500] text-[.95rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative">
                                                 <div class="float-left">
                                                     <RouterLink :to="{
                                                         name: 'Service Details',
                                                         params: { id: service.service_id },
                                                     }" class="text-[#0096fa] inherit py-[17px] hover:text-[#0060fa]">
                                                         <div
-                                                            class="bg-[#e8f0fe] box-border rounded-[8px] inline-block text-[12px] leading-[20px] py-[6px] px-[10px] text-center w-[124px]">
+                                                            class="bg-[#e8f0fe] box-border rounded-[8px] inline-block text-[14px] leading-[20px] p-[6px] text-center w-[80px]">
                                                             Truy cập</div>
                                                         <span class="sr-only">Truy cập</span>
                                                     </RouterLink>
@@ -385,31 +410,19 @@
                                             </td>
                                         </tr>
 
-                                        <tr v-if="service.append" class="mx-auto text-[12px]">
+                                        <tr v-if="service.append &&
+                                            (removeVietnameseTones(service.province_from).toLowerCase()).includes(removeVietnameseTones(filter.province_from).toLowerCase()) &&
+                                            (removeVietnameseTones(service.district_from).toLowerCase()).includes(removeVietnameseTones(filter.district_from).toLowerCase()) &&
+                                            (removeVietnameseTones(service.province_to).toLowerCase()).includes(removeVietnameseTones(filter.province_to).toLowerCase()) &&
+                                            (removeVietnameseTones(service.district_to).toLowerCase()).includes(removeVietnameseTones(filter.district_to).toLowerCase()) &&
+                                            ((filter.weight === '') || (filter.weight && (filter.weight >= service.weight)))"
+                                            class="mx-auto text-[14px]">
+                                            <td></td>
 
-                                            <td>
-                                                Từ Ha Noi
-                                                Đến Can Tho
-                                            </td>
-
-                                            <td class="px-[16px]" v-if="service?.totalCount">
-                                                <div>
-                                                    <div :data-tooltip="service.totalCount"
-                                                        class="tooltip text-[12px] text-[#757575] inline-flex items-center">
-                                                        <span class="mr-[4px]">{{
-                                                            (parseFloat(service.average_rate)).toLocaleString('vi-VN', {
-                                                                minimumFractionDigits: 1, // Số chữ số thập phân tối thiểu
-                                                                maximumFractionDigits: 1, // Số chữ số thập phân tối đa
-                                                            }) }}</span>
-                                                        <svg width="14" height="14" class="fill-current text-[#fbbc04]"
-                                                            data-testid="star-svg" preserveAspectRatio="none"
-                                                            viewBox="0 0 24 24">
-                                                            <path
-                                                                d="m12 20.6-5.86 3.23c-.7.38-1.57.1-1.94-.63-.15-.3-.2-.63-.14-.95l1.12-6.82L.43 10.6a1.55 1.55 0 0 1-.02-2.13c.22-.23.5-.39.82-.43l6.55-1 2.93-6.2a1.4 1.4 0 0 1 2.58 0l2.93 6.2 6.55 1a1.5 1.5 0 0 1 1.21 1.7c-.04.32-.19.63-.41.86l-4.75 4.83 1.12 6.82c.14.81-.39 1.59-1.17 1.73-.3.05-.63 0-.9-.15L12 20.6Z">
-                                                            </path>
-                                                        </svg>
-                                                    </div>
-                                                </div>
+                                            <td class="pl-[12px]">
+                                                <span>{{ service.district_from }} ,{{ service.province_from }}</span>
+                                                <div>Đến</div>
+                                                <span>{{ service.district_to }}, {{ service.province_to }}</span>
                                             </td>
 
                                             <td class="">
@@ -435,7 +448,25 @@
                                                     </span>
                                                 </button>
                                             </td>
-
+                                            <td class="px-[16px]" v-if="service?.totalCount">
+                                                <div>
+                                                    <div :data-tooltip="service.totalCount"
+                                                        class="tooltip text-[12px] text-[#757575] inline-flex items-center">
+                                                        <span class="mr-[4px]">{{
+                                                            (parseFloat(service.average_rate)).toLocaleString('vi-VN', {
+                                                                minimumFractionDigits: 1, // Số chữ số thập phân tối thiểu
+                                                                maximumFractionDigits: 1, // Số chữ số thập phân tối đa
+                                                            }) }}</span>
+                                                        <svg width="14" height="14" class="fill-current text-[#fbbc04]"
+                                                            data-testid="star-svg" preserveAspectRatio="none"
+                                                            viewBox="0 0 24 24">
+                                                            <path
+                                                                d="m12 20.6-5.86 3.23c-.7.38-1.57.1-1.94-.63-.15-.3-.2-.63-.14-.95l1.12-6.82L.43 10.6a1.55 1.55 0 0 1-.02-2.13c.22-.23.5-.39.82-.43l6.55-1 2.93-6.2a1.4 1.4 0 0 1 2.58 0l2.93 6.2 6.55 1a1.5 1.5 0 0 1 1.21 1.7c-.04.32-.19.63-.41.86l-4.75 4.83 1.12 6.82c.14.81-.39 1.59-1.17 1.73-.3.05-.63 0-.9-.15L12 20.6Z">
+                                                            </path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
                                     </template>
                                 </tbody>
@@ -449,8 +480,8 @@
 </template>
 
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import { ref } from "vue";
+import { RouterLink } from 'vue-router'
+import { ref, computed } from "vue";
 import {
     Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions, Dialog, DialogPanel, Disclosure, DisclosureButton, DisclosurePanel,
     Menu,
@@ -469,11 +500,6 @@ import banner from "../components/banner.vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 import Header from '../components/Header.vue';
 
-const { user } = useAuth0();
-
-const code = user ? JSON.stringify(user.value, null, 2) : "";
-console.log(user);
-
 const { pageview } = useGtag()
 const track = () => {
     pageview({ page_path: "/test" });
@@ -482,22 +508,59 @@ const track = () => {
 };
 track()
 
-const priceFilter = [
+// Khai bao bien
+const filter = ref({
+    province_from: '',
+    district_from: '',
+    province_to: '',
+    district_to: '',
+    weight: '',
+})
+
+const priceFilters = ref([
     {
         id: 1,
         name: 'Theo giá',
-        avatar:
-            'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        low: 0,
+        high: 0,
     },
     {
         id: 2,
-        name: '100000 - 200000 VND',
+        name: '0 - 20.000 VND',
+        low: 0,
+        high: 20000,
     },
     {
         id: 3,
-        name: '200000 - 300000 VND',
+        name: '20.000 - 50.000 VND',
+        low: 20000,
+        high: 50000,
+    },
+    {
+        id: 4,
+        name: '50.000 - 100.000 VND',
+        low: 50000,
+        high: 100000,
+    },
+    {
+        id: 4,
+        name: '100.000 - 200.000 VND',
+        low: 100000,
+        high: 200000,
+    },
+    {
+        id: 4,
+        name: '200.000 - 500.000 VND',
+        low: 200000,
+        high: 500000,
+    },
+    {
+        id: 4,
+        name: '> 1.000.000 VND',
+        low: 50000,
+        high: 1000000000,
     }
-]
+])
 
 const serivceTypeFilter = [
     {
@@ -533,7 +596,7 @@ const timeFilter = [
     }
 ]
 
-const priceSelected = ref(priceFilter[0])
+const priceSelected = ref(priceFilters.value[0])
 const timeSelected = ref(timeFilter[0])
 
 
@@ -546,18 +609,95 @@ const sortOptions = [
 ]
 
 
-import { getServices, createService, updateService, deteleService, getServiceById } from "@/services/service.service";
+import { getServices, createService, updateService, deteleService, getServiceById, getInfoReviews } from "@/services/service.service";
 
 const services = ref("");
+const rootServices = ref("");
+
+// function
+const priceFilterHandle = async (selected) => {
+    if(selected.name === priceFilters.value[0].name) {
+        console.log('2');
+        services.value = rootServices.value;
+        console.log(rootServices);
+        return;
+    }
+    services.value = [];
+    for (let i = 0; priceFilters.value.length > i; i++) {
+        if (selected.name === priceFilters.value[i].name) {
+            for (let j = 0; rootServices.value.length > j; j++) {
+                if ((rootServices.value[j].price >= priceFilters.value[i].low) && (rootServices.value[j].price <= priceFilters.value[i].high)) {
+                    services.value.push(rootServices.value[j]);
+                    console.log(priceFilters.value[i].high);
+                }
+            }
+        }
+    }
+};
+const mostPopularfilter = async () => {
+
+};
+
+const bestRatingfilter = async () => {
+    services.value = services.value.toSorted((a, b) => b.average_rate - a.average_rate);
+};
+
+const newestfilter = async () => {
+    services.value = rootServices.value;
+};
+
+const priceLowToHighfilter = async () => {
+    services.value = services.value.toSorted((a, b) => a.price - b.price);
+};
+
+const priceHighToLowfilter = async () => {
+    services.value = services.value.toSorted((a, b) => b.price - a.price);
+};
+
+function removeVietnameseTones(str) {
+    str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+    str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+    str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+    str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+    str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+    str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+    str = str.replace(/đ/g, "d");
+    str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+    str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+    str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+    str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+    str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+    str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+    str = str.replace(/Đ/g, "D");
+    // Some system encode vietnamese combining accent as individual utf-8 characters
+    // Một vài bộ encode coi các dấu mũ, dấu chữ như một kí tự riêng biệt nên thêm hai dòng này
+    str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, ""); // ̀ ́ ̃ ̉ ̣  huyền, sắc, ngã, hỏi, nặng
+    str = str.replace(/\u02C6|\u0306|\u031B/g, ""); // ˆ ̆ ̛  Â, Ê, Ă, Ơ, Ư
+    // Remove extra spaces
+    // Bỏ các khoảng trắng liền nhau
+    str = str.replace(/ + /g, " ");
+    str = str.trim();
+    // Remove punctuations
+    // Bỏ dấu câu, kí tự đặc biệt
+    str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, " ");
+    return str;
+}
 
 const getServicesAxios = async () => {
     const { data, error } = await getServices();
 
     if (data) {
         services.value = data;
-        for (let i = 0; services.value.length > i; i++) {
-            services.value[0].append = false;
+        for (let i = 0; data.length > i; i++) {
+            services.value[i].append = false;
         }
+
+        // Tao services root
+        rootServices.value = data;
+        for (let i = 0; data.length > i; i++) {
+            rootServices.value[i].append = false;
+        }
+        getInfoReviewsAxios();
     }
 
     if (error) {
@@ -567,6 +707,31 @@ const getServicesAxios = async () => {
 };
 
 getServicesAxios();
+
+const getInfoReviewsAxios = async () => {
+    const { data, error } = await getInfoReviews();
+
+    if (data) {
+        console.log(data);
+        for (let i = 0; services.value.length > i; i++) {
+            for (let j = 0; data.length > j; j++) {
+                if (services.value[i].service_id === data[j].service_id) {
+                    services.value[i].average_rate = data[j].average_rate;
+                    services.value[i].totalCount = data[j].totalCount;
+
+                    // Tao services root
+                    rootServices.value[i].average_rate = data[j].average_rate;
+                    rootServices.value[i].totalCount = data[j].totalCount;
+                }
+            }
+        }
+        console.log(services.value);
+    }
+
+    if (error) {
+        services.value = JSON.stringify(error, null, 2);
+    }
+};
 
 const testService = {
     "service_type_id": "1",
@@ -647,7 +812,7 @@ const service_id = 1
 // getServiceAxios()
 </script>
 
-<style scoped>
+<style>
 .tooltip {
     position: relative;
 }
@@ -691,5 +856,12 @@ const service_id = 1
     border: var(--arrow-size) solid transparent;
     border-top-color: var(--tooltip-color);
     transform-origin: top center;
+}
+
+/* Chrome, Safari, Edge, Opera - Khoá spin trên input, type number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 </style>

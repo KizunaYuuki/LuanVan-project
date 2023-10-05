@@ -19,6 +19,23 @@ export const getServices = async () => {
     };
 };
 
+export const getInfoReviews = async () => {
+    const config = {
+        url: `${apiServerUrl}/api/service/reviews-info`,
+        method: "GET",
+        headers: {
+            "content-type": "application/json",
+        },
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
+
 export const getServiceById = async (service_id) => {
     const config = {
         url: `${apiServerUrl}/api/service/${service_id}`,
