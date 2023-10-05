@@ -1,15 +1,14 @@
 <template>
     <Header></Header>
-
     <main>
-        <section class="flex flex-col max-w-[calc(1280px-64px)] mx-auto my-[16px] min-h-[calc(100vh)] min-[1280px]:px-0">
+        <section class="flex flex-col max-w-[calc(1040px)] mx-auto my-[16px] min-h-[calc(100vh)] min-[1280px]:px-0">
             <div class="bg-gray-50 rounded-lg">
                 <!-- Form Đăng ký dịch vụ -->
                 <form class="max-w-5xl min-[1024px]:py-[64px] py-[16px] mx-auto">
                     <!-- Buoc 1 Dien Thong tin -->
                     <div v-if="fillInformStep" class="">
                         <!-- Nav Steps - Thông tin dịch vụ -->
-                        <div class="bg-[#fff] rounded-[0.375rem] min-[1024px]:block hidden sticky top-0">
+                        <div class="bg-[#fff] rounded-[0.375rem] min-[1024px]:block hidden sticky top-0 z-[101]">
                             <div class="mx-auto">
                                 <nav aria-label="Progress">
                                     <ol role="list"
@@ -374,7 +373,7 @@
                     <!-- Buoc 2 Thanh toán -->
                     <div v-if="paymentStep" class="">
                         <!-- Nav Steps - Thanh toán -->
-                        <div class="bg-[#fff] rounded-[0.375rem] min-[1024px]:block hidden sticky top-0">
+                        <div class="bg-[#fff] rounded-[0.375rem] min-[1024px]:block hidden sticky top-0 z-[101]">
                             <div class="mx-auto">
                                 <nav aria-label="Progress">
                                     <ol role="list"
@@ -450,7 +449,8 @@
 
                                     <!-- Thanh toán -->
                                     <div class="border-b border-gray-900/10 pb-12 w-[calc(1024px-396px)] mx-auto">
-                                        <h2 class="text-base font-semibold leading-7 text-gray-900">Thanh toán</h2>
+                                        <h2 class="text-base font-semibold leading-7 text-gray-900">Chọn Phương thức Thanh
+                                            toán</h2>
                                         <p class="mt-1 text-sm leading-6 text-gray-600">Có hai phương thức là tiền mặt hoặc
                                             thông qua PayPal</p>
                                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -474,7 +474,7 @@
                                                         </div>
                                                     </label>
 
-                                                    <label for="paypal"
+                                                    <label for="payment-paypal"
                                                         class="text-[14px] min-[768px]:ml-[16px] min-[768px]:mt-0 mt-[16px] flex w-[268px] cursor-pointer p-[16px] border-[1px] hover:ring-4 hover:border-[#0096fa] border-[#d1d5db] rounded-[4px]">
                                                         <div>
                                                             <span class="text-[#111827]">Paypal</span>
@@ -486,7 +486,7 @@
                                                         <div>
                                                             <input v-model="order.payment_id" :value=2
                                                                 class="w-[18px] h-[18px]" type="radio" name="pay"
-                                                                id="paypal">
+                                                                id="payment-paypal">
                                                         </div>
                                                     </label>
                                                 </div>
@@ -497,11 +497,26 @@
                                                     <h1>Bạn đã chọn thành toán bằng <span class="text-[#0096fa]">Tiền
                                                             mặt</span>, Click Đăng ký để hoàn thành đăng ký dịch vụ.</h1>
                                                 </div>
-                                                <div v-if="order.payment_id === 2" class="flex justify-center">
+                                                <div v-if="order.payment_id === 2" class="flex justify-center z-1">
                                                     <h1>Một bước nữa thôi, thanh toán bằng <span
                                                             class="text-[#0096fa]">Paypal</span> để
                                                         hoàn thành đăng ký dịch
                                                         vụ.</h1>
+
+                                                </div>
+                                                <div v-if="order.payment_id === 2"
+                                                    class="p-8 flex items-center justify-center">
+                                                    <div v-if="USDToVND && service">
+                                                        <div v-if="!paidFor">
+                                                            <h1>Buy this Lamp - ${{ service.price }} OBO</h1>
+                                                        </div>
+
+                                                        <div v-if="paidFor">
+                                                            <h1>Noice, you bought a beautiful lamp!</h1>
+                                                        </div>
+
+                                                        <div v-if="USDToVND" style="width: 500px" ref="paypal"></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -509,14 +524,13 @@
                                 </div>
 
                                 <!-- Button -->
-                                <div @click="createOrderAxios(order)" v-if="order.payment_id !== '2'" class="py-4">
+                                <div v-if="order.payment_id === 1" class="py-4">
                                     <div class="space-y-12 mx-auto max-w-2xl">
                                         <div class="mt-6 flex items-center justify-end gap-x-6">
                                             <button @click="fillInformStep = !fillInformStep, paymentStep = !paymentStep"
                                                 type="button" class="text-sm font-semibold leading-6 text-gray-900">Trở
                                                 lại</button>
-                                            <button @click="completeStep = !completeStep, paymentStep = !paymentStep"
-                                                type="button"
+                                            <button @click="createOrderAxios(order)" type="button"
                                                 class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Đăng
                                                 ký</button>
                                         </div>
@@ -556,7 +570,16 @@
                                             {
                                                 style: 'currency',
                                                 currency: 'VND'
-                                            }) }}</span>
+                                            }) }}
+                                        <span v-if="changedPrice" class="font-[500]">
+                                            ~ {{
+                                                (parseFloat(changedPrice)).toLocaleString('en-US',
+                                                    {
+                                                        style: 'currency',
+                                                        currency: 'USD'
+                                                    }) }}
+                                        </span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -565,7 +588,7 @@
                     <!-- Buoc 3 Hoàn thành - Xem lại thông tin dịch vụ vừa mới đăng ký -->
                     <div v-if="completeStep" class="">
                         <!-- Nav Steps - Hoàn thành -->
-                        <div class="bg-[#fff] rounded-[0.375rem] min-[1024px]:block hidden sticky top-0">
+                        <div class="bg-[#fff] rounded-[0.375rem] min-[1024px]:block hidden sticky top-0 z-[101]">
                             <div class="mx-auto">
                                 <nav aria-label="Progress">
                                     <ol role="list"
@@ -645,7 +668,7 @@
                             <div class="space-y-12 mx-auto max-w-2xl">
 
                                 <!-- Tieu de -->
-                                <div class="border-b border-gray-900/10 pb-12 bg-white p-4 rounded-lg">
+                                <div class="border-b border-gray-900/10 pb-12 bg-white p-[32px] rounded-lg">
                                     <h2 class="font-semibold leading-7 text-gray-900 text-[1.25rem]">Hoàn Thành</h2>
                                     <p class="mt-1 leading-6 text-gray-600">Đăng ký dịch vụ Thành công, bạn có thể
                                         xem lại thông tin dịch vụ đã đăng ký trước khi rời trang này</p>
@@ -655,16 +678,16 @@
                                         <div class="col-span-full text-[16px]">
 
                                             <div class="py-[4px] leading-loose">
-                                                    <h1 class="font-[600]">Thông tin dịch vụ</h1>
-                                                    <h1 v-if="service">Tên: <span
-                                                            class="font-500">{{ service.service_name }}</span>
-                                                    </h1>
-                                                </div>
+                                                <h1 class="font-[600]">Thông tin dịch vụ</h1>
+                                                <h1 v-if="service">Tên: <span class="font-500">{{ service.service_name
+                                                }}</span>
+                                                </h1>
+                                            </div>
 
                                             <div class="py-[4px] leading-loose">
                                                 <h1 class="font-[600]">Thông tin cá nhân</h1>
-                                                <h1 v-if="orderResutl.user_name">Tên: <span
-                                                        class="font-500">{{ orderResutl.user_name }}</span>
+                                                <h1 v-if="orderResutl.user_name">Tên: <span class="font-500">{{
+                                                    orderResutl.user_name }}</span>
                                                 </h1>
                                                 <h1>Địa chỉ Email: <span class="font-500">{{
                                                     orderResutl.email }}</span></h1>
@@ -674,17 +697,18 @@
                                             </div>
 
                                             <div class="py-[4px] leading-loose">
-                                                    <h1 class="font-[600]">Thông tin Gói hàng</h1>
-                                                    <h1 v-if="packageResutl">Trọng lượng gói hàng: <span
-                                                            class="font-500">{{ packageResutl.weight }} (Gram)</span>
-                                                    </h1>
-                                                </div>
+                                                <h1 class="font-[600]">Thông tin Gói hàng</h1>
+                                                <h1 v-if="packageResutl">Trọng lượng gói hàng: <span class="font-500">{{
+                                                    packageResutl.weight }} (Gram)</span>
+                                                </h1>
+                                            </div>
 
-                                            <div class="py-[4px] leading-loose">
+                                            <div v-if="addressFromResutl && addressToResutl" class="py-[4px] leading-loose">
                                                 <h1 class="font-[600]">Địa chỉ</h1>
                                                 <h1>Lô hàng được gửi từ:
                                                     <span class="font-500">{{ addressFromResutl.ward }}, {{
-                                                        addressFromResutl.district }}, {{ addressFromResutl.province }}.</span>
+                                                        addressFromResutl.district }}, {{ addressFromResutl.province
+    }}.</span>
                                                 </h1>
                                                 <h1>Lô hàng được gửi đến:
                                                     <span class="font-500">{{ addressToResutl.ward }}, {{
@@ -694,7 +718,8 @@
 
                                             <div class="py-[4px] leading-loose">
                                                 <h1 class="font-[600]">Phương thức thanh toán:
-                                                    <span v-if="orderResutl.payment_id === 1" class="font-500">Tiền mặt</span>
+                                                    <span v-if="orderResutl.payment_id === 1" class="font-500">Tiền
+                                                        mặt</span>
                                                     <span v-if="orderResutl.payment_id === 2" class="font-500">Paypal</span>
                                                 </h1>
                                             </div>
@@ -743,6 +768,7 @@ import { onMounted, ref } from "vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 import Header from '../components/Header.vue';
 import { RouterLink, RouterView } from 'vue-router'
+import axios from 'axios';
 
 import { getUserByEmail, createUser } from "@/services/user.service";
 import { createOrder } from "@/services/order.service";
@@ -770,6 +796,12 @@ const addressFromResutl = ref();
 const addressToResutl = ref();
 const packageResutl = ref();
 const isValidationError = ref(false);
+
+const paypal = ref();
+const USDToVND = ref();
+const paidFor = ref(false);
+const loaded = ref(false);
+const changedPrice = ref();
 
 const order = ref(
     {
@@ -857,15 +889,7 @@ const getUserByEmailAxios = async (user) => {
         user_id.value = data.id;
         console.log(data);
         console.log(user_id.value);
-    } else {
-        const { data, error } = await createUser(accessToken, userData);
-        if (data) {
-            user_id.value = data.id;
-            console.log(data);
-            console.log(user_id.value);
-        }
-    }
-
+    } 
     if (error) {
         console.log(error.message);
     }
@@ -901,6 +925,7 @@ const createOrderAxios = async (orderData) => {
     if (error) {
         console.log(error);
     }
+    completeStep.value = !completeStep.value, paymentStep.value = !paymentStep.value;
 };
 
 const createAddressFromAxios = async () => {
@@ -956,6 +981,84 @@ const stepTwo = async () => {
         paymentStep.value = !paymentStep.value;
         fillInformStep.value = !fillInformStep.value;
     }
+
+    // Tải button Paypal
+    if (paymentStep.value === true) {
+        await axios
+            .get(`http://localhost:6060/google-finance`, {
+                // withCredentials: true
+            })
+            .then((response) => {
+                const data = response.data;
+                const exchangeRateRegex = /<div class="YMlKec fxKbKc">([\d.,]+)<\/div>/;
+                const exchangeRateMatch = data.match(exchangeRateRegex);
+                if (exchangeRateMatch) {
+                    const exchangeRate = exchangeRateMatch[1];
+                    USDToVND.value = parseFloat(exchangeRate, 10) * 1000;
+                }
+            })
+        console.log(USDToVND.value);
+
+        const script = document.createElement('script');
+        script.setAttribute("data-namespace", "paypal_sdk");
+        script.src =
+            "https://www.paypal.com/sdk/js?client-id=Af1NckO7mVTPI_VUoRGDxRhWQKwxkvFrbISLch5alNr06SslxwxiorKzaHNIxg8qGdPvwcWk6_-eerwW";
+        script.addEventListener('load', () => {
+            loaded.value = true;
+            let price = parseFloat(service.value.price / USDToVND.value).toFixed(2);
+            changedPrice.value = price
+            paypal_sdk
+                .Buttons({
+                    style: {
+                        // layout: 'horizontal',
+                        color: 'blue',
+                        shape: 'rect',
+                        size: 'responsive',
+                        label: 'checkout',
+                        tagline: false,
+                    },
+                    createOrder: (data, actions) => {
+                        return actions.order.create({
+                            purchase_units: [
+                                {
+                                    // items: [{
+                                    //     name: 'Tên dịch vụ',
+                                    //     description: "Mô tả",
+                                    //     quantity: 1,
+                                    //     unit_amount: {
+                                    //         currency_code: "USD",
+                                    //         value: this.product.price,
+                                    //     }
+                                    // }],
+                                    description: service.value.service_name,
+                                    amount: {
+                                        currency_code: "USD",
+                                        value: price,
+                                        // breakdown: {
+                                        //     item_total: {
+                                        //         currency_code: "USD",
+                                        //         value: this.product.price
+                                        //     }
+                                        // }
+                                    }
+                                }
+                            ]
+                        });
+                    },
+                    onApprove: async (data, actions) => {
+                        const result = await actions.order.capture();
+                        paidFor.value = true;
+                        createOrderAxios(order.value)
+                        console.log(result);
+                    },
+                    onError: err => {
+                        console.log(err);
+                    }
+                })
+                .render(paypal.value)
+        })
+        document.body.appendChild(script);
+    }
 };
 
 const stepThree = async () => {
@@ -974,7 +1077,8 @@ getUserByEmailAxios(user);
 getServiceByIdAxios(props.service_id);
 </script>
 
-<style scoped>ol {
+<style scoped>
+ol {
     margin-block-start: 1em;
     margin-block-end: 1em;
 }
@@ -984,4 +1088,5 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}</style>
+}
+</style>
