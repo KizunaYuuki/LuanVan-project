@@ -7,7 +7,8 @@ const {
     getServiceById,
     updateServiceById,
     deleteServiceById,
-    createService } = require("../controllers/services.controller.js");
+    createService,
+    getInfoReviewsByServiceId } = require("../controllers/services.controller.js");
 
 const servicesRouter = express.Router();
 
@@ -21,6 +22,12 @@ servicesRouter.post("/", validateAccessToken, async (req, res) => {
 // Lấy tất cả services
 servicesRouter.get("/", async (req, res) => {
     const result = await getServices();
+    res.status(201).json(result);
+});
+
+// Lấy thông tin về review 
+servicesRouter.get("/reviews-info", async (req, res) => {
+    const result = await getInfoReviewsByServiceId();
     res.status(201).json(result);
 });
 
