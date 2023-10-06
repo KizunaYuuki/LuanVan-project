@@ -10,6 +10,10 @@ const dbconfig = {
         USER: process.env.MYSQL_USER || "root",
         PASSWORD: process.env.MYSQL_PASSWORD || "TIMEJIKAN",
         DB: process.env.MYSQL_DATABASE || "notes_app"
+    },
+    Algolia: {
+        ApplicationID: process.env.ApplicationIDAlgolia,
+        APIKey: process.env.APIKeyAlgolia
     }
 };
 module.exports = {

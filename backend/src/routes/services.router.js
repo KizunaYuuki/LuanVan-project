@@ -1,7 +1,13 @@
 const express = require("express");
 const { validateAccessToken } = require("../middleware/auth0.middleware.js");
+const algoliasearch = require('algoliasearch');
+const { dbconfig } = require("../config/db.config.js")
+const client = algoliasearch(dbconfig.Algolia.ApplicationID, dbconfig.Algolia.APIKey);
 
-const { 
+// Create a new index - algolia
+const index = client.initIndex('services');
+
+const {
     getServices,
     getServicesByServiceTypeId,
     getServiceById,
@@ -16,6 +22,14 @@ const servicesRouter = express.Router();
 servicesRouter.post("/", validateAccessToken, async (req, res) => {
     const { service_type_id, name, description, delivery_date, weight, price } = req.body;
     const result = await createService(service_type_id, name, description, delivery_date, weight, price);
+
+    // update to algolia
+    index.saveObjects(result, { autoGenerateObjectIDIfNotExist: true })
+        .then(({ objectIDs }) => {
+            console.log(objectIDs);
+        })
+        .catch(({ error }) => console.log(error));
+
     res.status(201).json(result);
 });
 
