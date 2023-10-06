@@ -7,10 +7,12 @@ import "./assets/css/styles.css";
 import router from "./router";
 import './assets/tailwind.css'
 import VueGtag from "vue-gtag-next";
+import InstantSearch from 'vue-instantsearch/vue3/es';
 
 const app = createApp(App);
 
 app
+    .use(InstantSearch)
     .use(createPinia())
     .use(router)
     .use(

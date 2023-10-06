@@ -10,6 +10,13 @@
         "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
     },
     "dependencies": {
+        "@algolia/autocomplete-js": "1.11.1",
+        "@algolia/autocomplete-plugin-query-suggestions": "1.11.1",
+        "@algolia/autocomplete-plugin-recent-searches": "1.11.1",
+        "@algolia/autocomplete-theme-classic": "1.11.1",
+        "algoliasearch": "4.16.0",
+        "core-js": "^3.6.5",
+        "vue-instantsearch": "4.8.8",
         "@auth0/auth0-vue": "^2.3.0",
         "@headlessui/vue": "^1.7.16",
         "@heroicons/vue": "^2.0.18",

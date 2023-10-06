@@ -110,8 +110,7 @@ const router = createRouter({
         {
             path: '/testing',
             name: 'test',
-            component: () => import('../views/manage/ServicePage.vue'),
-            beforeEnter: authGuard,
+            component: () => import('../views/Test.vue'),
             meta: {
                 title: "test",
             }
