@@ -54,8 +54,7 @@
         <div class="min-h-[80vh]">
 
             <!-- Input -->
-            <div
-                class="bg-[#e8f0fe] p-4 m-[16px] flex justify-between flex-wrap max-w-5xl mx-auto text-[#06c] rounded-lg">
+            <div class="bg-[#e8f0fe] p-4 m-[16px] flex justify-between flex-wrap max-w-5xl mx-auto text-[#06c] rounded-lg">
 
                 <!-- Gửi từ -->
                 <div>
@@ -226,7 +225,7 @@
                 </Listbox>
 
                 <!-- time filter -->
-                <!-- <Listbox as="div" v-model="timeSelected" class="w-max ml-[8px]">
+                <Listbox as="div" v-model="timeSelected" class="w-max ml-[8px]">
                     <div class="relative">
                         <ListboxButton
                             class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
@@ -242,14 +241,14 @@
                             leave-to-class="opacity-0">
                             <ListboxOptions
                                 class="absolute z-10 mt-1 max-h-56 w-max overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                <ListboxOption as="template" v-for="person in timeFilter" :key="person.id" :value="person"
-                                    v-slot="{ active, selected }">
-                                    <li
+                                <ListboxOption as="template" v-for="timeFilter in timeFilters" :key="timeFilter.id"
+                                    :value="timeFilter" v-slot="{ active, selected }">
+                                    <li @click="timeFilterHandle(timeFilter)"
                                         :class="[active ? 'bg-indigo-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pr-9']">
                                         <div class="flex items-center">
                                             <span
                                                 :class="[selected ? 'font-semibold' : 'font-normal', 'ml-3 block truncate']">{{
-                                                    person.name }}</span>
+                                                    timeFilter.name }}</span>
                                         </div>
 
                                         <span v-if="selected"
@@ -261,7 +260,7 @@
                             </ListboxOptions>
                         </transition>
                     </div>
-                </Listbox> -->
+                </Listbox>
             </div>
 
             <!-- Content - Dich vụ lọc được -->
@@ -502,9 +501,7 @@ import Header from '../components/Header.vue';
 
 const { pageview } = useGtag()
 const track = () => {
-    pageview({ page_path: "/test" });
-
-    console.log(localStorage.getItem('1323'))
+    pageview({ page_path: "/" });
 };
 track()
 
@@ -579,26 +576,35 @@ const serivceTypeFilter = [
     }
 ]
 
-const timeFilter = [
+const timeFilters = ref([
     {
         id: 1,
         name: 'Theo thời gian',
-        avatar:
-            'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        min: 0,
+        max: 0
     },
     {
         id: 2,
-        name: '24h',
+        name: '12 - 24 Giờ',
+        min: 12,
+        max: 24
     },
     {
         id: 3,
-        name: 'Hơn 24h',
+        name: '1 - 2 Ngày',
+        min: 24,
+        max: 48
+    },
+    {
+        id: 4,
+        name: '2 - 5 Ngày',
+        min: 48,
+        max: 120
     }
-]
+])
 
 const priceSelected = ref(priceFilters.value[0])
-const timeSelected = ref(timeFilter[0])
-
+const timeSelected = ref(timeFilters.value[0])
 
 const sortOptions = [
     // { name: 'Phổ biến nhất', href: '#', current: true },
@@ -615,11 +621,12 @@ const services = ref("");
 const rootServices = ref("");
 
 // function
+
+// Lọc theo giá
 const priceFilterHandle = async (selected) => {
-    if(selected.name === priceFilters.value[0].name) {
-        console.log('2');
+    // Không áp dụng bộ lọc
+    if (selected.name === priceFilters.value[0].name) {
         services.value = rootServices.value;
-        console.log(rootServices);
         return;
     }
     services.value = [];
@@ -628,12 +635,31 @@ const priceFilterHandle = async (selected) => {
             for (let j = 0; rootServices.value.length > j; j++) {
                 if ((rootServices.value[j].price >= priceFilters.value[i].low) && (rootServices.value[j].price <= priceFilters.value[i].high)) {
                     services.value.push(rootServices.value[j]);
-                    console.log(priceFilters.value[i].high);
                 }
             }
         }
     }
 };
+
+// Lọc theo thời gian - Giờ
+const timeFilterHandle = async (selected) => {
+    // Không áp dụng bộ lọc
+    if (selected.name === timeFilters.value[0].name) {
+        services.value = rootServices.value;
+        return;
+    }
+    services.value = [];
+    for (let i = 0; timeFilters.value.length > i; i++) {
+        if (selected.name === timeFilters.value[i].name) {
+            for (let j = 0; rootServices.value.length > j; j++) {
+                if ((rootServices.value[j].delivery_max_time >= timeFilters.value[i].min) && (rootServices.value[j].delivery_min_time <= timeFilters.value[i].max)) {
+                    services.value.push(rootServices.value[j]);
+                }
+            }
+        }
+    }
+};
+
 const mostPopularfilter = async () => {
 
 };
