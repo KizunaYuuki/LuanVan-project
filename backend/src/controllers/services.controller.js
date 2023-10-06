@@ -4,7 +4,7 @@ const { pool } = require("../models/db.js");
 async function getServices() {
     // const [rows] = await pool.query("select * from services")
     const [rows] = await pool.query(`
-    SELECT services.id as service_id, services.name as service_name, services.delivery_date, services.weight, services.price, services.created,
+    SELECT services.id as service_id, services.name as service_name, services.delivery_date, services.delivery_max_time, services.delivery_min_time, services.weight, services.price, services.created,
     providers.id as provider_id, providers.name as provider_name, providers.image,
     location_from.domain as domain_from, location_from.province as province_from, location_from.district as district_from,
     location_to.domain as domain_to, location_to.province as province_to, location_to.district as district_to
