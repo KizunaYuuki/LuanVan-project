@@ -1,12 +1,13 @@
 <template>
     <Header></Header>
+    <!-- <div id="paypal" ref="paypal"></div> -->
     <main>
         <section class="flex flex-col max-w-[calc(1040px)] mx-auto my-[16px] min-h-[calc(100vh)] min-[1280px]:px-0">
             <div class="bg-gray-50 rounded-lg">
                 <!-- Form Đăng ký dịch vụ -->
                 <form class="max-w-5xl min-[1024px]:py-[64px] py-[16px] mx-auto">
                     <!-- Buoc 1 Dien Thong tin -->
-                    <div v-if="fillInformStep" class="">
+                    <div v-show="fillInformStep" class="">
                         <!-- Nav Steps - Thông tin dịch vụ -->
                         <div class="bg-[#fff] rounded-[0.375rem] min-[1024px]:block hidden sticky top-0 z-[101]">
                             <div class="mx-auto">
@@ -371,7 +372,7 @@
                     </div>
 
                     <!-- Buoc 2 Thanh toán -->
-                    <div v-if="paymentStep" class="">
+                    <div v-show="paymentStep" class="">
                         <!-- Nav Steps - Thanh toán -->
                         <div class="bg-[#fff] rounded-[0.375rem] min-[1024px]:block hidden sticky top-0 z-[101]">
                             <div class="mx-auto">
@@ -474,7 +475,7 @@
                                                         </div>
                                                     </label>
 
-                                                    <label for="payment-paypal"
+                                                    <label for="payment"
                                                         class="text-[14px] min-[768px]:ml-[16px] min-[768px]:mt-0 mt-[16px] flex w-[268px] cursor-pointer p-[16px] border-[1px] hover:ring-4 hover:border-[#0096fa] border-[#d1d5db] rounded-[4px]">
                                                         <div>
                                                             <span class="text-[#111827]">Paypal</span>
@@ -486,36 +487,27 @@
                                                         <div>
                                                             <input v-model="order.payment_id" :value=2
                                                                 class="w-[18px] h-[18px]" type="radio" name="pay"
-                                                                id="payment-paypal">
+                                                                id="payment">
                                                         </div>
                                                     </label>
                                                 </div>
                                             </div>
 
                                             <div class="col-span-full">
-                                                <div v-if="order.payment_id === 1" class="flex justify-center">
+                                                <div v-show="order.payment_id === 1" class="flex justify-center">
                                                     <h1>Bạn đã chọn thành toán bằng <span class="text-[#0096fa]">Tiền
                                                             mặt</span>, Click Đăng ký để hoàn thành đăng ký dịch vụ.</h1>
                                                 </div>
-                                                <div v-if="order.payment_id === 2" class="flex justify-center z-1">
+                                                <div v-show="order.payment_id === 2" class="flex justify-center z-1">
                                                     <h1>Một bước nữa thôi, thanh toán bằng <span
                                                             class="text-[#0096fa]">Paypal</span> để
                                                         hoàn thành đăng ký dịch
                                                         vụ.</h1>
-
                                                 </div>
-                                                <div v-if="order.payment_id === 2"
+                                                <div v-show="order.payment_id === 2"
                                                     class="p-8 flex items-center justify-center">
-                                                    <div v-if="USDToVND && service">
-                                                        <div v-if="!paidFor">
-                                                            <h1>Buy this Lamp - ${{ service.price }} OBO</h1>
-                                                        </div>
-
-                                                        <div v-if="paidFor">
-                                                            <h1>Noice, you bought a beautiful lamp!</h1>
-                                                        </div>
-
-                                                        <div v-if="USDToVND" style="width: 500px" ref="paypal"></div>
+                                                    <div v-show="USDToVND && service">
+                                                        <div v-show="USDToVND" style="width: 500px" ref="paypal"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -767,10 +759,10 @@
 import { onMounted, ref } from "vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 import Header from '../components/Header.vue';
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink } from 'vue-router'
 import axios from 'axios';
 
-import { getUserByEmail, createUser } from "@/services/user.service";
+import { getUserByEmail } from "@/services/user.service";
 import { createOrder } from "@/services/order.service";
 import { createAddress } from "@/services/address.service";
 import { createPackage } from "@/services/package.service";
@@ -797,11 +789,13 @@ const addressToResutl = ref();
 const packageResutl = ref();
 const isValidationError = ref(false);
 
-const paypal = ref();
+const paypal = ref(null);
 const USDToVND = ref();
 const paidFor = ref(false);
 const loaded = ref(false);
 const changedPrice = ref();
+
+const script = ref();
 
 const order = ref(
     {
@@ -889,7 +883,7 @@ const getUserByEmailAxios = async (user) => {
         user_id.value = data.id;
         console.log(data);
         console.log(user_id.value);
-    } 
+    }
     if (error) {
         console.log(error.message);
     }
@@ -981,96 +975,87 @@ const stepTwo = async () => {
         paymentStep.value = !paymentStep.value;
         fillInformStep.value = !fillInformStep.value;
     }
+};
+
+onMounted(async () => {
+    // Load ty le ngoai le
+    await axios
+        .get(`http://localhost:6060/google-finance`, {
+            // withCredentials: true
+        })
+        .then((response) => {
+            const data = response.data;
+            const exchangeRateRegex = /<div class="YMlKec fxKbKc">([\d.,]+)<\/div>/;
+            const exchangeRateMatch = data.match(exchangeRateRegex);
+            if (exchangeRateMatch) {
+                const exchangeRate = exchangeRateMatch[1];
+                USDToVND.value = parseFloat(exchangeRate, 10) * 1000;
+            }
+        })
+    console.log(USDToVND.value);
+
+    let script = document.createElement('script');
+    script.setAttribute("data-namespace", "paypal_sdk");
+    script.src =
+        "https://www.paypal.com/sdk/js?client-id=Af1NckO7mVTPI_VUoRGDxRhWQKwxkvFrbISLch5alNr06SslxwxiorKzaHNIxg8qGdPvwcWk6_-eerwW";
 
     // Tải button Paypal
-    if (paymentStep.value === true) {
-        await axios
-            .get(`http://localhost:6060/google-finance`, {
-                // withCredentials: true
-            })
-            .then((response) => {
-                const data = response.data;
-                const exchangeRateRegex = /<div class="YMlKec fxKbKc">([\d.,]+)<\/div>/;
-                const exchangeRateMatch = data.match(exchangeRateRegex);
-                if (exchangeRateMatch) {
-                    const exchangeRate = exchangeRateMatch[1];
-                    USDToVND.value = parseFloat(exchangeRate, 10) * 1000;
+    script.addEventListener('load', () => {
+        loaded.value = true;
+        let price = parseFloat(service.value.price / USDToVND.value).toFixed(2);
+        changedPrice.value = price
+        paypal_sdk
+            .Buttons({
+                style: {
+                    // layout: 'horizontal',
+                    color: 'blue',
+                    shape: 'rect',
+                    size: 'responsive',
+                    label: 'checkout',
+                    tagline: false,
+                },
+                createOrder: (data, actions) => {
+                    return actions.order.create({
+                        purchase_units: [
+                            {
+                                // items: [{
+                                //     name: 'Tên dịch vụ',
+                                //     description: "Mô tả",
+                                //     quantity: 1,
+                                //     unit_amount: {
+                                //         currency_code: "USD",
+                                //         value: this.product.price,
+                                //     }
+                                // }],
+                                description: service.value.service_name,
+                                amount: {
+                                    currency_code: "USD",
+                                    value: price,
+                                    // breakdown: {
+                                    //     item_total: {
+                                    //         currency_code: "USD",
+                                    //         value: this.product.price
+                                    //     }
+                                    // }
+                                }
+                            }
+                        ]
+                    });
+                },
+                onApprove: async (data, actions) => {
+                    const result = await actions.order.capture();
+                    paidFor.value = true;
+                    createOrderAxios(order.value)
+                    console.log(result);
+                },
+                onError: err => {
+                    console.log(err);
                 }
             })
-        console.log(USDToVND.value);
-
-        const script = document.createElement('script');
-        script.setAttribute("data-namespace", "paypal_sdk");
-        script.src =
-            "https://www.paypal.com/sdk/js?client-id=Af1NckO7mVTPI_VUoRGDxRhWQKwxkvFrbISLch5alNr06SslxwxiorKzaHNIxg8qGdPvwcWk6_-eerwW";
-        script.addEventListener('load', () => {
-            loaded.value = true;
-            let price = parseFloat(service.value.price / USDToVND.value).toFixed(2);
-            changedPrice.value = price
-            paypal_sdk
-                .Buttons({
-                    style: {
-                        // layout: 'horizontal',
-                        color: 'blue',
-                        shape: 'rect',
-                        size: 'responsive',
-                        label: 'checkout',
-                        tagline: false,
-                    },
-                    createOrder: (data, actions) => {
-                        return actions.order.create({
-                            purchase_units: [
-                                {
-                                    // items: [{
-                                    //     name: 'Tên dịch vụ',
-                                    //     description: "Mô tả",
-                                    //     quantity: 1,
-                                    //     unit_amount: {
-                                    //         currency_code: "USD",
-                                    //         value: this.product.price,
-                                    //     }
-                                    // }],
-                                    description: service.value.service_name,
-                                    amount: {
-                                        currency_code: "USD",
-                                        value: price,
-                                        // breakdown: {
-                                        //     item_total: {
-                                        //         currency_code: "USD",
-                                        //         value: this.product.price
-                                        //     }
-                                        // }
-                                    }
-                                }
-                            ]
-                        });
-                    },
-                    onApprove: async (data, actions) => {
-                        const result = await actions.order.capture();
-                        paidFor.value = true;
-                        createOrderAxios(order.value)
-                        console.log(result);
-                    },
-                    onError: err => {
-                        console.log(err);
-                    }
-                })
-                .render(paypal.value)
-        })
-        document.body.appendChild(script);
-    }
-};
-
-const stepThree = async () => {
-    // validate data
-    if (order.value.payment_id === '') {
-        isValidationError.value = true;
-        alert('Hãy chọn một phương thức thanh toán');
-    } else {
-        paymentStep.value = !paymentStep.value;
-        fillInformStep.value = !fillInformStep.value;
-    }
-};
+            .render(paypal.value)
+    })
+    document.body.appendChild(script);
+})
 
 // run function
 getUserByEmailAxios(user);
