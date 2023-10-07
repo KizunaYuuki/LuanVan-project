@@ -16,6 +16,7 @@ import '@algolia/autocomplete-theme-classic';
 import { createElement } from '../utils/createElement';
 import {
     INSTANT_SEARCH_INDEX_NAME,
+    INSTANT_SEARCH_QUERY_SUGGESTIONS,
     INSTANT_SEARCH_HIERARCHICAL_ATTRIBUTE,
 } from '../constants';
 import { searchClient } from '../searchClient';
@@ -101,7 +102,7 @@ export default {
 
         const querySuggestionPluginInCategory = createQuerySuggestionsPlugin({
             searchClient,
-            indexName: 'instant_search_demo_query_suggestions',
+            indexName: INSTANT_SEARCH_QUERY_SUGGESTIONS,
             getSearchParams() {
                 const currentCategory = getInstantSearchCurrentCategory();
                 return recentSearchesPlugin.data.getAlgoliaSearchParams({
@@ -116,6 +117,7 @@ export default {
 
                 return {
                     ...source,
+                    sourceId: '',
                     sourceId: 'querySuggestionsPluginInCategory',
                     onSelect({ item }) {
                         setInstantSearchUiState({
@@ -153,7 +155,7 @@ export default {
 
         const querySuggestionsPlugin = createQuerySuggestionsPlugin({
             searchClient,
-            indexName: 'instant_search_demo_query_suggestions',
+            indexName: INSTANT_SEARCH_QUERY_SUGGESTIONS,
             getSearchParams() {
                 const currentCategory = getInstantSearchCurrentCategory();
 

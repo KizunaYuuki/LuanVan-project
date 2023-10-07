@@ -14,31 +14,37 @@
                 :snippet-ellipsis-text.camel="'…'"></ais-configure>
             <div class="container wrapper">
                 <div>
-                    <ais-panel>
+                    <!-- <ais-panel>
                         <template v-slot:header>Categories</template>
                         <ais-hierarchical-menu :attributes="[
                             'hierarchicalCategories.lvl0',
                             'hierarchicalCategories.lvl1',
                         ]"></ais-hierarchical-menu>
-                    </ais-panel>
+                    </ais-panel> -->
                 </div>
                 <div>
                     <ais-hits>
                         <template v-slot:item="{ item }">
-                            <article class="hit">
-                                <div class="hit-image">
-                                    <img :src="item.image" :alt="item.name" />
-                                </div>
-                                <div>
-                                    <h1>
-                                        <ais-snippet :hit="item" attribute="name" />
-                                    </h1>
-                                    <div>
-                                        By <strong>{{ item.brand }}</strong> in
-                                        <strong>{{ item.categories[0] }}</strong>
+                            <RouterLink :to="{
+                                name: 'Service Details',
+                                params: { id: 1 },
+                            }" class="text-[#0096fa]">
+                                <article class="hit">
+                                    <div class="hit-image">
+                                        <img class="bg-slate-100" :src="item.image" :alt="item.name" />
                                     </div>
-                                </div>
-                            </article>
+                                    <div>
+                                        <h1>
+                                            <ais-snippet :hit="item" attribute="name" />
+                                        </h1>
+                                        <div>
+                                            By <strong>{{ item.service_name }}</strong> in
+                                            <!-- <strong>{{ item?.categories[0] }}</strong> -->
+                                        </div>
+                                    </div>
+                                </article>
+                            </RouterLink>
+
                         </template>
                     </ais-hits>
                     <ais-pagination :show-first="false" :show-last="false" />
@@ -49,13 +55,13 @@
 </template>
 
 <script>
+import { RouterLink } from 'vue-router';
 import { history as historyRouter } from 'instantsearch.js/es/lib/routers';
 import { singleIndex as singleIndexMapping } from 'instantsearch.js/es/lib/stateMappings';
 
 import Autocomplete from '../components/Autocomplete.vue';
 import { INSTANT_SEARCH_INDEX_NAME } from '../constants';
 import { searchClient } from '../searchClient';
-
 export default {
     components: { Autocomplete },
     data() {
@@ -122,7 +128,7 @@ a {
     padding: 1.5rem;
     display: grid;
     gap: 1rem;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 4fr;
 }
 
 /* Autocomplete */
@@ -136,7 +142,7 @@ a {
 .ais-Hits-list {
     display: grid;
     gap: 1rem;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .ais-Hits-item {
