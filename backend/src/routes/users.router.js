@@ -14,6 +14,12 @@ const {
 const usersRouter = express.Router();
 
 // Đăng ký người dùng
+usersRouter.get("/", validateAccessToken, async (req, res) => {
+    const result = await getUsers();
+    res.status(201).json(result);
+});
+
+// Đăng ký người dùng
 usersRouter.post("/", validateAccessToken, async (req, res) => {
     const { name, email } = req.body;
     // Theo mặc định tài khoản mới tạo sẽ có role là 1, chỉ có quyền của Khách hàng
