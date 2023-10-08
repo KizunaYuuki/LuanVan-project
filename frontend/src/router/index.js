@@ -119,8 +119,44 @@ const router = createRouter({
             path: '/management',
             name: 'Home Page - Management',
             component: () => import('../views/manage/HomeView.vue'),
+            beforeEnter: authGuard,
             meta: {
                 title: "Trang chủ - Quản lý",
+            }
+        },
+        {
+            path: '/management/order',
+            name: 'Order - Management',
+            component: () => import('../views/manage/OrderManage.vue'),
+            beforeEnter: authGuard,
+            meta: {
+                title: "Quản lý Đơn hàng",
+            }
+        },
+        {
+            path: '/management/service',
+            name: 'Service - Management',
+            component: () => import('../views/manage/ServiceManage.vue'),
+            beforeEnter: authGuard,
+            meta: {
+                title: "Quản lý Dịch vụ",
+            }
+        },
+        {
+            path: '/management/promotion',
+            name: 'Promotion - Management',
+            component: () => import('../views/manage/PromotionManage.vue'),
+            beforeEnter: authGuard,
+            meta: {
+                title: "Quản lý Khuyến mãi",
+            }
+        }, {
+            path: '/management/user',
+            name: 'User - Management',
+            component: () => import('../views/manage/UserManage.vue'),
+            beforeEnter: authGuard,
+            meta: {
+                title: "Quản lý Người dùng",
             }
         },
         {

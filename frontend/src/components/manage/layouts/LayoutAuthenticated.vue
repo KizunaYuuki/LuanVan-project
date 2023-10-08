@@ -27,7 +27,7 @@
                         class="flex-1 overflow-y-auto overflow-x-hidden aside-scrollbars dark:aside-scrollbars-[slate] text-[#000000cc] bg-[#fbfbfdcc]">
                         <ul>
                             <li class="hover:text-[#0096fa] hover:bg-slate-100">
-                                <RouterLink to="#"
+                                <RouterLink to="/management/order"
                                     class="flex cursor-pointer py-3 aside-menu-item dark:text-slate-300 dark:hover:text-white">
                                     <span class="inline-flex justify-center items-center w-16 h-6 flex-none">
                                         <svg viewBox="0 0 24 24" width="18" height="18" class="inline-block">
@@ -42,7 +42,7 @@
                             </li>
 
                             <li class="hover:text-[#0096fa] hover:bg-slate-100">
-                                <RouterLink to="#"
+                                <RouterLink to="/management/service"
                                     class="flex cursor-pointer py-3 aside-menu-item dark:text-slate-300 dark:hover:text-white">
                                     <span class="inline-flex justify-center items-center w-16 h-6 flex-none">
                                         <svg viewBox="0 0 24 24" width="18" height="18" class="inline-block">
@@ -57,7 +57,7 @@
                             </li>
 
                             <li class="hover:text-[#0096fa] hover:bg-slate-100">
-                                <RouterLink to="#"
+                                <RouterLink to="/management/promotion"
                                     class="flex cursor-pointer py-3 aside-menu-item dark:text-slate-300 dark:hover:text-white">
                                     <span class="inline-flex justify-center items-center w-16 h-6 flex-none">
                                         <svg viewBox="0 0 24 24" width="18" height="18" class="inline-block">
@@ -71,7 +71,7 @@
                             </li>
 
                             <li class="hover:text-[#0096fa] hover:bg-slate-100">
-                                <RouterLink to="#"
+                                <RouterLink to="/management/user"
                                     class="flex cursor-pointer py-3 aside-menu-item dark:text-slate-300 dark:hover:text-white">
                                     <span class="inline-flex justify-center items-center w-16 h-6 flex-none">
                                         <svg width="18" height="18" viewBox="0 0 48 48" fill="currentColor"
@@ -97,7 +97,7 @@
                     <!-- Logout -->
                     <ul>
                         <li>
-                            <button
+                            <button @click="handleLogout"
                                 class="w-full flex cursor-pointer py-3 bg-[#0096fa] hover:bg-[#0096fad6] dark:bg-blue-500 text-white hover:border-blue-700">
                                 <span class="inline-flex justify-center items-center w-16 h-6 flex-none">
                                     <svg viewBox="0 0 24 24" width="18" height="18" class="inline-block">
@@ -112,7 +112,7 @@
                     </ul>
                 </div>
             </aside>
-            
+
             <!-- Content -->
             <section class="p-6 xl:max-w-6xl xl:mx-auto">
                 <slot></slot>
@@ -123,4 +123,14 @@
 
 <script setup>
 import { RouterLink } from 'vue-router'
+import { useAuth0 } from "@auth0/auth0-vue";
+
+const { logout } = useAuth0();
+
+const handleLogout = () =>
+    logout({
+        logoutParams: {
+            returnTo: window.location.origin,
+        }
+    });
 </script>

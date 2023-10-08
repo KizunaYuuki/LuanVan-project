@@ -1,16 +1,15 @@
 <template>
-    <Header></Header>
-    <main>
-        <div v-show="orders" class="bg-[#ffffffbe] py-[2.5rem]">
+    <LayoutAuthenticated>
+        <div v-show="orders">
             <div class="mx-auto lg:max-w-[1024px]">
                 <div class="">
                     <!-- Title -->
                     <div class="flex items-center">
                         <div class="flex-auto">
-                            <h1 class="text-[#111827] leading-[1.5rem] font-[600] text-[2rem] leading-[3rem]">Đơn hàng</h1>
-                            <p class="text-[#374151] text-[.875rem] leading-[1.25rem] mt-[.5rem]">Hiển thị danh sách tất
+                            <h1 class="text-[#111827] leading-[3rem] font-[600] text-[1.5rem]">Đơn hàng</h1>
+                            <p class="text-[#374151] text-[.875rem] leading-[1.25rem]">Hiển thị danh sách tất
                                 cả
-                                đơn hàng của bạn</p>
+                                đơn hàng</p>
                         </div>
                         <div class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[4rem] mt-[1rem]">
                             <!-- <button type="button"
@@ -118,7 +117,7 @@
                                                 {{ order.email }}</td>
                                             <td
                                                 class="font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ order.phone }}</td>
+                                                {{ order.phone || '' }}</td>
                                             <td
                                                 class="font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
                                                 {{ format(new Date(order.order_created), 'MM/dd/yyyy') }}</td>
@@ -180,12 +179,12 @@
                 </div>
             </div>
         </div>
-    </main>
+    </LayoutAuthenticated>
 </template>
-
 <script setup>
+import LayoutAuthenticated from '../../components/manage/layouts/LayoutAuthenticated.vue'
+
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
-import Header from '../components/Header.vue';
 import { onMounted, ref } from "vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 import { RouterLink } from 'vue-router'
