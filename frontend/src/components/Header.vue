@@ -366,5 +366,7 @@ const deteleCartAxios = async (cart_id) => {
     }
 };
 // run function
-getUserByEmailAxios(user);
+if(isAuthenticated) {
+    getUserByEmailAxios(user);
+}
 </script>

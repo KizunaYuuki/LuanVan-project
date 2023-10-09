@@ -54,7 +54,7 @@
         <div class="min-h-[80vh]">
 
             <!-- Input -->
-            <div class="bg-[#e8f0fe] p-4 m-[16px] flex justify-between flex-wrap max-w-5xl mx-auto text-[#06c] rounded-lg">
+            <div class="font-[600] outline-8 outline-red-100 outline border border-red-200 bg-white p-4 m-[16px] flex justify-between flex-wrap max-w-5xl mx-auto text-gray-600 rounded-lg">
 
                 <!-- Gửi từ -->
                 <div>
@@ -72,7 +72,7 @@
                             </span>
                         </div>
                         <input v-model="filter.province_from" type="text"
-                            class="hover:border-[#9aa0a6] font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-[#d2e3fc] outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
+                            class="hover:border-[#9aa0a6] font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-gray-300 placeholder:font-semibold outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
                             placeholder="Tỉnh/Thành Phố" />
                     </div>
 
@@ -89,7 +89,7 @@
                             </span>
                         </div>
                         <input v-model="filter.district_from" type="text"
-                            class="hover:border-[#9aa0a6] font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-[#d2e3fc] outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
+                            class="hover:border-[#9aa0a6] font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-gray-300 placeholder:font-semibold outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
                             placeholder="Quận/Huyện" />
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                             </span>
                         </div>
                         <input v-model="filter.province_to" type="text"
-                            class="hover:border-[#9aa0a6] font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-[#d2e3fc] outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
+                            class="hover:border-[#9aa0a6] font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-gray-300 placeholder:font-semibold outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
                             placeholder="Tỉnh/Thành Phố" />
                     </div>
 
@@ -130,7 +130,7 @@
                             </span>
                         </div>
                         <input v-model="filter.district_to" type="text"
-                            class="hover:border-[#9aa0a6] font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-[#d2e3fc] outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
+                            class="hover:border-[#9aa0a6] font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] placeholder:text-gray-300 placeholder:font-semibold outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
                             placeholder="Quận/Huyện" />
                     </div>
                 </div>
@@ -160,14 +160,14 @@
                             </span>
                         </div>
                         <input v-model="filter.weight" type="number"
-                            class="hover:border-[#9aa0a6] placeholder:text-[#d2e3fc] font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
+                            class="hover:border-[#9aa0a6] placeholder:text-gray-300 placeholder:font-semibold font-[500] block w-full h-full rounded-md border py-1.5 pl-[40px] pr-20 text-[#3c4043] outline-none sm:text-sm sm:leading-6 border-[#dadce0]"
                             placeholder="Trọng lượng gói hàng (Kg)" />
                     </div>
                 </div>
             </div>
 
             <!-- Filters -->
-            <div class="bg-[#fbfbfd] rounded-lg m-[16px] flex justify-start mx-auto max-w-5xl">
+            <div class="rounded-lg m-[16px] flex justify-start mx-auto max-w-5xl pt-[24px]">
                 <div class="relative rounded-[16px] shadow-sm hover:text-[#1a73e8] bg-[white]">
                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                         <span class="sm:text-sm">
@@ -266,7 +266,7 @@
             <!-- Content - Dich vụ lọc được -->
             <div class="mx-auto max-w-5xl">
                 <div
-                    class="bg-[#f2f2f2] flex items-baseline lg:justify-between justify-end border-b border-gray-200 pb-6 pt-[24px] bg-[white] px-[8px] rounded-[4px]">
+                    class="bg-[#f2f2f2] flex items-baseline lg:justify-between justify-end shadow-md px-[8px] pb-6 pt-[24px] bg-[white] rounded-[4px]">
                     <h1 class="text-xl font-bold tracking-tight text-gray-900 hidden md:block">Vận chuyển hàng hoá</h1>
 
                     <div class="flex items-center">

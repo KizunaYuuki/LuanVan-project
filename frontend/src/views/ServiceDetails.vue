@@ -1,6 +1,6 @@
-<template v-if="service">
+<template>
     <Header></Header>
-    <main>
+    <main v-show="service">
         <div class="bg-[#ffffffbe]">
             <div class="pt-6">
                 <!-- Product info -->
@@ -8,7 +8,7 @@
                     class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
                     <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
                         <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{
-                            service.service_name }}</h1>
+                            service?.service_name }}</h1>
                     </div>
 
                     <div class="mt-4 lg:row-span-3 lg:mt-0">
@@ -97,12 +97,12 @@
                             <div class="">
                                 <RouterLink :to="{
                                     name: 'Create Order',
-                                    params: { 
+                                    params: {
                                         service_id: props.id,
-                                     },
-                                }" class="mt-10 flex w-[100%] items-center justify-center border border-transparent px-[16px] py-[8px] font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 leading-6 text-base shadow rounded-md bg-[#0096faee] hover:bg-[#0096fa]">
-                                    <div
-                                        class="">
+                                    },
+                                }"
+                                    class="mt-10 flex w-[100%] items-center justify-center border border-transparent px-[16px] py-[8px] font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 leading-6 text-base shadow rounded-md bg-[#0096faee] hover:bg-[#0096fa]">
+                                    <div class="">
                                         Đăng ký dịch vụ</div>
                                 </RouterLink>
                                 <button @click="createCartAxios(user_id)" type="button"
@@ -304,7 +304,7 @@
                     <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
                 </TransitionChild>
 
-                <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+                <div class="fixed inset-0 z-10 w-screen overflow-y-auto bg-[#0096fa40]">
                     <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                         <TransitionChild as="template" enter="ease-out duration-300"
                             enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -315,11 +315,7 @@
                                 class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                                 <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                                     <div class="">
-                                        <!-- <div
-                                            class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                                            <ExclamationTriangleIcon class="h-6 w-6 text-red-600" aria-hidden="true" />
-                                        </div> -->
-                                        <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                                        <div class="mt-3 text-center sm:mt-0 sm:text-left">
                                             <DialogTitle as="h3" class="text-[24px] font-semibold leading-6 text-gray-900">
                                                 Viết đánh giá</DialogTitle>
 
@@ -395,6 +391,11 @@ import { getUserByEmail, createUser } from "@/services/user.service";
 import { getLocationsByServicId } from "@/services/location.service";
 import { createCart } from "@/services/cart.service";
 
+// toast
+import { useToast } from "vue-toastification";
+// Get toast interface
+const toast = useToast();
+
 const openWriteReviewModal = ref(false)
 
 // login if loggin yet
@@ -458,7 +459,7 @@ const deteleReviewAxios = async (id) => {
     }
 
     if (data) {
-        console.log(data);
+        // console.log(data);
         let tempData = reviews.value
         reviews.value = []
         for (let i = 0; i < tempData.length; i++) {
@@ -469,7 +470,7 @@ const deteleReviewAxios = async (id) => {
     }
 
     if (error) {
-        console.log(error);
+        // console.log(error);
     }
 };
 
@@ -478,7 +479,7 @@ const getServiceByIdAxios = async (id) => {
 
     if (data) {
         service.value = data;
-        console.log(service.value);
+        // console.log(service.value);
     }
 
     if (error) {
@@ -501,7 +502,7 @@ const getLocationsByServicIdAxios = async (service_id) => {
     }
 
     if (error) {
-        console.log(error);
+        // console.log(error);
     }
 };
 
@@ -510,8 +511,13 @@ const createReviewAxios = async (reviewData) => {
     const accessToken = await getAccessTokenSilently();
     const { data, error } = await createReview(accessToken, reviewData);
     if (data) {
-        review.value = data;
-        console.log(review.value);
+        getReviewByServiceIdAxios(props.id);
+        // Xoa data
+        review.value.rate = 0;
+        review.value.comment = '';
+
+        toast.success("Đã thêm đánh giá cho dịch vu", { timeout: 3000 });
+        // console.log(review.value);
     }
     if (error) {
         // result.value = JSON.stringify(error, null, 2);
@@ -525,14 +531,14 @@ const getReviewByServiceIdAxios = async (id) => {
     if (data) {
         reviews.value = data;
         unOrderReviews.value = data;
-        console.log(reviews.value);
+        // console.log(reviews.value);
         reviewsCal.value.totalCount = data.length;
 
         data.forEach((element) => {
             reviewsCal.value.average = element.rate + reviewsCal.value.average;
         });
         reviewsCal.value.average = reviewsCal.value.average / data.length;
-        console.log(reviewsCal.value)
+        // console.log(reviewsCal.value)
     }
 
     if (error) {
@@ -590,19 +596,19 @@ const getUserByEmailAxios = async (user) => {
 
     if (data) {
         user_id.value = data.id;
-        console.log(data);
-        console.log(user_id.value);
+        // console.log(data);
+        // console.log(user_id.value);
     } else {
         const { data, error } = await createUser(accessToken, userData);
         if (data) {
             user_id.value = data.id;
-            console.log(data);
-            console.log(user_id.value);
+            // console.log(data);
+            // console.log(user_id.value);
         }
     }
 
     if (error) {
-        console.log(error.message);
+        // console.log(error.message);
     }
 };
 
@@ -621,11 +627,16 @@ const createCartAxios = async (user_id) => {
         const { data, error } = await createCart(accessToken, cartData);
 
         if (data) {
-            console.log(data);
+            if (data !== 'Giỏ hàng đã tồn tại') {
+                toast.success("Đã thêm dịch vụ vào giỏ hàng", { timeout: 3000 });
+            } else {
+                toast.warning("Oh, Dịch vụ đã có trong giỏ hàng", { timeout: 3000 });
+            }
+            // console.log(data);
         }
 
         if (error) {
-            console.log(error.message);
+            // console.log(error.message);
         }
     }
 };
@@ -640,8 +651,12 @@ const submitCreateReviewHandle = async (reviewData, user_id) => {
     // edit data
     reviewData.user_id = user_id;
     reviewData.service_id = props.id;
-
-    createReviewAxios(reviewData)
+    if (review.value.rate === 0) {
+        toast.warning("Oh, Hãy đánh giá dịch vụ với số sao từ 1 đến 5", { timeout: 3000 });
+        return;
+    } else {
+        createReviewAxios(reviewData);
+    }
 };
 
 const openReviewForm = async () => {

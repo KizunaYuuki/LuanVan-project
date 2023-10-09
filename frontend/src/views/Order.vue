@@ -768,6 +768,11 @@ import { createAddress } from "@/services/address.service";
 import { createPackage } from "@/services/package.service";
 import { getServiceById } from "@/services/service.service";
 
+// toast
+import { useToast } from "vue-toastification";
+// Get toast interface
+const toast = useToast();
+
 const props = defineProps({
     service_id: {} // Service Id
 })
@@ -842,6 +847,11 @@ const addressTo = ref(
 );
 
 const weightChange = async () => {
+    if (packageData.value.weight > service.value.weight) {
+        toast.warning(`Oh, Trọng lượng gói hàng không được > ${service.value.weight}`, { timeout: 5000 });
+    }
+
+    // reset data
     if (packageData.value.weight) {
 
         packageData.value.width = undefined;
@@ -900,6 +910,7 @@ const createOrderAxios = async (orderData) => {
 
     if (data) {
         console.log(data);
+        toast.success("Đã tạo đơn hàng thành công", { timeout: 3000 });
         orderResutl.value = data;
 
         // edit data address
@@ -970,8 +981,12 @@ const stepTwo = async () => {
         addressFrom.value.province === '' || addressFrom.value.district === '' || addressFrom.value.ward === '' ||
         addressTo.value.province === '' || addressTo.value.district === '' || addressTo.value.ward === '') {
         isValidationError.value = true;
-        alert('Hãy nhập đầy đủ thông tin cần thiết để đến bước tiếp theo');
-    } else {
+        toast.warning("Oh, Có thiếu sót gì đó! Xem lại những Input báo đỏ", { timeout: 3000 });
+    }
+    else if (packageData.value.weight > service.value.weight) {
+        toast.warning(`Oh, Trọng lượng gói hàng không được > ${service.value.weight}`, { timeout: 5000 });
+    }
+    else {
         paymentStep.value = !paymentStep.value;
         fillInformStep.value = !fillInformStep.value;
     }

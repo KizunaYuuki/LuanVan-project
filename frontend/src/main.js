@@ -8,6 +8,18 @@ import router from "./router";
 import './assets/tailwind.css'
 import VueGtag from "vue-gtag-next";
 import InstantSearch from 'vue-instantsearch/vue3/es';
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
+
+// Prevents toasts of the same type from appearing simultaneously, discarding duplicates
+const filterBeforeCreate = (toast, toasts) => {
+    if (toasts.filter(t => t.type === toast.type).length !== 0) {
+        // Returning false discards the toast
+        return false;
+    }
+    // You can modify the toast if you want
+    return toast;
+}
 
 const app = createApp(App);
 
@@ -25,6 +37,7 @@ app
             },
         })
     )
+    .use(Toast, { filterBeforeCreate })
     .use(VueGtag, {
         property: [
             { id: 'G-T117TRW8PB', default: true }

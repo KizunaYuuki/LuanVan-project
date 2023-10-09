@@ -1,7 +1,7 @@
 <template>
     <LayoutAuthenticated>
         <div>
-            <div class="mx-auto lg:max-w-[1024px]">
+            <div v-show="users" class="mx-auto lg:max-w-[1024px]">
                 <div class="">
                     <!-- Title -->
                     <div class="flex items-center">

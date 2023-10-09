@@ -117,7 +117,6 @@ export default {
 
                 return {
                     ...source,
-                    sourceId: '',
                     sourceId: 'querySuggestionsPluginInCategory',
                     onSelect({ item }) {
                         setInstantSearchUiState({
