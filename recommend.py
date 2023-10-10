@@ -13,7 +13,7 @@ data = pd.DataFrame({
 X_train, X_test, y_train, y_test = train_test_split(data[["Tuổi"]].values, data["Sản phẩm"], test_size=0.25)
 
 # Tạo mô hình cây quyết định
-model = DecisionTreeClassifier()
+model = DecisionTreeClassifier(ccp_alpha=0.01)
 
 # Huấn luyện mô hình
 model.fit(X_train, y_train)

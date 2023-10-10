@@ -1,0 +1,17 @@
+provider,service_type,weight,related_product
+VIETTEL POST,Dịch vụ chuyển phát Tối ưu,500,0
+VIETTEL POST,Dịch vụ chuyển phát Tối ưu,2000,0
+VIETTEL POST,Dịch vụ chuyển phát Nhanh,500,1
+VIETTEL POST,Dịch vụ chuyển phát Nhanh,2000,1
+VIETTEL POST,Dịch vụ chuyển phát Tiêu chuẩn,500,0
+VIETTEL POST,Dịch vụ chuyển phát Tiêu chuẩn,2000,1
+DHL EXPRESS,Dịch vụ chuyển phát Tối ưu,2000,0
+DHL EXPRESS,Dịch vụ chuyển phát Tiêu chuẩn,500,0
+DHL EXPRESS,Dịch vụ chuyển phát Nhanh,500,0
+DHL EXPRESS,Dịch vụ chuyển phát Nhanh,2000,1
+GHTK,Dịch vụ chuyển phát Tối ưu,500,1
+GHTK,Dịch vụ chuyển phát Tối ưu,2000,1
+GHTK,Dịch vụ chuyển phát Nhanh,500,1
+GHTK,Dịch vụ chuyển phát Nhanh,2000,1
+GHTK,Dịch vụ chuyển phát Tiêu chuẩn,500,1
+GHTK,Dịch vụ chuyển phát Tiêu chuẩn,2000,1

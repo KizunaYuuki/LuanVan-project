@@ -10,7 +10,7 @@ const { providersRouter } = require("./routes/providers.router.js");
 const { serviceTypesRouter } = require("./routes/serviceTypes.router.js");
 const { servicesRouter } = require("./routes/services.router.js");
 const { priceListsRouter } = require("./routes/priceLists.router.js");
-const { statusRouter } = require("./routes/status.router.js"); 
+const { statusRouter } = require("./routes/status.router.js");
 const { paymentsRouter } = require("./routes/payments.router.js");
 const { ordersRouter } = require("./routes/orders.router.js");
 const { addressRouter } = require("./routes/address.router.js");
@@ -19,6 +19,9 @@ const { reviewsRouter } = require("./routes/reviews.router.js");
 const { cartsRouter } = require("./routes/carts.router.js");
 const { locationsRouter } = require("./routes/locations.router.js");
 const axios = require('axios');
+
+// child_process to run python
+const { spawn } = require('child_process');
 
 const { errorHandler } = require("./middleware/error.middleware");
 const { notFoundHandler } = require("./middleware/not-found.middleware");
@@ -79,6 +82,69 @@ app.get('/', cors(), (req, res) => {
     res.send('Hello World!')
 })
 
+app.get('/related-product', cors(), (req, res) => {
+    // spawn new child process to call the python script
+    const python = spawn('python3', ['./src/python/RelatedProduct.py']);
+
+    python.stdout.on('data', function (data) {
+        console.log('Pipe data from python script ...');
+        console.log(data.toString());
+        res.send(data.toString())
+    });
+
+    python.stderr.on('data', function (data) {
+        console.log('Pipe data from python script ...');
+        console.error(data.toString());
+        res.send(data.toString())
+    });
+
+    python.on('exit', (code) => {
+        if (code === 0) {
+            console.log('Tiến trình con Python kết thúc thành công');
+        } else {
+            console.error('Tiến trình con Python kết thúc với mã lỗi ' + code);
+        }
+    });
+
+    // in close event we are sure that stream from child process is closed
+    python.on('close', (code) => {
+        console.log(`child process close all stdio with code ${code}`);
+        res.send()
+    });
+});
+
+app.get('/', cors(), (req, res) => {
+    // spawn new child process to call the python script
+    const python = spawn('python3', ['./src/python/RelatedProduct.py']);
+
+    python.stdout.on('data', function (data) {
+        console.log('Pipe data from python script ...');
+        console.log(data.toString());
+        res.send(data.toString())
+    });
+
+    python.stderr.on('data', function (data) {
+        console.log('Pipe data from python script ...');
+        console.error(data.toString());
+        res.send(data.toString())
+    });
+
+    python.on('exit', (code) => {
+        if (code === 0) {
+            console.log('Tiến trình con Python kết thúc thành công');
+        } else {
+            console.error('Tiến trình con Python kết thúc với mã lỗi ' + code);
+        }
+    });
+
+    // in close event we are sure that stream from child process is closed
+    python.on('close', (code) => {
+        console.log(`child process close all stdio with code ${code}`);
+        res.send()
+    });
+});
+
+
 // Lấy dữ liệu chuyển đổi USD/VND từ Google Finance 
 app.get('/google-finance', async (req, res) => {
     const { data } = await axios.get('https://www.google.com/finance/quote/USD-VND?hl=vi');
@@ -114,7 +180,7 @@ apiRouter.use("/messages", messagesRouter);
 apiRouter.use("/user", usersRouter);
 apiRouter.use("/provider", providersRouter);
 apiRouter.use("/service-type", serviceTypesRouter);
-apiRouter.use("/service", servicesRouter); 
+apiRouter.use("/service", servicesRouter);
 apiRouter.use("/price-list", priceListsRouter);
 apiRouter.use("/status", statusRouter);
 apiRouter.use("/payment", paymentsRouter);
