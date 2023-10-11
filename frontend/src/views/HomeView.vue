@@ -2,7 +2,7 @@
     <Header></Header>
     <main>
         <!-- Băng rôn khuyến mãi -->
-        <banner></banner>
+        <!-- <banner></banner> -->
         <!-- <h1 class="text-[24px] text-[#202124] font-[500] text-center">Khám phá những dịch vụ của chúng tôi</h1> -->
 
         <!-- Gợi ý dịch vụ -->
@@ -54,7 +54,8 @@
         <div class="min-h-[80vh]">
 
             <!-- Input -->
-            <div class="font-[600] outline-8 outline-red-100 outline border border-red-200 bg-white p-4 m-[16px] flex justify-between flex-wrap max-w-5xl mx-auto text-gray-600 rounded-lg">
+            <div
+                class="font-[600] outline-8 outline-red-100 outline border border-red-200 bg-white p-4 m-[16px] flex justify-between flex-wrap max-w-5xl mx-auto text-gray-600 rounded-lg">
 
                 <!-- Gửi từ -->
                 <div>
@@ -189,7 +190,7 @@
                     <!-- <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">Assigned to</ListboxLabel> -->
                     <div class="relative">
                         <ListboxButton
-                            class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
+                            class="relative w-full min-w-[205px] cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 sm:text-sm sm:leading-6">
                             <span class="flex items-center">
                                 <!-- <img :src="selected.avatar" alt="" class="h-5 w-5 flex-shrink-0 rounded-full" /> -->
                                 <span class="block truncate">{{ priceSelected.name }}</span>
@@ -206,7 +207,7 @@
                                 <ListboxOption as="template" v-for="priceFilter in priceFilters" :key="priceFilter.id"
                                     :value="priceFilter" v-slot="{ active, selected }">
                                     <li @click="priceFilterHandle(priceFilter)"
-                                        :class="[active ? 'bg-indigo-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pr-9']">
+                                        :class="[active ? 'bg-[#0096fa] text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pr-9']">
                                         <div class="flex items-center">
                                             <span
                                                 :class="[selected ? 'font-semibold' : 'font-normal', 'ml-3 block truncate']">{{
@@ -214,7 +215,7 @@
                                         </div>
 
                                         <span v-if="selected"
-                                            :class="[active ? 'text-white' : 'text-indigo-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+                                            :class="[active ? 'text-white' : 'text-[#0096fa]', 'absolute inset-y-0 right-0 flex items-center pr-4']">
                                             <CheckIcon class="h-5 w-5" aria-hidden="true" />
                                         </span>
                                     </li>
@@ -228,7 +229,7 @@
                 <Listbox as="div" v-model="timeSelected" class="w-max ml-[8px]">
                     <div class="relative">
                         <ListboxButton
-                            class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
+                            class="relative w-full min-w-[155px] cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 sm:text-sm sm:leading-6">
                             <span class="flex items-center">
                                 <span class="block truncate">{{ timeSelected.name }}</span>
                             </span>
@@ -244,7 +245,7 @@
                                 <ListboxOption as="template" v-for="timeFilter in timeFilters" :key="timeFilter.id"
                                     :value="timeFilter" v-slot="{ active, selected }">
                                     <li @click="timeFilterHandle(timeFilter)"
-                                        :class="[active ? 'bg-indigo-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pr-9']">
+                                        :class="[active ? 'bg-[#0096fa] text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pr-9']">
                                         <div class="flex items-center">
                                             <span
                                                 :class="[selected ? 'font-semibold' : 'font-normal', 'ml-3 block truncate']">{{
@@ -252,7 +253,7 @@
                                         </div>
 
                                         <span v-if="selected"
-                                            :class="[active ? 'text-white' : 'text-indigo-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+                                            :class="[active ? 'text-white' : 'text-[#0096fa]', 'absolute inset-y-0 right-0 flex items-center pr-4']">
                                             <CheckIcon class="h-5 w-5" aria-hidden="true" />
                                         </span>
                                     </li>
@@ -281,36 +282,52 @@
                                 </MenuButton>
                             </div>
 
-                            <transition enter-active-class="transition ease-out duration-100"
-                                enter-from-class="transform opacity-0 scale-95"
-                                enter-to-class="transform opacity-100 scale-100"
-                                leave-active-class="transition ease-in duration-75"
-                                leave-from-class="transform opacity-100 scale-100"
-                                leave-to-class="transform opacity-0 scale-95">
+                            <transition enter-active-class="transition duration-100 ease-out"
+                                enter-from-class="transform scale-95 opacity-0"
+                                enter-to-class="transform scale-100 opacity-100"
+                                leave-active-class="transition duration-75 ease-in"
+                                leave-from-class="transform scale-100 opacity-100"
+                                leave-to-class="transform scale-95 opacity-0">
                                 <MenuItems
-                                    class="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                    <div class="py-1">
+                                    class="z-[1] absolute right-[-8px] mt-2 w-44 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                    <div class="px-1 py-1">
                                         <MenuItem v-slot="{ active }">
-                                        <button @click="bestRatingfilter()"
-                                            :class="[true ? 'font-medium text-gray-900' : 'text-gray-500', active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm']">
+                                        <button @click="bestRatingfilter()" :class="[
+                                            active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                            'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                        ]">
+                                            <div class="mr-2 h-5 w-2 text-violet-400"></div>
                                             Đánh giá tốt nhất
                                         </button>
                                         </MenuItem>
+                                    </div>
+
+                                    <div class="px-1 py-1">
                                         <MenuItem v-slot="{ active }">
-                                        <button @click="newestfilter()"
-                                            :class="[true ? 'font-medium text-gray-900' : 'text-gray-500', active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm']">
+                                        <button  @click="newestfilter()" :class="[
+                                            active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                            'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                        ]">
+                                            <div class="mr-2 h-5 w-2 text-violet-400"></div>
                                             Mới nhất
                                         </button>
                                         </MenuItem>
+
                                         <MenuItem v-slot="{ active }">
-                                        <button @click="priceLowToHighfilter()"
-                                            :class="[true ? 'font-medium text-gray-900' : 'text-gray-500', active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm']">
-                                            Giá: Thấp đến cao
+                                        <button @click="priceLowToHighfilter()" :class="[
+                                            active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                            'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                        ]">
+                                            <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                           Giá: Thấp đến cao
                                         </button>
                                         </MenuItem>
                                         <MenuItem v-slot="{ active }">
-                                        <button @click="priceHighToLowfilter()"
-                                            :class="[true ? 'font-medium text-gray-900' : 'text-gray-500', active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm']">
+                                        <button @click="priceHighToLowfilter()" :class="[
+                                            active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                            'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                        ]">
+                                            <div class="mr-2 h-5 w-2 text-violet-400"></div>
                                             Giá: Cao đến thấp
                                         </button>
                                         </MenuItem>
@@ -321,7 +338,6 @@
                     </div>
                 </div>
 
-                <!-- Bảng dịch vụ -->
                 <!-- content -->
                 <div class="mt-[1rem] flow-root">
                     <div class="overflow-x-auto">
@@ -409,19 +425,21 @@
                                             </td>
                                         </tr>
 
-                                        <tr v-if="service.append &&
+                                        <tr v-show="service.append &&
                                             (removeVietnameseTones(service.province_from).toLowerCase()).includes(removeVietnameseTones(filter.province_from).toLowerCase()) &&
                                             (removeVietnameseTones(service.district_from).toLowerCase()).includes(removeVietnameseTones(filter.district_from).toLowerCase()) &&
                                             (removeVietnameseTones(service.province_to).toLowerCase()).includes(removeVietnameseTones(filter.province_to).toLowerCase()) &&
                                             (removeVietnameseTones(service.district_to).toLowerCase()).includes(removeVietnameseTones(filter.district_to).toLowerCase()) &&
                                             ((filter.weight === '') || (filter.weight && (filter.weight >= service.weight)))"
-                                            class="mx-auto text-[14px]">
+                                            class="mx-auto text-[15px] text-gray-600">
                                             <td></td>
 
-                                            <td class="pl-[12px]">
-                                                <span>{{ service.district_from }} ,{{ service.province_from }}</span>
-                                                <div>Đến</div>
-                                                <span>{{ service.district_to }}, {{ service.province_to }}</span>
+                                            <td class="pl-[12px] pb-4 font-[600]">
+                                                <span class="py-4">{{ service.district_from }} ,{{ service.province_from
+                                                }}</span>
+                                                <div class="py-4">Đến</div>
+                                                <span class="py-4">{{ service.district_to }}, {{ service.province_to
+                                                }}</span>
                                             </td>
 
                                             <td class="">
@@ -447,7 +465,8 @@
                                                     </span>
                                                 </button>
                                             </td>
-                                            <td class="px-[16px]" v-if="service?.totalCount">
+
+                                            <td class="px-[16px]" v-show="service?.totalCount">
                                                 <div>
                                                     <div :data-tooltip="service.totalCount"
                                                         class="tooltip text-[12px] text-[#757575] inline-flex items-center">
@@ -498,6 +517,7 @@ import domesticCard from "../components/cards/domestic-card.vue";
 import banner from "../components/banner.vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 import Header from '../components/Header.vue';
+import getTime from 'date-fns/getTime'
 
 const { pageview } = useGtag()
 const track = () => {
@@ -554,8 +574,8 @@ const priceFilters = ref([
     {
         id: 4,
         name: '> 1.000.000 VND',
-        low: 50000,
-        high: 1000000000,
+        low: 1000000,
+        high: '',
     }
 ])
 
@@ -600,6 +620,12 @@ const timeFilters = ref([
         name: '2 - 5 Ngày',
         min: 48,
         max: 120
+    },
+    {
+        id: 4,
+        name: '> 5 Ngày',
+        min: 120,
+        max: ''
     }
 ])
 
@@ -624,40 +650,86 @@ const rootServices = ref("");
 
 // Lọc theo giá
 const priceFilterHandle = async (selected) => {
-    // Không áp dụng bộ lọc
-    if (selected.name === priceFilters.value[0].name) {
-        services.value = rootServices.value;
-        return;
+    let result = []
+    // Nếu bộ lọc time đang hoạt động
+    if (timeFilters.value[0].name !== timeSelected.value.name) {
+        result = timeFilter(timeSelected.value, rootServices.value, timeFilters.value);
+        // Nếu bộ lọc price không hoạt động
+        if (selected.name === priceFilters.value[0].name) {
+            services.value = result;
+            return;
+        } else {
+            services.value = priceFilter(selected, result, priceFilters.value);
+        }
     }
-    services.value = [];
-    for (let i = 0; priceFilters.value.length > i; i++) {
-        if (selected.name === priceFilters.value[i].name) {
-            for (let j = 0; rootServices.value.length > j; j++) {
-                if ((rootServices.value[j].price >= priceFilters.value[i].low) && (rootServices.value[j].price <= priceFilters.value[i].high)) {
-                    services.value.push(rootServices.value[j]);
+    else {
+        // Nếu bộ lọc price không hoạt động
+        if (selected.name === priceFilters.value[0].name) {
+            services.value = rootServices.value;
+            return;
+        } else {
+            services.value = priceFilter(selected, rootServices.value, priceFilters.value);
+        }
+
+    }
+};
+
+function priceFilter(selected, services, filter) {
+    let result = []
+    for (let i = 0; filter.length > i; i++) {
+        if (selected.name === filter[i].name) {
+            for (let j = 0; services.length > j; j++) {
+                if ((services[j].price >= filter[i].low) && filter[i].high == '') {
+                    result.push(services[j]);
+                }
+                else if ((services[j].price >= filter[i].low) && (services[j].price <= filter[i].high)) {
+                    result.push(services[j]);
                 }
             }
         }
     }
+    return result;
 };
 
 // Lọc theo thời gian - Giờ
 const timeFilterHandle = async (selected) => {
-    // Không áp dụng bộ lọc
-    if (selected.name === timeFilters.value[0].name) {
-        services.value = rootServices.value;
-        return;
+    let result = []
+    // Nếu bộ lọc price đang hoạt động
+    if (priceFilters.value[0].name !== priceSelected.value.name) {
+        result = priceFilter(priceSelected.value, rootServices.value, priceFilters.value);
+        // Nếu bộ lọc time không hoạt động
+        if (selected.name === timeFilters.value[0].name) {
+            services.value = result;
+            return;
+        } else {
+            services.value = timeFilter(selected, result, timeFilters.value);
+        }
     }
-    services.value = [];
-    for (let i = 0; timeFilters.value.length > i; i++) {
-        if (selected.name === timeFilters.value[i].name) {
-            for (let j = 0; rootServices.value.length > j; j++) {
-                if ((rootServices.value[j].delivery_max_time >= timeFilters.value[i].min) && (rootServices.value[j].delivery_min_time <= timeFilters.value[i].max)) {
-                    services.value.push(rootServices.value[j]);
+    else {
+        if (selected.name === timeFilters.value[0].name) {
+            services.value = rootServices.value;
+            return;
+        } else {
+            services.value = timeFilter(selected, rootServices.value, timeFilters.value);
+        }
+    }
+};
+
+function timeFilter(selected, services, filter) {
+    let result = []
+    for (let i = 0; filter.length > i; i++) {
+        if (selected.name === filter[i].name) {
+            for (let j = 0; services.length > j; j++) {
+                if ((services[j].delivery_min_time === null) && (services[j].delivery_max_time >= filter[i].min)) {
+                    result.push(services[j]);
+                }
+                else if ((services[j].delivery_min_time >= filter[i].min) && (services[j].delivery_max_time <= filter[i].max)) {
+                    result.push(services[j]);
                 }
             }
         }
     }
+    return result;
 };
 
 const mostPopularfilter = async () => {
@@ -669,7 +741,7 @@ const bestRatingfilter = async () => {
 };
 
 const newestfilter = async () => {
-    services.value = rootServices.value;
+    services.value = services.value.toSorted((a, b) => getTime(new Date(b.created)) - getTime(new Date(a.created)));
 };
 
 const priceLowToHighfilter = async () => {
