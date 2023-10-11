@@ -110,6 +110,48 @@
                                     vào giỏ hàng</button>
                             </div>
                         </form>
+
+                        <br />
+                        <!-- Related Product -->
+                        <div v-show="relatedProduct">
+                            <h2 class="text-2xl py-4">Dịch vụ tương tự</h2>
+                            <div class="p-2 bg-gray-100 rounded-lg">
+                                <RouterLink :to="{
+                                    name: 'Service Details',
+                                    params: { id: relatedProduct?.service_id },
+                                }" class="flex p-2 bg-white rounded-lg">
+                                    <div
+                                        class="flex items-center h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                        <img :src="relatedProduct?.image" class="w-full flex-shrink-0 bg-[#607d8b]" />
+                                    </div>
+
+                                    <div class="ml-4 flex flex-1 flex-col">
+                                        <div>
+                                            <div class="flex justify-between text-base font-medium text-gray-900">
+                                                <div class="text-ellipsis overflow-hidden">
+                                                    <h3 class="">
+                                                        {{ relatedProduct?.service_name }}
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                            <p class="mt-1 text-sm text-gray-500">{{
+                                                relatedProduct?.provider_name
+                                            }}</p>
+                                        </div>
+                                        <div class="flex justify-end">
+                                            <p class="font-medium text-gray-500">{{
+                                                (relatedProduct?.price || 0).toLocaleString('vi-VN',
+                                                    {
+                                                        style: 'currency',
+                                                        currency: 'VND'
+                                                    }) }}</p>
+                                        </div>
+                                    </div>
+                                </RouterLink>
+                            </div>
+                        </div>
+
+
                     </div>
 
                     <div class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
@@ -429,6 +471,7 @@ const to = ref('');
 const from = ref('');
 
 const service = ref();
+const relatedProduct = ref();
 const reviews = ref([]);
 const unOrderReviews = ref();
 const user_id = ref('');
@@ -447,6 +490,24 @@ const reviewsCal = ref(
         totalCount: ""
     }
 );
+import axios from "axios";
+const apiServerUrl = import.meta.env.VITE_API_SERVER_URL;
+const getRelatedProductAxios = async (provider, service_type, weight) => {
+    // console.log(`${apiServerUrl}/related-product?provider=${provider}&service_type=${service_type}&weight=${weight}`);
+    await axios.get(`${apiServerUrl}/related-product?provider=${provider}&service_type=${service_type}&weight=${weight}`)
+        .then(function (response) {
+            // handle success
+            console.log(response.data);
+            relatedProduct.value = response.data
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+        .finally(function () {
+            // always executed
+        });
+};
 
 const deteleReviewAxios = async (id) => {
     const accessToken = await getAccessTokenSilently();
@@ -479,6 +540,8 @@ const getServiceByIdAxios = async (id) => {
 
     if (data) {
         service.value = data;
+        // console.log(data.provider_name, data.service_types_name, data.weight);
+        getRelatedProductAxios(data.provider_name, data.service_types_name, data.weight);
         // console.log(service.value);
     }
 
