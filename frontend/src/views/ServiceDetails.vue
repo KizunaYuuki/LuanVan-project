@@ -113,7 +113,7 @@
 
                         <br />
                         <!-- Related Product -->
-                        <div v-show="relatedProduct">
+                        <div v-show="relatedProduct.service_id">
                             <h2 class="text-2xl py-4">Dịch vụ tương tự</h2>
                             <div class="p-2 bg-gray-100 rounded-lg">
                                 <RouterLink :to="{
