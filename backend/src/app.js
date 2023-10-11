@@ -113,37 +113,6 @@ app.get('/related-product', cors(), (req, res) => {
     });
 });
 
-app.get('/', cors(), (req, res) => {
-    // spawn new child process to call the python script
-    const python = spawn('python3', ['./src/python/RelatedProduct.py']);
-
-    python.stdout.on('data', function (data) {
-        console.log('Pipe data from python script ...');
-        console.log(data.toString());
-        res.send(data.toString())
-    });
-
-    python.stderr.on('data', function (data) {
-        console.log('Pipe data from python script ...');
-        console.error(data.toString());
-        res.send(data.toString())
-    });
-
-    python.on('exit', (code) => {
-        if (code === 0) {
-            console.log('Tiến trình con Python kết thúc thành công');
-        } else {
-            console.error('Tiến trình con Python kết thúc với mã lỗi ' + code);
-        }
-    });
-
-    // in close event we are sure that stream from child process is closed
-    python.on('close', (code) => {
-        console.log(`child process close all stdio with code ${code}`);
-        res.send()
-    });
-});
-
 
 // Lấy dữ liệu chuyển đổi USD/VND từ Google Finance 
 app.get('/google-finance', async (req, res) => {
