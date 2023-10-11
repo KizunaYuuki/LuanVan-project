@@ -200,6 +200,21 @@ const { getAccessTokenSilently } = useAuth0();
 // get the information user
 const { user } = useAuth0();
 
+// Check role
+import { useRouter } from 'vue-router'
+const router = useRouter()
+// Xác thực người dùng đã đăng nhập chưa 
+const { isAuthenticated } = useAuth0();
+if (isAuthenticated) {
+    // console.log(user.role);
+    if (user.value.role) {
+        console.log(user);
+    }
+    else {
+        router.push('/');
+    }
+}
+
 const getUsersAxios = async () => {
     const accessToken = await getAccessTokenSilently();
     const { data, error } = await getUsers(accessToken);

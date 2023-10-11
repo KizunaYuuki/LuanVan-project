@@ -205,8 +205,21 @@ const order_root = ref('');
 // get the token
 const { getAccessTokenSilently } = useAuth0();
 
-// get the information user
+// Check role
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const { user } = useAuth0();
+// Xác thực người dùng đã đăng nhập chưa 
+const { isAuthenticated } = useAuth0();
+if (isAuthenticated) {
+    // console.log(user.role);
+    if (user.value.role) {
+        console.log(user);
+    }
+    else {
+        router.push('/');
+    }
+}
 
 const getOrdersByUserIdAxios = async (user_id) => {
     const accessToken = await getAccessTokenSilently();

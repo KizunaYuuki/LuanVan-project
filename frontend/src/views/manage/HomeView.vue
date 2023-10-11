@@ -427,7 +427,7 @@
                     </div>
                 </div>
             </div> -->
-            
+
             <div
                 class="rounded-2xl py-12 px-6 lg:px-12 text-center bg-gradient-to-tr from-pink-400 via-red-500 to-yellow-500 mt-6 mb-6">
                 <h1 class="text-3xl text-white mb-6">Like the project? Please star on <b>GitHub</b> ;-)</h1>
@@ -487,7 +487,7 @@
                             </path>
                         </svg></span></button>
             </section>
-            
+
             <div
                 class="bg-blue-500 border-blue-500 text-white px-3 py-6 md:py-3 mb-6 last:mb-0 border rounded-lg transition-colors duration-150">
                 <div class="justify-between items-center block md:flex">
@@ -516,4 +516,21 @@
 </template>
 <script setup>
 import LayoutAuthenticated from '../../components/manage/layouts/LayoutAuthenticated.vue'
+
+// Check role
+import { useRouter } from 'vue-router'
+const router = useRouter()
+import { useAuth0 } from "@auth0/auth0-vue";
+const { user } = useAuth0();
+// Xác thực người dùng đã đăng nhập chưa 
+const { isAuthenticated } = useAuth0();
+if (isAuthenticated) {
+    // console.log(user.role);
+    if (user.value.role) {
+        console.log(user);
+    }
+    else {
+        router.push('/');
+    }
+}
 </script>
