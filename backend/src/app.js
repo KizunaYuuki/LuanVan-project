@@ -82,19 +82,27 @@ app.get('/', cors(), (req, res) => {
     res.send('Hello World!')
 })
 
+
+const { getServiceById } = require("../src/controllers/services.controller.js");
+
 app.get('/related-product', cors(), (req, res) => {
     // spawn new child process to call the python script
-    const python = spawn('python3', ['./src/python/RelatedProduct.py']);
+    const python = spawn('python3', ['./src/python/RelatedProduct.py', req.query.provider, req.query.service_type, req.query.weight]);
 
-    python.stdout.on('data', function (data) {
+    python.stdout.on('data', async function (data) {
         console.log('Pipe data from python script ...');
         console.log(data.toString());
-        res.send(data.toString())
+        if (data.toString() !== 'False\n') {
+            const result = await getServiceById(data.toString());
+            res.status(200).json(result);
+        } else {
+            res.json(data.toString())
+        }
     });
 
     python.stderr.on('data', function (data) {
         console.log('Pipe data from python script ...');
-        console.error(data.toString());
+        // console.error(data.toString());
         res.send(data.toString())
     });
 
