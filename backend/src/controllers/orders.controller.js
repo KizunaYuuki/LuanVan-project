@@ -2,7 +2,15 @@ const { pool } = require("../models/db.js");
 
 // Lay tat ca don hang
 async function getOrders() {
-    const [rows] = await pool.query("select * from orders")
+    const [rows] = await pool.query(`
+    SELECT orders.id as order_id, orders.created as order_created, orders.total_amount, payments.name as payments_name, 
+    status.name as status_name, orders.email, orders.phone, packages.weight, packages.price as package_price
+    FROM orders
+    JOIN status ON orders.status_id = status.id
+    JOIN payments ON orders.payment_id = payments.id
+    JOIN packages ON orders.id = packages.order_id
+    ORDER BY orders.created DESC
+    `)
     return rows
 }
 
