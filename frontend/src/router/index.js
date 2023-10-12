@@ -143,6 +143,15 @@ const router = createRouter({
             }
         },
         {
+            path: '/management/service/new',
+            name: 'Add Service - Management',
+            component: () => import('../views/manage/ServicePage.vue'),
+            beforeEnter: authGuard,
+            meta: {
+                title: "Quản lý Dịch vụ",
+            }
+        },
+        {
             path: '/management/promotion',
             name: 'Promotion - Management',
             component: () => import('../views/manage/PromotionManage.vue'),

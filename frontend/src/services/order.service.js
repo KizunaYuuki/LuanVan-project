@@ -2,6 +2,24 @@ import { callExternalApi } from "./external-api.service";
 
 const apiServerUrl = import.meta.env.VITE_API_SERVER_URL;
 
+export const getOrders = async (accessToken) => {
+    const config = {
+        url: `${apiServerUrl}/api/order/`,
+        method: "GET",
+        headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+        },
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
+
 export const getOrdersByUserId = async (accessToken, user_id) => {
     const config = {
         url: `${apiServerUrl}/api/order/user/${user_id}`,

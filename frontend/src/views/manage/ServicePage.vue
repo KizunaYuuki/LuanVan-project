@@ -1,7 +1,10 @@
 <template>
-    <ServiceForm></ServiceForm>
+    <LayoutAuthenticated>
+        <ServiceForm :action="'ADD'"></ServiceForm>
+    </LayoutAuthenticated>
 </template>
 
 <script setup>
-import ServiceForm from '../../components/manage/form/ServiceForm.vue';
+import LayoutAuthenticated from '@/components/manage/layouts/LayoutAuthenticated.vue'
+import ServiceForm from '@/components/manage/form/ServiceForm.vue';
 </script>

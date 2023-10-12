@@ -12,6 +12,21 @@
                                 dịch vụ</p>
                         </div>
                         <div class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[4rem] mt-[1rem]">
+                            <button @click="goToAddServicePage()"
+                                class="hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms] my-[8px] inline-flex items-center px-[8px] py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-[#0096faee] hover:bg-[#0096fa]">
+                                <div class="flex items-center">
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                            aria-hidden="true" width="20" height="20"
+                                            class="text-white bg-[#0096fa] rounded-full">
+                                            <path
+                                                d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-sm font-medium leading-6  ml-2">Thêm Dịch vụ</span>
+                                </div>
+                            </button>
                         </div>
                     </div>
 
@@ -222,6 +237,10 @@ if (isAuthenticated) {
         router.push('/');
     }
 }
+
+const goToAddServicePage = async () => {
+    router.push('/management/service/new');
+};
 
 const getServicesAxios = async () => {
     const accessToken = await getAccessTokenSilently();

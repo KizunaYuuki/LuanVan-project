@@ -1,14 +1,41 @@
 <template>
     <div class="overflow-hidden lg:overflow-visible">
         <div
-            class="xl:pl-60 ml-60 lg:ml-0 min-h-screen w-screen transition-position lg:w-auto bg-gray-50 dark:bg-slate-800 dark:text-slate-100">
+            class="xl:pl-60 ml-60 lg:ml-0 min-h-screen w-screen transition-position lg:w-auto bg-gray-50">
+            <nav class="flex lg:items-stretch xl:mx-auto sticky top-0 bg-gray-50 z-[41]">
+                <div class="flex flex-1 items-stretch h-14 xl:pl-[76px]">
+                    <div
+                        class="flex my-2 mx-3 navbar-item-label items-center cursor-pointer">
+                        <div class="relative">
+                            <input placeholder="Search (ctrl+k)" type="text"
+                                class="py-2 max-w-full focus:ring focus:outline-none border-gray-700 rounded w-full h-12 border-0 bg-transparent">
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="xl:pr-[76px] max-h-screen-menu overflow-y-auto lg:overflow-visible absolute w-screen top-14 left-0 bg-gray-50 shadow-lg lg:w-auto lg:flex lg:static lg:shadow-none hidden">
+                    <div
+                        class="block lg:flex items-center relative cursor-pointer navbar-item-label lg:py-2 lg:px-3">
+                        <div
+                            class="flex items-center bg-gray-100 lg:bg-transparent p-3 lg:p-0">
+                            <div class="w-6 h-6 mr-3 inline-flex">
+                                <img :src="user.picture" alt="Profile" class="profile__avatar w-[24px] h-[24px]" />
+                            </div>
+
+                            <span class="px-2 transition-colors">{{ user.name }}</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
             <aside id="aside"
                 class="lg:py-2 lg:pl-2 w-60 fixed flex z-40 top-0 h-screen transition-position overflow-hidden left-0 lg:hidden xl:flex">
-                <div class="aside lg:rounded-2xl flex-1 flex flex-col overflow-hidden dark:bg-slate-900">
+                <div class="aside lg:rounded-2xl flex-1 flex flex-col overflow-hidden">
                     <div
-                        class="hover:text-[#0096fa] hover:bg-slate-300 aside-brand flex flex-row items-center justify-between dark:bg-slate-900 bg-gray-500 text-white">
+                        class="hover:text-[#0096fa] hover:bg-slate-300 aside-brand flex flex-row items-center justify-between bg-gray-500 text-white">
                         <RouterLink aria-current="page" to="/management"
-                            class="router-link-active router-link-exact-active flex cursor-pointer py-3 aside-menu-item dark:text-slate-300 dark:hover:text-white">
+                            class="router-link-active router-link-exact-active flex cursor-pointer py-3 aside-menu-item">
                             <span
                                 class="inline-flex justify-center items-center w-16 h-6 flex-none aside-menu-item-active font-bold">
                                 <svg viewBox="0 0 24 24" width="18" height="18" class="inline-block">
@@ -24,11 +51,11 @@
 
                     <!-- link -->
                     <div
-                        class="flex-1 overflow-y-auto overflow-x-hidden aside-scrollbars dark:aside-scrollbars-[slate] text-[#000000cc] bg-[#fbfbfdcc]">
+                        class="flex-1 overflow-y-auto overflow-x-hidden aside-scrollbars text-[#000000cc] bg-[#fbfbfdcc]">
                         <ul>
                             <li class="hover:text-[#0096fa] hover:bg-slate-100">
                                 <RouterLink to="/management/order"
-                                    class="flex cursor-pointer py-3 aside-menu-item dark:text-slate-300 dark:hover:text-white">
+                                    class="flex cursor-pointer py-3 aside-menu-item">
                                     <span class="inline-flex justify-center items-center w-16 h-6 flex-none">
                                         <svg viewBox="0 0 24 24" width="18" height="18" class="inline-block">
                                             <path fill="currentColor"
@@ -43,7 +70,7 @@
 
                             <li class="hover:text-[#0096fa] hover:bg-slate-100">
                                 <RouterLink to="/management/service"
-                                    class="flex cursor-pointer py-3 aside-menu-item dark:text-slate-300 dark:hover:text-white">
+                                    class="flex cursor-pointer py-3 aside-menu-item">
                                     <span class="inline-flex justify-center items-center w-16 h-6 flex-none">
                                         <svg viewBox="0 0 24 24" width="18" height="18" class="inline-block">
                                             <path fill="currentColor"
@@ -58,7 +85,7 @@
 
                             <li class="hover:text-[#0096fa] hover:bg-slate-100">
                                 <RouterLink to="/management/promotion"
-                                    class="flex cursor-pointer py-3 aside-menu-item dark:text-slate-300 dark:hover:text-white">
+                                    class="flex cursor-pointer py-3 aside-menu-item">
                                     <span class="inline-flex justify-center items-center w-16 h-6 flex-none">
                                         <svg viewBox="0 0 24 24" width="18" height="18" class="inline-block">
                                             <path fill="currentColor"
@@ -72,7 +99,7 @@
 
                             <li class="hover:text-[#0096fa] hover:bg-slate-100">
                                 <RouterLink to="/management/user"
-                                    class="flex cursor-pointer py-3 aside-menu-item dark:text-slate-300 dark:hover:text-white">
+                                    class="flex cursor-pointer py-3 aside-menu-item">
                                     <span class="inline-flex justify-center items-center w-16 h-6 flex-none">
                                         <svg width="18" height="18" viewBox="0 0 48 48" fill="currentColor"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -98,7 +125,7 @@
                     <ul>
                         <li>
                             <button @click="handleLogout"
-                                class="w-full flex cursor-pointer py-3 bg-[#0096fa] hover:bg-[#0096fad6] dark:bg-blue-500 text-white hover:border-blue-700">
+                                class="w-full flex cursor-pointer py-3 bg-[#0096fa] hover:bg-[#0096fad6] text-white hover:border-blue-700">
                                 <span class="inline-flex justify-center items-center w-16 h-6 flex-none">
                                     <svg viewBox="0 0 24 24" width="18" height="18" class="inline-block">
                                         <path fill="currentColor"
@@ -124,6 +151,9 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { useAuth0 } from "@auth0/auth0-vue";
+
+// get the information user
+const { user } = useAuth0();
 
 const { logout } = useAuth0();
 

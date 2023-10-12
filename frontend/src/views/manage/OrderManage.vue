@@ -24,48 +24,71 @@
                             <Menu as="div" class="relative inline-block text-left">
                                 <div>
                                     <MenuButton
-                                        class="inline-flex w-full justify-center gap-x-1.5 text-sm text-gray-900 shadow-sm hover:bg-[#e6e6e685] font-[600] text-[.875rem] leading-[1.25rem] text-center py-[.5rem] px-[.75rem] bg-[#e6e6e6] rounded-[.375rem]">
+                                        class="inline-flex w-full justify-center gap-x-1.5 text-sm text-gray-900 shadow-sm hover:bg-[#e1e3e9] font-[600] text-[.875rem] leading-[1.25rem] text-center py-[.5rem] px-[.75rem] bg-[#edeff6] rounded-[.375rem]">
                                         Tuỳ chọn
                                         <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
                                     </MenuButton>
                                 </div>
 
-                                <transition enter-active-class="transition ease-out duration-100"
-                                    enter-from-class="transform opacity-0 scale-95"
-                                    enter-to-class="transform opacity-100 scale-100"
-                                    leave-active-class="transition ease-in duration-75"
-                                    leave-from-class="transform opacity-100 scale-100"
-                                    leave-to-class="transform opacity-0 scale-95">
+                                <transition enter-active-class="transition duration-100 ease-out"
+                                    enter-from-class="transform scale-95 opacity-0"
+                                    enter-to-class="transform scale-100 opacity-100"
+                                    leave-active-class="transition duration-75 ease-in"
+                                    leave-from-class="transform scale-100 opacity-100"
+                                    leave-to-class="transform scale-95 opacity-0">
                                     <MenuItems
-                                        class="absolute right-0 z-10 mt-2 w-[9rem] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                        <div class="py-1">
+                                        class="z-[1] absolute right-0 mt-2 w-44 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                        <div class="px-1 py-1">
                                             <MenuItem v-slot="{ active }">
-                                            <button @click="Nofilter()"
-                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Tất
-                                                cả</button>
+                                            <button @click="Nofilter()" :class="[
+                                                active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                            ]">
+                                                <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                Tất cả
+                                            </button>
+                                            </MenuItem>
+                                        </div>
+
+                                        <div class="px-1 py-1">
+                                            <MenuItem v-slot="{ active }">
+                                            <button @click="DaDangKyfilter()" :class="[
+                                                active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                            ]">
+                                                <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                Đã đăng ký
+                                            </button>
                                             </MenuItem>
 
-                                        </div>
-                                        <div class="py-1">
                                             <MenuItem v-slot="{ active }">
-                                            <button @click="DaDangKyfilter()"
-                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Đã
-                                                đăng ký</button>
+                                            <button @click="HuyBofilter()" :class="[
+                                                active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                            ]">
+                                                <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                Huỷ bỏ
+                                            </button>
                                             </MenuItem>
+
                                             <MenuItem v-slot="{ active }">
-                                            <button @click="HuyBofilter()"
-                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Huỷ
-                                                bỏ</button>
+                                            <button @click="HoanThanhfilter()" :class="[
+                                                active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                            ]">
+                                                <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                Hoàn thành
+                                            </button>
                                             </MenuItem>
+
                                             <MenuItem v-slot="{ active }">
-                                            <button @click="HoanThanhfilter()"
-                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Hoàn
-                                                thành</button>
-                                            </MenuItem>
-                                            <MenuItem v-slot="{ active }">
-                                            <button @click="DaXacNhanfilter()"
-                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Đã
-                                                xác nhận</button>
+                                            <button @click="DaXacNhanfilter()" :class="[
+                                                active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                            ]">
+                                                <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                Đã xác nhận
+                                            </button>
                                             </MenuItem>
                                         </div>
                                     </MenuItems>
@@ -78,7 +101,7 @@
                     <div class="mt-[1rem] flow-root">
                         <div class="">
                             <div class="align-middle min-w-[100%] inline-block">
-                                <table class="min-w-[100%] indent-0 border-collapse bg-[#e6e6e6] rounded-[8px]">
+                                <table class="min-w-[100%] indent-0 border-collapse bg-[#edeff6] border-x border-[#d3e2fd]">
                                     <thead>
                                         <tr class="border-b-[4px] border-[white]">
                                             <th scope="col"
@@ -108,7 +131,7 @@
 
                                     <tbody class="">
                                         <tr v-for="order in orders" :key="order.order_id"
-                                            class="mx-[4px] border-b-[4px] border-[white] hover:bg-slate-400 text-slate-500 hover:text-slate-100">
+                                            class="mx-[4px] border-b-[4px] border-[white] hover:bg-[#e1e3e9] text-slate-500 hover:text-[#5080db]">
                                             <td
                                                 class="pl-[1rem] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
                                                 {{ order.order_id }}</td>
@@ -129,6 +152,7 @@
                                                 {{ order.status_name }}</td>
                                             <td
                                                 class="min-[640px]:pr-0 font-[500] text-[.875rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative">
+
                                                 <Menu as="div" class="relative inline-block text-left">
                                                     <div>
                                                         <MenuButton
@@ -144,26 +168,45 @@
                                                         </MenuButton>
                                                     </div>
 
-                                                    <transition enter-active-class="transition ease-out duration-100"
-                                                        enter-from-class="transform opacity-0 scale-95"
-                                                        enter-to-class="transform opacity-100 scale-100"
-                                                        leave-active-class="transition ease-in duration-75"
-                                                        leave-from-class="transform opacity-100 scale-100"
-                                                        leave-to-class="transform opacity-0 scale-95">
+                                                    <transition enter-active-class="transition duration-100 ease-out"
+                                                        enter-from-class="transform scale-95 opacity-0"
+                                                        enter-to-class="transform scale-100 opacity-100"
+                                                        leave-active-class="transition duration-75 ease-in"
+                                                        leave-from-class="transform scale-100 opacity-100"
+                                                        leave-to-class="transform scale-95 opacity-0">
                                                         <MenuItems
-                                                            class="absolute right-0 z-10 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                                            <div class="py-1" v-show="order.status_name === 'Đã đăng ký'">
-                                                                <MenuItem v-slot="{ active }">
-                                                                <button @click="cancelOrderAxios(order.order_id)"
-                                                                    :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Huỷ
-                                                                    đơn hàng</button>
+                                                            class="z-[1] absolute right-[-1px] -mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                            <div class="px-1 py-1">
+                                                                <MenuItem v-show="order.status_name === 'Đã đăng ký'"
+                                                                    v-slot="{ active }">
+                                                                <button @click="confirmOrderAxios(order.order_id)" :class="[
+                                                                    active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                                ]">
+                                                                    <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                                    Xác nhận
+                                                                </button>
                                                                 </MenuItem>
-                                                            </div>
-                                                            <div class="py-1">
+
+                                                                <MenuItem v-show="order.status_name === 'Đã đăng ký'"
+                                                                    v-slot="{ active }">
+                                                                <button @click="cancelOrderAxios(order.order_id)" :class="[
+                                                                    active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                                ]">
+                                                                    <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                                    Huỷ
+                                                                </button>
+                                                                </MenuItem>
+
                                                                 <MenuItem v-slot="{ active }">
-                                                                <button @click="deteleOrderAxios(order.order_id)"
-                                                                    :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Xoá
-                                                                    đơn hàng</button>
+                                                                <button @click="deteleOrderAxios(order.order_id)" :class="[
+                                                                    active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                                ]">
+                                                                    <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                                    Xoá
+                                                                </button>
                                                                 </MenuItem>
                                                             </div>
                                                         </MenuItems>
@@ -188,7 +231,7 @@ import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 import { onMounted, ref } from "vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 import { RouterLink } from 'vue-router'
-import { getOrdersByUserId, cancelOrder, deteleOrder } from "@/services/order.service";
+import { getOrders, cancelOrder, deteleOrder } from "@/services/order.service";
 import { getUserByEmail, createUser } from "@/services/user.service";
 import { format } from "date-fns";
 import { vi } from 'date-fns/locale'
@@ -221,15 +264,39 @@ if (isAuthenticated) {
     }
 }
 
-const getOrdersByUserIdAxios = async (user_id) => {
+const getOrdersByUserIdAxios = async () => {
     const accessToken = await getAccessTokenSilently();
-    const { data, error } = await getOrdersByUserId(accessToken, user_id);
+    const { data, error } = await getOrders(accessToken);
     // console.log(user_id);
 
     if (data) {
         orders.value = data;
         order_root.value = data;
         // console.log(orders.value)
+    }
+
+    if (error) {
+        // console.log(error)
+    }
+};
+
+const confirmOrderAxios = async (order_id) => {
+    // edit data
+    let orderData = {
+        status_id: 4
+    }
+
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await cancelOrder(accessToken, orderData, order_id);
+
+    if (data) {
+        // console.log(data);
+        for (let i = 0; i < orders.value.length; i++) {
+            if (orders.value[i].order_id == order_id) {
+                orders.value[i].status_name = "Đã xác nhận";
+                order_root.value[i].status_name = "Đã xác nhận";
+            }
+        }
     }
 
     if (error) {
@@ -301,7 +368,6 @@ const getUserByEmailAxios = async (user) => {
 
     if (data) {
         user_id.value = data.id;
-        getOrdersByUserIdAxios(data.id)
         // console.log(data);
     }
     if (error) {
@@ -352,5 +418,6 @@ const Nofilter = async () => {
 };
 
 // run function
-getUserByEmailAxios(user)
+getUserByEmailAxios(user);
+getOrdersByUserIdAxios();
 </script>

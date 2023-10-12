@@ -267,7 +267,7 @@
             <!-- Content - Dich vụ lọc được -->
             <div class="mx-auto max-w-5xl">
                 <div
-                    class="bg-[#f2f2f2] flex items-baseline lg:justify-between justify-end shadow-md px-[8px] pb-6 pt-[24px] bg-[white] rounded-[4px]">
+                    class="flex items-baseline lg:justify-between justify-end shadow-md px-[8px] pb-6 pt-[24px] bg-[white] rounded-[4px]">
                     <h1 class="text-xl font-bold tracking-tight text-gray-900 hidden md:block">Vận chuyển hàng hoá</h1>
 
                     <div class="flex items-center">
