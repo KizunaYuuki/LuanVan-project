@@ -73,6 +73,24 @@ async function deleteServiceById(id) {
     try {
         await pool.query(`
     DELETE
+    FROM locations
+    WHERE service_id = ?
+    `, [id])
+
+        await pool.query(`
+    DELETE
+    FROM reviews
+    WHERE service_id = ?
+    `, [id])
+
+        await pool.query(`
+    DELETE
+    FROM carts
+    WHERE service_id = ?
+    `, [id])
+
+        await pool.query(`
+    DELETE
     FROM services
     WHERE id = ?
     `, [id])

@@ -17,6 +17,7 @@ const { addressRouter } = require("./routes/address.router.js");
 const { packagesRouter } = require("./routes/packages.router.js");
 const { reviewsRouter } = require("./routes/reviews.router.js");
 const { cartsRouter } = require("./routes/carts.router.js");
+const { promotionsRouter } = require("./routes/promotions.router.js");
 const { locationsRouter } = require("./routes/locations.router.js");
 const axios = require('axios');
 
@@ -166,6 +167,7 @@ apiRouter.use("/address", addressRouter);
 apiRouter.use("/package", packagesRouter);
 apiRouter.use("/review", reviewsRouter);
 apiRouter.use("/cart", cartsRouter);
+apiRouter.use("/promotion", promotionsRouter);
 apiRouter.use("/location", locationsRouter);
 
 app.use(errorHandler);
