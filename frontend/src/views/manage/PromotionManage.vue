@@ -79,19 +79,19 @@
                                         <tr class="border-b-[4px] border-[white]">
                                             <th scope="col"
                                                 class="pl-[1rem] text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left pr-[.75rem] py-[.875rem]">
-                                                ID Service</th>
+                                                Promotion ID</th>
                                             <th scope="col"
                                                 class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                                Tên dịch vụ</th>
+                                                Tên khuyến mãi</th>
                                             <th scope="col"
                                                 class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                                ID Provider</th>
+                                                Service ID</th>
                                             <th scope="col" title="Trọng lượng tối đa của Gói hàng muốn vận chuyển"
                                                 class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                                Nhà cung cấp</th>
+                                                Ngày bắt đầu</th>
                                             <th scope="col"
                                                 class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                                Trọng lượng tối đa</th>
+                                                Ngày kết thúc</th>
                                             <th scope="col"
                                                 class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                                 Giá dịch vụ</th>
@@ -103,26 +103,26 @@
                                     </thead>
 
                                     <tbody class="">
-                                        <tr v-for="service in services" :key="service.service_id"
+                                        <tr v-for="promotion in promotions" :key="promotion.id"
                                             class="mx-[4px] border-b-[4px] border-[white] hover:bg-gray-400 text-gray-500 hover:text-gray-100">
                                             <td
                                                 class="pl-[1rem] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ service.service_id }}</td>
+                                                {{ promotion.id }}</td>
                                             <td
                                                 class="font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ service.service_name }}</td>
+                                                {{ promotion.name }}</td>
                                             <td
                                                 class="font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ service.provider_id }}</td>
+                                                {{ promotion.service_id }}</td>
                                             <td
                                                 class="font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ service.provider_name }}</td>
+                                                {{ format(new Date(promotion.start), 'PPpp', { locale: vi }) }}</td>
                                             <td
                                                 class="font-[600] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ service.weight }}</td>
+                                                {{ format(new Date(promotion.end), 'PPpp', { locale: vi }) }}</td>
                                             <td
                                                 class="font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ service.price }}</td>
+                                                {{ promotion.price }}</td>
                                             <td
                                                 class="min-[640px]:pr-0 font-[500] text-[.875rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative">
                                                 <Menu as="div" class="relative inline-block text-left">
@@ -162,7 +162,7 @@
 
                                                             <div class="px-1 py-1">
                                                                 <MenuItem v-slot="{ active }">
-                                                                <button :class="[
+                                                                <button @click="detelePromotionAxios(promotion.id)" :class="[
                                                                     active ? 'bg-sky-400 text-white' : 'text-gray-900',
                                                                     'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                                                                 ]">
@@ -191,16 +191,17 @@
 import LayoutAuthenticated from '../../components/manage/layouts/LayoutAuthenticated.vue'
 import { onMounted, ref, onBeforeMount } from "vue";
 import { useAuth0 } from "@auth0/auth0-vue";
-import { getOrdersByUserId, cancelOrder, deteleOrder } from "@/services/order.service";
-import { getServices } from "@/services/service.service";
+import { getPromotions, detelePromotion } from "@/services/promotion.service";
 import { getUserByEmail } from "@/services/user.service";
 import {
     Menu, MenuButton, MenuItem, MenuItems
 } from '@headlessui/vue'
+import format from 'date-fns/format'
+import { vi } from 'date-fns/locale'
 
 // variables
 const user_id = ref('');
-const services = ref('');
+const promotions = ref('');
 
 // get the token
 const { getAccessTokenSilently } = useAuth0();
@@ -223,13 +224,25 @@ if (isAuthenticated) {
     }
 }
 
-const getServicesAxios = async () => {
-    const accessToken = await getAccessTokenSilently();
-    const { data, error } = await getServices(accessToken);
+const getPromotionsAxios = async () => {
+    const { data, error } = await getPromotions();
 
     if (data) {
-        services.value = data;
-        // console.log(data);
+        promotions.value = data
+        console.log(data);
+    }
+    if (error) {
+        // console.log(error.message);
+    }
+};
+
+const detelePromotionAxios = async (promotion_id) => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await detelePromotion(accessToken, promotion_id);
+
+    if (data) {
+        console.log(data);
+        getPromotionsAxios();
     }
     if (error) {
         // console.log(error.message);
@@ -258,7 +271,7 @@ const getUserByEmailAxios = async (user) => {
 onBeforeMount(async () => {
     // run function
     getUserByEmailAxios(user);
-    getServicesAxios();
+    getPromotionsAxios();
 });
 
 </script>

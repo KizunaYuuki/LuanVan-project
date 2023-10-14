@@ -153,7 +153,7 @@
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                             <div class="sm:col-span-2">
                                 <label for="service_name" class="block text-sm font-medium leading-6 text-gray-900">Tên
-                                    dịch vụ</label>
+                                    dịch vụ<strong class="text-[red] ml-[8px]">*</strong></label>
                                 <div class="mt-2">
                                     <input type="text" v-model="service.name" name="service_name" id="service_name"
                                         class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
@@ -174,21 +174,50 @@
                                 </p>
                             </div>
 
-                            <div class="sm:col-span-2">
+                            <!-- <div class="sm:col-span-2">
                                 <label for="service_delivery_date"
                                     class="block text-sm font-medium leading-6 text-gray-900">Thời
-                                    gian vận chuyển</label>
+                                    gian vận chuyển (<span class="text-[#0096fa]">Tính theo giờ</span>)<strong
+                                        class="text-[red] ml-[8px]">*</strong></label>
                                 <div class="mt-2">
                                     <input v-model="service.delivery_date" placeholder="1-2 ngày" type="text"
                                         name="service_delivery_date" id="service_delivery_date"
                                         class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
+                            </div> -->
+
+                            <div class="sm:col-span-3">
+                                <label for="service_delivery_min_time"
+                                    class="block text-sm font-medium leading-6 text-gray-900">Thời
+                                    gian vận chuyển sớm nhất (<span class="text-[#0096fa]">Tính theo giờ</span>)<strong
+                                        class="text-[red] ml-[8px]">*</strong></label>
+                                <div class="mt-2">
+                                    <input v-model="service.delivery_min_time" placeholder="12" type="text"
+                                        name="service_delivery_min_time" id="service_delivery_min_time"
+                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                </div>
                             </div>
 
-                            <div class="sm:col-span-2">
+                            <div class="sm:col-span-3">
+                                <label for="service_delivery_max_time"
+                                    class="block text-sm font-medium leading-6 text-gray-900">Thời
+                                    gian vận chuyển trể nhất (<span class="text-[#0096fa]">Tính theo giờ</span>)<strong
+                                        class="text-[red] ml-[8px]">*</strong></label>
+                                <div class="mt-2">
+                                    <input v-model="service.delivery_max_time" placeholder="24" type="text"
+                                        name="service_delivery_max_time" id="service_delivery_max_time"
+                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                </div>
+                            </div>
+
+
+
+                            <div class="sm:col-span-3">
                                 <label for="service_weight" class="block text-sm font-medium leading-6 text-gray-900">Trọng
                                     lượng tối đa của
-                                    gói hàng</label>
+                                    gói hàng
+                                    (<span class="text-[#0096fa]">Gram</span>)
+                                    <strong class="text-[red] ml-[8px]">*</strong></label>
                                 <div class="mt-2">
                                     <input v-model="service.weight" id="service_weight" name="service_weight" type="number"
                                         autocomplete="service_weight"
@@ -199,7 +228,7 @@
                             <div class="sm:col-span-3">
                                 <label for="service_price" class="block text-sm font-medium leading-6 text-gray-900">Giá
                                     dịch
-                                    vụ</label>
+                                    vụ<strong class="text-[red] ml-[8px]">*</strong></label>
                                 <div class="mt-2">
                                     <input v-model="service.price" id="service_price" name="service_price" type="number"
                                         class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
@@ -218,7 +247,8 @@
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                             <div class="sm:col-span-2 sm:col-start-1">
                                 <label for="from_domain"
-                                    class="block text-sm font-medium leading-6 text-gray-900">Miền</label>
+                                    class="block text-sm font-medium leading-6 text-gray-900">Miền<strong
+                                        class="text-[red] ml-[8px]">*</strong></label>
                                 <div class="mt-2">
                                     <input v-model="from.domain" type="text" name="from_domain" id="from_domain"
                                         autocomplete="address-level3"
@@ -229,7 +259,7 @@
                             <div class="sm:col-span-2">
                                 <label for="from_province" class="block text-sm font-medium leading-6 text-gray-900">Tỉnh
                                     / Thành
-                                    phố</label>
+                                    phố<strong class="text-[red] ml-[8px]">*</strong></label>
                                 <div class="mt-2">
                                     <input v-model="from.province" type="text" name="from_province" id="from_province"
                                         autocomplete="address-level2"
@@ -239,7 +269,7 @@
 
                             <div class="sm:col-span-2">
                                 <label for="fron_district" class="block text-sm font-medium leading-6 text-gray-900">Quận /
-                                    Huyện</label>
+                                    Huyện<strong class="text-[red] ml-[8px]">*</strong></label>
                                 <div class="mt-2">
                                     <input v-model="from.district" type="text" name="fron_district" id="fron_district"
                                         autocomplete="address-level1"
@@ -256,8 +286,8 @@
                             dịch vụ</p>
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                             <div class="sm:col-span-2 sm:col-start-1">
-                                <label for="to_domain"
-                                    class="block text-sm font-medium leading-6 text-gray-900">Miền</label>
+                                <label for="to_domain" class="block text-sm font-medium leading-6 text-gray-900">Miền<strong
+                                        class="text-[red] ml-[8px]">*</strong></label>
                                 <div class="mt-2">
                                     <input v-model="to.domain" type="text" name="to_domain" id="to_domain"
                                         autocomplete="address-level3"
@@ -268,7 +298,7 @@
                             <div class="sm:col-span-2">
                                 <label for="to_province" class="block text-sm font-medium leading-6 text-gray-900">Tỉnh
                                     / Thành
-                                    phố</label>
+                                    phố<strong class="text-[red] ml-[8px]">*</strong></label>
                                 <div class="mt-2">
                                     <input v-model="to.province" type="text" name="to_province" id="to_province"
                                         autocomplete="address-level2"
@@ -278,7 +308,7 @@
 
                             <div class="sm:col-span-2">
                                 <label for="to_district" class="block text-sm font-medium leading-6 text-gray-900">Quận /
-                                    Huyện</label>
+                                    Huyện<strong class="text-[red] ml-[8px]">*</strong></label>
                                 <div class="mt-2">
                                     <input v-model="to.district" type="text" name="to_district" id="to_district"
                                         autocomplete="address-level1"
@@ -341,18 +371,18 @@ const service = ref(
 const from = ref(
     {
         service_id: "",
-        domain: "Miền Nam",
-        province: "TP Hồ Chí Minh Minh",
-        district: "Quận 1",
+        domain: "",
+        province: "",
+        district: "",
         type: "FROM"
     }
 )
 const to = ref(
     {
         service_id: "",
-        domain: "Miền Bắc",
-        province: "TP Hồ Chí Minh Minh",
-        district: "Quận 1",
+        domain: "",
+        province: "",
+        district: "",
         type: "TO"
     }
 )
@@ -407,14 +437,35 @@ function changeServiceType(providerId) {
 // create service
 const createServiceAxios = async () => {
     const accessToken = await getAccessTokenSilently();
+
+    // edit data service
+    if (service.value.delivery_min_time === '' && service.value.delivery_max_time !== '') {
+        if (service.value.delivery_max_time > 24) {
+            service.value.delivery_date = `${service.value.delivery_max_time / 24.0} ngày`
+        }
+        else {
+            service.value.delivery_date = `${service.value.delivery_max_time}h`
+        }
+    }
+    else if (service.value.delivery_min_time !== '' && service.value.delivery_max_time !== '') {
+        if (service.value.delivery_min_time >= 24) {
+            service.value.delivery_date = `${service.value.delivery_min_time / 24.0} - ${service.value.delivery_max_time / 24.0} ngày`
+        }
+        else {
+            service.value.delivery_date = `${service.value.delivery_min_time} - ${service.value.delivery_max_time} ngày`
+        }
+    }
+
     const { data, error } = await createService(accessToken, service.value);
     const result = ref({});
 
     if (data) {
         result.value = data;
+        console.log(data);
+
         // edit data location
-        from.value.service_id = data.id;
-        to.value.service_id = data.id;
+        from.value.service_id = data.service_id;
+        to.value.service_id = data.service_id;
 
         // Create location
         createLocationAxios(from.value);
@@ -434,6 +485,7 @@ const createLocationAxios = async (location) => {
 
     if (data) {
         result.value = data;
+        console.log(data);
     }
 
     if (error) {

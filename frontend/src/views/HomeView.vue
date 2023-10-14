@@ -304,7 +304,7 @@
 
                                     <div class="px-1 py-1">
                                         <MenuItem v-slot="{ active }">
-                                        <button  @click="newestfilter()" :class="[
+                                        <button @click="newestfilter()" :class="[
                                             active ? 'bg-sky-400 text-white' : 'text-gray-900',
                                             'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                                         ]">
@@ -319,7 +319,7 @@
                                             'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                                         ]">
                                             <div class="mr-2 h-5 w-2 text-violet-400"></div>
-                                           Giá: Thấp đến cao
+                                            Giá: Thấp đến cao
                                         </button>
                                         </MenuItem>
                                         <MenuItem v-slot="{ active }">
@@ -375,7 +375,8 @@
                                             (removeVietnameseTones(service.province_to).toLowerCase()).includes(removeVietnameseTones(filter.province_to).toLowerCase()) &&
                                             (removeVietnameseTones(service.district_to).toLowerCase()).includes(removeVietnameseTones(filter.district_to).toLowerCase()) &&
                                             ((filter.weight === '') || (filter.weight && (filter.weight >= service.weight)))"
-                                            class="mx-[4px] hover:shadow hover:bg-[#0096fa0d]">
+                                            class="mx-[4px] hover:shadow hover:bg-[#0096fa0d]"
+                                            :class="{ 'bg-red-50': (service.promotion_price && service.append === false) }">
                                             <td
                                                 class="text-ellipsis border-[#dadce0] border-t px-[.75rem] text-[#111827] font-[500] text-[.95rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
                                                 <div class="flex items-center text-ellipsis">
@@ -393,12 +394,21 @@
                                             <td
                                                 class="text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
                                                 {{ service.weight }} <span>kg</span></td>
-                                            <td v-if="service?.price"
+
+                                            <td v-if="service?.price && service.promotion_price"
+                                                class="text-ellipsis border-[#dadce0] border-t text-sky-400 font-[600] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                {{ (service.price * service.promotion_price / 100).toLocaleString('vi-VN', {
+                                                    style: 'currency',
+                                                    currency: 'VND'
+                                                }) }}</td>
+
+                                            <td v-else-if="service?.price"
                                                 class="text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
                                                 {{ (service.price).toLocaleString('vi-VN', {
                                                     style: 'currency',
                                                     currency: 'VND'
                                                 }) }}</td>
+
                                             <td
                                                 class="flex justify-between border-[#dadce0] border-t min-[640px]:pr-0 font-[500] text-[.95rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative">
                                                 <div class="float-left">
@@ -466,8 +476,8 @@
                                                 </button>
                                             </td>
 
-                                            <td class="px-[16px]" v-show="service?.totalCount">
-                                                <div>
+                                            <td class="px-[16px]">
+                                                <div v-show="service?.totalCount">
                                                     <div :data-tooltip="service.totalCount"
                                                         class="tooltip text-[12px] text-[#757575] inline-flex items-center">
                                                         <span class="mr-[4px]">{{
@@ -484,6 +494,10 @@
                                                         </svg>
                                                     </div>
                                                 </div>
+                                            </td>
+
+                                            <td class="px-[12px] font-medium text-gray-500" v-show="service?.promotion_price">
+                                                - {{ service.promotion_price }}%
                                             </td>
                                         </tr>
                                     </template>
@@ -642,6 +656,7 @@ const sortOptions = [
 
 
 import { getServices, createService, updateService, deteleService, getServiceById, getInfoReviews } from "@/services/service.service";
+import { getPromotions } from "@/services/promotion.service";
 
 const services = ref("");
 const rootServices = ref("");
@@ -796,12 +811,42 @@ const getServicesAxios = async () => {
             rootServices.value[i].append = false;
         }
         getInfoReviewsAxios();
+        getPromotionsAxios();
     }
 
     if (error) {
         services.value = JSON.stringify(error, null, 2);
     }
     console.log(services.value);
+};
+
+const getPromotionsAxios = async () => {
+    const { data, error } = await getPromotions();
+
+    if (data) {
+        console.log(data);
+        for (let i = 0; rootServices.value.length > i; i++) {
+            for (let j = 0; data.length > j; j++) {
+                if (rootServices.value[i].service_id === data[j].service_id) {
+                    rootServices.value[i].promotion_price = data[j].price;
+                }
+            }
+        }
+
+        for (let i = 0; services.value.length > i; i++) {
+            for (let j = 0; data.length > j; j++) {
+                if (services.value[i].service_id === data[j].service_id) {
+                    services.value[i].promotion_price = data[j].price;
+                }
+            }
+        }
+
+        console.log(services.value);
+    }
+
+    if (error) {
+        services.value = JSON.stringify(error, null, 2);
+    }
 };
 
 getServicesAxios();
@@ -830,84 +875,6 @@ const getInfoReviewsAxios = async () => {
         services.value = JSON.stringify(error, null, 2);
     }
 };
-
-const testService = {
-    "service_type_id": "1",
-    "name": "Dich vu chuyen phat nhanh",
-    "description": "Chat luong",
-    "delivery_date": "1-2 ngay",
-    "weight": 4,
-    "price": 200000
-}
-
-// const createServiceAxios = async () => {
-//     const { getAccessTokenSilently } = useAuth0();
-//     const accessToken = await getAccessTokenSilently();
-//     const { data, error } = await createService(accessToken, testService);
-
-//     if (data) {
-//         // message.value = JSON.stringify(data, null, 2);
-//         services.value = data;
-//     }
-
-//     if (error) {
-//         services.value = JSON.stringify(error, null, 2);
-//     }
-//     console.log(services.value);
-// };
-// createServiceAxios()
-const service_id = 1
-// const updateServiceAxios = async () => {
-//     const { getAccessTokenSilently } = useAuth0();
-//     const accessToken = await getAccessTokenSilently();
-//     const { data, error } = await updateService(accessToken, testService, service_id);
-
-//     if (data) {
-//         // message.value = JSON.stringify(data, null, 2);
-//         services.value = data;
-//     }
-
-//     if (error) {
-//         services.value = JSON.stringify(error, null, 2);
-//     }
-//     console.log(services.value);
-// };
-// updateServiceAxios()
-
-
-// const deleteServiceAxios = async () => {
-//     const { getAccessTokenSilently } = useAuth0();
-//     const accessToken = await getAccessTokenSilently();
-//     const { data, error } = await deteleService(accessToken, service_id);
-
-//     if (data) {
-//         // message.value = JSON.stringify(data, null, 2);
-//         services.value = data;
-//     }
-
-//     if (error) {
-//         services.value = JSON.stringify(error, null, 2);
-//     }
-//     console.log(services.value);
-// };
-// deleteServiceAxios()
-
-// const getServiceAxios = async () => {
-//     const { getAccessTokenSilently } = useAuth0();
-//     const accessToken = await getAccessTokenSilently();
-//     const { data, error } = await getServiceById(accessToken, service_id);
-
-//     if (data) {
-//         // message.value = JSON.stringify(data, null, 2);
-//         services.value = data;
-//     }
-
-//     if (error) {
-//         services.value = JSON.stringify(error, null, 2);
-//     }
-//     console.log(services.value);
-// };
-// getServiceAxios()
 </script>
 
 <style>

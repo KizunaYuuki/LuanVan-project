@@ -30,62 +30,6 @@
                         </div>
                     </div>
 
-                    <!-- Filter -->
-                    <!-- <div class="flex justify-end">
-                        <div class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[4rem] mt-[1rem]">
-                            <Menu as="div" class="relative inline-block text-left">
-                                <div>
-                                    <MenuButton
-                                        class="inline-flex w-full justify-center gap-x-1.5 text-sm text-gray-900 shadow-sm hover:bg-[#e6e6e685] font-[600] text-[.875rem] leading-[1.25rem] text-center py-[.5rem] px-[.75rem] bg-[#e6e6e6] rounded-[.375rem]">
-                                        Tuỳ chọn
-                                        <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
-                                    </MenuButton>
-                                </div>
-
-                                <transition enter-active-class="transition ease-out duration-100"
-                                    enter-from-class="transform opacity-0 scale-95"
-                                    enter-to-class="transform opacity-100 scale-100"
-                                    leave-active-class="transition ease-in duration-75"
-                                    leave-from-class="transform opacity-100 scale-100"
-                                    leave-to-class="transform opacity-0 scale-95">
-                                    <MenuItems
-                                        class="absolute right-0 z-10 mt-2 w-[9rem] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                        <div class="py-1">
-                                            <MenuItem v-slot="{ active }">
-                                            <button @click="Nofilter()"
-                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Tất
-                                                cả</button>
-                                            </MenuItem>
-
-                                        </div>
-                                        <div class="py-1">
-                                            <MenuItem v-slot="{ active }">
-                                            <button @click="DaDangKyfilter()"
-                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Đã
-                                                đăng ký</button>
-                                            </MenuItem>
-                                            <MenuItem v-slot="{ active }">
-                                            <button @click="HuyBofilter()"
-                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Huỷ
-                                                bỏ</button>
-                                            </MenuItem>
-                                            <MenuItem v-slot="{ active }">
-                                            <button @click="HoanThanhfilter()"
-                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Hoàn
-                                                thành</button>
-                                            </MenuItem>
-                                            <MenuItem v-slot="{ active }">
-                                            <button @click="DaXacNhanfilter()"
-                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Đã
-                                                xác nhận</button>
-                                            </MenuItem>
-                                        </div>
-                                    </MenuItems>
-                                </transition>
-                            </Menu>
-                        </div>
-                    </div> -->
-
                     <!-- Content -->
                     <div class="mt-[1rem] flow-root">
                         <div class="">
@@ -178,7 +122,7 @@
 
                                                             <div class="px-1 py-1">
                                                                 <MenuItem v-slot="{ active }">
-                                                                <button :class="[
+                                                                <button @click="deteleServiceAxios(service.service_id)" :class="[
                                                                     active ? 'bg-sky-400 text-white' : 'text-gray-900',
                                                                     'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                                                                 ]">
@@ -207,8 +151,7 @@
 import LayoutAuthenticated from '../../components/manage/layouts/LayoutAuthenticated.vue'
 import { onMounted, ref, onBeforeMount } from "vue";
 import { useAuth0 } from "@auth0/auth0-vue";
-import { getOrdersByUserId, cancelOrder, deteleOrder } from "@/services/order.service";
-import { getServices } from "@/services/service.service";
+import { getServices, deteleService } from "@/services/service.service";
 import { getUserByEmail } from "@/services/user.service";
 import {
     Menu, MenuButton, MenuItem, MenuItems
@@ -240,6 +183,20 @@ if (isAuthenticated) {
 
 const goToAddServicePage = async () => {
     router.push('/management/service/new');
+};
+
+const deteleServiceAxios = async (service_id) => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await deteleService(accessToken, service_id);
+
+    if (data) {
+        services.value = data;
+        console.log(data);
+        getServicesAxios()
+    }
+    if (error) {
+        console.log(error.message);
+    }
 };
 
 const getServicesAxios = async () => {
