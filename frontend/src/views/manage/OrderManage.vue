@@ -264,7 +264,7 @@ if (isAuthenticated) {
     }
 }
 
-const getOrdersByUserIdAxios = async () => {
+const getOrdersIdAxios = async () => {
     const accessToken = await getAccessTokenSilently();
     const { data, error } = await getOrders(accessToken);
     // console.log(user_id);
@@ -419,5 +419,5 @@ const Nofilter = async () => {
 
 // run function
 getUserByEmailAxios(user);
-getOrdersByUserIdAxios();
+getOrdersIdAxios();
 </script>

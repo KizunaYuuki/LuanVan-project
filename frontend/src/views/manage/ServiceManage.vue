@@ -152,6 +152,7 @@ import LayoutAuthenticated from '../../components/manage/layouts/LayoutAuthentic
 import { onMounted, ref, onBeforeMount } from "vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 import { getServices, deteleService } from "@/services/service.service";
+import { deteleOrder } from "@/services/order.service";
 import { getUserByEmail } from "@/services/user.service";
 import {
     Menu, MenuButton, MenuItem, MenuItems

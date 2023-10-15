@@ -442,12 +442,39 @@
                                             (removeVietnameseTones(service.district_to).toLowerCase()).includes(removeVietnameseTones(filter.district_to).toLowerCase()) &&
                                             ((filter.weight === '') || (filter.weight && (filter.weight >= service.weight)))"
                                             class="mx-auto text-[15px] text-gray-600">
-                                            <td></td>
+                                            <td>
+                                                <span class="p-[12px]">
+                                                    <!-- Xử lý if - else -->
+                                                    <!-- <button @click.prevent="true"
+                                                        :class="{ 'hidden': !isInCompareArray }"
+                                                        class="hover:scale-[1.05] transition-all duration-[0.3s] ease-in-out delay-[0ms] hover:text-[#0096fa] inline-flex items-center ">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                            fill="currentColor" class="bi bi-plus rounded-[50%] border"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                        </svg>
+                                                        <span class="inline-flex pl-[4px]">So sánh</span>
+                                                    </button>
 
-                                            <td class="pl-[12px] pb-4 font-[600]">
+                                                    <button @click.prevent="true"
+                                                        :class="{ 'hidden': isInCompareArray }"
+                                                        class="hover:scale-[1.05] transition-all duration-[0.3s] ease-in-out delay-[0ms] hover:text-[#0096fa] inline-flex items-center ">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-check rounded-[50%] border"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                                        </svg>
+                                                        <span class="inline-flex pl-[4px]">Đã thêm so sánh</span>
+                                                    </button> -->
+                                                </span>
+                                            </td>
+
+                                            <td class="p-[12px] pb-4 font-[600]">
                                                 <span class="py-4">{{ service.district_from }} ,{{ service.province_from
                                                 }}</span>
-                                                <div class="py-4">Đến</div>
+                                                <div class="py-4 font-medium">Đến</div>
                                                 <span class="py-4">{{ service.district_to }}, {{ service.province_to
                                                 }}</span>
                                             </td>
@@ -496,7 +523,8 @@
                                                 </div>
                                             </td>
 
-                                            <td class="px-[12px] font-medium text-gray-500" v-show="service?.promotion_price">
+                                            <td class="px-[12px] font-medium text-gray-500"
+                                                v-show="service?.promotion_price">
                                                 - {{ service.promotion_price }}%
                                             </td>
                                         </tr>
@@ -527,8 +555,8 @@ import { CheckIcon, ChevronUpDownIcon, ChevronDownIcon, FunnelIcon, MinusIcon, P
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 import { useGtag } from "vue-gtag-next";
 import freightProductCard from "../components/cards/freight-product-card.vue";
-import domesticCard from "../components/cards/domestic-card.vue";
-import banner from "../components/banner.vue";
+import domesticCard from "@/components/cards/domestic-card.vue";
+import banner from "@/components/banner.vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 import Header from '../components/Header.vue';
 import getTime from 'date-fns/getTime'
@@ -547,6 +575,9 @@ const filter = ref({
     district_to: '',
     weight: '',
 })
+
+// Mảng lưu các dịch vụ được so sánh
+const compareArray = ref([]);
 
 const priceFilters = ref([
     {
@@ -655,13 +686,32 @@ const sortOptions = [
 ]
 
 
-import { getServices, createService, updateService, deteleService, getServiceById, getInfoReviews } from "@/services/service.service";
+import { getServices, getInfoReviews } from "@/services/service.service";
 import { getPromotions } from "@/services/promotion.service";
 
 const services = ref("");
 const rootServices = ref("");
 
 // function
+const addCompare = (array, service_id) => {
+    array.forEach(element => {
+        if (element.id === service_id) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+}
+
+const isInCompareArray = (array, service_id) => {
+    array.forEach(element => {
+        if(element.id === service_id) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+}
 
 // Lọc theo giá
 const priceFilterHandle = async (selected) => {
@@ -825,21 +875,21 @@ const getPromotionsAxios = async () => {
 
     if (data) {
         console.log(data);
-        for (let i = 0; rootServices.value.length > i; i++) {
-            for (let j = 0; data.length > j; j++) {
-                if (rootServices.value[i].service_id === data[j].service_id) {
-                    rootServices.value[i].promotion_price = data[j].price;
-                }
-            }
-        }
+        // for (let i = 0; rootServices.value.length > i; i++) {
+        //     for (let j = 0; data.length > j; j++) {
+        //         if (rootServices.value[i].service_id === data[j].service_id) {
+        //             rootServices.value[i].promotion_price = data[j].price;
+        //         }
+        //     }
+        // }
 
-        for (let i = 0; services.value.length > i; i++) {
-            for (let j = 0; data.length > j; j++) {
-                if (services.value[i].service_id === data[j].service_id) {
-                    services.value[i].promotion_price = data[j].price;
-                }
-            }
-        }
+        // for (let i = 0; services.value.length > i; i++) {
+        //     for (let j = 0; data.length > j; j++) {
+        //         if (services.value[i].service_id === data[j].service_id) {
+        //             services.value[i].promotion_price = data[j].price;
+        //         }
+        //     }
+        // }
 
         console.log(services.value);
     }
@@ -928,5 +978,4 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
-</style>
+}</style>

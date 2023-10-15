@@ -13,7 +13,7 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
-            path: '/',
+            path: '/d',
             name: 'Home',
             component: HomeView,
             meta: {
@@ -116,7 +116,7 @@ const router = createRouter({
             }
         },
         {
-            path: '/management',
+            path: '/',
             name: 'Home Page - Management',
             component: () => import('../views/manage/HomeView.vue'),
             beforeEnter: authGuard,

@@ -20,6 +20,24 @@ export const getUsers = async (accessToken) => {
     };
 };
 
+export const getQuantityUser = async (accessToken) => {
+    const config = {
+        url: `${apiServerUrl}/api/user/quantity`,
+        method: "GET",
+        headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+        }
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
+
 export const getUserByEmail = async (accessToken, email) => {
     const config = {
         url: `${apiServerUrl}/api/user/email`,
