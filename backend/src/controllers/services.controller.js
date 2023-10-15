@@ -1,5 +1,22 @@
 const { pool } = require("../models/db.js");
 
+const {
+    getLocations,
+    getLocationsByServicId,
+    getLocationById,
+    updateLocationById,
+    deleteLocationById,
+    createLocation } = require("../controllers/locations.controller.js");
+
+const {
+    getReviews,
+    getReviewsByServiceId,
+    getReviewsByUserId,
+    getReviewById,
+    updateReviewById,
+    deleteReviewById,
+    createReview } = require("../controllers/reviews.controller.js");
+
 // Lay tat ca services
 async function getServices() {
     // const [rows] = await pool.query("select * from services")
@@ -72,28 +89,10 @@ async function updateServiceById(service_type_id, name, description, delivery_da
 async function deleteServiceById(id) {
     try {
         await pool.query(`
-    DELETE
-    FROM locations
-    WHERE service_id = ?
-    `, [id])
-
-        await pool.query(`
-    DELETE
-    FROM reviews
-    WHERE service_id = ?
-    `, [id])
-
-        await pool.query(`
-    DELETE
-    FROM carts
-    WHERE service_id = ?
-    `, [id])
-
-        await pool.query(`
-    DELETE
-    FROM services
-    WHERE id = ?
-    `, [id])
+        DELETE
+        FROM services
+        WHERE id = ?
+        `, [id])
         return "Xoá Dịch vụ thành công"
     } catch (error) {
         return error;

@@ -14,6 +14,12 @@ async function getUserById(id) {
     return rows[0]
 }
 
+async function getQuantityUser(id) {
+    const [rows] = await pool.query(`
+    SELECT COUNT(users.id) AS user_quantity FROM users`)
+    return rows[0]
+}
+
 async function getUserByEmail(email) {
     console.log(email);
     const [rows] = await pool.query(`
@@ -78,5 +84,6 @@ module.exports = {
     getStatusByEmail,
     validateStatus,
     validateRole,
-    getUsers
+    getUsers,
+    getQuantityUser
 };

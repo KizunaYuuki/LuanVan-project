@@ -9,13 +9,20 @@ const {
     getStatusByEmail,
     validateStatus,
     validateRole,
-    getUsers } = require("../controllers/users.controller.js");
+    getUsers,
+    getQuantityUser } = require("../controllers/users.controller.js");
 
 const usersRouter = express.Router();
 
-// Đăng ký người dùng
+// Lấy tất cả người dùng
 usersRouter.get("/", validateAccessToken, async (req, res) => {
     const result = await getUsers();
+    res.status(201).json(result);
+});
+
+// Lấy số lượng người dùng
+usersRouter.get("/quantity", validateAccessToken, async (req, res) => {
+    const result = await getQuantityUser();
     res.status(201).json(result);
 });
 

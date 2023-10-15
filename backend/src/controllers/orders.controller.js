@@ -57,22 +57,10 @@ async function updateOrderById(status_id, id) {
 async function deleteOrderById(id) {
     try {
         await pool.query(`
-    DELETE
-    FROM packages
-    WHERE order_id = ?
-    `, [id])
-
-        await pool.query(`
-    DELETE
-    FROM address
-    WHERE order_id = ?
-    `, [id])
-
-        await pool.query(`
-    DELETE
-    FROM orders
-    WHERE id = ?
-    `, [id])
+        DELETE
+        FROM orders
+        WHERE id = ?
+        `, [id])
         return "Xoá Đơn hàng thành công"
     } catch (error) {
         return error;
