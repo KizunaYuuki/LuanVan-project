@@ -27,13 +27,13 @@ const { getAccessTokenSilently } = useAuth0();
 
 const chart = ref();
 
-const mon = ref();
-const tue = ref();
-const wed = ref();
-const thu = ref();
-const fri = ref();
-const sat = ref();
-const sun = ref();
+const mon = ref(0);
+const tue = ref(0);
+const wed = ref(0);
+const thu = ref(0);
+const fri = ref(0);
+const sat = ref(0);
+const sun = ref(0);
 
 let dataDrop = ref({
     type: "line",
@@ -129,36 +129,36 @@ const getOrdersIdAxios = async () => {
                 // console.log(new Date(element.order_created));
                 if (isMonday(new Date(element.order_created))) {
                     // console.log('2');
-                    mon.value = element.total_amount;
+                    mon.value = element.total_amount + mon.value;
                 }
                 else if (isTuesday(new Date(element.order_created))) {
                     // console.log('3');
-                    tue.value = element.total_amount;
+                    tue.value = element.total_amount + tue.value;
                 }
 
                 else if (isWednesday(new Date(element.order_created))) {
                     // console.log('4');
-                    wed.value = element.total_amount;
+                    wed.value = element.total_amount + wed.value;
                 }
 
                 else if (isThursday(new Date(element.order_created))) {
                     // console.log('5');
-                    thu.value = element.total_amount;
+                    thu.value = element.total_amount + thu.value;
                 }
 
                 else if (isFriday(new Date(element.order_created))) {
                     // console.log('6');
-                    fri.value = element.total_amount;
+                    fri.value = element.total_amount + fri.value;
                 }
 
                 else if (isSaturday(new Date(element.order_created))) {
                     // console.log('7');
-                    sat.value = element.total_amount;
+                    sat.value = element.total_amount + sat.value;
                 }
 
                 else if (isSunday(new Date(element.order_created))) {
                     // console.log('8');
-                    sun.value = element.total_amount;
+                    sun.value = element.total_amount + sun.value;
                     // console.log(sun.value);
                 }
             }
