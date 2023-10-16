@@ -7,7 +7,6 @@
 <script setup>
 import Chart from 'chart.js/auto'
 import { onMounted, ref } from 'vue';
-import ChartData from '@/components/manage/charts/data-sales-revenue-by-week.js'
 import { useAuth0 } from "@auth0/auth0-vue";
 import { getOrders } from "@/services/order.service";
 import startOfWeek from 'date-fns/startOfWeek';
@@ -114,53 +113,53 @@ const getOrdersIdAxios = async () => {
     const { data, error } = await getOrders(accessToken);
 
     if (data) {
-        console.log(data)
+        // console.log(data)
         // Xử lý data
         let start = startOfWeek(new Date(), { weekStartsOn: 1 }, { locale: vi });
         // let end = endOfWeek(new Date(), { weekStartsOn: 1 }, { locale: vi });
 
-        console.log(startOfWeek(new Date(), { weekStartsOn: 1 }, { locale: vi }));
-        console.log(endOfWeek(new Date(), { weekStartsOn: 1 }, { locale: vi }));
+        // console.log(startOfWeek(new Date(), { weekStartsOn: 1 }, { locale: vi }));
+        // console.log(endOfWeek(new Date(), { weekStartsOn: 1 }, { locale: vi }));
 
         data.forEach(element => {
             if (isSameWeek(start, new Date(element.order_created), {
                 weekStartsOn: 1
             }) && element.status_name === 'Hoàn thành') {
                 // Xử lý từng ngày trong tuần
-                console.log(new Date(element.order_created));
+                // console.log(new Date(element.order_created));
                 if (isMonday(new Date(element.order_created))) {
-                    console.log('2');
+                    // console.log('2');
                     mon.value = element.total_amount;
                 }
                 else if (isTuesday(new Date(element.order_created))) {
-                    console.log('3');
+                    // console.log('3');
                     tue.value = element.total_amount;
                 }
 
                 else if (isWednesday(new Date(element.order_created))) {
-                    console.log('4');
+                    // console.log('4');
                     wed.value = element.total_amount;
                 }
 
                 else if (isThursday(new Date(element.order_created))) {
-                    console.log('5');
+                    // console.log('5');
                     thu.value = element.total_amount;
                 }
 
                 else if (isFriday(new Date(element.order_created))) {
-                    console.log('6');
+                    // console.log('6');
                     fri.value = element.total_amount;
                 }
 
                 else if (isSaturday(new Date(element.order_created))) {
-                    console.log('7');
+                    // console.log('7');
                     sat.value = element.total_amount;
                 }
 
                 else if (isSunday(new Date(element.order_created))) {
-                    console.log('8');
+                    // console.log('8');
                     sun.value = element.total_amount;
-                    console.log(sun.value);
+                    // console.log(sun.value);
                 }
             }
         });
@@ -239,14 +238,14 @@ const getOrdersIdAxios = async () => {
             }
 
         }
-        console.log(dataDrop.value.data.datasets[0]);
+        // console.log(dataDrop.value.data.datasets[0]);
 
         const ChartByWeek = new Chart(chart.value, dataDrop.value);
 
     }
 
     if (error) {
-        console.log(error)
+        // console.log(error)
     }
 };
 

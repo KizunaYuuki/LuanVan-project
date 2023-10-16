@@ -14,13 +14,14 @@
                 </div>
             </section>
 
+            <!-- Info -->
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
                 <!-- Số lượng người dùng -->
                 <div class="rounded-2xl flex-col  bg-white flex">
                     <div class="flex-1 p-6">
                         <div class="justify-between items-center flex mb-3">
                             <div class="flex items-center justify-center">
-                                <div
+                                <!-- <div
                                     class="inline-flex items-center capitalize leading-none text-xs border rounded-full py-1 px-3 bg-emerald-500 border-emerald-500 text-white">
                                     <span class="inline-flex justify-center items-center w-4 h-4 mr-1">
                                         <svg viewBox="0 0 24 24" width="14" height="14" class="inline-block">
@@ -30,8 +31,9 @@
                                         </svg>
                                     </span>
                                     <span>12%</span>
-                                </div>
+                                </div> -->
                             </div>
+
                             <div class="flex items-center justify-center">
                                 <button
                                     class="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-gray-100  ring-gray-200 bg-gray-100 text-black  hover:bg-gray-200  p-1"
@@ -73,7 +75,30 @@
                     <div class="flex-1 p-6">
                         <div class="justify-between items-center flex mb-3">
                             <div class="flex items-center justify-center">
-                                <div
+                                <!-- Tăng -->
+                                <div v-show="((parseFloat(currentMonthSales) / parseFloat(previousMonthSales) * 100) - 100) > 0"
+                                    class="flex items-center justify-center">
+                                    <div
+                                        class="inline-flex items-center capitalize leading-none text-xs border rounded-full py-1 px-3 bg-emerald-500 border-emerald-500 text-white">
+                                        <span class="inline-flex justify-center items-center w-4 h-4 mr-1">
+                                            <svg viewBox="0 0 24 24" width="14" height="14" class="inline-block">
+                                                <path fill="currentColor"
+                                                    d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                        <span>{{
+                                            ((parseFloat(currentMonthSales) / parseFloat(previousMonthSales) * 100) -
+                                                100).toLocaleString('vi-VN', {
+                                                    minimumFractionDigits: 1, // Số chữ số thập phân tối thiểu
+                                                    maximumFractionDigits: 1, // Số chữ số thập phân tối đa
+                                                }) }}%
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Giảm -->
+                                <div v-show="((parseFloat(currentMonthSales) / parseFloat(previousMonthSales) * 100) - 100) <= 0"
                                     class="inline-flex items-center capitalize leading-none text-xs border rounded-full py-1 px-3 bg-red-500 border-red-500 text-white">
                                     <span class="inline-flex justify-center items-center w-4 h-4 mr-1">
                                         <svg viewBox="0 0 24 24" width="14" height="14" class="inline-block">
@@ -82,7 +107,13 @@
                                             </path>
                                         </svg>
                                     </span>
-                                    <span>12%</span>
+                                    <span>{{
+                                        ((parseFloat(currentMonthSales) / parseFloat(previousMonthSales) * 100) -
+                                            100).toLocaleString('vi-VN', {
+                                                minimumFractionDigits: 1, // Số chữ số thập phân tối thiểu
+                                                maximumFractionDigits: 1, // Số chữ số thập phân tối đa
+                                            }) }}%
+                                    </span>
                                 </div>
                             </div>
                             <div class="flex items-center justify-center">
@@ -104,7 +135,12 @@
                                 <div>
                                     <h3 class="text-lg leading-tight text-gray-500 ">Doanh thu</h3>
                                     <h1 class="text-3xl leading-tight font-semibold">
-                                        <div>$7,770</div>
+                                        <div>{{ (currentMonthSales || 0).toLocaleString('vi-VN',
+                                            {
+                                                style: 'currency',
+                                                currency: 'VND'
+                                            })
+                                        }}</div>
                                     </h1>
                                 </div>
                             </div>
@@ -210,7 +246,7 @@
                                 <div>
                                     <h3 class="text-lg leading-tight text-gray-500 ">Đơn hàng chờ Xác nhận</h3>
                                     <h1 class="text-3xl leading-tight font-semibold">
-                                        <div>30</div>
+                                        <div>{{ waitOrderQuantity }}</div>
                                     </h1>
                                 </div>
                             </div>
@@ -218,7 +254,7 @@
                                 <span class="inline-flex justify-center items-center  h-16 text-blue-500">
                                     <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="48" height="48"
-                                            class="inline-block">
+                                        class="inline-block">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
@@ -229,304 +265,7 @@
                 </div>
             </div>
 
-            <!-- <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                <div class="flex flex-col justify-between">
-                    <div class="rounded-2xl flex-col  bg-white flex mb-6 last:mb-0">
-                        <div class="flex-1 p-6">
-                            <div class="justify-between items-center block md:flex">
-                                <div class="flex items-center justify-center mb-6 md:mb-0">
-                                    <div class="justify-start items-center block md:flex">
-                                        <div class="flex items-center justify-center mb-6 md:mb-0"><span
-                                                class="inline-flex justify-center items-center w-12 h-12 rounded-full text-emerald-500 bg-gray-50 md:mr-6"><svg
-                                                    viewBox="0 0 24 24" width="24" height="24" class="inline-block">
-                                                    <path fill="currentColor"
-                                                        d="M15 15V17H18V20H20V17H23V15H20V12H18V15M14.97 11.61C14.85 10.28 13.59 8.97 12 9C10.3 9.03 9 10.3 9 12C9 13.7 10.3 14.94 12 15C12.38 15 12.77 14.92 13.14 14.77C13.41 13.67 13.86 12.63 14.97 11.61M13 16H7C7 14.9 6.11 14 5 14V10C6.11 10 7 9.11 7 8H17C17 9.11 17.9 10 19 10V10.06C19.67 10.06 20.34 10.18 21 10.4V6H3V18H13.32C13.1 17.33 13 16.66 13 16Z">
-                                                    </path>
-                                                </svg></span></div>
-                                        <div class="flex items-center justify-center">
-                                            <div class="text-center space-y-1 md:text-left md:mr-6">
-                                                <h4 class="text-xl">$375.53</h4>
-                                                <p class="text-gray-500 "><b>3 days ago</b> via
-                                                    Turcotte</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-center">
-                                    <div class="text-center md:text-right space-y-2">
-                                        <p class="text-sm text-gray-500">Home Loan Account</p>
-                                        <div>
-                                            <div
-                                                class="inline-flex items-center capitalize leading-none text-xs border rounded-full py-1 px-3 bg-emerald-500 border-emerald-500 text-white">
-                                                <span>deposit</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rounded-2xl flex-col  bg-white flex mb-6 last:mb-0">
-                        <div class="flex-1 p-6">
-                            <div class="justify-between items-center block md:flex">
-                                <div class="flex items-center justify-center mb-6 md:mb-0">
-                                    <div class="justify-start items-center block md:flex">
-                                        <div class="flex items-center justify-center mb-6 md:mb-0"><span
-                                                class="inline-flex justify-center items-center w-12 h-12 rounded-full text-blue-500 bg-gray-50 md:mr-6"><svg
-                                                    viewBox="0 0 24 24" width="24" height="24" class="inline-block">
-                                                    <path fill="currentColor"
-                                                        d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z">
-                                                    </path>
-                                                </svg></span></div>
-                                        <div class="flex items-center justify-center">
-                                            <div class="text-center space-y-1 md:text-left md:mr-6">
-                                                <h4 class="text-xl">$470.26</h4>
-                                                <p class="text-gray-500 "><b>3 days ago</b> via
-                                                    Murazik - Graham</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-center">
-                                    <div class="text-center md:text-right space-y-2">
-                                        <p class="text-sm text-gray-500">Savings Account</p>
-                                        <div>
-                                            <div
-                                                class="inline-flex items-center capitalize leading-none text-xs border rounded-full py-1 px-3 bg-blue-500 border-blue-500 text-white">
-                                                <span>payment</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rounded-2xl flex-col  bg-white flex mb-6 last:mb-0">
-                        <div class="flex-1 p-6">
-                            <div class="justify-between items-center block md:flex">
-                                <div class="flex items-center justify-center mb-6 md:mb-0">
-                                    <div class="justify-start items-center block md:flex">
-                                        <div class="flex items-center justify-center mb-6 md:mb-0"><span
-                                                class="inline-flex justify-center items-center w-12 h-12 rounded-full text-yellow-500 bg-gray-50 md:mr-6"><svg
-                                                    viewBox="0 0 24 24" width="24" height="24" class="inline-block">
-                                                    <path fill="currentColor"
-                                                        d="M3 22L4.5 20.5L6 22L7.5 20.5L9 22L10.5 20.5L12 22L13.5 20.5L15 22L16.5 20.5L18 22L19.5 20.5L21 22V2L19.5 3.5L18 2L16.5 3.5L15 2L13.5 3.5L12 2L10.5 3.5L9 2L7.5 3.5L6 2L4.5 3.5L3 2">
-                                                    </path>
-                                                </svg></span></div>
-                                        <div class="flex items-center justify-center">
-                                            <div class="text-center space-y-1 md:text-left md:mr-6">
-                                                <h4 class="text-xl">$971.34</h4>
-                                                <p class="text-gray-500 "><b>5 days ago</b> via Fahey
-                                                    - Keebler</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-center">
-                                    <div class="text-center md:text-right space-y-2">
-                                        <p class="text-sm text-gray-500">Checking Account</p>
-                                        <div>
-                                            <div
-                                                class="inline-flex items-center capitalize leading-none text-xs border rounded-full py-1 px-3 bg-yellow-500 border-yellow-500 text-white">
-                                                <span>invoice</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rounded-2xl flex-col  bg-white flex mb-6 last:mb-0">
-                        <div class="flex-1 p-6">
-                            <div class="justify-between items-center block md:flex">
-                                <div class="flex items-center justify-center mb-6 md:mb-0">
-                                    <div class="justify-start items-center block md:flex">
-                                        <div class="flex items-center justify-center mb-6 md:mb-0"><span
-                                                class="inline-flex justify-center items-center w-12 h-12 rounded-full text-red-500 bg-gray-50 md:mr-6"><svg
-                                                    viewBox="0 0 24 24" width="24" height="24" class="inline-block">
-                                                    <path fill="currentColor"
-                                                        d="M15 15V17H23V15M14.97 11.61C14.85 10.28 13.59 8.97 12 9C10.3 9.03 9 10.3 9 12C9 13.7 10.3 14.94 12 15C12.38 15 12.77 14.92 13.14 14.77C13.41 13.67 13.86 12.63 14.97 11.61M13 16H7C7 14.9 6.11 14 5 14V10C6.11 10 7 9.11 7 8H17C17 9.11 17.9 10 19 10V10.06C19.67 10.06 20.34 10.18 21 10.4V6H3V18H13.32C13.1 17.33 13 16.66 13 16Z">
-                                                    </path>
-                                                </svg></span></div>
-                                        <div class="flex items-center justify-center">
-                                            <div class="text-center space-y-1 md:text-left md:mr-6">
-                                                <h4 class="text-xl">$374.63</h4>
-                                                <p class="text-gray-500 "><b>7 days ago</b> via
-                                                    Collier - Hintz</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-center">
-                                    <div class="text-center md:text-right space-y-2">
-                                        <p class="text-sm text-gray-500">Auto Loan Account</p>
-                                        <div>
-                                            <div
-                                                class="inline-flex items-center capitalize leading-none text-xs border rounded-full py-1 px-3 bg-red-500 border-red-500 text-white">
-                                                <span>withdrawal</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex flex-col justify-between">
-                    <div class="rounded-2xl flex-col  bg-white flex mb-6 last:mb-0">
-                        <div class="flex-1 p-6">
-                            <div class="justify-between items-center block md:flex">
-                                <div class="flex items-center justify-center mb-6 md:mb-0">
-                                    <div class="justify-start items-center block md:flex">
-                                        <div class="flex items-center justify-center mb-6 md:mb-0">
-                                            <div class="w-12 h-12 mr-6"><img
-                                                    src="https://api.dicebear.com/7.x/avataaars/svg?seed=Howell-Hand.svg"
-                                                    alt="Howell Hand"
-                                                    class="rounded-full block h-auto w-full max-w-full bg-gray-100">
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center justify-center">
-                                            <div class="text-center md:text-left overflow-hidden">
-                                                <h4 class="text-xl text-ellipsis">Howell Hand</h4>
-                                                <p class="text-gray-500 ">Mar 3, 2023 @ percy64</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-center">
-                                    <div
-                                        class="inline-flex items-center capitalize leading-none text-sm border rounded-full py-1.5 px-4 bg-emerald-500 border-emerald-500 text-white">
-                                        <span class="inline-flex justify-center items-center w-4 h-4 mr-2"><svg
-                                                viewBox="0 0 24 24" width="16" height="16" class="inline-block">
-                                                <path fill="currentColor"
-                                                    d="M16,6L18.29,8.29L13.41,13.17L9.41,9.17L2,16.59L3.41,18L9.41,12L13.41,16L19.71,9.71L22,12V6H16Z">
-                                                </path>
-                                            </svg></span><span>70%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rounded-2xl flex-col  bg-white flex mb-6 last:mb-0">
-                        <div class="flex-1 p-6">
-                            <div class="justify-between items-center block md:flex">
-                                <div class="flex items-center justify-center mb-6 md:mb-0">
-                                    <div class="justify-start items-center block md:flex">
-                                        <div class="flex items-center justify-center mb-6 md:mb-0">
-                                            <div class="w-12 h-12 mr-6"><img
-                                                    src="https://api.dicebear.com/7.x/avataaars/svg?seed=Hope-Howe.svg"
-                                                    alt="Hope Howe"
-                                                    class="rounded-full block h-auto w-full max-w-full bg-gray-100">
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center justify-center">
-                                            <div class="text-center md:text-left overflow-hidden">
-                                                <h4 class="text-xl text-ellipsis">Hope Howe</h4>
-                                                <p class="text-gray-500">Dec 1, 2023 @
-                                                    dare.concepcion</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-center">
-                                    <div
-                                        class="inline-flex items-center capitalize leading-none text-sm border rounded-full py-1.5 px-4 bg-emerald-500 border-emerald-500 text-white">
-                                        <span class="inline-flex justify-center items-center w-4 h-4 mr-2"><svg
-                                                viewBox="0 0 24 24" width="16" height="16" class="inline-block">
-                                                <path fill="currentColor"
-                                                    d="M16,6L18.29,8.29L13.41,13.17L9.41,9.17L2,16.59L3.41,18L9.41,12L13.41,16L19.71,9.71L22,12V6H16Z">
-                                                </path>
-                                            </svg></span><span>68%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rounded-2xl flex-col bg-white flex mb-6 last:mb-0">
-                        <div class="flex-1 p-6">
-                            <div class="justify-between items-center block md:flex">
-                                <div class="flex items-center justify-center mb-6 md:mb-0">
-                                    <div class="justify-start items-center block md:flex">
-                                        <div class="flex items-center justify-center mb-6 md:mb-0">
-                                            <div class="w-12 h-12 mr-6"><img
-                                                    src="https://api.dicebear.com/7.x/avataaars/svg?seed=Nelson-Jerde.svg"
-                                                    alt="Nelson Jerde"
-                                                    class="rounded-full block h-auto w-full max-w-full bg-gray-100">
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center justify-center">
-                                            <div class="text-center md:text-left overflow-hidden">
-                                                <h4 class="text-xl text-ellipsis">Nelson Jerde</h4>
-                                                <p class="text-gray-500">May 18, 2023 @
-                                                    geovanni.kessler</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-center">
-                                    <div
-                                        class="inline-flex items-center capitalize leading-none text-sm border rounded-full py-1.5 px-4 bg-yellow-500 border-yellow-500 text-white">
-                                        <span class="inline-flex justify-center items-center w-4 h-4 mr-2"><svg
-                                                viewBox="0 0 24 24" width="16" height="16" class="inline-block">
-                                                <path fill="currentColor" d="M22,12L18,8V11H3V13H18V16L22,12Z"></path>
-                                            </svg></span><span>49%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rounded-2xl flex-col bg-white flex mb-6 last:mb-0">
-                        <div class="flex-1 p-6">
-                            <div class="justify-between items-center block md:flex">
-                                <div class="flex items-center justify-center mb-6 md:mb-0">
-                                    <div class="justify-start items-center block md:flex">
-                                        <div class="flex items-center justify-center mb-6 md:mb-0">
-                                            <div class="w-12 h-12 mr-6"><img
-                                                    src="https://api.dicebear.com/7.x/avataaars/svg?seed=Kim-Weimann.svg"
-                                                    alt="Kim Weimann"
-                                                    class="rounded-full block h-auto w-full max-w-full bg-gray-100">
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center justify-center">
-                                            <div class="text-center md:text-left overflow-hidden">
-                                                <h4 class="text-xl text-ellipsis">Kim Weimann</h4>
-                                                <p class="text-gray-500">May 4, 2023 @
-                                                    macejkovic.dashawn</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-center">
-                                    <div
-                                        class="inline-flex items-center capitalize leading-none text-sm border rounded-full py-1.5 px-4 bg-red-500 border-red-500 text-white">
-                                        <span class="inline-flex justify-center items-center w-4 h-4 mr-2"><svg
-                                                viewBox="0 0 24 24" width="16" height="16" class="inline-block">
-                                                <path fill="currentColor"
-                                                    d="M16,18L18.29,15.71L13.41,10.83L9.41,14.83L2,7.41L3.41,6L9.41,12L13.41,8L19.71,14.29L22,12V18H16Z">
-                                                </path>
-                                            </svg></span><span>38%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
-            <div
-                class="rounded-2xl py-12 px-6 lg:px-12 text-center bg-gradient-to-tr from-pink-400 via-red-500 to-yellow-500 mt-6 mb-6">
-                <h1 class="text-3xl text-white mb-6">Like the project? Please star on <b>GitHub</b> ;-)</h1>
-                <div><a class="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded-full border-white ring-gray-200 bg-white text-black hover:bg-gray-100 py-2 px-6"
-                        href="https://github.com/justboil/admin-one-vue-tailwind" target="_blank" disabled="false"><span
-                            class="inline-flex justify-center items-center w-6 h-6"><svg viewBox="0 0 24 24" width="16"
-                                height="16" class="inline-block">
-                                <path fill="currentColor"
-                                    d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z">
-                                </path>
-                            </svg></span><span class="px-2">GitHub</span></a></div>
-            </div>
-
-            <!-- Chart -->
+            <!-- Title Chart -->
             <section class="pt-6 mb-6 flex items-center justify-between">
                 <div class="flex items-center justify-start">
                     <span class="inline-flex justify-center items-center w-6 h-6 mr-2">
@@ -540,29 +279,23 @@
                 </div>
 
                 <div class="flex justify-center items-center">
-                    <!-- <button
-                        class="mx-2 px-2 inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 p-1"
-                        type="button">
-                        <span class="inline-flex justify-center items-center">
-                            Ngày
-                        </span>
-                    </button> -->
-                    <!-- <button @click="Week = true"
+                    <button @click="Week = true, Month = false"
                         class="mx-2 px-2 inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 p-1"
                         type="button">
                         <span class="inline-flex justify-center items-center">
                             Tuần
                         </span>
-                    </button> -->
-                    <!-- <button
+                    </button>
+                    <button @click="Month = true, Week = false"
                         class="mx-2 px-2 inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 p-1"
                         type="button">
                         <span class="inline-flex justify-center items-center">
                             Tháng
                         </span>
-                    </button> -->
+                    </button>
 
-                    <button
+                    <!-- Updata charts -->
+                    <!-- <button
                         class="ml-2 pl-2 inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 p-1"
                         type="button"><span class="inline-flex justify-center items-center w-6 h-6">
                             <svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
@@ -571,7 +304,7 @@
                                 </path>
                             </svg>
                         </span>
-                    </button>
+                    </button> -->
                 </div>
             </section>
 
@@ -579,52 +312,9 @@
             <div class="rounded-2xl flex-col bg-white flex mb-6">
                 <div class="flex-1 p-6">
                     <div>
-                        <!-- <ChartByMonth v-show="Month === true"></ChartByMonth> -->
+                        <ChartByMonth v-show="Month === true"></ChartByMonth>
                         <ChartByWeek v-show="Week === true"></ChartByWeek>
                     </div>
-                </div>
-            </div>
-
-            <section class="pt-6 mb-6 flex items-center justify-between">
-                <div class="flex items-center justify-start"><span
-                        class="inline-flex justify-center items-center w-6 h-6 mr-2"><svg viewBox="0 0 24 24" width="20"
-                            height="20" class="inline-block">
-                            <path fill="currentColor"
-                                d="M16 17V19H2V17S2 13 9 13 16 17 16 17M12.5 7.5A3.5 3.5 0 1 0 9 11A3.5 3.5 0 0 0 12.5 7.5M15.94 13A5.32 5.32 0 0 1 18 17V19H22V17S22 13.37 15.94 13M15 4A3.39 3.39 0 0 0 13.07 4.59A5 5 0 0 1 13.07 10.41A3.39 3.39 0 0 0 15 11A3.5 3.5 0 0 0 15 4Z">
-                            </path>
-                        </svg></span>
-                    <h1 class="text-2xl leading-tight">Người dùng</h1>
-                </div><button
-                    class="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 p-1"
-                    type="button"><span class="inline-flex justify-center items-center w-6 h-6"><svg viewBox="0 0 24 24"
-                            width="16" height="16" class="inline-block">
-                            <path fill="currentColor"
-                                d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z">
-                            </path>
-                        </svg></span></button>
-            </section>
-
-            <div
-                class="bg-blue-500 border-blue-500 text-white px-3 py-6 md:py-3 mb-6 last:mb-0 border rounded-lg transition-colors duration-150">
-                <div class="justify-between items-center block md:flex">
-                    <div class="flex items-center justify-center mb-6 md:mb-0">
-                        <div class="flex flex-col md:flex-row items-center"><span
-                                class="inline-flex justify-center items-center w-10 md:w-5 h-10 md:h-5 md:mr-2"><svg
-                                    viewBox="0 0 24 24" width="24" height="24" class="inline-block">
-                                    <path fill="currentColor"
-                                        d="M23,11H18A1,1 0 0,0 17,12V21A1,1 0 0,0 18,22H23A1,1 0 0,0 24,21V12A1,1 0 0,0 23,11M23,20H18V13H23V20M20,2H2C0.89,2 0,2.89 0,4V16A2,2 0 0,0 2,18H9V20H7V22H15V20H13V18H15V16H2V4H20V9H22V4C22,2.89 21.1,2 20,2Z">
-                                    </path>
-                                </svg></span><span class="text-center md:text-left md:py-2"><b>Responsive table.</b>
-                                Collapses on mobile </span></div>
-                    </div>
-                    <div class="flex items-center justify-center"><button
-                            class="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded-full border-white ring-gray-200 bg-white text-black hover:bg-gray-100 p-1"
-                            type="button"><span class="inline-flex justify-center items-center w-6 h-6"><svg
-                                    viewBox="0 0 24 24" width="16" height="16" class="inline-block">
-                                    <path fill="currentColor"
-                                        d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z">
-                                    </path>
-                                </svg></span></button></div>
                 </div>
             </div>
         </div>
@@ -634,13 +324,23 @@
 import LayoutAuthenticated from '@/components/manage/layouts/LayoutAuthenticated.vue';
 import ChartByMonth from '@/components/manage/charts/ChartByMonth.vue';
 import ChartByWeek from '@/components/manage/charts/ChartByWeek.vue';
-import ChartByDay from '@/components/manage/charts/ChartByDay.vue';
 import { onMounted, ref, onBeforeMount } from "vue";
+
+import format from 'date-fns/format'
+import startOfMonth from 'date-fns/startOfMonth';
+import endOfMonth from 'date-fns/endOfMonth';
+import subMonths from 'date-fns/subMonths'
+
 import { getQuantityUser } from "@/services/user.service";
+import { getSales, getWaitOrders } from "@/services/order.service";
 
 const Month = ref(false);
 const Week = ref(true);
 const userQuantity = ref();
+const waitOrderQuantity = ref();
+
+const previousMonthSales = ref();
+const currentMonthSales = ref();
 
 // get the token
 const { getAccessTokenSilently } = useAuth0();
@@ -655,12 +355,26 @@ const { isAuthenticated } = useAuth0();
 if (isAuthenticated) {
     // console.log(user.role);
     if (user.value.role) {
-        console.log(user);
+        // console.log(user);
     }
     else {
         router.push('/');
     }
 }
+
+// Lấy số lượng người dùng
+const getWaitOrdersAxios = async () => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await getWaitOrders(accessToken);
+
+    if (data) {
+        waitOrderQuantity.value = data.quantity;
+        // console.log(data);
+    }
+    if (error) {
+        // console.log(error.message);
+    }
+};
 
 // Lấy số lượng người dùng
 const getQuantityUserAxios = async () => {
@@ -669,15 +383,46 @@ const getQuantityUserAxios = async () => {
 
     if (data) {
         userQuantity.value = data.user_quantity;
-        console.log(data);
+        // console.log(data);
     }
     if (error) {
-        console.log(error.message);
+        // console.log(error.message);
+    }
+};
+
+// Lấy doanh thu theo khoảng thời gian by created của order
+const getCurrentSalesAxios = async (startDate, endDate) => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await getSales(accessToken, startDate, endDate);
+
+    if (data) {
+        // console.log(data);
+        currentMonthSales.value = data.sales;
+    }
+    if (error) {
+        // console.log(error.message);
+    }
+};
+
+// Lấy doanh thu theo khoảng thời gian by created của order
+const getPreviousSalesAxios = async (startDate, endDate) => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await getSales(accessToken, startDate, endDate);
+
+    if (data) {
+        // console.log(data);
+        previousMonthSales.value = data.sales;
+    }
+    if (error) {
+        // console.log(error.message);
     }
 };
 
 onBeforeMount(async () => {
     // run function
     getQuantityUserAxios();
+    getWaitOrdersAxios();
+    getCurrentSalesAxios(format(startOfMonth(new Date()), 'yyyy-MM-dd'), format(endOfMonth(new Date()), 'yyyy-MM-dd'));
+    getPreviousSalesAxios(format(startOfMonth(subMonths(new Date(), 1)), 'yyyy-MM-dd'), format(endOfMonth(subMonths(new Date(), 1)), 'yyyy-MM-dd'));
 });
 </script>
