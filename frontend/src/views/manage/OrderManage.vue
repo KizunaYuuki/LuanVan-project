@@ -1,5 +1,7 @@
 <template>
     <LayoutAuthenticated>
+        <PageLoader v-show="!orders" />
+
         <div v-show="orders">
             <div class="mx-auto lg:max-w-[1024px]">
                 <div class="">
@@ -12,9 +14,17 @@
                                 đơn hàng</p>
                         </div>
                         <div class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[4rem] mt-[1rem]">
-                            <!-- <button type="button"
-                                class="text-[#fff] font-[600] text-[.875rem] leading-[1.25rem] text-center py-[.5rem] px-[.75rem] bg-[#0096fa] rounded-[.375rem]">Xuất
-                                đơn hàng</button> -->
+                            <button @click="updateOrder()"
+                                class="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 p-1"
+                                type="button" title="Tải lại">
+                                <span class="inline-flex justify-center items-center w-6 h-6">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
+                                        <path fill="currentColor"
+                                            d="M2 12C2 16.97 6.03 21 11 21C13.39 21 15.68 20.06 17.4 18.4L15.9 16.9C14.63 18.25 12.86 19 11 19C4.76 19 1.64 11.46 6.05 7.05C10.46 2.64 18 5.77 18 12H15L19 16H19.1L23 12H20C20 7.03 15.97 3 11 3C6.03 3 2 7.03 2 12Z">
+                                        </path>
+                                    </svg>
+                                </span>
+                            </button>
                         </div>
                     </div>
 
@@ -98,7 +108,7 @@
                     </div>
 
                     <!-- Content -->
-                    <div class="mt-[1rem] flow-root">
+                    <div v-show="orders.length !== 0" class="mt-[1rem] flow-root">
                         <div class="">
                             <div class="align-middle min-w-[100%] inline-block">
                                 <table class="min-w-[100%] indent-0 border-collapse bg-[#edeff6] border-x border-[#d3e2fd]">
@@ -188,6 +198,17 @@
                                                                 </button>
                                                                 </MenuItem>
 
+                                                                <MenuItem v-show="order.status_name === 'Đã xác nhận'"
+                                                                    v-slot="{ active }">
+                                                                <button @click="completeOrderAxios(order.order_id)" :class="[
+                                                                    active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                                ]">
+                                                                    <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                                    Hoàn thành
+                                                                </button>
+                                                                </MenuItem>
+
                                                                 <MenuItem v-show="order.status_name === 'Đã đăng ký'"
                                                                     v-slot="{ active }">
                                                                 <button @click="cancelOrderAxios(order.order_id)" :class="[
@@ -219,6 +240,12 @@
                             </div>
                         </div>
                     </div>
+
+                    <div v-show="orders.length === 0" class="bg-white w-[1024px] max-h-full h-[420px] text-gray-500 flex items-center content-center justify-center">
+                        <div class="text-[32px] font-[600]">
+                            <h1 class=" text-gray-500">Chưa có đơn hàng nào</h1>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -228,20 +255,16 @@
 import LayoutAuthenticated from '../../components/manage/layouts/LayoutAuthenticated.vue'
 
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
-import { onMounted, ref } from "vue";
+import { ref, onBeforeMount } from "vue";
 import { useAuth0 } from "@auth0/auth0-vue";
-import { RouterLink } from 'vue-router'
 import { getOrders, cancelOrder, deteleOrder } from "@/services/order.service";
-import { getUserByEmail, createUser } from "@/services/user.service";
 import { format } from "date-fns";
-import { vi } from 'date-fns/locale'
 import {
-    RadioGroup, RadioGroupLabel, RadioGroupOption, Menu, MenuButton, MenuItem, MenuItems,
-    Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot
+    Menu, MenuButton, MenuItem, MenuItems
 } from '@headlessui/vue'
+import PageLoader from "@/components/page-loader.vue";
 
 // variables
-const user_id = ref('');
 const orders = ref('');
 const order_root = ref('');
 
@@ -255,9 +278,9 @@ const { user } = useAuth0();
 // Xác thực người dùng đã đăng nhập chưa 
 const { isAuthenticated } = useAuth0();
 if (isAuthenticated) {
-    // console.log(user.role);
+    // D.log(user.role);
     if (user.value.role) {
-        console.log(user);
+        // D.log(user);
     }
     else {
         router.push('/');
@@ -267,16 +290,39 @@ if (isAuthenticated) {
 const getOrdersIdAxios = async () => {
     const accessToken = await getAccessTokenSilently();
     const { data, error } = await getOrders(accessToken);
-    // console.log(user_id);
 
     if (data) {
         orders.value = data;
         order_root.value = data;
-        // console.log(orders.value)
+        // D.log(orders.value)
     }
 
     if (error) {
-        // console.log(error)
+        // D.log(error)
+    }
+};
+
+const completeOrderAxios = async (order_id) => {
+    // edit data
+    let orderData = {
+        status_id: 3
+    }
+
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await cancelOrder(accessToken, orderData, order_id);
+
+    if (data) {
+        // D.log(data);
+        for (let i = 0; i < orders.value.length; i++) {
+            if (orders.value[i].order_id == order_id) {
+                orders.value[i].status_name = "Hoàn thành";
+                order_root.value[i].status_name = "Hoàn thành";
+            }
+        }
+    }
+
+    if (error) {
+        // D.log(error)
     }
 };
 
@@ -290,7 +336,7 @@ const confirmOrderAxios = async (order_id) => {
     const { data, error } = await cancelOrder(accessToken, orderData, order_id);
 
     if (data) {
-        // console.log(data);
+        // D.log(data);
         for (let i = 0; i < orders.value.length; i++) {
             if (orders.value[i].order_id == order_id) {
                 orders.value[i].status_name = "Đã xác nhận";
@@ -300,7 +346,7 @@ const confirmOrderAxios = async (order_id) => {
     }
 
     if (error) {
-        // console.log(error)
+        // D.log(error)
     }
 };
 
@@ -314,7 +360,7 @@ const cancelOrderAxios = async (order_id) => {
     const { data, error } = await cancelOrder(accessToken, orderData, order_id);
 
     if (data) {
-        // console.log(data);
+        // D.log(data);
         for (let i = 0; i < orders.value.length; i++) {
             if (orders.value[i].order_id == order_id) {
                 orders.value[i].status_name = "Huỷ bỏ";
@@ -324,7 +370,7 @@ const cancelOrderAxios = async (order_id) => {
     }
 
     if (error) {
-        // console.log(error)
+        // D.log(error)
     }
 };
 
@@ -333,7 +379,7 @@ const deteleOrderAxios = async (order_id) => {
     const { data, error } = await deteleOrder(accessToken, order_id);
 
     if (data) {
-        // console.log(data);
+        // D.log(data);
         let tempOrders = orders.value;
         let tempOrder_root = order_root.value;
         orders.value = [];
@@ -352,26 +398,7 @@ const deteleOrderAxios = async (order_id) => {
     }
 
     if (error) {
-        // console.log(error)
-    }
-};
-
-const getUserByEmailAxios = async (user) => {
-    // edit data
-    const userData = {
-        email: user.value?.email,
-        name: user.value?.name
-    }
-
-    const accessToken = await getAccessTokenSilently();
-    const { data, error } = await getUserByEmail(accessToken, userData);
-
-    if (data) {
-        user_id.value = data.id;
-        // console.log(data);
-    }
-    if (error) {
-        // console.log(error.message);
+        // D.log(error)
     }
 };
 
@@ -417,7 +444,12 @@ const Nofilter = async () => {
     orders.value = order_root.value;
 };
 
-// run function
-getUserByEmailAxios(user);
-getOrdersIdAxios();
+const updateOrder = async () => {
+    getOrdersIdAxios();
+};
+
+onBeforeMount(async () => {
+    // run function
+    getOrdersIdAxios();
+});
 </script>
