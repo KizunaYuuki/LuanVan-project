@@ -2,12 +2,15 @@ const express = require("express");
 const { validateAccessToken } = require("../middleware/auth0.middleware.js");
 
 const { 
-    getOrders, 
-    getOrdersByUserId, 
-    getOrderById, 
-    updateOrderById, 
+    getOrders,
+    getOrdersByUserId,
+    getOrderById,
+    updateOrderById,
     deleteOrderById,
-    createOrders } = require("../controllers/orders.controller.js");
+    createOrders,
+    getSales,
+    getWaitOrders,
+    getCompleteOrders } = require("../controllers/orders.controller.js");
 
 const ordersRouter = express.Router();
 
@@ -15,6 +18,24 @@ const ordersRouter = express.Router();
 ordersRouter.post("/", validateAccessToken, async (req, res) => {
     const { user_id, status_id, service_id, payment_id, total_amount, email, phone, user_name } = req.body;
     const orders = await createOrders(user_id, status_id, service_id, payment_id, total_amount, email, phone, user_name);
+    res.status(201).json(orders);
+});
+
+// Lấy doanh thu theo khoảng thời gian by created của order
+ordersRouter.get("/sales", validateAccessToken, async (req, res) => {
+    const orders = await getSales(req.query.startDate, req.query.endDate);
+    res.status(201).json(orders);
+});
+
+// Lấy đơn hàng theo khoảng thời gian by created của order với trạng thái đã đăng ký
+ordersRouter.get("/complete-order", validateAccessToken, async (req, res) => {
+    const orders = await getCompleteOrders(req.query.startDate, req.query.endDate);
+    res.status(201).json(orders);
+});
+
+// Lấy số đơn hàng đang trờ xác nhận
+ordersRouter.get("/wait-order", validateAccessToken, async (req, res) => {
+    const orders = await getWaitOrders();
     res.status(201).json(orders);
 });
 

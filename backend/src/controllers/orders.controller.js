@@ -29,6 +29,36 @@ async function getOrdersByUserId(id) {
     return rows
 }
 
+// Lấy doanh thu theo khoảng thời gian by created của order
+async function getSales(startDate, endDate) {
+    const [rows] = await pool.query(`
+    SELECT SUM(orders.total_amount) AS sales
+    FROM orders
+    WHERE created BETWEEN ? AND ? AND orders.status_id = 3
+    `, [startDate, endDate])
+    return rows[0]
+}
+
+// Lấy đơn hàng theo khoảng thời gian by created của order với trạng thái đã đăng ký
+async function getCompleteOrders(startDate, endDate) {
+    const [rows] = await pool.query(`
+    SELECT *
+    FROM orders
+    WHERE created BETWEEN ? AND ? AND orders.status_id = 3
+    ORDER BY created ASC
+    `, [startDate, endDate])
+    return rows
+}
+
+// Lấy số đơn hàng đang trờ xác nhận
+async function getWaitOrders(startDate, endDate) {
+    const [rows] = await pool.query(`
+    SELECT COUNT(orders.id) AS quantity
+    FROM orders
+    WHERE orders.status_id = 1`)
+    return rows[0]
+}
+
 // Lay mot don hang theo id
 async function getOrderById(id) {
     const [rows] = await pool.query(`
@@ -83,5 +113,8 @@ module.exports = {
     getOrderById,
     updateOrderById,
     deleteOrderById,
-    createOrders
+    createOrders,
+    getSales,
+    getWaitOrders,
+    getCompleteOrders
 };
