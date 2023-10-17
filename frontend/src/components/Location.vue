@@ -28,7 +28,7 @@
                                 v-slot="{ selected, active }">
                                 <li @click="changeDomain(domain)"
                                     class="relative cursor-default select-none py-2 pl-10 pr-4" :class="{
-                                        'bg-teal-600 text-white': active,
+                                        'bg-sky-400 text-white': active,
                                         'text-gray-900': !active,
                                     }">
                                     <span class="block truncate"
@@ -75,7 +75,7 @@
                                 :value="province" v-slot="{ selected, active }">
                                 <li @click="changeProvince(province)"
                                     class="relative cursor-default select-none py-2 pl-10 pr-4" :class="{
-                                        'bg-teal-600 text-white': active,
+                                        'bg-sky-400 text-white': active,
                                         'text-gray-900': !active,
                                     }">
                                     <span class="block truncate"
@@ -121,7 +121,7 @@
                                 :value="district" v-slot="{ selected, active }">
                                 <li @click="sendLocation(district)"
                                     class="relative cursor-default select-none py-2 pl-10 pr-4" :class="{
-                                        'bg-teal-600 text-white': active,
+                                        'bg-sky-400 text-white': active,
                                         'text-gray-900': !active,
                                     }">
                                     <span class="block truncate"
@@ -241,7 +241,7 @@ const getLocationsForCreateServiceAxios = async () => {
     if (data) {
         // console.log(data);
         location.value = data
-        selectedDomain.value = ref(data[0])
+        selectedDomain.value = []
     }
 
     if (error) {
