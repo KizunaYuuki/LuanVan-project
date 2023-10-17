@@ -2,6 +2,24 @@ import { callExternalApi } from "./external-api.service";
 
 const apiServerUrl = import.meta.env.VITE_API_SERVER_URL;
 
+// Thông tin về tỉnh vùng miền của Việt Nam để đăng ký đơn hàng
+export const getAddressForCreateOrder = async () => {
+    const config = {
+        url: `${apiServerUrl}/address`,
+        method: "GET",
+        headers: {
+            "content-type": "application/json",
+        },
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
+
 export const getAllAddress = async () => {
     const config = {
         url: `${apiServerUrl}/api/address`,

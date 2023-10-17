@@ -2,6 +2,25 @@ import { callExternalApi } from "./external-api.service";
 
 const apiServerUrl = import.meta.env.VITE_API_SERVER_URL;
 
+// Thông tin về tỉnh vùng miền của Việt Nam để tính giá dịch vụ theo bảng giá của nhà cung cấp khi tạo dịch vụ
+export const getLocationsForCreateService = async (accessToken) => {
+    const config = {
+        url: `${apiServerUrl}/location`,
+        method: "GET",
+        headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+        },
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
+
 export const getLocations = async (accessToken) => {
     const config = {
         url: `${apiServerUrl}/api/location`,
