@@ -221,16 +221,16 @@ let filteredDistrict = computed(() =>
 )
 
 function changeDomain(data) {
-    console.log(data.Provice);
-    province.value = data.Provice;
+    // console.log(data.Provice);
+    province.value = data?.Provice;
     selectedProvince.value = [];
     selectedDistrict.value = [];
     sendLocation();
 }
 
 function changeProvince(data) {
-    console.log(data.Districts);
-    district.value = data.Districts;
+    // console.log(data.Districts);
+    district.value = data?.Districts;
     selectedDistrict.value = [];
     sendLocation();
 }
@@ -239,13 +239,13 @@ const getLocationsForCreateServiceAxios = async () => {
     const { data, error } = await getLocationsForCreateService();
 
     if (data) {
-        console.log(data);
+        // console.log(data);
         location.value = data
         selectedDomain.value = ref(data[0])
     }
 
     if (error) {
-        console.log(error)
+        // console.log(error)
     }
 };
 

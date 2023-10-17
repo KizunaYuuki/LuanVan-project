@@ -1,0 +1,537 @@
+<template>
+    <!-- Wait auth0 load -->
+    <div v-if="isLoading" class="page-layout">
+        <PageLoader />
+    </div>
+
+    <div v-else>
+        <div class="mx-auto max-w-5xl bg-white p-16 rounded-lg">
+
+            <!-- Title -->
+            <div class="flex-auto mb-10">
+                <h1 class="text-[#111827] leading-[3rem] font-[600] text-[1.5rem]">Cập nhật
+                    dịch vụ</h1>
+            </div>
+
+            <form class="max-w-4xl" @submit="submitHandle">
+                <div class="space-y-12">
+                    <div class="border-b border-gray-900/10 pb-12">
+                        <h2 class="text-base font-semibold leading-7 text-gray-900">Nhà cung cấp và Loại dịch vụ</h2>
+                        <p class="mt-1 text-sm leading-6 text-gray-600">Những thông tin này có ảnh hưởng lớn đến giá
+                            dịch vụ</p>
+
+                        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                            <div class="sm:col-span-3">
+                                <Listbox as="div" v-model="selectedProvider">
+                                    <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">Chọn
+                                        nhà cung cấp dịch vụ
+                                    </ListboxLabel>
+                                    <div class="relative mt-2">
+                                        <ListboxButton v-if="selectedProvider?.image"
+                                            class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
+                                            <span class="flex items-center">
+                                                <img :src="selectedProvider.image" alt=""
+                                                    class="h-5 w-5 flex-shrink-0 rounded-full bg-[#607d8b]" />
+                                                <span v-if="selectedProvider?.name" class="ml-3 block truncate">{{
+                                                    selectedProvider.name
+                                                }}</span>
+                                            </span>
+                                            <span
+                                                class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+                                                <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+                                            </span>
+                                        </ListboxButton>
+
+                                        <transition leave-active-class="transition ease-in duration-100"
+                                            leave-from-class="opacity-100" leave-to-class="opacity-0">
+                                            <ListboxOptions
+                                                class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                                <ListboxOption as="template" v-for="provider in providers"
+                                                    :key="provider.id" :value="provider" v-slot="{ active, selected }">
+                                                    <li @click="changeServiceType(provider.id)"
+                                                        :class="[active ? 'bg-indigo-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
+                                                        <div class="flex items-center">
+                                                            <img :src="provider.image" alt=""
+                                                                class="h-5 w-5 flex-shrink-0 rounded-full bg-[#607d8b]" />
+                                                            <span
+                                                                :class="[selected ? 'font-semibold' : 'font-normal', 'ml-3 block truncate']">{{
+                                                                    provider.name }}</span>
+                                                        </div>
+
+                                                        <span v-if="selected"
+                                                            :class="[active ? 'text-white' : 'text-indigo-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+                                                            <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                                                        </span>
+                                                    </li>
+                                                </ListboxOption>
+                                            </ListboxOptions>
+                                        </transition>
+                                    </div>
+                                </Listbox>
+                                <button type="button" class="flex items-center mt-4 pl-[12px]">
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                            aria-hidden="true" width="20" height="20"
+                                            class="text-white bg-[#0096fa] rounded-full">
+                                            <path
+                                                d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-sm font-medium leading-6 text-gray-900 ml-2">Thêm nhà cung
+                                        cấp</span>
+                                </button>
+                            </div>
+
+                            <div class="sm:col-span-3">
+                                <Listbox as="div" v-model="selectedServiceTypes">
+                                    <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">Chọn
+                                        loại dịch vụ
+                                    </ListboxLabel>
+                                    <div class="relative mt-2">
+                                        <ListboxButton v-if="selectedServiceTypes?.name"
+                                            class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
+                                            <span class="flex items-center">
+                                                <span class="ml-3 block truncate">{{
+                                                    selectedServiceTypes.name }}</span>
+                                            </span>
+                                            <span
+                                                class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+                                                <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+                                            </span>
+                                        </ListboxButton>
+
+                                        <transition leave-active-class="transition ease-in duration-100"
+                                            leave-from-class="opacity-100" leave-to-class="opacity-0">
+                                            <ListboxOptions
+                                                class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                                <ListboxOption as="template" v-for="serviceType in serviceTypes"
+                                                    :key="serviceType.id" :value="serviceType"
+                                                    v-slot="{ active, selectedServiceTypes }">
+                                                    <li
+                                                        :class="[active ? 'bg-indigo-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
+                                                        <div class="flex items-center">
+                                                            <span
+                                                                :class="[selectedServiceTypes ? 'font-semibold' : 'font-normal', 'ml-3 block truncate']">{{
+                                                                    serviceType.name }}</span>
+                                                        </div>
+
+                                                        <span v-if="selectedServiceTypes"
+                                                            :class="[active ? 'text-white' : 'text-indigo-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+                                                            <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                                                        </span>
+                                                    </li>
+                                                </ListboxOption>
+                                            </ListboxOptions>
+                                        </transition>
+                                    </div>
+                                </Listbox>
+                                <button type="button" class="flex items-center mt-4 pl-[12px]">
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                            aria-hidden="true" width="20" height="20"
+                                            class="text-white bg-[#0096fa] rounded-full">
+                                            <path
+                                                d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-sm font-medium leading-6 text-gray-900 ml-2">Thêm loại dịch
+                                        vụ</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-b border-gray-900/10 pb-12">
+                        <h2 class="text-base font-semibold leading-7 text-gray-900">Thông tin cơ bản</h2>
+                        <p class="mt-1 text-sm leading-6 text-gray-600">Cung cấp những thông tin như tên hay mô tả của
+                            dịch vụ</p>
+
+                        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                            <div class="sm:col-span-2">
+                                <label for="service_name" class="block text-sm font-medium leading-6 text-gray-900">Tên
+                                    dịch vụ<strong class="text-[red] ml-[8px]">*</strong></label>
+                                <div class="mt-2">
+                                    <input type="text" v-model="service.name" name="service_name" id="service_name"
+                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                </div>
+                            </div>
+
+                            <div class="col-span-full">
+                                <label for="service_description"
+                                    class="block text-sm font-medium leading-6 text-gray-900">Mô tả về
+                                    dịch vụ</label>
+                                <div class="mt-2">
+                                    <textarea v-model="service.description" id="service_description"
+                                        name="service_description" rows="3"
+                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                </div>
+                                <p class="mt-3 text-sm leading-6 text-gray-600">Viết mô tả ngắn gọn về dịch vụ vận
+                                    chuyển
+                                </p>
+                            </div>
+
+                            <!-- <div class="sm:col-span-2">
+                                <label for="service_delivery_date"
+                                    class="block text-sm font-medium leading-6 text-gray-900">Thời
+                                    gian vận chuyển (<span class="text-[#0096fa]">Tính theo giờ</span>)<strong
+                                        class="text-[red] ml-[8px]">*</strong></label>
+                                <div class="mt-2">
+                                    <input v-model="service.delivery_date" placeholder="1-2 ngày" type="text"
+                                        name="service_delivery_date" id="service_delivery_date"
+                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                </div>
+                            </div> -->
+
+                            <div class="sm:col-span-3">
+                                <label for="service_delivery_min_time"
+                                    class="block text-sm font-medium leading-6 text-gray-900">Thời
+                                    gian vận chuyển sớm nhất (<span class="text-[#0096fa]">Tính theo giờ</span>)<strong
+                                        class="text-[red] ml-[8px]">*</strong></label>
+                                <div class="mt-2">
+                                    <input v-model="service.delivery_min_time" placeholder="12" type="text"
+                                        name="service_delivery_min_time" id="service_delivery_min_time"
+                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-3">
+                                <label for="service_delivery_max_time"
+                                    class="block text-sm font-medium leading-6 text-gray-900">Thời
+                                    gian vận chuyển trể nhất (<span class="text-[#0096fa]">Tính theo giờ</span>)<strong
+                                        class="text-[red] ml-[8px]">*</strong></label>
+                                <div class="mt-2">
+                                    <input v-model="service.delivery_max_time" placeholder="24" type="text"
+                                        name="service_delivery_max_time" id="service_delivery_max_time"
+                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                </div>
+                            </div>
+
+
+
+                            <div class="sm:col-span-3">
+                                <label for="service_weight" class="block text-sm font-medium leading-6 text-gray-900">Trọng
+                                    lượng tối đa của
+                                    gói hàng
+                                    (<span class="text-[#0096fa]">Gram</span>)
+                                    <strong class="text-[red] ml-[8px]">*</strong></label>
+                                <div class="mt-2">
+                                    <input v-model="service.weight" id="service_weight" name="service_weight" type="number"
+                                        autocomplete="service_weight"
+                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-3">
+                                <label for="service_price" class="block text-sm font-medium leading-6 text-gray-900">Giá
+                                    dịch
+                                    vụ<strong class="text-[red] ml-[8px]">*</strong></label>
+                                <div class="mt-2">
+                                    <input v-model="service.price" id="service_price" name="service_price" type="number"
+                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                </div>
+                                <p class="mt-3 text-sm leading-6 text-gray-600">Giá dịch vụ được tính tự động theo bảng
+                                    giá của nhà cung cấp khi đã điền đầy đủ thông tin</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FROM -->
+                    <div class="border-b border-gray-900/10 pb-12">
+                        <h2 class="text-base font-semibold leading-7 text-gray-900">Gói hàng được gửi từ đâu?</h2>
+                        <p class="mt-1 text-sm leading-6 text-gray-600">Những thông tin này có ảnh hưởng đến giá dịch vụ
+                            dịch vụ</p>
+                        <!-- <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                            <div class="sm:col-span-2 sm:col-start-1">
+                                <label for="from_domain"
+                                    class="block text-sm font-medium leading-6 text-gray-900">Miền<strong
+                                        class="text-[red] ml-[8px]">*</strong></label>
+                                <div class="mt-2">
+                                    <input v-model="from.domain" type="text" name="from_domain" id="from_domain"
+                                        autocomplete="address-level3"
+                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-2">
+                                <label for="from_province" class="block text-sm font-medium leading-6 text-gray-900">Tỉnh
+                                    / Thành
+                                    phố<strong class="text-[red] ml-[8px]">*</strong></label>
+                                <div class="mt-2">
+                                    <input v-model="from.province" type="text" name="from_province" id="from_province"
+                                        autocomplete="address-level2"
+                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-2">
+                                <label for="fron_district" class="block text-sm font-medium leading-6 text-gray-900">Quận /
+                                    Huyện<strong class="text-[red] ml-[8px]">*</strong></label>
+                                <div class="mt-2">
+                                    <input v-model="from.district" type="text" name="fron_district" id="fron_district"
+                                        autocomplete="address-level1"
+                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <Location
+                            @sendLocation="(data) => { updateFromLocation(data), from.domain = data.domain.Name, from.province = data.province.Name, from.district = data.district.Name }">
+                        </Location>
+                    </div>
+
+                    <!-- TO -->
+                    <div class="border-b border-gray-900/10 pb-12">
+                        <h2 class="text-base font-semibold leading-7 text-gray-900">Gói hàng được gửi đến đâu?</h2>
+                        <p class="mt-1 text-sm leading-6 text-gray-600">Những thông tin này có ảnh hưởng đến giá dịch vụ
+                            dịch vụ</p>
+                        <!-- <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                            <div class="sm:col-span-2 sm:col-start-1">
+                                <label for="to_domain" class="block text-sm font-medium leading-6 text-gray-900">Miền<strong
+                                        class="text-[red] ml-[8px]">*</strong></label>
+                                <div class="mt-2">
+                                    <input v-model="to.domain" type="text" name="to_domain" id="to_domain"
+                                        autocomplete="address-level3"
+                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-2">
+                                <label for="to_province" class="block text-sm font-medium leading-6 text-gray-900">Tỉnh
+                                    / Thành
+                                    phố<strong class="text-[red] ml-[8px]">*</strong></label>
+                                <div class="mt-2">
+                                    <input v-model="to.province" type="text" name="to_province" id="to_province"
+                                        autocomplete="address-level2"
+                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-2">
+                                <label for="to_district" class="block text-sm font-medium leading-6 text-gray-900">Quận /
+                                    Huyện<strong class="text-[red] ml-[8px]">*</strong></label>
+                                <div class="mt-2">
+                                    <input v-model="to.district" type="text" name="to_district" id="to_district"
+                                        autocomplete="address-level1"
+                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+                        </div> -->
+                        <Location
+                            @sendLocation="(data) => { to.domain = data.domain.Name, to.province = data.province.Name, to.district = data.district.Name }">
+                        </Location>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex items-center justify-end gap-x-6">
+                    <RouterLink to="/management/service" class="text-sm font-semibold leading-6 text-gray-900">
+                        <div class="">Huỷ</div>
+                    </RouterLink>
+
+                    <button type="submit"
+                        class="hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms] my-[8px] inline-flex items-center px-[8px] py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-[#0096faee] hover:bg-[#0096fa]">
+                        <div class="flex items-center">
+                            <span class="text-sm font-medium leading-6">Submit</span>
+                        </div>
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</template>
+
+<script setup>
+import { RouterLink } from 'vue-router'
+import { ref, onBeforeMount } from "vue";
+import { getProviders } from "@/services/provider.service";
+import { getServiceTypesByProviderId } from "@/services/service-type.service";
+import { getServices, createService, updateService, deteleService, getServiceById } from "@/services/service.service";
+import { createLocation } from "@/services/location.service";
+import { useAuth0 } from "@auth0/auth0-vue";
+import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid';
+import PageLoader from "@/components/page-loader.vue";
+import Location from '../../Location.vue';
+
+// toast
+import { useToast } from "vue-toastification";
+// Get toast interface
+const toast = useToast();
+
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
+const { getAccessTokenSilently } = useAuth0();
+
+const getEmitFromLocation = ref();
+const getEmitToLocation = ref();
+
+const service = ref(
+    {
+        service_type_id: 1,
+        name: "",
+        description: "",
+        delivery_date: "",
+        delivery_max_time: "",
+        delivery_min_time: "",
+        weight: "",
+        price: "",
+    }
+)
+
+const from = ref(
+    {
+        service_id: "",
+        domain: "",
+        province: "",
+        district: "",
+        type: "FROM"
+    }
+)
+const to = ref(
+    {
+        service_id: "",
+        domain: "",
+        province: "",
+        district: "",
+        type: "TO"
+    }
+)
+
+// variables
+const providers = ref();
+const selectedProvider = ref()
+const serviceTypes = ref();
+const selectedServiceTypes = ref();
+const { isLoading, } = useAuth0();
+
+// Test data
+function updateFromLocation(data) {
+    console.log(data);
+}
+
+const getProvidersAxios = async () => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await getProviders(accessToken);
+
+    if (data) {
+        providers.value = data;
+        isLoading.value = false;
+        getServiceTypesByProviderIdAxios(providers.value[0].id);
+    }
+
+    if (error) {
+        // result.value = JSON.stringify(error, null, 2);
+    }
+};
+
+const getServiceTypesByProviderIdAxios = async (providerId) => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await getServiceTypesByProviderId(accessToken, providerId);
+
+    if (data) {
+        serviceTypes.value = data;
+        selectedServiceTypes.value = serviceTypes.value[0]
+    }
+
+    if (error) {
+        // result.value = JSON.stringify(error, null, 2);
+    }
+};
+
+onBeforeMount(async () => {
+    await getProvidersAxios();
+    selectedProvider.value = providers.value[0]
+})
+
+// change provider
+function changeServiceType(providerId) {
+    getServiceTypesByProviderIdAxios(providerId);
+}
+
+
+// create service
+const createServiceAxios = async () => {
+    const accessToken = await getAccessTokenSilently();
+
+    // validate
+    if (service.value.name === '' || service.value.delivery_max_time === '' || service.value.delivery_min_time === '' || service.value.price === '' || service.value.weight === '' ||
+        to.value.domain === '' || to.value.province === '' || to.value.district === '' ||
+        from.value.domain === '' || from.value.province === '' || from.value.district === '') {
+        toast.warning("Oh, Có thiếu sót gì đó! Xem lại những Input có * đỏ", { timeout: 3000 });
+        return;
+    }
+
+    // edit data service
+    if (service.value.delivery_min_time === '' && service.value.delivery_max_time !== '') {
+        if (service.value.delivery_max_time > 24) {
+            service.value.delivery_date = `${service.value.delivery_max_time / 24.0} ngày`
+        }
+        else {
+            service.value.delivery_date = `${service.value.delivery_max_time}h`
+        }
+    }
+    else if (service.value.delivery_min_time !== '' && service.value.delivery_max_time !== '') {
+        if (service.value.delivery_min_time >= 24) {
+            service.value.delivery_date = `${service.value.delivery_min_time / 24.0} - ${service.value.delivery_max_time / 24.0} ngày`
+        }
+        else {
+            service.value.delivery_date = `${service.value.delivery_min_time} - ${service.value.delivery_max_time} ngày`
+        }
+    }
+
+    const { data, error } = await createService(accessToken, service.value);
+    const result = ref({});
+
+    if (data) {
+        result.value = data;
+        console.log(data);
+
+        // edit data location
+        from.value.service_id = data.service_id;
+        to.value.service_id = data.service_id;
+
+        // Create location
+        createLocationAxios(from.value);
+        createLocationAxios(to.value);
+        toast.success("Đã tạo dịch vụ thành công", { timeout: 3000 });
+
+        // Về trang quản lý dịch vụ
+        router.push('/management/service');
+    }
+
+    if (error) {
+        result.value = JSON.stringify(error, null, 2);
+    }
+};
+
+// create the location
+const createLocationAxios = async (location) => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await createLocation(accessToken, location);
+    const result = ref({});
+
+    if (data) {
+        result.value = data;
+        console.log(data);
+    }
+
+    if (error) {
+        result.value = JSON.stringify(error, null, 2);
+    }
+    // console.log(result.value);
+};
+
+function submitHandle(event) {
+    // Ngăn chặn sự kiện mặc định của form để tránh tải lại trang
+    event.preventDefault();
+
+    // edit data
+    service.value.service_type_id = selectedServiceTypes.value.id;
+
+    // Create service 
+    createServiceAxios();
+}
+</script>

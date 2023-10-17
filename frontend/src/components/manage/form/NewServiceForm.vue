@@ -4,15 +4,13 @@
         <PageLoader />
     </div>
 
-    <div v-else class="">
+    <div v-else>
         <div class="mx-auto max-w-5xl bg-white p-16 rounded-lg">
 
             <!-- Title -->
             <div class="flex-auto mb-10">
-                <h1 v-show="props.action === 'ADD'" class="text-[#111827] leading-[3rem] font-[600] text-[1.5rem]">Thêm
+                <h1 class="text-[#111827] leading-[3rem] font-[600] text-[1.5rem]">Thêm
                     dịch vụ</h1>
-                <h1 v-show="props.action === 'EDIT'" class="text-[#111827] leading-[3rem] font-[600] text-[1.5rem]">
-                    Chỉnh sữa dịch vụ</h1>
             </div>
 
             <form class="max-w-4xl" @submit="submitHandle">
@@ -50,7 +48,7 @@
                                                 class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                                                 <ListboxOption as="template" v-for="provider in providers"
                                                     :key="provider.id" :value="provider" v-slot="{ active, selected }">
-                                                    <li @click="changeServiceType(provider.id)"
+                                                    <li @click="changeProvider(provider.id)"
                                                         :class="[active ? 'bg-indigo-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
                                                         <div class="flex items-center">
                                                             <img :src="provider.image" alt=""
@@ -70,7 +68,7 @@
                                         </transition>
                                     </div>
                                 </Listbox>
-                                <a href="#" target="_blank" class="flex items-center mt-4 pl-[12px]">
+                                <button type="button" class="flex items-center mt-4 pl-[12px]">
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                             aria-hidden="true" width="20" height="20"
@@ -82,7 +80,7 @@
                                     </span>
                                     <span class="text-sm font-medium leading-6 text-gray-900 ml-2">Thêm nhà cung
                                         cấp</span>
-                                </a>
+                                </button>
                             </div>
 
                             <div class="sm:col-span-3">
@@ -110,7 +108,7 @@
                                                 <ListboxOption as="template" v-for="serviceType in serviceTypes"
                                                     :key="serviceType.id" :value="serviceType"
                                                     v-slot="{ active, selectedServiceTypes }">
-                                                    <li
+                                                    <li @click="changeServiceType(serviceType.id)"
                                                         :class="[active ? 'bg-indigo-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
                                                         <div class="flex items-center">
                                                             <span
@@ -128,7 +126,7 @@
                                         </transition>
                                     </div>
                                 </Listbox>
-                                <a href="#" target="_blank" class="flex items-center mt-4 pl-[12px]">
+                                <button type="button" class="flex items-center mt-4 pl-[12px]">
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                             aria-hidden="true" width="20" height="20"
@@ -140,11 +138,12 @@
                                     </span>
                                     <span class="text-sm font-medium leading-6 text-gray-900 ml-2">Thêm loại dịch
                                         vụ</span>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Info -->
                     <div class="border-b border-gray-900/10 pb-12">
                         <h2 class="text-base font-semibold leading-7 text-gray-900">Thông tin cơ bản</h2>
                         <p class="mt-1 text-sm leading-6 text-gray-600">Cung cấp những thông tin như tên hay mô tả của
@@ -173,69 +172,6 @@
                                     chuyển
                                 </p>
                             </div>
-
-                            <!-- <div class="sm:col-span-2">
-                                <label for="service_delivery_date"
-                                    class="block text-sm font-medium leading-6 text-gray-900">Thời
-                                    gian vận chuyển (<span class="text-[#0096fa]">Tính theo giờ</span>)<strong
-                                        class="text-[red] ml-[8px]">*</strong></label>
-                                <div class="mt-2">
-                                    <input v-model="service.delivery_date" placeholder="1-2 ngày" type="text"
-                                        name="service_delivery_date" id="service_delivery_date"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                                </div>
-                            </div> -->
-
-                            <div class="sm:col-span-3">
-                                <label for="service_delivery_min_time"
-                                    class="block text-sm font-medium leading-6 text-gray-900">Thời
-                                    gian vận chuyển sớm nhất (<span class="text-[#0096fa]">Tính theo giờ</span>)<strong
-                                        class="text-[red] ml-[8px]">*</strong></label>
-                                <div class="mt-2">
-                                    <input v-model="service.delivery_min_time" placeholder="12" type="text"
-                                        name="service_delivery_min_time" id="service_delivery_min_time"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                                </div>
-                            </div>
-
-                            <div class="sm:col-span-3">
-                                <label for="service_delivery_max_time"
-                                    class="block text-sm font-medium leading-6 text-gray-900">Thời
-                                    gian vận chuyển trể nhất (<span class="text-[#0096fa]">Tính theo giờ</span>)<strong
-                                        class="text-[red] ml-[8px]">*</strong></label>
-                                <div class="mt-2">
-                                    <input v-model="service.delivery_max_time" placeholder="24" type="text"
-                                        name="service_delivery_max_time" id="service_delivery_max_time"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                                </div>
-                            </div>
-
-
-
-                            <div class="sm:col-span-3">
-                                <label for="service_weight" class="block text-sm font-medium leading-6 text-gray-900">Trọng
-                                    lượng tối đa của
-                                    gói hàng
-                                    (<span class="text-[#0096fa]">Gram</span>)
-                                    <strong class="text-[red] ml-[8px]">*</strong></label>
-                                <div class="mt-2">
-                                    <input v-model="service.weight" id="service_weight" name="service_weight" type="number"
-                                        autocomplete="service_weight"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                                </div>
-                            </div>
-
-                            <div class="sm:col-span-3">
-                                <label for="service_price" class="block text-sm font-medium leading-6 text-gray-900">Giá
-                                    dịch
-                                    vụ<strong class="text-[red] ml-[8px]">*</strong></label>
-                                <div class="mt-2">
-                                    <input v-model="service.price" id="service_price" name="service_price" type="number"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                                </div>
-                                <p class="mt-3 text-sm leading-6 text-gray-600">Giá dịch vụ được tính tự động theo bảng
-                                    giá của nhà cung cấp khi đã điền đầy đủ thông tin</p>
-                            </div>
                         </div>
                     </div>
 
@@ -244,7 +180,7 @@
                         <h2 class="text-base font-semibold leading-7 text-gray-900">Gói hàng được gửi từ đâu?</h2>
                         <p class="mt-1 text-sm leading-6 text-gray-600">Những thông tin này có ảnh hưởng đến giá dịch vụ
                             dịch vụ</p>
-                        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <!-- <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                             <div class="sm:col-span-2 sm:col-start-1">
                                 <label for="from_domain"
                                     class="block text-sm font-medium leading-6 text-gray-900">Miền<strong
@@ -276,7 +212,11 @@
                                         class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
+
+                        <Location
+                            @sendLocation="(data) => { updateFromLocation(data), from.domain = data.domain.Name, from.province = data.province.Name, from.district = data.district.Name, automaticPriceCalculation(data) }">
+                        </Location>
                     </div>
 
                     <!-- TO -->
@@ -284,7 +224,7 @@
                         <h2 class="text-base font-semibold leading-7 text-gray-900">Gói hàng được gửi đến đâu?</h2>
                         <p class="mt-1 text-sm leading-6 text-gray-600">Những thông tin này có ảnh hưởng đến giá dịch vụ
                             dịch vụ</p>
-                        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <!-- <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                             <div class="sm:col-span-2 sm:col-start-1">
                                 <label for="to_domain" class="block text-sm font-medium leading-6 text-gray-900">Miền<strong
                                         class="text-[red] ml-[8px]">*</strong></label>
@@ -315,13 +255,75 @@
                                         class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
+                        </div> -->
+                        <Location
+                            @sendLocation="(data) => { to.domain = data.domain.Name, to.province = data.province.Name, to.district = data.district.Name, automaticPriceCalculation(data) }">
+                        </Location>
+                    </div>
+
+                    <!-- Automatic -->
+                    <div class="border-b border-gray-900/10 pb-12">
+                        <h2 class="text-base font-semibold leading-7 text-gray-900">Thông tin Dịch vụ</h2>
+                        <p class="mt-1 text-sm leading-6 text-gray-600">Khi nhập đầy đủ thông tin ở những phần trên, và nhập
+                            thêm Trọng lượng tối đa của gói hàng. Các giá trị còn lại sẽ được tự động tính dựa vào Bảng giá
+                            của nhà cung cấp</p>
+
+                        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                            <div class="sm:col-span-3">
+                                <label for="service_weight" class="block text-sm font-medium leading-6 text-gray-900">Trọng
+                                    lượng tối đa của
+                                    gói hàng
+                                    (<span class="text-[#0096fa]">Gram</span>)
+                                    <strong class="text-[red] ml-[8px]">*</strong></label>
+                                <div class="mt-2">
+                                    <input @change="automaticPriceCalculation()" v-model="service.weight"
+                                        id="service_weight" name="service_weight" type="number"
+                                        autocomplete="service_weight"
+                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-3">
+                                <label for="service_price" class="block text-sm font-medium leading-6 text-gray-900">Giá
+                                    dịch
+                                    vụ<strong class="text-[red] ml-[8px]">*</strong></label>
+                                <div class="mt-2">
+                                    <input v-model="service.price" id="service_price" name="service_price" type="number"
+                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                </div>
+                                <p class="mt-3 text-sm leading-6 text-gray-600">Giá dịch vụ được tính tự động theo bảng
+                                    giá của nhà cung cấp khi đã điền đầy đủ thông tin</p>
+                            </div>
+                            <div class="sm:col-span-3">
+                                <label for="service_delivery_min_time"
+                                    class="block text-sm font-medium leading-6 text-gray-900">Thời
+                                    gian vận chuyển sớm nhất (<span class="text-[#0096fa]">Tính theo giờ</span>)<strong
+                                        class="text-[red] ml-[8px]">*</strong></label>
+                                <div class="mt-2">
+                                    <input v-model="service.delivery_min_time" placeholder="12" type="text"
+                                        name="service_delivery_min_time" id="service_delivery_min_time"
+                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-3">
+                                <label for="service_delivery_max_time"
+                                    class="block text-sm font-medium leading-6 text-gray-900">Thời
+                                    gian vận chuyển trể nhất (<span class="text-[#0096fa]">Tính theo giờ</span>)<strong
+                                        class="text-[red] ml-[8px]">*</strong></label>
+                                <div class="mt-2">
+                                    <input v-model="service.delivery_max_time" placeholder="24" type="text"
+                                        name="service_delivery_max_time" id="service_delivery_max_time"
+                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Button -->
                 <div class="mt-6 flex items-center justify-end gap-x-6">
-                    <RouterLink to="/management/service" class="text-sm font-semibold leading-6 text-gray-900"
-                        target="_blank">
+                    <RouterLink to="/management/service" class="text-sm font-semibold leading-6 text-gray-900">
                         <div class="">Huỷ</div>
                     </RouterLink>
 
@@ -344,16 +346,27 @@ import { ref, onBeforeMount } from "vue";
 import { getProviders } from "@/services/provider.service";
 import { getServiceTypesByProviderId } from "@/services/service-type.service";
 import { getServices, createService, updateService, deteleService, getServiceById } from "@/services/service.service";
+import { getPriceListsByServiceTypeId } from "@/services/price-list.service";
 import { createLocation } from "@/services/location.service";
 import { useAuth0 } from "@auth0/auth0-vue";
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid';
 import PageLoader from "@/components/page-loader.vue";
+import Location from '@/components/Location.vue';
+import { getLocationsForCreateService } from "@/services/location.service";
+
+// toast
+import { useToast } from "vue-toastification";
+// Get toast interface
+const toast = useToast();
+
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 const { getAccessTokenSilently } = useAuth0();
 
-const props = defineProps({
-    action: String
-})
+const getEmitFromLocation = ref();
+const getEmitToLocation = ref();
 
 const service = ref(
     {
@@ -393,6 +406,211 @@ const selectedProvider = ref()
 const serviceTypes = ref();
 const selectedServiceTypes = ref();
 const { isLoading, } = useAuth0();
+const location = ref();
+const price_list = ref();
+
+const getLocationsForCreateServiceAxios = async () => {
+    const { data, error } = await getLocationsForCreateService();
+
+    if (data) {
+        console.log(data);
+        location.value = data
+    }
+
+    if (error) {
+        console.log(error)
+    }
+};
+
+// Test data
+function updateFromLocation(data) {
+    // console.log(data);
+}
+
+// Tính giá dịch vụ đựa vào bảng giá của nhà cung cấp
+function automaticPriceCalculation(data) {
+    // validate
+    if ((to.value.district !== '' && to.value.district !== undefined) &&
+        (from.value.district !== '' && from.value.district !== undefined) &&
+        service.value.weight !== '' && service.value.weight !== undefined &&
+        selectedServiceTypes.value) {
+        if (to.value.domain === from.value.domain) {
+            console.log(price_list.value);
+            // Nội miền - Nội tỉnh
+            if (to.value.province === from.value.province) {
+                // Tính thời gian cho dịch vụ
+                if (service.value.delivery_max_time === '' && service.value.delivery_min_time === '') {
+                    if (selectedServiceTypes.value.intra_province_min_time !== 0) {
+                        service.value.delivery_min_time = selectedServiceTypes.value.intra_province_min_time;
+                        service.value.delivery_max_time = selectedServiceTypes.value.intra_province_max_time;
+                    } else {
+                        service.value.delivery_max_time = selectedServiceTypes.value.intra_province_max_time;
+                    }
+                }
+
+                price_list.value.forEach(element => {
+                    if (service.value.weight > element.start_weight && service.value.weight <= element.end_weight && element.end_weight <= selectedServiceTypes.value.break_weight) {
+                        // service.value.price
+                        if (element.special_price !== 0) {
+                            service.value.price = element.special_price;
+                            console.log('Nội miền - Nội tỉnh Đặt biệt ' + service.value.price);
+                            return;
+                        } else {
+                            service.value.price = element.intra_province_price;
+                            console.log('Nội miền - Nội tỉnh ' + service.value.price);
+                            return;
+                        }
+                    }
+                });
+
+                // Weight lớn hơn break_weight
+                if (service.value.weight > selectedServiceTypes.value.break_weight && service.value.price !== 0) {
+                    // Tính giá dựa vào khối lượng, mỗi 500g tăng giá theo bảng giá
+                    let temp = service.value.weight - 2000;
+                    temp = parseInt(temp / 500);
+
+                    let tempPrice;
+                    price_list.value.forEach(element => {
+                        if (element.end_weight === selectedServiceTypes.value.break_weight) {
+                            tempPrice = element.intra_province_price;
+                        }
+                    });
+
+                    if (temp === 0) {
+                        service.value.price = tempPrice + selectedServiceTypes.value.intra_province_extra_price;
+                        console.log(selectedServiceTypes.value.intra_province_extra_price);
+                        console.log('Nội miền - Nội tỉnh với trọng lượng > ' + selectedServiceTypes.value.break_weight + ":" + service.value.price);
+                    }
+                    else {
+                        service.value.price = tempPrice + (selectedServiceTypes.value.intra_province_extra_price * temp);
+                        console.log(selectedServiceTypes.value.intra_province_extra_price);
+                        console.log('Nội miền - Nội tỉnh với trọng lượng > ' + selectedServiceTypes.value.break_weight + ":" + service.value.price);
+                    }
+                }
+            }
+            // Nội miền - Liên tỉnh
+            else {
+                // Tính thời gian cho dịch vụ
+                if (service.value.delivery_max_time === '' && service.value.delivery_min_time === '') {
+                    if (selectedServiceTypes.value.inter_provincial_min_time !== 0) {
+                        service.value.delivery_min_time = selectedServiceTypes.value.inter_provincial_min_time;
+                        service.value.delivery_max_time = selectedServiceTypes.value.inter_provincial_max_time;
+                    } else {
+                        service.value.delivery_max_time = selectedServiceTypes.value.inter_provincial_max_time;
+                    }
+                }
+
+                price_list.value.forEach(element => {
+                    if (service.value.weight > element.start_weight && service.value.weight <= element.end_weight && element.end_weight <= selectedServiceTypes.value.break_weight) {
+                        // service.value.price
+                        if (element.special_price !== 0) {
+                            service.value.price = element.special_price;
+                            console.log('Nội miền - Liên tỉnh Đặt biệt ' + service.value.price);
+                            return;
+                        } else {
+                            service.value.price = element.inter_provincial_price;
+                            console.log('Nội miền - Liên tỉnh ' + service.value.price);
+                            return;
+                        }
+                    }
+                });
+
+                // Weight lớn hơn break_weight
+                if (service.value.weight > selectedServiceTypes.value.break_weight && service.value.price !== 0) {
+                    // Tính giá dựa vào khối lượng, mỗi 500g tăng giá theo bảng giá
+                    let temp = service.value.weight - 2000;
+                    temp = parseInt(temp / 500);
+
+                    let tempPrice;
+                    price_list.value.forEach(element => {
+                        if (element.end_weight === selectedServiceTypes.value.break_weight) {
+                            tempPrice = element.inter_provincial_price;
+                        }
+                    });
+
+                    if (temp === 0) {
+                        service.value.price = tempPrice + selectedServiceTypes.value.inter_provincial_extra_price;
+                        console.log(selectedServiceTypes.value.inter_provincial_extra_price);
+                        console.log('Nội miền - Liên tỉnh với trọng lượng > ' + selectedServiceTypes.value.break_weight + ":" + service.value.price);
+                    }
+                    else {
+                        service.value.price = tempPrice + (selectedServiceTypes.value.inter_provincial_extra_price * temp);
+                        console.log(selectedServiceTypes.value.inter_provincial_extra_price);
+                        console.log('Nội miền - Liên tỉnh với trọng lượng > ' + selectedServiceTypes.value.break_weight + ":" + service.value.price);
+                    }
+                }
+            }
+        }
+        //  Liên miền
+        else {
+            // Tính thời gian cho dịch vụ
+            if (service.value.delivery_max_time === '' && service.value.delivery_min_time === '') {
+                if (selectedServiceTypes.value.inter_domain_min_time !== 0) {
+                    service.value.delivery_min_time = selectedServiceTypes.value.inter_domain_min_time;
+                    service.value.delivery_max_time = selectedServiceTypes.value.inter_domain_max_time;
+                }
+                else {
+                    service.value.delivery_max_time = selectedServiceTypes.value.inter_domain_max_time;
+                }
+            }
+
+            price_list.value.forEach(element => {
+                if (service.value.weight > element.start_weight && service.value.weight <= element.end_weight && element.end_weight <= selectedServiceTypes.value.break_weight) {
+                    // service.value.price
+                    if (element.special_price !== 0) {
+                        service.value.price = element.special_price;
+                        console.log('Liên miền Đặt biệt ' + service.value.price);
+                        return;
+                    } else {
+                        service.value.price = element.inter_domain_price;
+                        console.log('Liên miền ' + service.value.price);
+                        return;
+                    }
+                }
+            });
+
+            // Weight lớn hơn break_weight
+            if (service.value.weight > selectedServiceTypes.value.break_weight && service.value.price !== 0) {
+                // Tính giá dựa vào khối lượng, mỗi 500g tăng giá theo bảng giá
+                let temp = service.value.weight - 2000;
+                temp = parseInt(temp / 500);
+
+                let tempPrice;
+                price_list.value.forEach(element => {
+                    if (element.end_weight === selectedServiceTypes.value.break_weight) {
+                        tempPrice = element.inter_domain_price;
+                    }
+                });
+
+                if (temp === 0) {
+                    service.value.price = tempPrice + selectedServiceTypes.value.inter_domain_extra_price;
+                    console.log(selectedServiceTypes.value.inter_domain_extra_price);
+                    console.log('Liên miền với trọng lượng > ' + selectedServiceTypes.value.break_weight + ":" + service.value.price);
+                }
+                else {
+                    service.value.price = tempPrice + (selectedServiceTypes.value.inter_domain_extra_price * temp);
+                    console.log(selectedServiceTypes.value.inter_domain_extra_price);
+                    console.log('Liên miền với trọng lượng > ' + selectedServiceTypes.value.break_weight + ":" + service.value.price);
+                }
+            }
+        }
+    } else {
+        return;
+    }
+}
+
+// change service type
+function changeServiceType(service_type_id) {
+    console.log(selectedServiceTypes.value);
+    if (service_type_id) {
+        getPriceListsByServiceTypeIdAxios(service_type_id);
+    }
+}
+
+// change provider
+function changeProvider(providerId) {
+    getServiceTypesByProviderIdAxios(providerId);
+}
 
 const getProvidersAxios = async () => {
     const accessToken = await getAccessTokenSilently();
@@ -402,10 +620,11 @@ const getProvidersAxios = async () => {
         providers.value = data;
         isLoading.value = false;
         getServiceTypesByProviderIdAxios(providers.value[0].id);
+        console.log(data);
     }
 
     if (error) {
-        // result.value = JSON.stringify(error, null, 2);
+        console.log(error);
     }
 };
 
@@ -415,28 +634,46 @@ const getServiceTypesByProviderIdAxios = async (providerId) => {
 
     if (data) {
         serviceTypes.value = data;
-        selectedServiceTypes.value = serviceTypes.value[0]
+        selectedServiceTypes.value = serviceTypes.value[0];
+        console.log(data);
     }
 
     if (error) {
-        // result.value = JSON.stringify(error, null, 2);
+        console.log(error);
+    }
+};
+
+const getPriceListsByServiceTypeIdAxios = async (service_type_id) => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await getPriceListsByServiceTypeId(accessToken, service_type_id);
+
+    if (data) {
+        console.log(data);
+        price_list.value = data;
+    }
+
+    if (error) {
+        // console.log(error);
     }
 };
 
 onBeforeMount(async () => {
     await getProvidersAxios();
+    getLocationsForCreateServiceAxios();
     selectedProvider.value = providers.value[0]
 })
-
-// change provider
-function changeServiceType(providerId) {
-    getServiceTypesByProviderIdAxios(providerId);
-}
-
 
 // create service
 const createServiceAxios = async () => {
     const accessToken = await getAccessTokenSilently();
+
+    // validate
+    if (service.value.name === '' || service.value.delivery_max_time === '' || service.value.delivery_min_time === '' || service.value.price === '' || service.value.weight === '' ||
+        to.value.domain === '' || to.value.province === '' || to.value.district === '' ||
+        from.value.domain === '' || from.value.province === '' || from.value.district === '') {
+        toast.warning("Oh, Có thiếu sót gì đó! Xem lại những Input có * đỏ", { timeout: 3000 });
+        return;
+    }
 
     // edit data service
     if (service.value.delivery_min_time === '' && service.value.delivery_max_time !== '') {
@@ -470,6 +707,10 @@ const createServiceAxios = async () => {
         // Create location
         createLocationAxios(from.value);
         createLocationAxios(to.value);
+        toast.success("Đã tạo dịch vụ thành công", { timeout: 3000 });
+
+        // Về trang quản lý dịch vụ
+        router.push('/management/service');
     }
 
     if (error) {

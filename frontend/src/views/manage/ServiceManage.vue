@@ -110,22 +110,26 @@
                                                             class="z-[1] absolute right-0 -mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                                             <div class="px-1 py-1">
                                                                 <MenuItem v-slot="{ active }">
-                                                                <button :class="[
+                                                                <RouterLink :to="{
+                                                                    name: 'Edit Service - Management',
+                                                                    params: { service_id: service.service_id },
+                                                                }" :class="[
                                                                     active ? 'bg-sky-400 text-white' : 'text-gray-900',
                                                                     'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                                                                 ]">
                                                                     <div class="mr-2 h-5 w-2 text-violet-400"></div>
                                                                     Chỉnh sửa
-                                                                </button>
+                                                                </RouterLink>
                                                                 </MenuItem>
                                                             </div>
 
                                                             <div class="px-1 py-1">
                                                                 <MenuItem v-slot="{ active }">
-                                                                <button @click="deteleServiceAxios(service.service_id)" :class="[
-                                                                    active ? 'bg-sky-400 text-white' : 'text-gray-900',
-                                                                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                                                                ]">
+                                                                <button @click="deteleServiceAxios(service.service_id)"
+                                                                    :class="[
+                                                                        active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                                    ]">
                                                                     <div class="mr-2 h-5 w-2 text-violet-400"></div>
                                                                     Xoá
                                                                 </button>
@@ -149,6 +153,7 @@
 
 <script setup>
 import LayoutAuthenticated from '../../components/manage/layouts/LayoutAuthenticated.vue'
+import { RouterLink } from 'vue-router'
 import { onMounted, ref, onBeforeMount } from "vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 import { getServices, deteleService } from "@/services/service.service";

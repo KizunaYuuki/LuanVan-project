@@ -145,10 +145,20 @@ const router = createRouter({
         {
             path: '/management/service/new',
             name: 'Add Service - Management',
-            component: () => import('../views/manage/ServicePage.vue'),
+            component: () => import('../views/manage/NewServicePage.vue'),
             beforeEnter: authGuard,
             meta: {
-                title: "Quản lý Dịch vụ",
+                title: "Thêm Dịch vụ mới",
+            }
+        },
+        {
+            path: '/management/service/edit/:service_id',
+            name: 'Edit Service - Management',
+            component: () => import('../views/manage/EditServicePage.vue'),
+            props: true,
+            beforeEnter: authGuard,
+            meta: {
+                title: "Cập nhật Dịch vụ",
             }
         },
         {
