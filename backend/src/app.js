@@ -93,12 +93,13 @@ app.get('/related-product', cors(), (req, res) => {
     python.stdout.on('data', async function (data) {
         console.log('Pipe data from python script ...');
         console.log(data.toString());
-        if (data.toString() !== 'False\n') {
-            const result = await getServiceById(data.toString());
-            res.status(200).json(result);
-        } else {
-            res.json(data.toString())
-        }
+        res.json(data.toString());
+        // if (data.toString() !== 'False\n') {
+        //     const result = await getServiceById(data.toString());
+        //     res.status(200).json(result);
+        // } else {
+        //     res.json(data.toString())
+        // }
     });
 
     python.stderr.on('data', function (data) {
@@ -128,10 +129,29 @@ app.get('/google-finance', async (req, res) => {
     const { data } = await axios.get('https://www.google.com/finance/quote/USD-VND?hl=vi');
     res.send(data);
 });
+ 
+// Thông tin về tỉnh vùng miền của Việt Nam để tính giá dịch vụ theo bảng giá của nhà cung cấp khi tạo dịch vụ
+app.get("/location", async (req, res) => {
+    fs.readFile('./src/public/Location.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Lỗi khi đọc file JSON:', err);
+            return;
+        }
 
-// Thông tin về tỉnh vùng miền của Việt Nam để tính giá dịch vụ theo bảng giá của nhà cung cấp
+        // Nếu không có lỗi, data chứa nội dung của tệp JSON dưới dạng chuỗi.
+        try {
+            const jsonObject = JSON.parse(data);
+            // console.log('Đối tượng JSON:', jsonObject);
+            res.status(201).send(jsonObject);
+        } catch (parseError) {
+            console.error('Lỗi khi phân tích nội dung JSON:', parseError);
+        }
+    });
+})
+
+// Thông tin về tỉnh vùng miền của Việt Nam để đăng ký đơn hàng
 app.get("/address", async (req, res) => {
-    fs.readFile('./src/public/VietNameAddress.json', 'utf8', (err, data) => {
+    fs.readFile('./src/public/data.json', 'utf8', (err, data) => {
         if (err) {
             console.error('Lỗi khi đọc file JSON:', err);
             return;

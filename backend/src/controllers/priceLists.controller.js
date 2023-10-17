@@ -12,6 +12,7 @@ async function getPriceListsByServiceTypeId(id) {
     SELECT * 
     FROM price_lists
     WHERE service_type_id = ?
+    ORDER BY price_lists.start_weight ASC
     `, [id])
     return rows
 }

@@ -21,7 +21,7 @@ async function getQuantityUser(id) {
 }
 
 async function getUserByEmail(email) {
-    console.log(email);
+    // console.log(email);
     const [rows] = await pool.query(`
     SELECT * 
     FROM users
