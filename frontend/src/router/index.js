@@ -107,14 +107,14 @@ const router = createRouter({
         },
 
         // Các trang của Management
-        {
-            path: '/testing',
-            name: 'test',
-            component: () => import('../views/Test.vue'),
-            meta: {
-                title: "test",
-            }
-        },
+        // {
+        //     path: '/testing',
+        //     name: 'test',
+        //     component: () => import('../views/Test.vue'),
+        //     meta: {
+        //         title: "test",
+        //     }
+        // },
         {
             path: '/management',
             name: 'Home Page - Management',

@@ -76,15 +76,15 @@ export const createLocation = async (accessToken, LocationData) => {
     };
 };
 
-export const updateService = async (accessToken, serviceData, service_id) => {
+export const updateLocation = async (accessToken, locationData, location_id) => {
     const config = {
-        url: `${apiServerUrl}/api/service/${service_id}`,
+        url: `${apiServerUrl}/api/location/${location_id}`,
         method: "PUT",
         headers: {
             "content-type": "application/json",
             Authorization: `Bearer ${accessToken}`,
         },
-        data: serviceData,
+        data: locationData,
     };
 
     const { data, error } = await callExternalApi({ config });

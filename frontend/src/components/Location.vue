@@ -19,7 +19,7 @@
                         @after-leave="queryDomain = ''">
                         <ComboboxOptions
                             class="absolute mt-1 max-h-40 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                            <div v-if="filteredDomain.length === 0 && queryDomain !== ''"
+                            <div v-if="filteredDomain?.length === 0 && queryDomain !== ''"
                                 class="relative cursor-default select-none py-2 px-4 text-gray-700">
                                 Chưa tìm thấy...
                             </div>
@@ -66,9 +66,14 @@
                         @after-leave="queryProvince = ''">
                         <ComboboxOptions
                             class="absolute mt-1 max-h-40 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                            <div v-if="filteredProvince.length === 0 && queryProvince !== ''"
+                            <div v-if="filteredProvince?.length === 0 && queryProvince !== ''"
                                 class="relative cursor-default select-none py-2 px-4 text-gray-700">
                                 Chưa tìm thấy...
+                            </div>
+
+                            <div v-if="(filteredProvince?.length === 0 || !filteredProvince) && queryProvince === ''"
+                                class="relative cursor-default select-none py-2 px-4 text-red-500">
+                                Hãy chọn Miền
                             </div>
 
                             <ComboboxOption v-for="province in filteredProvince" as="template" :key="province.id"
@@ -112,9 +117,14 @@
                         @after-leave="queryDistrict = ''">
                         <ComboboxOptions
                             class="absolute mt-1 max-h-40 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                            <div v-if="filteredDistrict.length === 0 && queryDistrict !== ''"
+                            <div v-if="filteredDistrict?.length === 0 && queryDistrict !== ''"
                                 class="relative cursor-default select-none py-2 px-4 text-gray-700">
                                 Chưa tìm thấy...
+                            </div>
+
+                            <div v-if="(filteredDistrict?.length === 0 || !filteredDistrict) && queryDistrict === ''"
+                                class="relative cursor-default select-none py-2 px-4 text-red-500">
+                                Hãy chọn Tỉnh/Thành phố
                             </div>
 
                             <ComboboxOption v-for="district in filteredDistrict" as="template" :key="district.id"
@@ -143,7 +153,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onBeforeMount } from 'vue'
+import { ref, computed, onBeforeMount, onMounted } from 'vue'
 import {
     Combobox,
     ComboboxInput,
@@ -154,8 +164,13 @@ import {
 } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid';
 import { getLocationsForCreateService } from "@/services/location.service";
+import { el } from 'date-fns/locale';
+// import { ppid } from 'process';
 
 const emit = defineEmits(['sendLocation']);
+const props = defineProps({
+    locationData: '' // Service Id
+})
 
 const location = ref();
 const province = ref();
@@ -223,6 +238,7 @@ let filteredDistrict = computed(() =>
 function changeDomain(data) {
     // console.log(data.Provice);
     province.value = data?.Provice;
+    district.value = []
     selectedProvince.value = [];
     selectedDistrict.value = [];
     sendLocation();
@@ -242,6 +258,54 @@ const getLocationsForCreateServiceAxios = async () => {
         // console.log(data);
         location.value = data
         selectedDomain.value = []
+
+        // Test props
+        if (props.locationData?.id) {
+            // const tempLocation = props.locationData;
+            const domainName = props.locationData.domain;
+            const provinceName = props.locationData.province;
+            const districtName = props.locationData.district;
+
+            let tempDomain = [];
+            let tempProvince = [];
+            let tempDistrict = [];
+
+            // Search Domain
+            data.forEach(element => {
+                // console.log(element);
+                if (element.Name === domainName) {
+                    selectedDomain.value = element;
+                    // console.log(element);
+
+                    tempDomain = element;
+                    changeDomain(element);
+                }
+            })
+
+            // console.log(domainName, provinceName, districtName);
+
+            // Search Province
+            tempDomain.Provice.forEach(element => {
+                if (element.Name === provinceName) {
+                    selectedProvince.value = element;
+                    // console.log(element);
+
+                    tempProvince = element;
+                    changeProvince(element);
+                }
+            });
+
+            // Search District
+            tempProvince.Districts.forEach(element => {
+                if (element.Name === districtName) {
+                    selectedDistrict.value = element;
+                    // console.log(element);
+
+                    sendLocation(element);
+                }
+            });
+
+        }
     }
 
     if (error) {

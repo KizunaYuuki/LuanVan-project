@@ -573,7 +573,7 @@ function automaticPriceCalculation(data) {
     if ((to.value.district !== '' && to.value.district !== undefined) &&
         (from.value.district !== '' && from.value.district !== undefined) &&
         service.value.weight !== '' && service.value.weight !== undefined &&
-        selectedServiceType) {
+        selectedServiceType.value && price_list.value) {
         if (to.value.domain === from.value.domain) {
             // console.log(price_list.value);
             // Nội miền - Nội tỉnh
@@ -740,10 +740,10 @@ function automaticPriceCalculation(data) {
 }
 
 // change service type
-function changeServiceType(service_type_id) {
+async function  changeServiceType(service_type_id) {
     // console.log(selectedServiceType.value);
     if (service_type_id) {
-        getPriceListsByServiceTypeIdAxios(service_type_id);
+        await getPriceListsByServiceTypeIdAxios(service_type_id);
     }
     automaticPriceCalculation();
 }
@@ -761,7 +761,10 @@ const getProvidersAxios = async () => {
         providers.value = data;
         selectedProvider.value = {}
         isLoading.value = false;
-        getServiceTypesByProviderIdAxios(providers.value[0].id);
+
+        // Khi chưa chọn Provider thì danh sách serviceType = []
+        serviceTypes.value = [];
+        selectedServiceType.value = []
         // console.log(data);
     }
 
@@ -795,7 +798,7 @@ const getPriceListsByServiceTypeIdAxios = async (service_type_id) => {
     }
 
     if (error) {
-        console.log(error);
+        // console.log(error);
     }
 };
 
@@ -873,7 +876,7 @@ const createLocationAxios = async (location) => {
     if (error) {
         result.value = JSON.stringify(error, null, 2);
     }
-    console.log(result.value);
+    // console.log(result.value);
 };
 
 function submitHandle(event) {
