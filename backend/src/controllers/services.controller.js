@@ -61,8 +61,9 @@ async function getServicesByServiceTypeId(id) {
 async function getServiceById(id) {
     const [rows] = await pool.query(`
     SELECT services.id as service_id, services.name as service_name, services.description, services.delivery_date, services.weight, services.price,
+    services.delivery_min_time, services.delivery_max_time,
     providers.id as provider_id, providers.name as provider_name, providers.image,
-    service_types.name as service_types_name
+    service_types.name as service_types_name, service_types.id as service_types_id
     FROM services
     JOIN service_types ON services.service_type_id = service_types.id
     JOIN providers ON service_types.providers_id = providers.id
@@ -72,13 +73,13 @@ async function getServiceById(id) {
 }
 
 // Cap nhat mot services theo id
-async function updateServiceById(service_type_id, name, description, delivery_date, weight, price, id) {
+async function updateServiceById(service_type_id, name, description, delivery_date, delivery_max_time, delivery_min_time, weight, price, id) {
     try {
         const [rows] = await pool.query(`
     UPDATE services
-    SET service_type_id = ?, name = ?, description = ?, delivery_date = ?, weight = ?, price = ?
+    SET service_type_id = ?, name = ?, description = ?, delivery_date = ?, delivery_max_time = ?, delivery_min_time = ?, weight = ?, price = ?
     WHERE id = ?
-    `, [service_type_id, name, description, delivery_date, weight, price, id])
+    `, [service_type_id, name, description, delivery_date, delivery_max_time, delivery_min_time, weight, price, id])
         return "Cập nhật Loại dịch vụ thành công"
     } catch (error) {
         return error;
@@ -100,12 +101,12 @@ async function deleteServiceById(id) {
 }
 
 // Tao services
-async function createService(service_type_id, name, description, delivery_date, weight, price) {
+async function createService(service_type_id, name, description, delivery_date, delivery_max_time, delivery_min_time, weight, price) {
     const [result] = await pool.query(`
     INSERT INTO services 
-    (service_type_id, name, description, delivery_date, weight, price)
-    VALUES (?, ?, ?, ?, ?, ?)
-    `, [service_type_id, name, description, delivery_date, weight, price])
+    (service_type_id, name, description, delivery_date, delivery_max_time, delivery_min_time, weight, price)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    `, [service_type_id, name, description, delivery_date, delivery_max_time, delivery_min_time, weight, price])
     const id = result.insertId;
     return getServiceById(id);
 }

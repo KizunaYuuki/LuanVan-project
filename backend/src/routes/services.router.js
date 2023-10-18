@@ -20,8 +20,8 @@ const servicesRouter = express.Router();
 
 // Tạo services
 servicesRouter.post("/", validateAccessToken, async (req, res) => {
-    const { service_type_id, name, description, delivery_date, weight, price } = req.body;
-    const result = await createService(service_type_id, name, description, delivery_date, weight, price);
+    const { service_type_id, name, description, delivery_date, delivery_max_time, delivery_min_time, weight, price } = req.body;
+    const result = await createService(service_type_id, name, description, delivery_date, delivery_max_time, delivery_min_time, weight, price);
 
     // update to algolia
     index.saveObjects(result, { autoGenerateObjectIDIfNotExist: true })
@@ -62,8 +62,8 @@ servicesRouter.get("/:id", async (req, res) => {
 // Cap nhat mot services theo id
 servicesRouter.put("/:id", validateAccessToken, async (req, res) => {
     const id = req.params.id;
-    const { service_type_id, name, description, delivery_date, weight, price } = req.body;
-    const result = await updateServiceById(service_type_id, name, description, delivery_date, weight, price, id);
+    const { service_type_id, name, description, delivery_date, delivery_max_time, delivery_min_time, weight, price } = req.body;
+    const result = await updateServiceById(service_type_id, name, description, delivery_date, delivery_max_time, delivery_min_time, weight, price, id);
     res.status(200).json(result);
 });
 
