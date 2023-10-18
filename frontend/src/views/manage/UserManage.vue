@@ -74,26 +74,26 @@
                     <div class="mt-[1rem] flow-root">
                         <div class="">
                             <div class="align-middle min-w-[100%] inline-block">
-                                <table class="min-w-[100%] indent-0 border-collapse bg-gray-200 rounded-[8px]">
+                                <table class="min-w-[100%] indent-0 border-collapse bg-[#edeff6] border-x border-[#d3e2fd]">
                                     <thead>
-                                        <tr class="border-b-[4px] border-[white]">
+                                        <tr class="border-b-[4px] border-[white] bg-gray-200">
                                             <th scope="col"
-                                                class="pl-[1rem] text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left pr-[.75rem] py-[.875rem]">
+                                                class="pl-[1rem] text-gray-600 text-[.875rem] leading-[1.25rem] text-left pr-[.75rem] py-[.875rem]">
                                                 User ID</th>
                                             <th scope="col"
-                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                                 Tên</th>
                                             <th scope="col"
-                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                                 email</th>
                                             <th scope="col"
-                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                                 Vai trò</th>
                                             <th scope="col"
-                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                                 Trạng thái</th>
                                             <th scope="col"
-                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left py-[.875rem] relative">
+                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left py-[.875rem] relative">
                                                 <span class="sr-only">Xoá</span>
                                             </th>
                                         </tr>
@@ -101,7 +101,7 @@
 
                                     <tbody class="">
                                         <tr v-for="user in users" :key="user.id"
-                                            class="mx-[4px] border-b-[4px] border-[white] hover:bg-gray-400 text-gray-500 hover:text-gray-100">
+                                            class="mx-[4px] border-b-[4px] border-[white] hover:bg-[#e1e3e9] text-slate-500 hover:text-[#5080db]">
                                             <td
                                                 class="pl-[1rem] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
                                                 {{ user.id }}</td>
@@ -142,7 +142,7 @@
                                                         leave-to-class="transform scale-95 opacity-0">
                                                         <MenuItems
                                                             class="z-[1] absolute right-0 -mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                                            <div class="px-1 py-1">
+                                                            <!-- <div class="px-1 py-1">
                                                                 <MenuItem v-slot="{ active }">
                                                                 <button :class="[
                                                                     active ? 'bg-sky-400 text-white' : 'text-gray-900',
@@ -152,7 +152,7 @@
                                                                     Chỉnh sửa
                                                                 </button>
                                                                 </MenuItem>
-                                                            </div>
+                                                            </div> -->
 
                                                             <div class="px-1 py-1">
                                                                 <MenuItem v-slot="{ active }">

@@ -156,7 +156,14 @@
                                                 {{ format(new Date(order.order_created), 'MM/dd/yyyy') }}</td>
                                             <td
                                                 class="font-[600] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ order.total_amount }}</td>
+                                                {{
+                                                    (order.total_amount).toLocaleString('vi-VN',
+                                                        {
+                                                            style: 'currency',
+                                                            currency: 'VND'
+                                                        })
+                                                }}
+                                            </td>
                                             <td
                                                 class="font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
                                                 {{ order.status_name }}</td>
@@ -241,7 +248,8 @@
                         </div>
                     </div>
 
-                    <div v-show="orders.length === 0" class="bg-white w-[1024px] max-h-full h-[420px] text-gray-500 flex items-center content-center justify-center">
+                    <div v-show="orders.length === 0"
+                        class="bg-white w-[1024px] max-h-full h-[420px] text-gray-500 flex items-center content-center justify-center">
                         <div class="text-[32px] font-[600]">
                             <h1 class=" text-gray-500">Chưa có đơn hàng nào</h1>
                         </div>

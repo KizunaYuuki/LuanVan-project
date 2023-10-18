@@ -169,7 +169,17 @@ const router = createRouter({
             meta: {
                 title: "Quản lý Khuyến mãi",
             }
-        }, {
+        }, 
+        {
+            path: '/management/promotion/new',
+            name: 'Add Promotion - Management',
+            component: () => import('../views/manage/NewPromotionPage.vue'),
+            beforeEnter: authGuard,
+            meta: {
+                title: "Thêm Khuyến mãi",
+            }
+        }, 
+        {
             path: '/management/user',
             name: 'User - Management',
             component: () => import('../views/manage/UserManage.vue'),

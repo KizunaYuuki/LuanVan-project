@@ -11,6 +11,21 @@
                                 cả Khuyến mãi</p>
                         </div>
                         <div class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[4rem] mt-[1rem]">
+                            <button @click="goToAddPromotionPage()"
+                                class="hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms] my-[8px] inline-flex items-center px-[8px] py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-[#0096faee] hover:bg-[#0096fa]">
+                                <div class="flex items-center">
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                            aria-hidden="true" width="20" height="20"
+                                            class="text-white bg-[#0096fa] rounded-full">
+                                            <path
+                                                d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-sm font-medium leading-6  ml-2">Thêm Khuyến mãi</span>
+                                </div>
+                            </button>
                         </div>
                     </div>
 
@@ -74,29 +89,29 @@
                     <div class="mt-[1rem] flow-root">
                         <div class="">
                             <div class="align-middle min-w-[100%] inline-block">
-                                <table class="min-w-[100%] indent-0 border-collapse bg-gray-200 rounded-[8px]">
+                                <table class="min-w-[100%] indent-0 border-collapse bg-[#edeff6] border-x border-[#d3e2fd]">
                                     <thead>
-                                        <tr class="border-b-[4px] border-[white]">
+                                        <tr class="border-b-[4px] border-[white] bg-gray-200">
                                             <th scope="col"
-                                                class="pl-[1rem] text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left pr-[.75rem] py-[.875rem]">
+                                                class="pl-[1rem] text-gray-600 text-[.875rem] leading-[1.25rem] text-left pr-[.75rem] py-[.875rem]">
                                                 Promotion ID</th>
                                             <th scope="col"
-                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                                Tên khuyến mãi</th>
+                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                Tên</th>
                                             <th scope="col"
-                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                                 Service ID</th>
                                             <th scope="col" title="Trọng lượng tối đa của Gói hàng muốn vận chuyển"
-                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                                Ngày bắt đầu</th>
+                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                Bắt đầu</th>
                                             <th scope="col"
-                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                                Ngày kết thúc</th>
+                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                Kết thúc</th>
                                             <th scope="col"
-                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                                Giá dịch vụ</th>
+                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                Giá trị</th>
                                             <th scope="col"
-                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left py-[.875rem] relative">
+                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left py-[.875rem] relative">
                                                 <span class="sr-only">Xoá</span>
                                             </th>
                                         </tr>
@@ -104,7 +119,7 @@
 
                                     <tbody class="">
                                         <tr v-for="promotion in promotions" :key="promotion.id"
-                                            class="mx-[4px] border-b-[4px] border-[white] hover:bg-gray-400 text-gray-500 hover:text-gray-100">
+                                            class="mx-[4px] border-b-[4px] border-[white] hover:bg-[#e1e3e9] text-slate-500 hover:text-[#5080db]">
                                             <td
                                                 class="pl-[1rem] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
                                                 {{ promotion.id }}</td>
@@ -198,6 +213,10 @@ import {
 } from '@headlessui/vue'
 import format from 'date-fns/format'
 import { vi } from 'date-fns/locale'
+
+const goToAddPromotionPage = async () => {
+    router.push('/management/promotion/new');
+};
 
 // variables
 const user_id = ref('');

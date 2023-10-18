@@ -34,29 +34,29 @@
                     <div class="mt-[1rem] flow-root">
                         <div class="">
                             <div class="align-middle min-w-[100%] inline-block">
-                                <table class="min-w-[100%] indent-0 border-collapse bg-gray-200 rounded-[8px]">
+                                <table class="min-w-[100%] indent-0 border-collapse bg-[#edeff6] border-x border-[#d3e2fd]">
                                     <thead>
-                                        <tr class="border-b-[4px] border-[white]">
+                                        <tr class="border-b-[4px] border-[white] bg-gray-200">
                                             <th scope="col"
-                                                class="pl-[1rem] text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left pr-[.75rem] py-[.875rem]">
+                                                class="pl-[1rem] text-gray-600 text-[.875rem] leading-[1.25rem] text-left pr-[.75rem] py-[.875rem]">
                                                 Service ID</th>
                                             <th scope="col"
-                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                                Tên dịch vụ</th>
+                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                Dịch vụ</th>
                                             <th scope="col"
-                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                                 Provider ID</th>
                                             <th scope="col" title="Trọng lượng tối đa của Gói hàng muốn vận chuyển"
-                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                                 Nhà cung cấp</th>
                                             <th scope="col"
-                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                                 Trọng lượng tối đa</th>
                                             <th scope="col"
-                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                                Giá dịch vụ</th>
+                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                Giá</th>
                                             <th scope="col"
-                                                class="min-[640px]:pl-0 text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left py-[.875rem] relative">
+                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left py-[.875rem] relative">
                                                 <span class="sr-only">Xoá</span>
                                             </th>
                                         </tr>
@@ -64,7 +64,7 @@
 
                                     <tbody class="">
                                         <tr v-for="service in services" :key="service.service_id"
-                                            class="mx-[4px] border-b-[4px] border-[white] hover:bg-gray-400 text-gray-500 hover:text-gray-100">
+                                            class="mx-[4px] border-b-[4px] border-[white] hover:bg-[#e1e3e9] text-slate-500 hover:text-[#5080db]">
                                             <td
                                                 class="pl-[1rem] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
                                                 {{ service.service_id }}</td>
@@ -79,10 +79,16 @@
                                                 {{ service.provider_name }}</td>
                                             <td
                                                 class="font-[600] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ service.weight }}</td>
+                                                {{ service.weight }} g</td>
                                             <td
                                                 class="font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ service.price }}</td>
+                                                {{
+                                                    (service.price).toLocaleString('vi-VN',
+                                                        {
+                                                            style: 'currency',
+                                                            currency: 'VND'
+                                                        })
+                                                }}</td>
                                             <td
                                                 class="min-[640px]:pr-0 font-[500] text-[.875rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative">
                                                 <Menu as="div" class="relative inline-block text-left">
@@ -114,9 +120,9 @@
                                                                     name: 'Edit Service - Management',
                                                                     params: { service_id: service.service_id },
                                                                 }" :class="[
-                                                                    active ? 'bg-sky-400 text-white' : 'text-gray-900',
-                                                                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                                                                ]">
+    active ? 'bg-sky-400 text-white' : 'text-gray-900',
+    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+]">
                                                                     <div class="mr-2 h-5 w-2 text-violet-400"></div>
                                                                     Chỉnh sửa
                                                                 </RouterLink>

@@ -875,21 +875,21 @@ const getPromotionsAxios = async () => {
 
     if (data) {
         console.log(data);
-        // for (let i = 0; rootServices.value.length > i; i++) {
-        //     for (let j = 0; data.length > j; j++) {
-        //         if (rootServices.value[i].service_id === data[j].service_id) {
-        //             rootServices.value[i].promotion_price = data[j].price;
-        //         }
-        //     }
-        // }
+        for (let i = 0; rootServices.value.length > i; i++) {
+            for (let j = 0; data.length > j; j++) {
+                if (rootServices.value[i].service_id === data[j].service_id && getTime(new Date()) >= getTime(new Date(data[j].start)) && getTime(new Date()) < getTime(new Date(data[j].end))) {
+                    rootServices.value[i].promotion_price = data[j].price;
+                }
+            }
+        }
 
-        // for (let i = 0; services.value.length > i; i++) {
-        //     for (let j = 0; data.length > j; j++) {
-        //         if (services.value[i].service_id === data[j].service_id) {
-        //             services.value[i].promotion_price = data[j].price;
-        //         }
-        //     }
-        // }
+        for (let i = 0; services.value.length > i; i++) {
+            for (let j = 0; data.length > j; j++) {
+                if (services.value[i].service_id === data[j].service_id && getTime(new Date()) >= getTime(new Date(data[j].start)) && getTime(new Date()) < getTime(new Date(data[j].end))) {
+                    services.value[i].promotion_price = data[j].price;
+                }
+            }
+        }
 
         console.log(services.value);
     }
