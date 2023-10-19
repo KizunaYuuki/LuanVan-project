@@ -112,46 +112,46 @@
                         </form>
 
                         <br />
-                        <!-- Related Product -->
-                        <div v-show="relatedProduct?.service_id">
-                            <h2 class="text-2xl py-4">Dịch vụ tương tự</h2>
-                            <div class="p-2 bg-gray-100 rounded-lg">
-                                <RouterLink :to="{
-                                    name: 'Service Details',
-                                    params: { id: relatedProduct?.service_id },
-                                }" class="flex p-2 bg-white rounded-lg">
-                                    <div
-                                        class="flex items-center h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                        <img :src="relatedProduct?.image" class="w-full flex-shrink-0 bg-[#607d8b]" />
-                                    </div>
+                        <!-- Related Product List -->
+                        <div v-show="relatedProducts" class="p-2 bg-gray-100 rounded-lg">
+                            <h2 class="text-2xl p-4 font-medium">Dịch vụ tương tự</h2>
+                            <div v-for="relatedProduct in relatedProducts">
+                                <div class="p-2">
+                                    <RouterLink target="_blank" :to="{
+                                        name: 'Service Details',
+                                        params: { id: relatedProduct?.service_id },
+                                    }" class="flex p-2 bg-white">
+                                        <div
+                                            class="flex items-center h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                            <img :src="relatedProduct?.image" class="w-full flex-shrink-0 bg-[#607d8b]" />
+                                        </div>
 
-                                    <div class="ml-4 flex flex-1 flex-col">
-                                        <div>
-                                            <div class="flex justify-between text-base font-medium text-gray-900">
-                                                <div class="text-ellipsis overflow-hidden">
-                                                    <h3 class="">
-                                                        {{ relatedProduct?.service_name }}
-                                                    </h3>
+                                        <div class="ml-4 flex flex-1 flex-col">
+                                            <div>
+                                                <div class="flex justify-between text-base font-medium text-gray-900">
+                                                    <div class="text-ellipsis overflow-hidden">
+                                                        <h3 class="">
+                                                            {{ relatedProduct?.service_name }}
+                                                        </h3>
+                                                    </div>
                                                 </div>
+                                                <p class="mt-1 text-sm text-gray-500">{{
+                                                    relatedProduct?.provider_name
+                                                }}</p>
                                             </div>
-                                            <p class="mt-1 text-sm text-gray-500">{{
-                                                relatedProduct?.provider_name
-                                            }}</p>
+                                            <div class="flex justify-end">
+                                                <p class="font-medium text-gray-500">{{
+                                                    (relatedProduct?.price || 0).toLocaleString('vi-VN',
+                                                        {
+                                                            style: 'currency',
+                                                            currency: 'VND'
+                                                        }) }}</p>
+                                            </div>
                                         </div>
-                                        <div class="flex justify-end">
-                                            <p class="font-medium text-gray-500">{{
-                                                (relatedProduct?.price || 0).toLocaleString('vi-VN',
-                                                    {
-                                                        style: 'currency',
-                                                        currency: 'VND'
-                                                    }) }}</p>
-                                        </div>
-                                    </div>
-                                </RouterLink>
+                                    </RouterLink>
+                                </div>
                             </div>
                         </div>
-
-
                     </div>
 
                     <div class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
@@ -169,11 +169,17 @@
                                                     service.provider_name }}</span>
                                             </li>
                                             <li class="">
+                                                Loại dịch vụ:
+                                                <span class="font-[500]">{{
+                                                    service.service_types_name }}</span>
+                                            </li>
+                                            <!-- service_types_name -->
+                                            <li class="">
                                                 Thời gian: <span class="font-[500]">{{ service.delivery_date }}</span>
                                             </li>
                                             <li class="">
-                                                Khối lượng: <span class="font-[500]">&le; {{ service.weight }}
-                                                    <span>kg</span></span>
+                                                Trọng lượng tối đa: <span class="font-[500]">{{ service.weight }}
+                                                    <span>g</span></span>
                                             </li>
                                             <li class="" v-if="from">
                                                 Gởi hàng từ: <span class="font-[500]">{{ from.district }}, {{ from.province
@@ -325,8 +331,8 @@
                                                     { includeSeconds: true, locale: vi },
                                                 ) }} trước
                                             </span>
-                                            <span
-                                                class="text-[12px] h-[24px] inline-flex items-center px-[12px] rounded-[4px] border m-[6px] hover:bg-[#f8f9fa]">Mới</span>
+                                            <!-- <span
+                                                class="text-[12px] h-[24px] inline-flex items-center px-[12px] rounded-[4px] border m-[6px] hover:bg-[#f8f9fa]">Mới</span> -->
                                         </div>
                                         <p>{{ review.comment }}</p>
                                     </div>
@@ -471,7 +477,7 @@ const to = ref('');
 const from = ref('');
 
 const service = ref();
-const relatedProduct = ref();
+const relatedProducts = ref();
 const reviews = ref([]);
 const unOrderReviews = ref();
 const user_id = ref('');
@@ -498,7 +504,7 @@ const getRelatedProductAxios = async (provider, service_type, weight) => {
         .then(function (response) {
             // handle success
             console.log(response.data);
-            relatedProduct.value = response.data
+            relatedProducts.value = response.data
         })
         .catch(function (error) {
             // handle error
@@ -542,7 +548,7 @@ const getServiceByIdAxios = async (id) => {
         service.value = data;
         // console.log(data.provider_name, data.service_types_name, data.weight);
         getRelatedProductAxios(data.provider_name, data.service_types_name, data.weight);
-        // console.log(service.value);
+        console.log(service.value);
     }
 
     if (error) {
