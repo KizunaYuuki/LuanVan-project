@@ -85,6 +85,10 @@ app.get('/', cors(), (req, res) => {
 
 
 const { getServiceById } = require("../src/controllers/services.controller.js");
+function convertStringToArray(str) {
+    return str.match(/\d+/g).map((item) => Number(item));
+}
+
 
 app.get('/related-product', cors(), (req, res) => {
     // spawn new child process to call the python script
@@ -92,19 +96,23 @@ app.get('/related-product', cors(), (req, res) => {
 
     python.stdout.on('data', async function (data) {
         console.log('Pipe data from python script ...');
-        console.log(data.toString());
-        res.json(data.toString());
-        // if (data.toString() !== 'False\n') {
-        //     const result = await getServiceById(data.toString());
-        //     res.status(200).json(result);
-        // } else {
-        //     res.json(data.toString())
-        // }
+        let relatedProductArray = [];
+        let relatedProductIdArray = convertStringToArray(data.toString());
+
+        if (data.toString() !== 'False\n') {
+            let result = []
+            for (let index = 0; index < relatedProductIdArray.length; index++) {
+                result = await getServiceById(relatedProductIdArray[index]);
+                relatedProductArray.push(result);
+            }
+            res.status(200).json(relatedProductArray);
+        } else {
+            res.json(data.toString())
+        }
     });
 
     python.stderr.on('data', function (data) {
         console.log('Pipe data from python script ...');
-        // console.error(data.toString());
         res.send(data.toString())
     });
 
@@ -123,13 +131,12 @@ app.get('/related-product', cors(), (req, res) => {
     });
 });
 
-
 // Lấy dữ liệu chuyển đổi USD/VND từ Google Finance 
 app.get('/google-finance', async (req, res) => {
     const { data } = await axios.get('https://www.google.com/finance/quote/USD-VND?hl=vi');
     res.send(data);
 });
- 
+
 // Thông tin về tỉnh vùng miền của Việt Nam để tính giá dịch vụ theo bảng giá của nhà cung cấp khi tạo dịch vụ
 app.get("/location", async (req, res) => {
     fs.readFile('./src/public/Location.json', 'utf8', (err, data) => {
