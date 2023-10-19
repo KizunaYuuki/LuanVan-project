@@ -16,19 +16,19 @@ async function getPromotionById(id) {
     return rows[0]
 }
 
-// // Cap nhat mot promotions theo id
-// async function updatePromotionById(service_type_id, name, description, delivery_date, weight, price, id) {
-//     try {
-//         const [rows] = await pool.query(`
-//     UPDATE promotions
-//     SET service_type_id = ?, name = ?, description = ?, delivery_date = ?, weight = ?, price = ?
-//     WHERE id = ?
-//     `, [service_type_id, name, description, delivery_date, weight, price, id])
-//         return "Cập nhật Loại dịch vụ thành công"
-//     } catch (error) {
-//         return error;
-//     }
-// }
+// Cap nhat mot promotions theo id
+async function updatePromotionById(service_id, name, description, price, start, end, id) {
+    try {
+        const [rows] = await pool.query(`
+    UPDATE promotions
+    SET service_id = ?, name = ?, description = ?, price = ?, start = ?, end = ?
+    WHERE id = ?
+    `, [service_id, name, description, price, start, end, id])
+        return "Cập nhật Khuyến mãi thành công"
+    } catch (error) {
+        return error;
+    }
+}
 
 // Xoa mot promotions theo id
 async function deletePromotionById(id) {
@@ -38,7 +38,7 @@ async function deletePromotionById(id) {
         FROM promotions
         WHERE id = ?
         `, [id])
-        return "Xoá Dịch vụ thành công"
+        return "Xoá Khuyến mãi thành công"
     } catch (error) {
         return error;
     }
@@ -60,4 +60,5 @@ module.exports = {
     getPromotionById,
     deletePromotionById,
     createPromotion,
+    updatePromotionById
 }

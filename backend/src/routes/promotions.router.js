@@ -5,7 +5,8 @@ const {
     getPromotions,
     getPromotionById,
     deletePromotionById,
-    createPromotion, } = require("../controllers/promotions.controller.js");
+    createPromotion,
+    updatePromotionById } = require("../controllers/promotions.controller.js");
 
 const promotionsRouter = express.Router();
 
@@ -29,6 +30,15 @@ promotionsRouter.get("/:id", async (req, res) => {
     const result = await getPromotionById(id);
     res.status(200).json(result);
 });
+
+// Update mot promotions theo id
+promotionsRouter.put("/:id", validateAccessToken, async (req, res) => {
+    const id = req.params.id;
+    const { service_id, name, description, price, start, end } = req.body;
+    const result = await updatePromotionById(service_id, name, description, price, start, end, id);
+    res.status(200).json(result);
+});
+
 
 // Xoa mot promotions theo id
 promotionsRouter.delete("/:id", validateAccessToken, async (req, res) => {
