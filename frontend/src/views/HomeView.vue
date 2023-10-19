@@ -397,7 +397,7 @@
 
                                             <td v-if="service?.price && service.promotion_price"
                                                 class="text-ellipsis border-[#dadce0] border-t text-sky-400 font-[600] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ (service.price * service.promotion_price / 100).toLocaleString('vi-VN', {
+                                                {{ (service.price - (service.price * service.promotion_price / 100) > 0 ? (service.price - (service.price * service.promotion_price / 100)) : 0).toLocaleString('vi-VN', {
                                                     style: 'currency',
                                                     currency: 'VND'
                                                 }) }}</td>

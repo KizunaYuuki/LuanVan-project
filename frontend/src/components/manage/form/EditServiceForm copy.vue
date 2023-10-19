@@ -427,14 +427,20 @@ function automaticPriceCalculation(data) {
             // Nội miền - Nội tỉnh
             if (to.value.province === from.value.province) {
                 // Tính thời gian cho dịch vụ
-                if (!service.value.delivery_max_time && !service.value.delivery_min_time) {
-                    if (selectedServiceType.value.intra_province_min_time !== 0) {
-                        service.value.delivery_min_time = selectedServiceType.value.intra_province_min_time;
-                        service.value.delivery_max_time = selectedServiceType.value.intra_province_max_time;
-                    } else {
-                        service.value.delivery_min_time = '';
-                        service.value.delivery_max_time = selectedServiceType.value.intra_province_max_time;
-                    }
+                // if (!service.value.delivery_max_time && !service.value.delivery_min_time) {
+                //     if (selectedServiceType.value.intra_province_min_time !== 0) {
+                //         service.value.delivery_min_time = selectedServiceType.value.intra_province_min_time;
+                //         service.value.delivery_max_time = selectedServiceType.value.intra_province_max_time;
+                //     } else {
+                //         service.value.delivery_max_time = selectedServiceType.value.intra_province_max_time;
+                //     }
+                // }
+                if (selectedServiceType.value.intra_province_min_time !== 0) {
+                    service.value.delivery_min_time = selectedServiceType.value.intra_province_min_time;
+                    service.value.delivery_max_time = selectedServiceType.value.intra_province_max_time;
+                } else {
+                    service.value.delivery_min_time = '';
+                    service.value.delivery_max_time = selectedServiceType.value.intra_province_max_time;
                 }
 
                 price_list.value.forEach(element => {
@@ -480,14 +486,20 @@ function automaticPriceCalculation(data) {
             // Nội miền - Liên tỉnh
             else {
                 // Tính thời gian cho dịch vụ
-                if (!service.value.delivery_max_time && !service.value.delivery_min_time) {
-                    if (selectedServiceType.value.inter_provincial_min_time !== 0) {
-                        service.value.delivery_min_time = selectedServiceType.value.inter_provincial_min_time;
-                        service.value.delivery_max_time = selectedServiceType.value.inter_provincial_max_time;
-                    } else {
-                        service.value.delivery_min_time = '';
-                        service.value.delivery_max_time = selectedServiceType.value.inter_provincial_max_time;
-                    }
+                // if (!service.value.delivery_max_time && !service.value.delivery_min_time) {
+                //     if (selectedServiceType.value.inter_provincial_min_time !== 0) {
+                //         service.value.delivery_min_time = selectedServiceType.value.inter_provincial_min_time;
+                //         service.value.delivery_max_time = selectedServiceType.value.inter_provincial_max_time;
+                //     } else {
+                //         service.value.delivery_max_time = selectedServiceType.value.inter_provincial_max_time;
+                //     }
+                // }
+                if (selectedServiceType.value.inter_provincial_min_time !== 0) {
+                    service.value.delivery_min_time = selectedServiceType.value.inter_provincial_min_time;
+                    service.value.delivery_max_time = selectedServiceType.value.inter_provincial_max_time;
+                } else {
+                    service.value.delivery_min_time = '';
+                    service.value.delivery_max_time = selectedServiceType.value.inter_provincial_max_time;
                 }
 
                 price_list.value.forEach(element => {
@@ -534,15 +546,22 @@ function automaticPriceCalculation(data) {
         //  Liên miền
         else {
             // Tính thời gian cho dịch vụ
-            if (!service.value.delivery_max_time && !service.value.delivery_min_time) {
-                if (selectedServiceType.value.inter_domain_min_time !== 0) {
-                    service.value.delivery_min_time = selectedServiceType.value.inter_domain_min_time;
-                    service.value.delivery_max_time = selectedServiceType.value.inter_domain_max_time;
-                }
-                else {
-                    service.value.delivery_min_time = '';
-                    service.value.delivery_max_time = selectedServiceType.value.inter_domain_max_time;
-                }
+            // if (!service.value.delivery_max_time && !service.value.delivery_min_time) {
+            //     if (selectedServiceType.value.inter_domain_min_time !== 0) {
+            //         service.value.delivery_min_time = selectedServiceType.value.inter_domain_min_time;
+            //         service.value.delivery_max_time = selectedServiceType.value.inter_domain_max_time;
+            //     }
+            //     else {
+            //         service.value.delivery_max_time = selectedServiceType.value.inter_domain_max_time;
+            //     }
+            // }
+            if (selectedServiceType.value.inter_domain_min_time !== 0) {
+                service.value.delivery_min_time = selectedServiceType.value.inter_domain_min_time;
+                service.value.delivery_max_time = selectedServiceType.value.inter_domain_max_time;
+            }
+            else {
+                service.value.delivery_min_time = '';
+                service.value.delivery_max_time = selectedServiceType.value.inter_domain_max_time;
             }
 
             price_list.value.forEach(element => {
@@ -739,7 +758,7 @@ const updateServiceAxios = async () => {
         else {
             service.value.delivery_date = `${service.value.delivery_max_time}h`
         }
-        service.value.delivery_min_time = null;
+        // service.value.delivery_min_time = null;
     }
     else if (service.value.delivery_min_time !== '' && service.value.delivery_max_time !== '') {
         if (service.value.delivery_min_time >= 24) {
@@ -765,11 +784,11 @@ const updateServiceAxios = async () => {
         toast.success("Đã cập nhật dịch vụ thành công", { timeout: 3000 });
 
         // Về trang quản lý dịch vụ
-        router.push('/management/service');
+        // router.push('/management/service');
     }
 
     if (error) {
-        console.log(error);
+        // console.log(error);
     }
 };
 

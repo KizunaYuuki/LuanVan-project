@@ -202,9 +202,8 @@ const deteleServiceAxios = async (service_id) => {
     const { data, error } = await deteleService(accessToken, service_id);
 
     if (data) {
-        services.value = data;
-        console.log(data);
-        getServicesAxios()
+        await getServicesAxios()
+        // console.log(data);
     }
     if (error) {
         console.log(error.message);
