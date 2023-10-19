@@ -165,7 +165,7 @@
                                                             class="z-[1] absolute right-0 -mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                                             <div class="px-1 py-1">
                                                                 <MenuItem v-slot="{ active }">
-                                                                <button :class="[
+                                                                <button @click="goToEditPromotionPage(promotion.id)" :class="[
                                                                     active ? 'bg-sky-400 text-white' : 'text-gray-900',
                                                                     'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                                                                 ]">
@@ -218,6 +218,10 @@ const goToAddPromotionPage = async () => {
     router.push('/management/promotion/new');
 };
 
+const goToEditPromotionPage = async (promotion_id) => {
+    router.push(`/management/promotion/edit/${promotion_id}`);
+};
+
 // variables
 const user_id = ref('');
 const promotions = ref('');
@@ -236,19 +240,24 @@ const { isAuthenticated } = useAuth0();
 if (isAuthenticated) {
     // console.log(user.role);
     if (user.value.role) {
-        console.log(user);
+        // console.log(user);
     }
     else {
         router.push('/');
     }
 }
 
+// toast
+import { useToast } from "vue-toastification";
+// Get toast interface
+const toast = useToast();
+
 const getPromotionsAxios = async () => {
     const { data, error } = await getPromotions();
 
     if (data) {
         promotions.value = data
-        console.log(data);
+        // console.log(data);
     }
     if (error) {
         // console.log(error.message);
@@ -260,8 +269,9 @@ const detelePromotionAxios = async (promotion_id) => {
     const { data, error } = await detelePromotion(accessToken, promotion_id);
 
     if (data) {
-        console.log(data);
-        getPromotionsAxios();
+        // console.log(data);
+        toast.success("Xoá Khuyến mãi thành công", { timeout: 3000 });
+        await getPromotionsAxios();
     }
     if (error) {
         // console.log(error.message);

@@ -56,6 +56,25 @@ export const createPromotion = async (accessToken, promotionData) => {
     };
 };
 
+export const updatePromotion = async (accessToken, promotionData, promotion_id) => {
+    const config = {
+        url: `${apiServerUrl}/api/promotion/${promotion_id}`,
+        method: "PUT",
+        headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+        },
+        data: promotionData,
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
+
 export const detelePromotion = async (accessToken, promotion_id) => {
     const config = {
         url: `${apiServerUrl}/api/promotion/${promotion_id}`,

@@ -8,7 +8,7 @@
         <div class="mx-auto max-w-5xl bg-white p-16 rounded-lg">
             <!-- Title -->
             <div class="flex-auto mb-10">
-                <h1 class="text-[#111827] leading-[3rem] font-[600] text-[1.5rem]">Thêm
+                <h1 class="text-[#111827] leading-[3rem] font-[600] text-[1.5rem]">Cập nhật
                     Khuyến mãi</h1>
             </div>
 
@@ -175,7 +175,7 @@ import {
 } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid';
 import { getServices } from "@/services/service.service";
-import { createPromotion } from "@/services/promotion.service";
+import { createPromotion, getPromotionById, updatePromotion } from "@/services/promotion.service";
 
 // toast
 import { useToast } from "vue-toastification";
@@ -183,9 +183,14 @@ import { useToast } from "vue-toastification";
 const toast = useToast();
 
 import { useRouter } from 'vue-router'
+import format from 'date-fns/format';
 const router = useRouter()
 
 const { getAccessTokenSilently } = useAuth0();
+
+const props = defineProps({
+    promotion_id: '' // Promotion Id
+})
 
 const isLoading = ref(true);
 
@@ -199,6 +204,33 @@ const promotion = ref({
 })
 const services = ref()
 
+const getPromotionByIdAxios = async (promotion_id) => {
+    const { data, error } = await getPromotionById(promotion_id);
+
+    if (data) {
+        // console.log(data);
+
+        // Push data to form
+        promotion.value.service_id = data.service_id;
+        promotion.value.name = data.name;
+        promotion.value.description = data.description;
+        promotion.value.price = data.price;
+        promotion.value.start = (format(new Date(data.start), `yyyy-MM-dd`).toString() + "T" + format(new Date(data.start), `H:mm`).toString()).toString();
+        promotion.value.end = (format(new Date(data.end), `yyyy-MM-dd`).toString() + "T" + format(new Date(data.end), `H:mm`).toString()).toString();
+
+        services.value.forEach(element => {
+            if (element.service_id === data.service_id) {
+                // console.log(element);
+                selectedService.value = element;
+            }
+        });
+    }
+
+    if (error) {
+        // console.log(error)
+    }
+};
+
 const getServicesAxios = async () => {
     const { data, error } = await getServices();
 
@@ -206,6 +238,7 @@ const getServicesAxios = async () => {
         services.value = data;
         selectedService.value = [];
         // console.log(data);
+        await getPromotionByIdAxios(props.promotion_id);
         isLoading.value = false;
     }
 
@@ -217,6 +250,7 @@ const getServicesAxios = async () => {
 function changeService(service_id) {
     promotion.value.service_id = service_id;
 }
+
 
 let queryService = ref('');
 const selectedService = ref();
@@ -233,14 +267,14 @@ let filteredServices = computed(() =>
 )
 
 // create service
-const createPromotionAxios = async () => {
+const updatePromotionAxios = async () => {
     const accessToken = await getAccessTokenSilently();
-    const { data, error } = await createPromotion(accessToken, promotion.value);
+    const { data, error } = await updatePromotion(accessToken, promotion.value, props.promotion_id);
 
     if (data) {
         // console.log(data);
 
-        toast.success("Đã tạo Khuyến mãi thành công", { timeout: 3000 });
+        toast.success("Đã Cập nhật Khuyến mãi thành công", { timeout: 3000 });
 
         // Về trang quản lý dịch vụ
         router.push('/management/promotion');
@@ -262,7 +296,7 @@ function submitHandle(event) {
     // console.log(promotion.value);
 
     // Create service 
-    createPromotionAxios();
+    updatePromotionAxios();
 }
 
 onBeforeMount(() => {

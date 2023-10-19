@@ -169,7 +169,7 @@ const router = createRouter({
             meta: {
                 title: "Quản lý Khuyến mãi",
             }
-        }, 
+        },
         {
             path: '/management/promotion/new',
             name: 'Add Promotion - Management',
@@ -178,7 +178,18 @@ const router = createRouter({
             meta: {
                 title: "Thêm Khuyến mãi",
             }
-        }, 
+        },
+        {
+            path: '/management/promotion/edit/:promotion_id',
+            name: 'Edit Promotion - Management',
+            component: () => import('../views/manage/EditPromotionPage.vue'),
+            // component: () => import('../views/manage/NewPromotionPage.vue'),
+            props: true,
+            beforeEnter: authGuard,
+            meta: {
+                title: "Cập nhật Khuyến mãi",
+            }
+        },
         {
             path: '/management/user',
             name: 'User - Management',
