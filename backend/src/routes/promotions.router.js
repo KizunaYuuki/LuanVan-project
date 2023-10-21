@@ -6,7 +6,8 @@ const {
     getPromotionById,
     deletePromotionById,
     createPromotion,
-    updatePromotionById } = require("../controllers/promotions.controller.js");
+    updatePromotionById,
+    getPromotionByServiceId } = require("../controllers/promotions.controller.js");
 
 const promotionsRouter = express.Router();
 
@@ -28,6 +29,13 @@ promotionsRouter.get("/", async (req, res) => {
 promotionsRouter.get("/:id", async (req, res) => {
     const id = req.params.id;
     const result = await getPromotionById(id);
+    res.status(200).json(result);
+});
+
+// Lay mot service theo id
+promotionsRouter.get("/service/:service_id", async (req, res) => {
+    const service_id = req.params.service_id;
+    const result = await getPromotionByServiceId(service_id);
     res.status(200).json(result);
 });
 

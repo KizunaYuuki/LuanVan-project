@@ -16,6 +16,16 @@ async function getPromotionById(id) {
     return rows[0]
 }
 
+// Lay mot promotions theo service id
+async function getPromotionByServiceId(service_id) {
+    const [rows] = await pool.query(`
+    SELECT *
+    FROM promotions
+    WHERE promotions.service_id = ?
+    `, [service_id])
+    return rows
+}
+
 // Cap nhat mot promotions theo id
 async function updatePromotionById(service_id, name, description, price, start, end, id) {
     try {
@@ -60,5 +70,6 @@ module.exports = {
     getPromotionById,
     deletePromotionById,
     createPromotion,
-    updatePromotionById
+    updatePromotionById,
+    getPromotionByServiceId
 }

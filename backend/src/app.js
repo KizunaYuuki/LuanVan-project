@@ -170,7 +170,7 @@ app.get("/address", async (req, res) => {
         // Nếu không có lỗi, data chứa nội dung của tệp JSON dưới dạng chuỗi.
         try {
             const jsonObject = JSON.parse(data);
-            console.log('Đối tượng JSON:', jsonObject);
+            // console.log('Đối tượng JSON:', jsonObject);
             res.status(201).send(jsonObject);
         } catch (parseError) {
             console.error('Lỗi khi phân tích nội dung JSON:', parseError);
