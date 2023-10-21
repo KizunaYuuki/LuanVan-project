@@ -222,48 +222,9 @@
                                             từ đâu?</h2>
                                         <p class="mt-1 text-sm leading-6 text-gray-600">Thông tin về địa
                                             điểm cụ thể mà nhân viên vận chuyển đến để lấy lô hàng của bạn.</p>
-                                        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-
-                                            <div class="sm:col-span-2 sm:col-start-1">
-                                                <label for="provinceFROM"
-                                                    class="block text-sm font-medium leading-6 text-gray-900">Tỉnh
-                                                    / Thành
-                                                    phố<strong class="text-[red] ml-[8px]">*</strong></label>
-                                                <div class="mt-2">
-                                                    <input
-                                                        :class="{ 'border-red-600 border': (isValidationError && addressFrom.province === '') }"
-                                                        v-model="addressFrom.province" type="text" name="provinceFROM"
-                                                        id="provinceFROM" autocomplete="address-level2"
-                                                        class="pl-[14px] block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                                </div>
-                                            </div>
-
-                                            <div class="sm:col-span-2">
-                                                <label for="districtFROM"
-                                                    class="block text-sm font-medium leading-6 text-gray-900">Quận /
-                                                    Huyện<strong class="text-[red] ml-[8px]">*</strong></label>
-                                                <div class="mt-2">
-                                                    <input
-                                                        :class="{ 'border-red-600 border': (isValidationError && addressFrom.district === '') }"
-                                                        v-model="addressFrom.district" type="text" name="districtFROM"
-                                                        id="districtFROM" autocomplete="address-level1"
-                                                        class="pl-[14px] block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                                </div>
-                                            </div>
-
-                                            <div class="sm:col-span-2">
-                                                <label for="wardFROM"
-                                                    class="block text-sm font-medium leading-6 text-gray-900">Xã /
-                                                    Phường<strong class="text-[red] ml-[8px]">*</strong></label>
-                                                <div class="mt-2">
-                                                    <input
-                                                        :class="{ 'border-red-600 border': (isValidationError && addressFrom.ward === '') }"
-                                                        v-model="addressFrom.ward" type="text" name="wardFROM" id="wardFROM"
-                                                        autocomplete="address-level3"
-                                                        class="pl-[14px] block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <Address :addressData="locationFrom"
+                                            @sendAddress="(data) => { addressFrom.province = data.province.Name, addressFrom.district = data.district.Name, addressFrom.ward = data.ward.Name }">
+                                        </Address>
                                     </div>
 
                                     <!-- Lô hàng của bạn gửi đi đâu? TO -->
@@ -274,48 +235,9 @@
                                             điểm cụ thể mà bạn muốn gửi hàng đến. Thông tin về
                                             địa chỉ rất quan trọng để đảm bảo rằng hàng hóa sẽ
                                             đến đúng địa điểm đích mà bạn muốn.</p>
-                                        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                                            <div class="sm:col-span-2 sm:col-start-1">
-                                                <label for="provinceTO"
-                                                    class="block text-sm font-medium leading-6 text-gray-900">Tỉnh
-                                                    / Thành
-                                                    phố<strong class="text-[red] ml-[8px]">*</strong></label>
-                                                <div class="mt-2">
-                                                    <input
-                                                        :class="{ 'border-red-600 border': (isValidationError && addressTo.province === '') }"
-                                                        v-model="addressTo.province" type="text" name="provinceTO"
-                                                        id="provinceTO" autocomplete="address-level2"
-                                                        class="pl-[14px] block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                                </div>
-                                            </div>
-
-                                            <div class="sm:col-span-2">
-                                                <label for="districtTO"
-                                                    class="block text-sm font-medium leading-6 text-gray-900">Quận /
-                                                    Huyện<strong class="text-[red] ml-[8px]">*</strong></label>
-                                                <div class="mt-2">
-                                                    <input
-                                                        :class="{ 'border-red-600 border': (isValidationError && addressTo.district === '') }"
-                                                        v-model="addressTo.district" type="text" name="districtTO"
-                                                        id="districtTO" autocomplete="address-level1"
-                                                        class="pl-[14px] block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                                </div>
-                                            </div>
-
-                                            <div class="sm:col-span-2">
-                                                <label for="wardTO"
-                                                    class="block text-sm font-medium leading-6 text-gray-900">Xã
-                                                    /
-                                                    Phường<strong class="text-[red] ml-[8px]">*</strong></label>
-                                                <div class="mt-2">
-                                                    <input
-                                                        :class="{ 'border-red-600 border': (isValidationError && addressTo.ward === '') }"
-                                                        v-model="addressTo.ward" type="text" name="wardTO" id="wardTO"
-                                                        autocomplete="address-level3"
-                                                        class="pl-[14px] block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <Address :addressData="locationTo"
+                                            @sendAddress="(data) => { addressTo.province = data.province.Name, addressTo.district = data.district.Name, addressTo.ward = data.ward.Name }">
+                                        </Address>
                                     </div>
                                 </div>
                                 <!-- Button -->
@@ -347,12 +269,18 @@
                                                 <h3>
                                                     <span>{{ service.service_name }}</span>
                                                 </h3>
-                                                <p class="ml-4">{{
-                                                    (service.price).toLocaleString('vi-VN',
-                                                        {
-                                                            style: 'currency',
-                                                            currency: 'VND'
-                                                        }) }}</p>
+                                                <span class="ml-4" v-if="service.promotion_price">
+                                                    {{ (service.promotion_price).toLocaleString('vi-VN', {
+                                                        style: 'currency',
+                                                        currency: 'VND'
+                                                    }) }}
+                                                </span>
+                                                <span class="ml-4" v-else>
+                                                    {{ (service.price).toLocaleString('vi-VN', {
+                                                        style: 'currency',
+                                                        currency: 'VND'
+                                                    }) }}
+                                                </span>
                                             </div>
                                             <p class="mt-1 text-sm text-gray-500">{{ service.provider_name }}</p>
                                         </div>
@@ -360,12 +288,18 @@
                                 </RouterLink>
                                 <div v-if="service" class="flex items-center justify-between pt-4">
                                     <span>Tổng giá dịch vụ</span>
-                                    <span>{{
-                                        (service.price).toLocaleString('vi-VN',
-                                            {
-                                                style: 'currency',
-                                                currency: 'VND'
-                                            }) }}</span>
+                                    <span class="" v-if="service.promotion_price">
+                                        {{ (service.promotion_price).toLocaleString('vi-VN', {
+                                            style: 'currency',
+                                            currency: 'VND'
+                                        }) }}
+                                    </span>
+                                    <span class="" v-else>
+                                        {{ (service.price).toLocaleString('vi-VN', {
+                                            style: 'currency',
+                                            currency: 'VND'
+                                        }) }}
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -544,12 +478,18 @@
                                                 <h3>
                                                     <span>{{ service.service_name }}</span>
                                                 </h3>
-                                                <p class="ml-4">{{
-                                                    (service.price).toLocaleString('vi-VN',
-                                                        {
-                                                            style: 'currency',
-                                                            currency: 'VND'
-                                                        }) }}</p>
+                                                <span class="ml-4" v-if="service.promotion_price">
+                                                    {{ (service.promotion_price).toLocaleString('vi-VN', {
+                                                        style: 'currency',
+                                                        currency: 'VND'
+                                                    }) }}
+                                                </span>
+                                                <span class="ml-4" v-else>
+                                                    {{ (service.price).toLocaleString('vi-VN', {
+                                                        style: 'currency',
+                                                        currency: 'VND'
+                                                    }) }}
+                                                </span>
                                             </div>
                                             <p class="mt-1 text-sm text-gray-500">{{ service.provider_name }}</p>
                                         </div>
@@ -557,12 +497,25 @@
                                 </RouterLink>
                                 <div v-if="service" class="flex items-center justify-between pt-4">
                                     <span>Tổng giá dịch vụ</span>
-                                    <span>{{
-                                        (service.price).toLocaleString('vi-VN',
-                                            {
-                                                style: 'currency',
-                                                currency: 'VND'
-                                            }) }}
+                                    <span v-if="service.promotion_price">
+                                        {{ (service.promotion_price).toLocaleString('vi-VN', {
+                                            style: 'currency',
+                                            currency: 'VND'
+                                        }) }}
+                                        <span v-if="changedPrice" class="font-[500]">
+                                            ~ {{
+                                                (parseFloat(changedPrice)).toLocaleString('en-US',
+                                                    {
+                                                        style: 'currency',
+                                                        currency: 'USD'
+                                                    }) }}
+                                        </span>
+                                    </span>
+                                    <span v-else>
+                                        {{ (service.price).toLocaleString('vi-VN', {
+                                            style: 'currency',
+                                            currency: 'VND'
+                                        }) }}
                                         <span v-if="changedPrice" class="font-[500]">
                                             ~ {{
                                                 (parseFloat(changedPrice)).toLocaleString('en-US',
@@ -657,15 +610,127 @@
 
                         <!-- Noi dung -->
                         <div class="max-w-7xl mx-auto px-4 sm:px-6 min-[1024px]:pt-[64px] py-[16px] lg:px-8">
-                            <div class="space-y-12 mx-auto max-w-2xl">
-
-                                <!-- Tieu de -->
+                            <div class="space-y-12 mx-auto max-w-4xl">
                                 <div class="border-b border-gray-900/10 pb-12 bg-white p-[32px] rounded-lg">
-                                    <h2 class="font-semibold leading-7 text-gray-900 text-[1.25rem]">Hoàn Thành</h2>
-                                    <p class="mt-1 leading-6 text-gray-600">Đăng ký dịch vụ Thành công, bạn có thể
-                                        xem lại thông tin dịch vụ đã đăng ký trước khi rời trang này</p>
-                                    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                                    <div class="p-4">
+                                        <!-- Tieu de -->
+                                        <div class="p-4 sm:px-0">
+                                            <h2 class="font-semibold leading-7 text-gray-900 text-[1.25rem]">Hoàn Thành
+                                                - Đăng ký thành công
+                                            </h2>
+                                            <p class="mt-1 leading-6 text-gray-600">Đăng ký dịch vụ Thành công, bạn có
+                                                thể
+                                                xem lại thông tin dịch vụ đã đăng ký trước khi rời trang này</p>
+                                        </div>
+                                        <!-- Content -->
+                                        <div v-if="orderResutl?.user_name" class="mt-6 border-t border-gray-100">
+                                            <dl class="divide-y divide-gray-100">
+                                                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                                    <dt class="text-sm font-medium leading-6 text-gray-900">Tên dịch vụ</dt>
+                                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                                        {{ service.service_name }}
+                                                    </dd>
+                                                </div>
+                                                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                                    <dt class="text-sm font-medium leading-6 text-gray-900">Tên Khách hàng
+                                                        đăng ký dịch vụ: </dt>
+                                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                                        {{ orderResutl.user_name }}
+                                                    </dd>
+                                                </div>
+                                                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                                    <dt class="text-sm font-medium leading-6 text-gray-900">Địa chỉ
+                                                        Email: </dt>
+                                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                                        {{ orderResutl.email }}
+                                                    </dd>
+                                                </div>
+                                                <div v-if="orderResutl?.phone"
+                                                    class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                                    <dt class="text-sm font-medium leading-6 text-gray-900">Số điện
+                                                        thoại: </dt>
+                                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                                        {{ orderResutl.phone }}</dd>
+                                                </div>
+                                                <div v-if="packageResutl?.weight"
+                                                    class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                                    <dt class="text-sm font-medium leading-6 text-gray-900">Trọng lượng
+                                                        gói hàng: </dt>
+                                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                                        {{ packageResutl.weight }}</dd>
+                                                </div>
+                                                <div v-show="packageResutl?.price"
+                                                    class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                                    <dt class="text-sm font-medium leading-6 text-gray-900">Giá trị
+                                                        gói hàng: </dt>
+                                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                                        {{ packageResutl?.price }}</dd>
+                                                </div>
+                                                <div v-if="addressFromResutl?.ward"
+                                                    class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                                    <dt class="text-sm font-medium leading-6 text-gray-900">Lô hàng được
+                                                        gửi từ: </dt>
+                                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                                        {{ addressFromResutl.ward }},
+                                                        {{ addressFromResutl.district }},
+                                                        {{ addressFromResutl.province }}.
+                                                    </dd>
+                                                </div>
+                                                <div v-if="addressToResutl?.ward"
+                                                    class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                                    <dt class="text-sm font-medium leading-6 text-gray-900">Lô hàng được
+                                                        gửi đến:</dt>
+                                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                                        {{ addressToResutl.ward }},
+                                                        {{ addressToResutl.district }},
+                                                        {{ addressToResutl.province }}.
+                                                    </dd>
+                                                </div>
+                                                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                                    <dt class="text-sm font-medium leading-6 text-gray-900">Phương thức
+                                                        thanh toán:</dt>
+                                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                                        <span v-if="orderResutl.payment_id === 1" class="font-500">Tiền
+                                                            mặt</span>
+                                                        <span v-if="orderResutl.payment_id === 2"
+                                                            class="font-500">Paypal</span>
+                                                    </dd>
+                                                </div>
+                                                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                                    <dt class="text-sm font-medium leading-6 text-gray-900">Loại dịch vụ:
+                                                    </dt>
+                                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                                        {{ service.service_types_name }}</dd>
+                                                </div>
+                                                <div v-if="orderResutl?.total_amount"
+                                                    class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                                    <dt class="text-sm font-medium leading-6 text-gray-900">Phí dịch vụ:
+                                                    </dt>
+                                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                                        {{
+                                                            (orderResutl?.total_amount || 0).toLocaleString('vi-VN',
+                                                                {
+                                                                    style: 'currency',
+                                                                    currency: 'VND'
+                                                                })
+                                                        }}
+                                                    </dd>
+                                                </div>
+                                                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                                    <dt class="text-sm font-medium leading-6 text-gray-900"></dt>
+                                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                                        <div class="flex">
+                                                            <h1>Dịch vụ (Đơn hàng) này sẽ được xét duyệt trong vòng
+                                                                <span class="text-[#0096fa]">24h</span>
+                                                            </h1>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                            </dl>
+                                        </div>
+                                    </div>
 
+                                    <div v-if="false" class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                         <!-- Thông tin cá nhân -->
                                         <div class="col-span-full text-[16px]">
 
@@ -734,7 +799,7 @@
 
                         <!-- Button -->
                         <div class="px-4">
-                            <div class="space-y-12 mx-auto max-w-2xl">
+                            <div class="space-y-12 mx-auto max-w-4xl">
                                 <div class="mt-6 flex items-center justify-end gap-x-6">
                                     <RouterLink to="/"
                                         class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
@@ -745,12 +810,9 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </form>
-
             </div>
-
         </section>
     </main>
 </template>
@@ -767,6 +829,10 @@ import { createOrder } from "@/services/order.service";
 import { createAddress } from "@/services/address.service";
 import { createPackage } from "@/services/package.service";
 import { getServiceById } from "@/services/service.service";
+import { getLocationsByServicId } from "@/services/location.service";
+import { getPromotionByServiceId } from "@/services/promotion.service";
+import Address from "@/components/Address.vue";
+import getTime from 'date-fns/getTime'
 
 // toast
 import { useToast } from "vue-toastification";
@@ -826,6 +892,9 @@ const packageData = ref(
     }
 );
 
+const locationFrom = ref();
+const locationTo = ref();
+
 const addressFrom = ref(
     {
         order_id: '',
@@ -879,6 +948,47 @@ const getServiceByIdAxios = async (id) => {
     }
 };
 
+const getLocationsByServicIdAxios = async (service_id) => {
+    const { data, error } = await getLocationsByServicId(service_id);
+
+    if (data) {
+        data.forEach(element => {
+            if (element.type === "TO") {
+                locationTo.value = element;
+            }
+            else {
+                locationFrom.value = element;
+            }
+        });
+    }
+
+    if (error) {
+        // console.log(error);
+    }
+};
+
+const getPromotionByServiceIdAxios = async (service_id) => {
+    const { data, error } = await getPromotionByServiceId(service_id);
+
+    if (data) {
+        // console.log(data);
+        data.forEach(element => {
+            if (getTime(new Date()) >= getTime(new Date(element.start)) && getTime(new Date()) < getTime(new Date(element.end))) {
+                console.log(element);
+                if (element.price < 100)
+                    service.value.promotion_price = service.value.price - (service.value.price * element.price / 100);
+                else {
+                    service.value.promotion_price = 0;
+                }
+            }
+        });
+    }
+
+    if (error) {
+        // console.log(error);
+    }
+};
+
 const getUserByEmailAxios = async (user) => {
     // edit data
     const userData = {
@@ -903,8 +1013,13 @@ const createOrderAxios = async (orderData) => {
     // edit data order
     order.value.user_id = user_id.value;
     order.value.service_id = parseInt(props.service_id);
-    order.value.total_amount = service.value.price;
 
+    // Nếu có khuyến mãi
+    if (service.value?.promotion_price) {
+        order.value.total_amount = service.value.promotion_price;
+    } else {
+        order.value.total_amount = service.value.price;
+    }
     const accessToken = await getAccessTokenSilently();
     const { data, error } = await createOrder(accessToken, orderData);
 
@@ -1017,7 +1132,14 @@ onMounted(async () => {
     // Tải button Paypal
     script.addEventListener('load', () => {
         loaded.value = true;
-        let price = parseFloat(service.value.price / USDToVND.value).toFixed(2);
+        let price
+        if (service.value?.promotion_price) {
+            price = parseFloat(service.value.promotion_price / USDToVND.value).toFixed(2);
+        }
+        else {
+            price = parseFloat(service.value.price / USDToVND.value).toFixed(2);
+        }
+
         changedPrice.value = price
         paypal_sdk
             .Buttons({
@@ -1075,6 +1197,8 @@ onMounted(async () => {
 // run function
 getUserByEmailAxios(user);
 getServiceByIdAxios(props.service_id);
+getLocationsByServicIdAxios(props.service_id);
+getPromotionByServiceIdAxios(props.service_id)
 </script>
 
 <style scoped>

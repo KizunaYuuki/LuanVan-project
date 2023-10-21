@@ -36,6 +36,23 @@ export const getPromotionById = async (promotion_id) => {
     };
 };
 
+export const getPromotionByServiceId = async (service_id) => {
+    const config = {
+        url: `${apiServerUrl}/api/promotion/service/${service_id}`,
+        method: "GET",
+        headers: {
+            "content-type": "application/json",
+        },
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
+
 
 export const createPromotion = async (accessToken, promotionData) => {
     const config = {
