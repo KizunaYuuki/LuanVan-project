@@ -103,7 +103,10 @@ app.get('/related-product', cors(), (req, res) => {
             let result = []
             for (let index = 0; index < relatedProductIdArray.length; index++) {
                 result = await getServiceById(relatedProductIdArray[index]);
-                relatedProductArray.push(result);
+                if (result.service_id) {
+                    // console.log(result.service_id);
+                    relatedProductArray.push(result);
+                }
             }
             res.status(200).json(relatedProductArray);
         } else {
