@@ -116,8 +116,7 @@
                                             <DialogTitle class="text-lg font-medium text-gray-900">Giỏ hàng
                                             </DialogTitle>
                                             <div class="ml-3 flex h-7 items-center">
-                                                <button type="button"
-                                                    class="relative p-2 text-gray-400 hover:text-gray-500"
+                                                <button type="button" class="relative p-2 text-gray-400 hover:text-gray-500"
                                                     @click="cartOpen = false">
                                                     <span class="absolute -inset-0.5" />
                                                     <span class="sr-only">Close panel</span>
@@ -216,7 +215,7 @@ import LoginButton from "@/components/buttons/login-button.vue";
 import LogoutButton from "@/components/buttons/logout-button.vue";
 import SignupButton from "@/components/buttons/signup-button.vue";
 import { useAuth0 } from "@auth0/auth0-vue";
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import {
     Dialog,
     DialogPanel,
@@ -312,6 +311,7 @@ const carts = ref();
 const mobileMenuOpen = ref(false)
 // get the information user
 const { user } = useAuth0();
+const { isLoading } = useAuth0();
 // get the token
 const { getAccessTokenSilently } = useAuth0();
 
@@ -328,12 +328,12 @@ const getUserByEmailAxios = async (user) => {
     if (data) {
         user_id.value = data.id;
         getCartsByUserIdAxios(data.id);
-        console.log(data);
-        console.log(user_id.value);
+        // console.log(data);
+        // console.log(user_id.value);
     }
 
     if (error) {
-        console.log(error.message);
+        // console.log(error.message);
     }
 };
 
@@ -343,11 +343,11 @@ const getCartsByUserIdAxios = async (user_id) => {
 
     if (data) {
         carts.value = data;
-        console.log(data);
+        // console.log(data);
     }
 
     if (error) {
-        console.log(error.message);
+        // console.log(error.message);
     }
 };
 
@@ -356,17 +356,20 @@ const deteleCartAxios = async (cart_id) => {
     const { data, error } = await deteleCart(accessToken, cart_id);
 
     if (data) {
-        console.log(data);
+        // console.log(data);
         // edit cart data
         carts.value = carts.value.filter((element) => element.cart_id !== cart_id);
     }
 
     if (error) {
-        console.log(error.message);
+        // console.log(error.message);
     }
 };
 // run function
-if(isAuthenticated) {
-    getUserByEmailAxios(user);
-}
+onMounted(() => {
+    if (isLoading && isAuthenticated && user.value?.name) {
+        getUserByEmailAxios(user);
+    }
+})
+
 </script>

@@ -821,26 +821,6 @@ const changeCheckBoxCompare = (service_id) => {
     }
 }
 
-const addCompare = (array, service_id) => {
-    array.forEach(element => {
-        if (element.id === service_id) {
-            return true;
-        } else {
-            return false;
-        }
-    });
-}
-
-// const isInCompareArray = (array, service_id) => {
-//     array.forEach(element => {
-//         if (element.id === service_id) {
-//             return true;
-//         } else {
-//             return false;
-//         }
-//     });
-// }
-
 // Lọc theo giá
 const priceFilterHandle = async (selected) => {
     let result = []
@@ -925,10 +905,6 @@ function timeFilter(selected, services, filter) {
     return result;
 };
 
-const mostPopularfilter = async () => {
-
-};
-
 const bestRatingfilter = async () => {
     services.value = services.value.toSorted((a, b) => b.average_rate - a.average_rate);
 };
@@ -978,6 +954,7 @@ const getServicesAxios = async () => {
     const { data, error } = await getServices();
 
     if (data) {
+        // console.log(data);
         services.value = data;
         for (let i = 0; data.length > i; i++) {
             services.value[i].append = false;
@@ -1000,14 +977,14 @@ const getServicesAxios = async () => {
     if (error) {
         services.value = JSON.stringify(error, null, 2);
     }
-    console.log(services.value);
+    // console.log(services.value);
 };
 
 const getPromotionsAxios = async () => {
     const { data, error } = await getPromotions();
 
     if (data) {
-        console.log(data);
+        // console.log(data);
         for (let i = 0; rootServices.value.length > i; i++) {
             for (let j = 0; data.length > j; j++) {
                 if (rootServices.value[i].service_id === data[j].service_id && getTime(new Date()) >= getTime(new Date(data[j].start)) && getTime(new Date()) < getTime(new Date(data[j].end))) {
@@ -1024,7 +1001,7 @@ const getPromotionsAxios = async () => {
             }
         }
 
-        console.log(services.value);
+        // console.log(services.value);
     }
 
     if (error) {
@@ -1038,7 +1015,7 @@ const getInfoReviewsAxios = async () => {
     const { data, error } = await getInfoReviews();
 
     if (data) {
-        console.log(data);
+        // console.log(data);
         for (let i = 0; services.value.length > i; i++) {
             for (let j = 0; data.length > j; j++) {
                 if (services.value[i].service_id === data[j].service_id) {
@@ -1051,7 +1028,7 @@ const getInfoReviewsAxios = async () => {
                 }
             }
         }
-        console.log(services.value);
+        // console.log(services.value);
     }
 
     if (error) {
