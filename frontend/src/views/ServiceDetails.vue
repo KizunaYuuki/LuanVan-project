@@ -13,12 +13,28 @@
 
                     <div class="mt-4 lg:row-span-3 lg:mt-0">
                         <h2 class="sr-only">Thông tin dịch vụ</h2>
-                        <p v-if="service" class="text-3xl tracking-tight text-gray-900">
-                            {{ (service.price).toLocaleString('vi-VN', {
-                                style: 'currency',
-                                currency: 'VND'
-                            }) }}
-                        </p>
+                        <div>
+                            <p v-if="service?.price && service.promotion_price"
+                                class="text-3xl tracking-tight text-sky-400">
+                                {{ (service.price - (service.price * service.promotion_price /
+                                    100)
+                                    > 0
+                                    ?
+                                    (service.price - (service.price * service.promotion_price /
+                                        100)) :
+                                    0).toLocaleString('vi-VN', {
+                                        style: 'currency',
+                                        currency: 'VND'
+                                    }) }} <span class="text-sm">Giá khuyến mãi</span>
+                            </p>
+                            <p v-else-if="service?.price" class="text-3xl tracking-tight text-gray-900">
+                                {{ (service.price).toLocaleString('vi-VN', {
+                                    style: 'currency',
+                                    currency: 'VND'
+                                }) }}
+                            </p>
+                        </div>
+
 
                         <!-- Reviews -->
                         <div class="mt-6">
@@ -497,18 +513,20 @@ const reviewsCal = ref(
     }
 );
 import axios from "axios";
+import { getPromotions } from "@/services/promotion.service";
+import getTime from 'date-fns/getTime'
 const apiServerUrl = import.meta.env.VITE_API_SERVER_URL;
 const getRelatedProductAxios = async (provider, service_type, weight) => {
     // console.log(`${apiServerUrl}/related-product?provider=${provider}&service_type=${service_type}&weight=${weight}`);
     await axios.get(`${apiServerUrl}/related-product?provider=${provider}&service_type=${service_type}&weight=${weight}`)
         .then(function (response) {
             // handle success
-            console.log(response.data);
+            // console.log(response.data);
             relatedProducts.value = response.data
         })
         .catch(function (error) {
             // handle error
-            console.log(error);
+            // console.log(error);
         })
         .finally(function () {
             // always executed
@@ -548,7 +566,8 @@ const getServiceByIdAxios = async (id) => {
         service.value = data;
         // console.log(data.provider_name, data.service_types_name, data.weight);
         getRelatedProductAxios(data.provider_name, data.service_types_name, data.weight);
-        console.log(service.value);
+        getPromotionsAxios();
+        // console.log(service.value);
     }
 
     if (error) {
@@ -707,6 +726,21 @@ const createCartAxios = async (user_id) => {
         if (error) {
             // console.log(error.message);
         }
+    }
+};
+
+const getPromotionsAxios = async () => {
+    const { data, error } = await getPromotions();
+
+    if (data) {
+        // console.log(data);
+        for (let i = 0; data.length > i; i++) {
+            if (service.value.service_id === data[i].service_id && getTime(new Date()) >= getTime(new Date(data[i].start)) && getTime(new Date()) < getTime(new Date(data[i].end))) {
+                service.value.promotion_price = data[i].price;
+                // console.log(service.value);
+            }
+        }
+        // console.log(services.value);
     }
 };
 

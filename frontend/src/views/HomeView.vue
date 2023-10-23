@@ -342,199 +342,241 @@
                 <div class="mt-[1rem] flow-root">
                     <div class="overflow-x-auto">
                         <div class="align-middle min-w-[100%] inline-block">
-                            <table
-                                class="bg-[white] min-w-[100%] indent-0 border rounded-[8px] border-separate border-spacing-0 table-fixed">
-                                <thead>
-                                    <tr class="">
-                                        <th scope="col"
-                                            class="text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                            Nhà cung cấp</th>
-                                        <th scope="col"
-                                            class="text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                            Tên dịch vụ</th>
-                                        <th scope="col"
-                                            class="text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                            Thời gian vận chuyển</th>
-                                        <th scope="col"
-                                            class="text-[#111827] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                            Trọng lượng</th>
-                                        <th scope="col"
-                                            class="text-[#111827] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                            Giá dịch vụ</th>
-                                        <th scope="col"
-                                            class="text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left pr-[1rem] py-[.875rem] relative">
-                                            <span class="sr-only">Xoá</span>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="">
+                            <div
+                                class="bg-[white] min-w-[100%] indent-0 border-[0.5px] rounded-[8px] border-separate border-spacing-0">
+                                <!-- Service Title  -->
+                                <section class="flex bg-gray-100 rounded-t-lg">
+                                    <div class="w-10"></div>
+
+                                    <div class="flex grow">
+                                        <div
+                                            class="w-[15%] text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            Nhà cung cấp</div>
+                                        <div
+                                            class="grow text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            Tên dịch vụ</div>
+                                        <div
+                                            class="w-[19%] text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            Thời gian vận chuyển</div>
+                                        <div
+                                            class="w-[12%] text-[#111827] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            Trọng lượng</div>
+                                        <div
+                                            class="w-[12%] text-[#111827] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            Giá dịch vụ</div>
+                                        <div
+                                            class="w-[6%] text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left pr-[1rem] py-[.875rem] relative">
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- Service Card -->
+                                <section class="">
                                     <template v-for="service in services" :key="service.service_id">
-                                        <tr v-if="service &&
-                                            (removeVietnameseTones(service.province_from).toLowerCase()).includes(removeVietnameseTones(filter.province_from).toLowerCase()) &&
-                                            (removeVietnameseTones(service.district_from).toLowerCase()).includes(removeVietnameseTones(filter.district_from).toLowerCase()) &&
-                                            (removeVietnameseTones(service.province_to).toLowerCase()).includes(removeVietnameseTones(filter.province_to).toLowerCase()) &&
-                                            (removeVietnameseTones(service.district_to).toLowerCase()).includes(removeVietnameseTones(filter.district_to).toLowerCase()) &&
-                                            ((filter.weight === '') || (filter.weight && (filter.weight >= service.weight)))"
-                                            class="mx-[4px] hover:shadow hover:bg-[#0096fa0d]"
-                                            :class="{ 'bg-red-50': (service.promotion_price && service.append === false) }">
-                                            <td
-                                                class="text-ellipsis border-[#dadce0] border-t px-[.75rem] text-[#111827] font-[500] text-[.95rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                                <div class="flex items-center text-ellipsis">
-                                                    <img :src="service.image" alt=""
-                                                        class="h-5 w-5 flex-shrink-0 rounded-full bg-slate-400 mr-2" />
-                                                    <span>{{ service.provider_name }}</span>
-                                                </div>
-                                            </td>
-                                            <td
-                                                class="text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ service.service_name }}</td>
-                                            <td
-                                                class="text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ service.delivery_date }}</td>
-                                            <td
-                                                class="text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ service.weight }} <span>kg</span></td>
+                                        <div class="flex hover:shadow hover:bg-[#0096fa0d] border-t-0 border-b-0 border-l border-r-0 hover:border-l-[#d30038]"
+                                            :class="{ 'bg-red-50/[.6]': (service.promotion_price) }">
+                                            <RouterLink :to="{
+                                                name: 'Service Details',
+                                                params: { id: service.service_id },
+                                            }" class="grow">
+                                                <div v-if="service &&
+                                                    (removeVietnameseTones(service.province_from).toLowerCase()).includes(removeVietnameseTones(filter.province_from).toLowerCase()) &&
+                                                    (removeVietnameseTones(service.district_from).toLowerCase()).includes(removeVietnameseTones(filter.district_from).toLowerCase()) &&
+                                                    (removeVietnameseTones(service.province_to).toLowerCase()).includes(removeVietnameseTones(filter.province_to).toLowerCase()) &&
+                                                    (removeVietnameseTones(service.district_to).toLowerCase()).includes(removeVietnameseTones(filter.district_to).toLowerCase()) &&
+                                                    ((filter.weight === '') || (filter.weight && (filter.weight >= service.weight)))"
+                                                    class="flex">
+                                                    <div
+                                                        class="w-10 flex items-center text-ellipsis border-[#dadce0] border-t px-[.75rem] text-[#111827] font-[500] text-[.95rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
+                                                        <!-- <button @click.prevent="changeCheckBoxCompare()" class="flex items-center text-ellipsis">
+                                                            <span>SGD</span>
+                                                        </button> -->
 
-                                            <td v-if="service?.price && service.promotion_price"
-                                                class="text-ellipsis border-[#dadce0] border-t text-sky-400 font-[600] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ (service.price - (service.price * service.promotion_price / 100) > 0 ? (service.price - (service.price * service.promotion_price / 100)) : 0).toLocaleString('vi-VN', {
-                                                    style: 'currency',
-                                                    currency: 'VND'
-                                                }) }}</td>
+                                                        <!-- Xử lý if - else -->
+                                                        <button v-show="!service.isInCompareArray"
+                                                            @click.prevent="changeCheckBoxCompare(service.service_id)"
+                                                            class="hover:scale-[1.05] transition-all duration-[0.3s] ease-in-out delay-[0ms] hover:text-[#0096fa] inline-flex items-center hover:bg-slate-200 rounded-lg">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                                fill="currentColor" class="bi bi-plus rounded-[50%] border"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                            </svg>
+                                                            <!-- <span class="inline-flex pl-[4px]">So sánh</span> -->
+                                                        </button>
 
-                                            <td v-else-if="service?.price"
-                                                class="text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ (service.price).toLocaleString('vi-VN', {
-                                                    style: 'currency',
-                                                    currency: 'VND'
-                                                }) }}</td>
+                                                        <button v-show="service.isInCompareArray"
+                                                            @click.prevent="changeCheckBoxCompare(service.service_id)"
+                                                            class="hover:scale-[1.05] transition-all duration-[0.3s] ease-in-out delay-[0ms] text-[#0096fa] inline-flex items-center hover:bg-slate-200 rounded-lg">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                                fill="currentColor" class="bi bi-check rounded-[50%] border"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                                            </svg>
+                                                            <!-- <span class="inline-flex pl-[4px]">Đã thêm so sánh</span> -->
+                                                        </button>
+                                                    </div>
 
-                                            <td
-                                                class="flex justify-between border-[#dadce0] border-t min-[640px]:pr-0 font-[500] text-[.95rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative">
-                                                <div class="float-left">
-                                                    <RouterLink :to="{
-                                                        name: 'Service Details',
-                                                        params: { id: service.service_id },
-                                                    }" class="text-[#0096fa] inherit py-[17px] hover:text-[#0060fa]">
-                                                        <div
-                                                            class="bg-[#e8f0fe] box-border rounded-[8px] inline-block text-[14px] leading-[20px] p-[6px] text-center w-[80px]">
-                                                            Truy cập</div>
-                                                        <span class="sr-only">Truy cập</span>
-                                                    </RouterLink>
-                                                </div>
-                                                <div class="flex items-center mr-2">
-                                                    <button @click="service.append = !service.append">
-                                                        <svg focusable="false" width="24" height="24" viewBox="0 0 24 24"
-                                                            class="fill-current text-[#0096fa]">
-                                                            <path
-                                                                d="M12 16.41l-6.71-6.7 1.42-1.42 5.29 5.3 5.29-5.3 1.42 1.42z">
-                                                            </path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                    <div
+                                                        class="w-[15%] flex items-center text-ellipsis border-[#dadce0] border-t px-[.75rem] text-[#111827] font-[500] text-[.95rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
+                                                        <div class="flex items-center text-ellipsis">
+                                                            <img :src="service.image" alt=""
+                                                                class="h-5 w-5 flex-shrink-0 rounded-full bg-slate-400 mr-2" />
+                                                            <span>{{ service.provider_name }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="grow flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                        {{ service.service_name }}</div>
+                                                    <div
+                                                        class="w-[19%] flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                        {{ service.delivery_date }}</div>
+                                                    <div
+                                                        class="w-[12%] flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[600] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                        {{
+                                                            (service.weight >= 1000 ? (service.weight / 1000.0) :
+                                                                service.weight).toLocaleString('vi-VN', {
+                                                                    minimumFractionDigits: 0, // Số chữ số thập phân tối thiểu
+                                                                    maximumFractionDigits: 0, // Số chữ số thập phân tối đa
+                                                                })
+                                                        }}
+                                                        <span v-if="service.weight >= 1000">kg</span>
+                                                        <span v-else>g</span>
+                                                    </div>
 
-                                        <tr v-show="service.append &&
-                                            (removeVietnameseTones(service.province_from).toLowerCase()).includes(removeVietnameseTones(filter.province_from).toLowerCase()) &&
-                                            (removeVietnameseTones(service.district_from).toLowerCase()).includes(removeVietnameseTones(filter.district_from).toLowerCase()) &&
-                                            (removeVietnameseTones(service.province_to).toLowerCase()).includes(removeVietnameseTones(filter.province_to).toLowerCase()) &&
-                                            (removeVietnameseTones(service.district_to).toLowerCase()).includes(removeVietnameseTones(filter.district_to).toLowerCase()) &&
-                                            ((filter.weight === '') || (filter.weight && (filter.weight >= service.weight)))"
-                                            class="mx-auto text-[15px] text-gray-600">
-                                            <td>
-                                                <span class="p-[12px]">
-                                                    <!-- Xử lý if - else -->
-                                                    <!-- <button @click.prevent="true"
-                                                        :class="{ 'hidden': !isInCompareArray }"
-                                                        class="hover:scale-[1.05] transition-all duration-[0.3s] ease-in-out delay-[0ms] hover:text-[#0096fa] inline-flex items-center ">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
-                                                            fill="currentColor" class="bi bi-plus rounded-[50%] border"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                                        </svg>
-                                                        <span class="inline-flex pl-[4px]">So sánh</span>
-                                                    </button>
+                                                    <div v-if="service?.price && service.promotion_price"
+                                                        class="w-[12%] flex items-center text-ellipsis border-[#dadce0] border-t text-sky-400 font-[600] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                        {{ (service.price - (service.price * service.promotion_price / 100)
+                                                            > 0
+                                                            ?
+                                                            (service.price - (service.price * service.promotion_price / 100)) :
+                                                            0).toLocaleString('vi-VN', {
+                                                                style: 'currency',
+                                                                currency: 'VND'
+                                                            }) }}</div>
 
-                                                    <button @click.prevent="true"
-                                                        :class="{ 'hidden': isInCompareArray }"
-                                                        class="hover:scale-[1.05] transition-all duration-[0.3s] ease-in-out delay-[0ms] hover:text-[#0096fa] inline-flex items-center ">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                            fill="currentColor" class="bi bi-check rounded-[50%] border"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                                                        </svg>
-                                                        <span class="inline-flex pl-[4px]">Đã thêm so sánh</span>
-                                                    </button> -->
-                                                </span>
-                                            </td>
+                                                    <div v-else-if="service?.price"
+                                                        class="w-[12%] flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                        {{ (service.price).toLocaleString('vi-VN', {
+                                                            style: 'currency',
+                                                            currency: 'VND'
+                                                        }) }}
+                                                    </div>
 
-                                            <td class="p-[12px] pb-4 font-[600]">
-                                                <span class="py-4">{{ service.district_from }} ,{{ service.province_from
-                                                }}</span>
-                                                <div class="py-4 font-medium">Đến</div>
-                                                <span class="py-4">{{ service.district_to }}, {{ service.province_to
-                                                }}</span>
-                                            </td>
-
-                                            <td class="">
-                                                <!-- Them vao gio -->
-                                                <button @click.prevent="true"
-                                                    class="inline-flex items-center justify-center shrink-0 flex-row py-[12px] px-[16px] m-[4px] h-[40px] w-[40px] z-10 text-white rounded-[100px] hover:bg-[#ebeff5]">
-                                                    <span class="w-[24px] h-[24px] inline-block shrink-0 relative">
-                                                        <!-- <svg width="24" height="24" aria-hidden="true"
-                                                            class="fill-current text-[#d83737]" preserveAspectRatio="none"
-                                                            viewBox="0 0 24 24">
-                                                            <path
-                                                                d="M15.7 3c-1.4 0-2.6.4-3.7 1.2a6.1 6.1 0 0 0-8.2.8 7 7 0 0 0 0 9.2c.7 1 1.5 1.7 2.9 3l2.8 2.4.8.7c.5.5 1 .7 1.7.7.6 0 1.2-.2 1.7-.6 2-1.7 5.3-4.7 6.6-6.2a7 7 0 0 0-.1-9.2 6.2 6.2 0 0 0-4.5-2m0 1.8c1.1 0 2.3.5 3.2 1.4a5 5 0 0 1 0 6.8 88.2 88.2 0 0 1-6.9 6.2l-.6-.2-.8-.7L8 15.8c-1.4-1.2-2-2-2.8-2.8a5 5 0 0 1 0-6.8 4.5 4.5 0 0 1 6.5 0l.4.5.4-.5c1-.9 2-1.4 3.3-1.4">
-                                                            </path>
-                                                        </svg> -->
-
-                                                        <svg width="24" height="24" aria-hidden="true"
-                                                            class="fill-current text-[#ffd2d2] w-full h-full"
-                                                            preserveAspectRatio="none" viewBox="0 0 24 24">
-                                                            <path
-                                                                d="M15.3 4.1c-1.2 0-2.3.4-3.3 1a5.6 5.6 0 00-7.4.7 6 6 0 000 8.2c.7.7 1.3 1.4 2.6 2.5l2.5 2.2.7.6a2.4 2.4 0 003.2 0c1.7-1.4 4.7-4 5.8-5.3a6 6 0 000-8.2 5.6 5.6 0 00-4.1-1.7">
-                                                            </path>
-                                                        </svg>
-                                                    </span>
-                                                </button>
-                                            </td>
-
-                                            <td class="px-[16px]">
-                                                <div v-show="service?.totalCount">
-                                                    <div :data-tooltip="service.totalCount"
-                                                        class="tooltip text-[12px] text-[#757575] inline-flex items-center">
-                                                        <span class="mr-[4px]">{{
-                                                            (parseFloat(service.average_rate)).toLocaleString('vi-VN', {
-                                                                minimumFractionDigits: 1, // Số chữ số thập phân tối thiểu
-                                                                maximumFractionDigits: 1, // Số chữ số thập phân tối đa
-                                                            }) }}</span>
-                                                        <svg width="14" height="14" class="fill-current text-[#fbbc04]"
-                                                            data-testid="star-svg" preserveAspectRatio="none"
-                                                            viewBox="0 0 24 24">
-                                                            <path
-                                                                d="m12 20.6-5.86 3.23c-.7.38-1.57.1-1.94-.63-.15-.3-.2-.63-.14-.95l1.12-6.82L.43 10.6a1.55 1.55 0 0 1-.02-2.13c.22-.23.5-.39.82-.43l6.55-1 2.93-6.2a1.4 1.4 0 0 1 2.58 0l2.93 6.2 6.55 1a1.5 1.5 0 0 1 1.21 1.7c-.04.32-.19.63-.41.86l-4.75 4.83 1.12 6.82c.14.81-.39 1.59-1.17 1.73-.3.05-.63 0-.9-.15L12 20.6Z">
-                                                            </path>
-                                                        </svg>
+                                                    <div
+                                                        class="w-[6%] flex items-center justify-between border-[#dadce0] border-t min-[640px]:pr-0 font-[500] text-[.95rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative">
+                                                        <div class="flex items-center mr-2">
+                                                            <button
+                                                                class="rounded-full hover:bg-gray-200 w-[48px] h-[48px] flex items-center justify-center hover:rotate-180"
+                                                                @click.prevent="service.append = !service.append">
+                                                                <svg focusable="false" width="24" height="24"
+                                                                    viewBox="0 0 24 24" class="fill-current text-[#0096fa]">
+                                                                    <path
+                                                                        d="M12 16.41l-6.71-6.7 1.42-1.42 5.29 5.3 5.29-5.3 1.42 1.42z">
+                                                                    </path>
+                                                                </svg>
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </td>
 
-                                            <td class="px-[12px] font-medium text-gray-500"
-                                                v-show="service?.promotion_price">
-                                                - {{ service.promotion_price }}%
-                                            </td>
-                                        </tr>
+                                                <div v-show="service.append &&
+                                                    (removeVietnameseTones(service.province_from).toLowerCase()).includes(removeVietnameseTones(filter.province_from).toLowerCase()) &&
+                                                    (removeVietnameseTones(service.district_from).toLowerCase()).includes(removeVietnameseTones(filter.district_from).toLowerCase()) &&
+                                                    (removeVietnameseTones(service.province_to).toLowerCase()).includes(removeVietnameseTones(filter.province_to).toLowerCase()) &&
+                                                    (removeVietnameseTones(service.district_to).toLowerCase()).includes(removeVietnameseTones(filter.district_to).toLowerCase()) &&
+                                                    ((filter.weight === '') || (filter.weight && (filter.weight >= service.weight)))"
+                                                    class="mx-auto text-[15px] text-gray-600 flex">
+                                                    <div class="w-[15%]"></div>
+
+                                                    <div class="grow p-[12px] pb-4 font-[600]">
+                                                        <span class="py-4">{{ service.district_from }} ,{{
+                                                            service.province_from
+                                                        }}</span>
+                                                        <div class="py-4 font-medium">Đến</div>
+                                                        <span class="py-4">{{ service.district_to }}, {{ service.province_to
+                                                        }}</span>
+                                                    </div>
+
+                                                    <!-- Them vao gio -->
+                                                    <div class="hidden">
+                                                        <button @click.prevent="true"
+                                                            class="inline-flex items-center justify-center shrink-0 flex-row py-[12px] px-[16px] m-[4px] h-[40px] w-[40px] z-10 text-white rounded-[100px] hover:bg-[#ebeff5]">
+                                                            <span class="w-[24px] h-[24px] inline-block shrink-0 relative">
+                                                                <svg width="24" height="24" aria-hidden="true"
+                                                                    class="fill-current text-[#d83737]"
+                                                                    preserveAspectRatio="none" viewBox="0 0 24 24">
+                                                                    <path
+                                                                        d="M15.7 3c-1.4 0-2.6.4-3.7 1.2a6.1 6.1 0 0 0-8.2.8 7 7 0 0 0 0 9.2c.7 1 1.5 1.7 2.9 3l2.8 2.4.8.7c.5.5 1 .7 1.7.7.6 0 1.2-.2 1.7-.6 2-1.7 5.3-4.7 6.6-6.2a7 7 0 0 0-.1-9.2 6.2 6.2 0 0 0-4.5-2m0 1.8c1.1 0 2.3.5 3.2 1.4a5 5 0 0 1 0 6.8 88.2 88.2 0 0 1-6.9 6.2l-.6-.2-.8-.7L8 15.8c-1.4-1.2-2-2-2.8-2.8a5 5 0 0 1 0-6.8 4.5 4.5 0 0 1 6.5 0l.4.5.4-.5c1-.9 2-1.4 3.3-1.4">
+                                                                    </path>
+                                                                </svg>
+
+                                                                <svg width="24" height="24" aria-hidden="true"
+                                                                    class="fill-current text-[#ffd2d2] w-full h-full"
+                                                                    preserveAspectRatio="none" viewBox="0 0 24 24">
+                                                                    <path
+                                                                        d="M15.3 4.1c-1.2 0-2.3.4-3.3 1a5.6 5.6 0 00-7.4.7 6 6 0 000 8.2c.7.7 1.3 1.4 2.6 2.5l2.5 2.2.7.6a2.4 2.4 0 003.2 0c1.7-1.4 4.7-4 5.8-5.3a6 6 0 000-8.2 5.6 5.6 0 00-4.1-1.7">
+                                                                    </path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+
+                                                    <!-- Đánh giá sao -->
+                                                    <div class="w-[12%] px-[12px] flex items-center">
+                                                        <div v-show="service?.totalCount">
+                                                            <div :data-tooltip="service.totalCount"
+                                                                class="tooltip text-[12px] text-[#757575] inline-flex items-center">
+                                                                <span class="mr-[4px]">{{
+                                                                    (parseFloat(service.average_rate)).toLocaleString('vi-VN',
+                                                                        {
+                                                                            minimumFractionDigits: 1,
+                                                                            maximumFractionDigits: 1,
+                                                                        }) }}</span>
+                                                                <svg width="14" height="14"
+                                                                    class="fill-current text-[#fbbc04]"
+                                                                    data-testid="star-svg" preserveAspectRatio="none"
+                                                                    viewBox="0 0 24 24">
+                                                                    <path
+                                                                        d="m12 20.6-5.86 3.23c-.7.38-1.57.1-1.94-.63-.15-.3-.2-.63-.14-.95l1.12-6.82L.43 10.6a1.55 1.55 0 0 1-.02-2.13c.22-.23.5-.39.82-.43l6.55-1 2.93-6.2a1.4 1.4 0 0 1 2.58 0l2.93 6.2 6.55 1a1.5 1.5 0 0 1 1.21 1.7c-.04.32-.19.63-.41.86l-4.75 4.83 1.12 6.82c.14.81-.39 1.59-1.17 1.73-.3.05-.63 0-.9-.15L12 20.6Z">
+                                                                    </path>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div
+                                                        class="w-[18%] px-[12px] font-medium text-gray-500 flex items-center">
+                                                        <div v-show="service?.promotion_price">
+                                                            Khuyến mãi
+                                                            <br />
+                                                            Giảm {{ service.promotion_price }}%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </RouterLink>
+                                        </div>
                                     </template>
-                                </tbody>
-                            </table>
+                                </section>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Button So sanh dich vu -->
+        <div class="sticky bottom-10 float-right">
+            <button @click="handleCompareService()"
+                class="hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms] m-[8px] inline-flex items-center px-[8px] py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-[#0096faee] hover:bg-[#0096fa] xl:mx-[208px]">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-5 h-5 mr-3">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                </svg>
+                So sánh dịch vụ
+            </button>
         </div>
     </main>
 </template>
@@ -692,7 +734,93 @@ import { getPromotions } from "@/services/promotion.service";
 const services = ref("");
 const rootServices = ref("");
 
+// toast
+import { useToast } from "vue-toastification";
+// Get toast interface
+const toast = useToast();
+
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 // function
+const handleCompareService = () => {
+    let compareServices = localStorage.getItem('compareProductList');
+    let temp = JSON.parse(compareServices);
+    if (temp.length >= 2) {
+        router.push(`/compare`);
+    }
+    else {
+        toast.warning("Oh, Phải chọn 2 dịch vụ trở lên", { timeout: 3000 });
+    }
+}
+
+const changeCheckBoxCompare = (service_id) => {
+    let compareServices = localStorage.getItem('compareProductList');
+    let temp = JSON.parse(compareServices);
+    if (compareServices && !service_id) {
+        // Push data to services
+        for (let i = 0; i < temp.length; i++) {
+            for (let j = 0; j < services.value.length; j++) {
+                if (services.value[j].service_id === temp[i]) {
+                    console.log(temp[i] + " " + services.value[j].service_id);
+                    services.value[j].isInCompareArray = true;
+                    break;
+                }
+            }
+        }
+    }
+    else {
+        // Nếu có mảng so sánh tồn tài trong localhost
+        if (compareServices) {
+            if (temp.includes(service_id)) {
+                temp = temp.filter((element) => element !== service_id);
+                services.value.forEach((element, index) => {
+                    if (element.service_id === service_id) {
+                        services.value[index].isInCompareArray = false;
+                        console.log(element, index);
+                    }
+                });
+                toast.warning("Dịch vụ đã xoá khỏi danh sách so sánh", { timeout: 3000 });
+            } else {
+                // Nếu nhiều hơn năm sản phầm thì thông báo lỗi
+                if (temp.length > 4) {
+                    console.log(temp.length);
+                    toast.warning("Oh, Chỉ so sánh tối đa 5 dịch vụ", { timeout: 3000 });
+                } else {
+                    services.value.forEach((element, index) => {
+                        if (element.service_id === service_id) {
+                            services.value[index].isInCompareArray = true;
+                            console.log(element, index);
+                        }
+                    });
+                    toast.success("Thêm thành công", { timeout: 3000 });
+                    temp.push(service_id);
+                }
+            }
+
+            // Chuyen sang json va luu
+            localStorage.setItem('compareProductList', JSON.stringify(temp))
+        }
+
+        // Nếu có mảng so sánh chưa tồn tài trong localhost
+        else {
+            temp = []
+            services.value.forEach((element, index) => {
+                if (element.service_id === service_id) {
+                    services.value[index].isInCompareArray = true;
+                    console.log(element, index);
+                }
+            });
+
+            temp.push(service_id)
+            toast.success("Thêm thành công", { timeout: 3000 });
+
+            // Chuyen sang json va luu
+            localStorage.setItem('compareProductList', JSON.stringify(temp))
+        }
+    }
+}
+
 const addCompare = (array, service_id) => {
     array.forEach(element => {
         if (element.id === service_id) {
@@ -703,15 +831,15 @@ const addCompare = (array, service_id) => {
     });
 }
 
-const isInCompareArray = (array, service_id) => {
-    array.forEach(element => {
-        if(element.id === service_id) {
-            return true;
-        } else {
-            return false;
-        }
-    });
-}
+// const isInCompareArray = (array, service_id) => {
+//     array.forEach(element => {
+//         if (element.id === service_id) {
+//             return true;
+//         } else {
+//             return false;
+//         }
+//     });
+// }
 
 // Lọc theo giá
 const priceFilterHandle = async (selected) => {
@@ -853,15 +981,20 @@ const getServicesAxios = async () => {
         services.value = data;
         for (let i = 0; data.length > i; i++) {
             services.value[i].append = false;
+            services.value[i].isInCompareArray = false;
         }
 
         // Tao services root
         rootServices.value = data;
         for (let i = 0; data.length > i; i++) {
             rootServices.value[i].append = false;
+            rootServices.value[i].isInCompareArray = false;
         }
-        getInfoReviewsAxios();
-        getPromotionsAxios();
+        await getInfoReviewsAxios();
+        await getPromotionsAxios();
+
+        // puhs data tu localhost neu co
+        changeCheckBoxCompare();
     }
 
     if (error) {
@@ -978,4 +1111,5 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}</style>
+}
+</style>
