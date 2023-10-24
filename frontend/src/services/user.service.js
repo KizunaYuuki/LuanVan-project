@@ -20,6 +20,26 @@ export const getUsers = async (accessToken) => {
     };
 };
 
+export const getUsersByAuth0Api = async (accessToken) => {
+    const config = {
+        // url: `${apiServerUrl}/api/user/`,
+        url: 'https://freight-service.us.auth0.com/api/v2/users/auth0%7C653672c974bf5dc6a211da67',
+        method: "GET",
+        maxBodyLength: Infinity,
+        headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+        }
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
+
 export const getQuantityUser = async (accessToken) => {
     const config = {
         url: `${apiServerUrl}/api/user/quantity`,

@@ -3,11 +3,6 @@
     <main>
         <div class="content-layout max-w-[1024px] mx-auto px-0">
             <div class="content__body">
-                <!-- <p id="page-description">
-                <span>You can use the <strong>ID Token</strong> to get the profile
-                    information of an authenticated user.</span>
-                <span><strong>Only authenticated users can access this page.</strong></span>
-            </p> -->
                 <div class="profile-grid">
                     <div class="profile__header">
                         <img :src="user.picture" alt="Profile" class="profile__avatar" />
@@ -29,7 +24,8 @@
 import CodeSnippet from "@/components/code-snippet.vue";
 import Header from '../components/Header.vue';
 import { useAuth0 } from "@auth0/auth0-vue";
-import { getUserByEmail, createUser } from "@/services/user.service";
+import { getUserByEmail, createUser, getUsersByAuth0Api } from "@/services/user.service";
+import { onBeforeMount } from "vue";
 
 const { user } = useAuth0();
 const code = user ? JSON.stringify(user.value, null, 2) : "";
@@ -59,6 +55,22 @@ const getUserByEmailAxios = async (user) => {
     }
 };
 
-// run function
-getUserByEmailAxios(user);
+const getUsersByAuth0ApiAxios = async () => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await getUsersByAuth0Api(accessToken);
+
+    if (data) {
+        console.log(data);
+    }
+    if (error) {
+        console.log(error.message);
+    }
+};
+
+onBeforeMount(() => {
+    // run function
+    getUserByEmailAxios(user);
+    getUsersByAuth0ApiAxios();
+})
+
 </script>

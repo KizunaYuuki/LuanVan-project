@@ -1,9 +1,9 @@
 <template>
-    <RouterLink to="/services/1">
+    <RouterLink to="/services/1" class="inline-flex">
         <div
-            class="card rounded-t-[16px] rounded-b-[8px] bg-white hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
+            class="card bg-sky-50 hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms] w-[50vw] sm:w-full box-border">
             <!-- Hinh anh -->
-            <div class="card-img rounded-[16px] relative">
+            <div class="card-img relative" style="display: none;">
                 <div class="part-hidden " style="padding-top:35%"></div>
                 <img class="img"
                     src="https://storage.googleapis.com/futa-busline-cms-dev/Rectangle_23_2_8bf6ed1d78/Rectangle_23_2_8bf6ed1d78.png"
@@ -21,12 +21,12 @@
                     <button @click.prevent="true"
                         class="inline-flex items-center justify-center shrink-0 flex-row py-[12px] px-[16px] m-[4px] h-[40px] w-[40px] absolute top-[0px] right-0 z-10 text-white rounded-[100px] hover:bg-[#ebeff5]">
                         <span class="w-[24px] h-[24px] inline-block shrink-0 relative">
-                            <!-- <svg width="24" height="24" aria-hidden="true" class="fill-current text-[#d83737]"
-                    preserveAspectRatio="none" viewBox="0 0 24 24">
-                    <path
-                        d="M15.7 3c-1.4 0-2.6.4-3.7 1.2a6.1 6.1 0 0 0-8.2.8 7 7 0 0 0 0 9.2c.7 1 1.5 1.7 2.9 3l2.8 2.4.8.7c.5.5 1 .7 1.7.7.6 0 1.2-.2 1.7-.6 2-1.7 5.3-4.7 6.6-6.2a7 7 0 0 0-.1-9.2 6.2 6.2 0 0 0-4.5-2m0 1.8c1.1 0 2.3.5 3.2 1.4a5 5 0 0 1 0 6.8 88.2 88.2 0 0 1-6.9 6.2l-.6-.2-.8-.7L8 15.8c-1.4-1.2-2-2-2.8-2.8a5 5 0 0 1 0-6.8 4.5 4.5 0 0 1 6.5 0l.4.5.4-.5c1-.9 2-1.4 3.3-1.4">
-                    </path>
-                </svg> -->
+                            <svg width="24" height="24" aria-hidden="true" class="fill-current text-[#d83737]"
+                                preserveAspectRatio="none" viewBox="0 0 24 24">
+                                <path
+                                    d="M15.7 3c-1.4 0-2.6.4-3.7 1.2a6.1 6.1 0 0 0-8.2.8 7 7 0 0 0 0 9.2c.7 1 1.5 1.7 2.9 3l2.8 2.4.8.7c.5.5 1 .7 1.7.7.6 0 1.2-.2 1.7-.6 2-1.7 5.3-4.7 6.6-6.2a7 7 0 0 0-.1-9.2 6.2 6.2 0 0 0-4.5-2m0 1.8c1.1 0 2.3.5 3.2 1.4a5 5 0 0 1 0 6.8 88.2 88.2 0 0 1-6.9 6.2l-.6-.2-.8-.7L8 15.8c-1.4-1.2-2-2-2.8-2.8a5 5 0 0 1 0-6.8 4.5 4.5 0 0 1 6.5 0l.4.5.4-.5c1-.9 2-1.4 3.3-1.4">
+                                </path>
+                            </svg>
 
                             <svg width="24" height="24" aria-hidden="true" class="fill-current text-[#ffd2d2] w-full h-full"
                                 preserveAspectRatio="none" viewBox="0 0 24 24">
@@ -44,11 +44,16 @@
                 </div>
             </div>
             <!-- Noi dung card -->
-            <div class="card-text hover:bg-[#0096fa0d]">
-                <div>
-                    <h1 class="text-[20px] text-[#202124] font-[400]">Về TP. Hồ Chí Minh</h1>
+            <div class="hover:bg-[#0096fa0d] p-2">
+                <div class="lg:text-lg text-[15px]">
+                    <div class="pb-3">
+                        <h1 class="text-[#202124] font-[400]">TP. Hồ Chí Minh</h1>
+                        <h1 class="text-[#202124] font-[400]">Về</h1>
+                        <h1 class="text-[#202124] font-[400]">TP. Hồ Chí Minh</h1>
+                    </div>
+
                     <div class="flex justify-between items-baseline">
-                        <h2 class="text-[16px] text-[#202124] font-[500] whitespace-nowrap">{{
+                        <h2 class="text-[18px] text-[#202124] font-[500] whitespace-nowrap">{{
                             (280000).toLocaleString('vi-VN',
                                 {
                                     style: 'currency',
@@ -62,7 +67,8 @@
                                 d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z">
                             </path>
                         </svg> -->
-                            <div data-tooltip="1232" class="tooltip text-[12px] text-[#757575] inline-flex items-center">
+                            <div data-tooltip="1232"
+                                class="tooltip text-sm font-semibold text-[#757575] inline-flex items-center">
                                 <span class="mr-[4px]">{{
                                     (4.7).toLocaleString('vi-VN', {
                                         minimumFractionDigits: 1, // Số chữ số thập phân tối thiểu
@@ -83,7 +89,7 @@
                 <!-- <h5 class="text-[12px] text-[#757575]">310km - 8 giờ - 19/08/2023</h5> -->
 
                 <!-- So sánh dịch vụ -->
-                <div class="text-[12px] text-[#757575] mt-[8px]">
+                <div class="text-[12px] text-[#757575] mt-[8px] hidden">
 
                     <span class="flex justify-between">
                         <!-- Xử lý if - else -->
@@ -364,9 +370,9 @@ const selectedSize = ref(product.sizes[2])
 /* Xu ly Animation cho card-skew, Github */
 .card {
     color: #fff;
-    margin: 8px;
-    border: 1px solid #dadce0;
-    width: 287.773px;
+    /* margin: 8px; */
+    /* border: 1px solid #dadce0; */
+    /* width: 287.773px; */
     /* height: 260.117px; */
     /* overflow: hidden; */
     cursor: pointer;
@@ -376,12 +382,6 @@ const selectedSize = ref(product.sizes[2])
 
 .card:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Text animation */
-.card-text {
-    padding: 12px 16px;
-    /* overflow: hidden; */
 }
 
 .card-img {
