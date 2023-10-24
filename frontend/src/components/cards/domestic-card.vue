@@ -1,5 +1,8 @@
 <template>
-    <RouterLink to="/services/1" class="inline-flex">
+    <RouterLink :to="{
+        name: 'Service Details',
+        params: { id: props.service.service_id },
+    }" class="">
         <div
             class="card bg-sky-50 hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms] w-[50vw] sm:w-full box-border">
             <!-- Hinh anh -->
@@ -44,33 +47,31 @@
                 </div>
             </div>
             <!-- Noi dung card -->
-            <div class="hover:bg-[#0096fa0d] p-2">
-                <div class="lg:text-lg text-[15px]">
+            <div v-if="props?.service?.service_id" class="hover:bg-[#0096fa0d] p-2">
+                <div class="lg:text-lg text-[15px] font-[600] pb-3">
+                    {{ props.service.service_name }}
+                </div>
+
+                <div class="lg:text-lg text-[15px] font-[500]">
                     <div class="pb-3">
-                        <h1 class="text-[#202124] font-[400]">TP. Hồ Chí Minh</h1>
-                        <h1 class="text-[#202124] font-[400]">Về</h1>
-                        <h1 class="text-[#202124] font-[400]">TP. Hồ Chí Minh</h1>
+                        <h1 class="text-[#747a84]">{{ props.service.province_from }}</h1>
+                        <h1 class="text-[#747a84] font-light">Về</h1>
+                        <h1 class="text-[#747a84]">{{ props.service.province_to }}</h1>
                     </div>
 
                     <div class="flex justify-between items-baseline">
                         <h2 class="text-[18px] text-[#202124] font-[500] whitespace-nowrap">{{
-                            (280000).toLocaleString('vi-VN',
+                            (props.service.price).toLocaleString('vi-VN',
                                 {
                                     style: 'currency',
                                     currency: 'VND'
                                 }) }}
                         </h2>
-                        <span class="">
-                            <!-- <svg width="14" height="14" viewBox="0 0 24 24" focusable="false"
-                            class="fill-current text-[#fbbc04]">
-                            <path
-                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z">
-                            </path>
-                        </svg> -->
-                            <div data-tooltip="1232"
+                        <span  v-show="props.service?.totalCount" class="">
+                            <div :data-tooltip="props.service.totalCount"
                                 class="tooltip text-sm font-semibold text-[#757575] inline-flex items-center">
                                 <span class="mr-[4px]">{{
-                                    (4.7).toLocaleString('vi-VN', {
+                                    (parseFloat(props.service.average_rate)).toLocaleString('vi-VN', {
                                         minimumFractionDigits: 1, // Số chữ số thập phân tối thiểu
                                         maximumFractionDigits: 1, // Số chữ số thập phân tối đa
                                     }) }}</span>
@@ -86,7 +87,6 @@
                     </div>
 
                 </div>
-                <!-- <h5 class="text-[12px] text-[#757575]">310km - 8 giờ - 19/08/2023</h5> -->
 
                 <!-- So sánh dịch vụ -->
                 <div class="text-[12px] text-[#757575] mt-[8px] hidden">
@@ -103,7 +103,7 @@
                             <span class="inline-flex pl-[4px]">So sánh</span>
                         </button>
 
-                        <button @click.prevent="ToggleAddIntoCart" :class="{ 'hidden': !isInCart }"
+                        <button @click.prevent="true" :class="{ 'hidden': !isInCart }"
                             class="hover:scale-[1.05] transition-all duration-[0.3s] ease-in-out delay-[0ms] hover:text-[#0096fa] inline-flex items-center ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-check rounded-[50%] border" viewBox="0 0 16 16">
@@ -310,30 +310,9 @@ import { StarIcon } from '@heroicons/vue/20/solid'
 // Khởi tạo biến lưu trạng thái của sản phẩm - Đã thêm vào giỏ hàng hay chưa
 let isInCart = ref(false);
 
-let service = ref({
-    serviceId: '111',
+const props = defineProps({
+    service: Object
 })
-
-function localStorageChek() {
-    // Kiểm tra localStorage
-    if (localStorage.getItem(service.value.serviceId)) {
-        isInCart.value = !isInCart.value;
-    }
-}
-localStorageChek()
-
-// Them dich vu vao localStorage
-function ToggleAddIntoCart() {
-    // Neu dich vu co trong gio hang
-    if (isInCart.value === true) {
-        localStorage.removeItem(service.value.serviceId);
-    }
-    else {
-        localStorage.setItem(service.value.serviceId, service.value.serviceId);
-        console.log(service.value.serviceId);
-    }
-    isInCart.value = !isInCart.value;
-}
 
 const product = {
     name: 'FedEx Vận chuyển quốc tế ',
@@ -364,12 +343,16 @@ const quickviews = ref(false)
 const selectedColor = ref(product.colors[0])
 const selectedSize = ref(product.sizes[2])
 
+onMounted(() => {
+    // console.log(props.service);
+})
+
 </script>
 
 <style scoped>
 /* Xu ly Animation cho card-skew, Github */
 .card {
-    color: #fff;
+    /* color: #fff; */
     /* margin: 8px; */
     /* border: 1px solid #dadce0; */
     /* width: 287.773px; */
@@ -413,7 +396,6 @@ const selectedSize = ref(product.sizes[2])
     --scale: 0;
     --arrow-size: 10px;
     --tooltip-color: #333;
-
     position: absolute;
     top: -.25rem;
     left: 50%;
@@ -424,7 +406,6 @@ const selectedSize = ref(product.sizes[2])
 
 .tooltip::before {
     --translate-y: calc(-100% - var(--arrow-size));
-
     content: attr(data-tooltip) " đánh giá";
     color: white;
     padding: .25rem;
@@ -442,7 +423,6 @@ const selectedSize = ref(product.sizes[2])
 
 .tooltip::after {
     --translate-y: calc(-1 * var(--arrow-size));
-
     content: '';
     border: var(--arrow-size) solid transparent;
     border-top-color: var(--tooltip-color);

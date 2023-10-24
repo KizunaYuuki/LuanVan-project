@@ -2,13 +2,13 @@
     <Header></Header>
     <main>
         <!-- Tìm kiếm dịch vụ -->
-        <div class="min-h-[80vh] mt-8">
+        <div class="min-h-[80vh] pt-8">
             <!-- Input -->
             <div
-                class="font-[600] outline-8 outline-red-100 outline border border-red-200 bg-white p-4 m-[16px] flex md:justify-evenly justify-center flex-wrap max-w-5xl mx-auto text-gray-600 rounded-lg">
+                class="font-[600] shadow-md shadow-xl shadow-[#0096fa] outline-[0.01px] outline-[#0096fa] outline border-0 border-[#0096fa] bg-white p-4 m-[16px] flex md:justify-evenly justify-center flex-wrap max-w-5xl mx-auto text-gray-600 rounded-lg">
 
                 <!-- Gửi từ -->
-                <div>
+                <div class="m-4">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center">
                             <span class="text-gray-500 sm:text-sm">
@@ -128,7 +128,7 @@
                 </div>
 
                 <!-- Gửi đến -->
-                <div>
+                <div class="m-4">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center">
                             <span class="text-gray-500 sm:text-sm">
@@ -249,7 +249,7 @@
                 </div>
 
                 <!-- Loại dịch vụ và Khối lượng lô hàng -->
-                <div>
+                <div class="m-4">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center">
                             <span class="text-gray-500 sm:text-sm">
@@ -304,7 +304,7 @@
                     <!-- <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">Assigned to</ListboxLabel> -->
                     <div class="relative">
                         <ListboxButton
-                            class="relative w-full min-w-[205px] cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 sm:text-sm sm:leading-6">
+                            class="relative shadow-md hover:border-[#9aa0a6] border rounded-md border-gray-50 w-full min-w-[205px] cursor-default py-1.5 pl-3 pr-10 text-left text-gray-900 outline-none sm:text-sm sm:leading-6">
                             <span class="flex items-center">
                                 <!-- <img :src="selected.avatar" alt="" class="h-5 w-5 flex-shrink-0 rounded-full" /> -->
                                 <span class="block truncate">{{ priceSelected.name }}</span>
@@ -343,7 +343,7 @@
                 <Listbox as="div" v-model="timeSelected" class="w-max m-2 ml-[8px]">
                     <div class="relative">
                         <ListboxButton
-                            class="relative w-full min-w-[155px] cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 sm:text-sm sm:leading-6">
+                            class="relative shadow-md hover:border-[#9aa0a6] border rounded-md border-gray-50 w-full min-w-[205px] cursor-default py-1.5 pl-3 pr-10 text-left text-gray-900 outline-none sm:text-sm sm:leading-6">
                             <span class="flex items-center">
                                 <span class="block truncate">{{ timeSelected.name }}</span>
                             </span>
@@ -495,7 +495,7 @@
                                     <!-- Service Card -->
                                     <section class="">
                                         <template v-for="service in services" :key="service.service_id">
-                                            <div class="flex hover:shadow hover:bg-[#0096fa0d] border-t-0 border-b-0 border-l border-r-0 hover:border-l-[#d30038]"
+                                            <div class="flex hover:shadow-md hover:shadow-sky-200 hover:bg-[#0096fa0d] border-t-0 border-b-0 border-l border-r-0  hover:border-l-[#d30038]"
                                                 :class="{ 'bg-red-50/[.6]': (service.promotion_price) }">
                                                 <RouterLink :to="{
                                                     name: 'Service Details',
@@ -696,16 +696,17 @@
 
                 <!-- Mobile -->
                 <div class="lg:hidden">
+                    <!-- Cuon ngang -->
                     <!-- <div class="overflow-auto whitespace-nowrap no-scrollbar">
                         <template v-for="service in services">
                             <domesticCard></domesticCard>
                         </template>
-                    </div>
-                    <div class="no-scrollbar grid grid-cols-2 gap-0.5">
-                        <template v-for="service in services">
-                            <domesticCard></domesticCard>
-                        </template>
                     </div> -->
+                    <div class="no-scrollbar grid grid-cols-2 gap-x-1.5 gap-y-0.5">
+                        <template v-for="service in services">
+                            <domesticCard :service="service"></domesticCard>
+                        </template>
+                    </div>
                 </div>
             </div>
         </div>
@@ -994,7 +995,7 @@ const changeCheckBoxCompare = (service_id) => {
         for (let i = 0; i < temp.length; i++) {
             for (let j = 0; j < services.value.length; j++) {
                 if (services.value[j].service_id === temp[i]) {
-                    console.log(temp[i] + " " + services.value[j].service_id);
+                    // console.log(temp[i] + " " + services.value[j].service_id);
                     services.value[j].isInCompareArray = true;
                     break;
                 }
@@ -1009,20 +1010,20 @@ const changeCheckBoxCompare = (service_id) => {
                 services.value.forEach((element, index) => {
                     if (element.service_id === service_id) {
                         services.value[index].isInCompareArray = false;
-                        console.log(element, index);
+                        // console.log(element, index);
                     }
                 });
                 toast.warning("Dịch vụ đã xoá khỏi danh sách so sánh", { timeout: 3000 });
             } else {
                 // Nếu nhiều hơn năm sản phầm thì thông báo lỗi
                 if (temp.length > 4) {
-                    console.log(temp.length);
+                    // console.log(temp.length);
                     toast.warning("Oh, Chỉ so sánh tối đa 5 dịch vụ", { timeout: 3000 });
                 } else {
                     services.value.forEach((element, index) => {
                         if (element.service_id === service_id) {
                             services.value[index].isInCompareArray = true;
-                            console.log(element, index);
+                            // console.log(element, index);
                         }
                     });
                     toast.success("Thêm thành công", { timeout: 3000 });
@@ -1040,7 +1041,7 @@ const changeCheckBoxCompare = (service_id) => {
             services.value.forEach((element, index) => {
                 if (element.service_id === service_id) {
                     services.value[index].isInCompareArray = true;
-                    console.log(element, index);
+                    // console.log(element, index);
                 }
             });
 
@@ -1237,7 +1238,7 @@ const getAddressForCreateOrderAxios = async () => {
     const { data, error } = await getAddressForCreateOrder();
 
     if (data) {
-        console.log(data);
+        // console.log(data);
         getServicesAxios();
         address.value = data;
         // address.value = data
@@ -1245,7 +1246,7 @@ const getAddressForCreateOrderAxios = async () => {
 
         // // Test props
         // if (props.addressData) {
-        //     console.log(props.addressData);
+            // console.log(props.addressData);
         //     // const tempLocation = props.locationData;
 
         //     const provinceName = props.addressData.province;
@@ -1255,10 +1256,10 @@ const getAddressForCreateOrderAxios = async () => {
 
         //     // Search Province
         //     data.forEach(element => {
-        //         // console.log(element);
+                // console.log(element);
         //         if (element.Name === provinceName) {
         //             selectedProvince.value = element;
-        //             console.log(element);
+                    // console.log(element);
 
         //             tempProvince = element;
         //             changeProvince(element);
@@ -1267,7 +1268,7 @@ const getAddressForCreateOrderAxios = async () => {
 
         //     // Search Province
         //     tempProvince.Districts.forEach(element => {
-        //         // console.log(element);
+        //         console.log(element);
         //         if (element.Name === districtName) {
         //             selectedDistrict.value = element;
         //             console.log(element);
