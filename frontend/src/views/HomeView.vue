@@ -5,7 +5,7 @@
         <div class="min-h-[80vh] pt-8">
             <!-- Input -->
             <div
-                class="font-[600] shadow-xl shadow-[#0096fa] outline-[0.01px] outline-[#0096fa] outline border-0 border-[#0096fa] bg-white p-4 m-[16px] flex md:justify-evenly justify-center flex-wrap max-w-5xl mx-auto text-gray-600 rounded-lg">
+                class="font-[600] shadow-xl shadow-[#0096fa6a] outline-[0.01px] outline-[#0096fa] outline border-0 border-[#0096fa] bg-white p-4 m-[16px] flex md:justify-evenly justify-center flex-wrap max-w-5xl mx-auto text-gray-600 rounded-lg">
 
                 <!-- Gửi từ -->
                 <div class="m-4">
@@ -283,7 +283,7 @@
 
             <!-- Filters -->
             <div class="rounded-lg m-[16px] flex lg:justify-start mx-auto max-w-5xl lg:pt-[24px] flex-wrap justify-center">
-                <div class="relative rounded-[16px] shadow-sm hover:text-[#1a73e8] bg-[white] m-2">
+                <div class="relative rounded-[16px] shadow-sm text-[#1a73e8] bg-[white] m-2">
                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                         <span class="sm:text-sm">
                             <svg width="18" height="18" viewBox="0 0 24 24" focusable="false"
@@ -295,7 +295,7 @@
                         </span>
                     </div>
                     <h2
-                        class="hover:text-inherit font-[500] block w-full h-full rounded-md py-1.5 pl-[40px] pr-[16px] text-[#3c4043] outline-none sm:text-sm sm:leading-6">
+                        class="text-inherit font-[500] block w-full h-full rounded-md py-1.5 pl-[40px] pr-[16px] text-[#3c4043] outline-none sm:text-sm sm:leading-6">
                         Lọc</h2>
                 </div>
 
@@ -304,7 +304,7 @@
                     <!-- <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">Assigned to</ListboxLabel> -->
                     <div class="relative">
                         <ListboxButton
-                            class="relative shadow-md hover:border-[#9aa0a6] border rounded-md border-gray-50 w-full min-w-[205px] cursor-default py-1.5 pl-3 pr-10 text-left text-gray-900 outline-none sm:text-sm sm:leading-6">
+                            class="relative bg-[white] shadow-md hover:border-[#9aa0a6] border rounded-md border-gray-50 w-full min-w-[205px] cursor-default py-1.5 pl-3 pr-10 text-left text-gray-900 outline-none sm:text-sm sm:leading-6">
                             <span class="flex items-center">
                                 <!-- <img :src="selected.avatar" alt="" class="h-5 w-5 flex-shrink-0 rounded-full" /> -->
                                 <span class="block truncate">{{ priceSelected.name }}</span>
@@ -343,7 +343,7 @@
                 <Listbox as="div" v-model="timeSelected" class="w-max m-2 ml-[8px]">
                     <div class="relative">
                         <ListboxButton
-                            class="relative shadow-md hover:border-[#9aa0a6] border rounded-md border-gray-50 w-full min-w-[205px] cursor-default py-1.5 pl-3 pr-10 text-left text-gray-900 outline-none sm:text-sm sm:leading-6">
+                            class="relative bg-[white] shadow-md hover:border-[#9aa0a6] border rounded-md border-gray-50 w-full min-w-[205px] cursor-default py-1.5 pl-3 pr-10 text-left text-gray-900 outline-none sm:text-sm sm:leading-6">
                             <span class="flex items-center">
                                 <span class="block truncate">{{ timeSelected.name }}</span>
                             </span>
@@ -380,26 +380,47 @@
 
             <!-- Content - Dich vụ lọc được -->
             <div v-if="isLoading" class="mx-auto max-w-5xl">
-                <div class="loader h-60">
-                    <img :src="loadingImg" alt="Loading..." />
+                <div class="loader h-56">
+                    <!-- <img :src="loadingImg" alt="Loading..." /> -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="text-gray-500">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                    </svg>
+
                 </div>
+                <!-- <div class="rounded-md p-4 w-full mx-auto">
+                    <div class="animate-pulse flex space-x-4">
+                        <div class="rounded-full bg-slate-200 h-10 w-10"></div>
+                        <div class="flex-1 space-y-6 py-1">
+                            <div class="h-2 bg-slate-200 rounded"></div>
+                            <div class="space-y-3">
+                                <div class="grid grid-cols-3 gap-4">
+                                    <div class="h-2 bg-slate-200 rounded col-span-2"></div>
+                                    <div class="h-2 bg-slate-200 rounded col-span-1"></div>
+                                </div>
+                                <div class="h-2 bg-slate-200 rounded"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
             </div>
 
             <div v-else>
                 <!-- PC -->
                 <div class="mx-auto max-w-5xl lg:block hidden">
                     <div
-                        class="flex items-baseline lg:justify-between justify-end shadow-md lg:px-[8px] lg:pb-6 lg:pt-[24px] pb-4 px-4 bg-[white] rounded-[4px]">
+                        class="flex items-baseline lg:justify-between justify-end shadow-md lg:px-[8px] lg:pb-5 lg:pt-5 pb-4 px-4 bg-[white] rounded-[8px]">
                         <h1 class="text-xl font-bold tracking-tight text-gray-900 hidden lg:block">Vận chuyển hàng hoá</h1>
 
                         <div class="flex items-center">
                             <Menu as="div" class="relative inline-block text-left">
                                 <div>
                                     <MenuButton
-                                        class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+                                        class="group inline-flex justify-center text-sm font-medium text-[#1a73e8] hover:text-gray-500">
                                         Sắp xếp
                                         <ChevronDownIcon
-                                            class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                                            class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-[#1a73e8] group-hover:text-gray-500"
                                             aria-hidden="true" />
                                     </MenuButton>
                                 </div>
@@ -467,12 +488,12 @@
                                 <div
                                     class="bg-[white] min-w-[100%] indent-0 border-[0.5px] rounded-[8px] border-separate border-spacing-0">
                                     <!-- Service Title  -->
-                                    <section class="flex bg-gray-100 rounded-t-lg">
+                                    <section class="flex bg-gray-200 rounded-t-lg">
                                         <div class="w-10"></div>
 
                                         <div class="flex grow">
                                             <div
-                                                class="w-[15%] text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                class="w-[17%] text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                                 Nhà cung cấp</div>
                                             <div
                                                 class="grow text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
@@ -495,12 +516,12 @@
                                     <!-- Service Card -->
                                     <section class="">
                                         <template v-for="service in services" :key="service.service_id">
-                                            <div class="flex hover:shadow-md hover:shadow-sky-200 hover:bg-[#0096fa0d] border-t-0 border-b-0 border-l border-r-0  hover:border-l-[#d30038]"
+                                            <div class="hover:shadow-md hover:shadow-sky-200 hover:bg-[#0096fa0d] border-t-0 border-b-0 border-l border-r-0  hover:border-l-[#d30038]"
                                                 :class="{ 'bg-red-50/[.6]': (service.promotion_price) }">
                                                 <RouterLink :to="{
                                                     name: 'Service Details',
                                                     params: { id: service.service_id },
-                                                }" class="grow">
+                                                }" class="">
                                                     <div v-show="service &&
                                                         (removeVietnameseTones(service.province_from).toLowerCase()).includes(removeVietnameseTones(filter.province_from?.Name ? filter.province_from?.Name : '').toLowerCase()) &&
                                                         (removeVietnameseTones(service.district_from).toLowerCase()).includes(removeVietnameseTones(filter.district_from?.Name ? filter.district_from?.Name : '').toLowerCase()) &&
@@ -510,9 +531,6 @@
                                                         class="flex">
                                                         <div
                                                             class="w-10 flex items-center text-ellipsis border-[#dadce0] border-t px-[.75rem] text-[#111827] font-[500] text-[.95rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                                            <!-- <button @click.prevent="changeCheckBoxCompare()" class="flex items-center text-ellipsis">
-                                                            <span>SGD</span>
-                                                        </button> -->
 
                                                             <!-- Xử lý if - else -->
                                                             <button v-show="!service.isInCompareArray"
@@ -542,68 +560,76 @@
                                                             </button>
                                                         </div>
 
-                                                        <div
-                                                            class="w-[15%] flex items-center text-ellipsis border-[#dadce0] border-t px-[.75rem] text-[#111827] font-[500] text-[.95rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                                            <div class="flex items-center text-ellipsis">
-                                                                <img :src="service.image" alt=""
-                                                                    class="h-5 w-5 flex-shrink-0 rounded-full bg-slate-400 mr-2" />
-                                                                <span>{{ service.provider_name }}</span>
+                                                        <div class="flex grow">
+                                                            <div
+                                                                class="w-[17%] flex items-center text-ellipsis border-[#dadce0] border-t px-[.75rem] text-[#111827] font-[500] text-[.95rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
+                                                                <div class="flex items-center text-ellipsis">
+                                                                    <img :src="service.image" alt=""
+                                                                        class="h-5 w-5 flex-shrink-0 rounded-full bg-slate-400 mr-2" />
+                                                                    <span>{{ service.provider_name }}</span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div
-                                                            class="grow flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
-                                                            {{ service.service_name }}</div>
-                                                        <div
-                                                            class="w-[19%] flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
-                                                            {{ service.delivery_date }}</div>
-                                                        <div
-                                                            class="w-[12%] flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[600] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
-                                                            {{
-                                                                (service.weight >= 1000 ? (service.weight / 1000.0) :
-                                                                    service.weight).toLocaleString('vi-VN', {
-                                                                        minimumFractionDigits: 0, // Số chữ số thập phân tối thiểu
-                                                                        maximumFractionDigits: 0, // Số chữ số thập phân tối đa
-                                                                    })
-                                                            }}
-                                                            <span v-if="service.weight >= 1000">kg</span>
-                                                            <span v-else>g</span>
-                                                        </div>
 
-                                                        <div v-if="service?.price && service.promotion_price"
-                                                            class="w-[12%] flex items-center text-ellipsis border-[#dadce0] border-t text-sky-400 font-[600] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
-                                                            {{ (service.price - (service.price * service.promotion_price /
-                                                                100)
-                                                                > 0
-                                                                ?
-                                                                (service.price - (service.price * service.promotion_price /
-                                                                    100)) :
-                                                                0).toLocaleString('vi-VN', {
+                                                            <div
+                                                                class="grow flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                                {{ service.service_name }}
+                                                            </div>
+
+                                                            <div
+                                                                class="w-[19%] flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                                {{ service.delivery_date }}
+                                                            </div>
+
+                                                            <div
+                                                                class="w-[12%] flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[600] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                                {{
+                                                                    (service.weight >= 1000 ? (service.weight / 1000.0) :
+                                                                        service.weight).toLocaleString('vi-VN', {
+                                                                            minimumFractionDigits: 0, // Số chữ số thập phân tối thiểu
+                                                                            maximumFractionDigits: 0, // Số chữ số thập phân tối đa
+                                                                        })
+                                                                }}
+                                                                <span v-if="service.weight >= 1000">kg</span>
+                                                                <span v-else>g</span>
+                                                            </div>
+
+                                                            <div v-if="service?.price && service.promotion_price"
+                                                                class="w-[12%] flex items-center text-ellipsis border-[#dadce0] border-t text-sky-400 font-[600] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                                {{ (service.price - (service.price * service.promotion_price
+                                                                    /
+                                                                    100)
+                                                                    > 0
+                                                                    ?
+                                                                    (service.price - (service.price * service.promotion_price /
+                                                                        100)) :
+                                                                    0).toLocaleString('vi-VN', {
+                                                                        style: 'currency',
+                                                                        currency: 'VND'
+                                                                    }) }}</div>
+
+                                                            <div v-else-if="service?.price"
+                                                                class="w-[12%] flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                                {{ (service.price).toLocaleString('vi-VN', {
                                                                     style: 'currency',
                                                                     currency: 'VND'
-                                                                }) }}</div>
+                                                                }) }}
+                                                            </div>
 
-                                                        <div v-else-if="service?.price"
-                                                            class="w-[12%] flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
-                                                            {{ (service.price).toLocaleString('vi-VN', {
-                                                                style: 'currency',
-                                                                currency: 'VND'
-                                                            }) }}
-                                                        </div>
-
-                                                        <div
-                                                            class="w-[6%] flex items-center justify-between border-[#dadce0] border-t min-[640px]:pr-0 font-[500] text-[.95rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative">
-                                                            <div class="flex items-center mr-2">
-                                                                <button
-                                                                    class="rounded-full hover:bg-gray-200 w-[48px] h-[48px] flex items-center justify-center hover:rotate-180"
-                                                                    @click.prevent="service.append = !service.append">
-                                                                    <svg focusable="false" width="24" height="24"
-                                                                        viewBox="0 0 24 24"
-                                                                        class="fill-current text-[#0096fa]">
-                                                                        <path
-                                                                            d="M12 16.41l-6.71-6.7 1.42-1.42 5.29 5.3 5.29-5.3 1.42 1.42z">
-                                                                        </path>
-                                                                    </svg>
-                                                                </button>
+                                                            <div
+                                                                class="w-[6%] flex items-center justify-between border-[#dadce0] border-t min-[640px]:pr-0 font-[500] text-[.95rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative">
+                                                                <div class="flex items-center mr-2">
+                                                                    <button
+                                                                        class="rounded-full hover:bg-gray-200 w-[48px] h-[48px] flex items-center justify-center hover:rotate-180"
+                                                                        @click.prevent="service.append = !service.append">
+                                                                        <svg focusable="false" width="24" height="24"
+                                                                            viewBox="0 0 24 24"
+                                                                            class="fill-current text-[#0096fa]">
+                                                                            <path
+                                                                                d="M12 16.41l-6.71-6.7 1.42-1.42 5.29 5.3 5.29-5.3 1.42 1.42z">
+                                                                            </path>
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -615,72 +641,76 @@
                                                         (removeVietnameseTones(service.district_to).toLowerCase()).includes(removeVietnameseTones(filter.district_to?.Name ? filter.district_to?.Name : '').toLowerCase()) &&
                                                         ((filter.weight === '') || (filter.weight && (filter.weight >= service.weight)))"
                                                         class="mx-auto text-[15px] text-gray-600 flex">
-                                                        <div class="w-[15%]"></div>
+                                                        <div class="w-10"></div>
 
-                                                        <div class="grow p-[12px] pb-4 font-[600]">
-                                                            <span class="py-4">{{ service.district_from }} ,{{
-                                                                service.province_from
-                                                            }}</span>
-                                                            <div class="py-4 font-medium">Đến</div>
-                                                            <span class="py-4">{{ service.district_to }}, {{
-                                                                service.province_to
-                                                            }}</span>
-                                                        </div>
+                                                        <div class="flex grow">
+                                                            <div class="w-[17%]"></div>
 
-                                                        <!-- Them vao gio -->
-                                                        <div class="hidden">
-                                                            <button @click.prevent="true"
-                                                                class="inline-flex items-center justify-center shrink-0 flex-row py-[12px] px-[16px] m-[4px] h-[40px] w-[40px] z-10 text-white rounded-[100px] hover:bg-[#ebeff5]">
-                                                                <span
-                                                                    class="w-[24px] h-[24px] inline-block shrink-0 relative">
-                                                                    <svg width="24" height="24" aria-hidden="true"
-                                                                        class="fill-current text-[#d83737]"
-                                                                        preserveAspectRatio="none" viewBox="0 0 24 24">
-                                                                        <path
-                                                                            d="M15.7 3c-1.4 0-2.6.4-3.7 1.2a6.1 6.1 0 0 0-8.2.8 7 7 0 0 0 0 9.2c.7 1 1.5 1.7 2.9 3l2.8 2.4.8.7c.5.5 1 .7 1.7.7.6 0 1.2-.2 1.7-.6 2-1.7 5.3-4.7 6.6-6.2a7 7 0 0 0-.1-9.2 6.2 6.2 0 0 0-4.5-2m0 1.8c1.1 0 2.3.5 3.2 1.4a5 5 0 0 1 0 6.8 88.2 88.2 0 0 1-6.9 6.2l-.6-.2-.8-.7L8 15.8c-1.4-1.2-2-2-2.8-2.8a5 5 0 0 1 0-6.8 4.5 4.5 0 0 1 6.5 0l.4.5.4-.5c1-.9 2-1.4 3.3-1.4">
-                                                                        </path>
-                                                                    </svg>
+                                                            <div class="grow p-[12px] pb-4 font-[600]">
+                                                                <span class="py-4">{{ service.district_from }} ,{{
+                                                                    service.province_from
+                                                                }}</span>
+                                                                <div class="py-4 font-medium">Đến</div>
+                                                                <span class="py-4">{{ service.district_to }}, {{
+                                                                    service.province_to
+                                                                }}</span>
+                                                            </div>
 
-                                                                    <svg width="24" height="24" aria-hidden="true"
-                                                                        class="fill-current text-[#ffd2d2] w-full h-full"
-                                                                        preserveAspectRatio="none" viewBox="0 0 24 24">
-                                                                        <path
-                                                                            d="M15.3 4.1c-1.2 0-2.3.4-3.3 1a5.6 5.6 0 00-7.4.7 6 6 0 000 8.2c.7.7 1.3 1.4 2.6 2.5l2.5 2.2.7.6a2.4 2.4 0 003.2 0c1.7-1.4 4.7-4 5.8-5.3a6 6 0 000-8.2 5.6 5.6 0 00-4.1-1.7">
-                                                                        </path>
-                                                                    </svg>
-                                                                </span>
-                                                            </button>
-                                                        </div>
+                                                            <!-- Them vao gio -->
+                                                            <div class="hidden">
+                                                                <button @click.prevent="true"
+                                                                    class="inline-flex items-center justify-center shrink-0 flex-row py-[12px] px-[16px] m-[4px] h-[40px] w-[40px] z-10 text-white rounded-[100px] hover:bg-[#ebeff5]">
+                                                                    <span
+                                                                        class="w-[24px] h-[24px] inline-block shrink-0 relative">
+                                                                        <svg width="24" height="24" aria-hidden="true"
+                                                                            class="fill-current text-[#d83737]"
+                                                                            preserveAspectRatio="none" viewBox="0 0 24 24">
+                                                                            <path
+                                                                                d="M15.7 3c-1.4 0-2.6.4-3.7 1.2a6.1 6.1 0 0 0-8.2.8 7 7 0 0 0 0 9.2c.7 1 1.5 1.7 2.9 3l2.8 2.4.8.7c.5.5 1 .7 1.7.7.6 0 1.2-.2 1.7-.6 2-1.7 5.3-4.7 6.6-6.2a7 7 0 0 0-.1-9.2 6.2 6.2 0 0 0-4.5-2m0 1.8c1.1 0 2.3.5 3.2 1.4a5 5 0 0 1 0 6.8 88.2 88.2 0 0 1-6.9 6.2l-.6-.2-.8-.7L8 15.8c-1.4-1.2-2-2-2.8-2.8a5 5 0 0 1 0-6.8 4.5 4.5 0 0 1 6.5 0l.4.5.4-.5c1-.9 2-1.4 3.3-1.4">
+                                                                            </path>
+                                                                        </svg>
 
-                                                        <!-- Đánh giá sao -->
-                                                        <div class="w-[12%] px-[12px] flex items-center">
-                                                            <div v-show="service?.totalCount">
-                                                                <div :data-tooltip="service.totalCount"
-                                                                    class="tooltip text-[12px] text-[#757575] inline-flex items-center">
-                                                                    <span class="mr-[4px]">{{
-                                                                        (parseFloat(service.average_rate)).toLocaleString('vi-VN',
-                                                                            {
-                                                                                minimumFractionDigits: 1,
-                                                                                maximumFractionDigits: 1,
-                                                                            }) }}</span>
-                                                                    <svg width="14" height="14"
-                                                                        class="fill-current text-[#fbbc04]"
-                                                                        data-testid="star-svg" preserveAspectRatio="none"
-                                                                        viewBox="0 0 24 24">
-                                                                        <path
-                                                                            d="m12 20.6-5.86 3.23c-.7.38-1.57.1-1.94-.63-.15-.3-.2-.63-.14-.95l1.12-6.82L.43 10.6a1.55 1.55 0 0 1-.02-2.13c.22-.23.5-.39.82-.43l6.55-1 2.93-6.2a1.4 1.4 0 0 1 2.58 0l2.93 6.2 6.55 1a1.5 1.5 0 0 1 1.21 1.7c-.04.32-.19.63-.41.86l-4.75 4.83 1.12 6.82c.14.81-.39 1.59-1.17 1.73-.3.05-.63 0-.9-.15L12 20.6Z">
-                                                                        </path>
-                                                                    </svg>
+                                                                        <svg width="24" height="24" aria-hidden="true"
+                                                                            class="fill-current text-[#ffd2d2] w-full h-full"
+                                                                            preserveAspectRatio="none" viewBox="0 0 24 24">
+                                                                            <path
+                                                                                d="M15.3 4.1c-1.2 0-2.3.4-3.3 1a5.6 5.6 0 00-7.4.7 6 6 0 000 8.2c.7.7 1.3 1.4 2.6 2.5l2.5 2.2.7.6a2.4 2.4 0 003.2 0c1.7-1.4 4.7-4 5.8-5.3a6 6 0 000-8.2 5.6 5.6 0 00-4.1-1.7">
+                                                                            </path>
+                                                                        </svg>
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+
+                                                            <!-- Đánh giá sao -->
+                                                            <div class="w-[12%] px-[12px] flex items-center">
+                                                                <div v-show="service?.totalCount">
+                                                                    <div :data-tooltip="service.totalCount"
+                                                                        class="tooltip text-[12px] text-[#757575] inline-flex items-center">
+                                                                        <span class="mr-[4px]">{{
+                                                                            (parseFloat(service.average_rate)).toLocaleString('vi-VN',
+                                                                                {
+                                                                                    minimumFractionDigits: 1,
+                                                                                    maximumFractionDigits: 1,
+                                                                                }) }}</span>
+                                                                        <svg width="14" height="14"
+                                                                            class="fill-current text-[#fbbc04]"
+                                                                            data-testid="star-svg"
+                                                                            preserveAspectRatio="none" viewBox="0 0 24 24">
+                                                                            <path
+                                                                                d="m12 20.6-5.86 3.23c-.7.38-1.57.1-1.94-.63-.15-.3-.2-.63-.14-.95l1.12-6.82L.43 10.6a1.55 1.55 0 0 1-.02-2.13c.22-.23.5-.39.82-.43l6.55-1 2.93-6.2a1.4 1.4 0 0 1 2.58 0l2.93 6.2 6.55 1a1.5 1.5 0 0 1 1.21 1.7c-.04.32-.19.63-.41.86l-4.75 4.83 1.12 6.82c.14.81-.39 1.59-1.17 1.73-.3.05-.63 0-.9-.15L12 20.6Z">
+                                                                            </path>
+                                                                        </svg>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
 
-                                                        <div
-                                                            class="w-[18%] px-[12px] font-medium text-gray-500 flex items-center">
-                                                            <div v-show="service?.promotion_price">
-                                                                Khuyến mãi
-                                                                <br />
-                                                                Giảm {{ service.promotion_price }}%
+                                                            <div
+                                                                class="w-[18%] px-[12px] font-medium text-gray-500 flex items-center">
+                                                                <div v-show="service?.promotion_price">
+                                                                    Khuyến mãi
+                                                                    <br />
+                                                                    Giảm {{ service.promotion_price }}%
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1246,7 +1276,7 @@ const getAddressForCreateOrderAxios = async () => {
 
         // // Test props
         // if (props.addressData) {
-            // console.log(props.addressData);
+        // console.log(props.addressData);
         //     // const tempLocation = props.locationData;
 
         //     const provinceName = props.addressData.province;
@@ -1256,10 +1286,10 @@ const getAddressForCreateOrderAxios = async () => {
 
         //     // Search Province
         //     data.forEach(element => {
-                // console.log(element);
+        // console.log(element);
         //         if (element.Name === provinceName) {
         //             selectedProvince.value = element;
-                    // console.log(element);
+        // console.log(element);
 
         //             tempProvince = element;
         //             changeProvince(element);
@@ -1409,5 +1439,4 @@ input::-webkit-inner-spin-button {
     /* IE and Edge */
     scrollbar-width: none;
     /* Firefox */
-}
-</style>
+}</style>

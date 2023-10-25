@@ -1,10 +1,10 @@
 <template>
     <Header></Header>
     <main class="leading-[131%]">
-        <div class="bg-[#ffffffbe] min-h-screen max-w-5xl mx-auto">
+        <div class="min-h-screen max-w-5xl mx-auto">
             <!-- PC -->
             <div class="min-[1024px]:block hidden mx-auto max-w-[1280px] py-[32px]">
-                <div class="flex items-center border-b border-[#ecedef] min-h-[50px] mb-[32px] pb-[32px] w-full">
+                <div class="flex items-center min-h-[50px] mb-[32px] pb-[32px] w-full">
                     <!-- <a href="/shopping/product/7709523306101892395?q=iphone+14&amp;sca_esv=564125615&amp;rlz=1C5CHFA_enVN1030VN1031&amp;biw=1378&amp;bih=758&amp;prds=eto:11631040611031032597_0,pid:3664884782502962629,rsk:PC_8053804293482199477" tabindex="-1" data-ved="0ahUKEwidr9Cx1p-BAxUaB4gKHUzuALQQyJ0ECA4"><img class="r4m4nf" src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQV4X0Vmp5MVKv4eTBtp7lnzMCyIA0V2LsLTvhZb4Bla5X1avUvs_udIqxKOXl-44WFmG93OTBFZ33bv0pcRLAc3yfvqKS09AmTbx6IG5rskO35mp3gQIPI8Q&amp;usqp=CAY" data-atf="0" data-frt="0"></a> -->
                     <!-- Tiêu đề -->
                     <span class="leading-[28px] text-[22px]">So sánh Dịch vụ: <strong></strong></span>
@@ -17,7 +17,7 @@
                         <div class="overflow-x-auto">
                             <div class="align-middle min-w-[100%] inline-block">
                                 <div
-                                    class="bg-[white] min-w-[100%] indent-0 border-[0.5px] rounded-[8px] border-separate border-spacing-0">
+                                    class="min-w-[100%] indent-0 border-[0.5px] rounded-[8px] border-separate border-spacing-0">
                                     <!-- Service Title  -->
                                     <section class="flex bg-gray-100 rounded-t-lg">
                                         <div class="flex grow">
@@ -43,7 +43,7 @@
                                     </section>
 
                                     <!-- Service Card -->
-                                    <section class="">
+                                    <section class="bg-white">
                                         <template v-for="service in services" :key="service.service_id">
                                             <div class="flex hover:shadow hover:bg-[#0096fa0d] border-t-0 border-b-0 border-l border-r-0 hover:border-l-[#d30038]"
                                                 :class="{ 'bg-red-50/[.6]': (service.promotion_price) }">

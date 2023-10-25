@@ -22,6 +22,8 @@ body {
 
 body {
     /* background-color: var(--black); */
+    background-size: cover;
+    background-image: linear-gradient(95.2deg, #0096fa0f 26.8%, #0096fa32 64%);
 
     /* color: var(--white); */
     font-family: var(--font-primary);
