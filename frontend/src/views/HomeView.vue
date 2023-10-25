@@ -5,7 +5,7 @@
         <div class="min-h-[80vh] pt-8">
             <!-- Input -->
             <div
-                class="font-[600] shadow-md shadow-xl shadow-[#0096fa] outline-[0.01px] outline-[#0096fa] outline border-0 border-[#0096fa] bg-white p-4 m-[16px] flex md:justify-evenly justify-center flex-wrap max-w-5xl mx-auto text-gray-600 rounded-lg">
+                class="font-[600] shadow-xl shadow-[#0096fa] outline-[0.01px] outline-[#0096fa] outline border-0 border-[#0096fa] bg-white p-4 m-[16px] flex md:justify-evenly justify-center flex-wrap max-w-5xl mx-auto text-gray-600 rounded-lg">
 
                 <!-- Gửi từ -->
                 <div class="m-4">
