@@ -1,14 +1,14 @@
 <template>
     <div class="overflow-hidden lg:overflow-visible">
         <div
-            class="xl:pl-60 ml-60 lg:ml-0 min-h-screen w-screen transition-position lg:w-auto bg-gray-50">
-            <nav class="flex lg:items-stretch xl:mx-auto sticky top-0 bg-gray-50 z-[41]">
+            class="xl:pl-60 ml-60 lg:ml-0 min-h-screen w-screen transition-position lg:w-auto">
+            <nav class="flex lg:items-stretch xl:mx-auto sticky top-0 bg-gray-50 z-[41] shadow-md shadow-[#0096fa2e]">
                 <div class="flex flex-1 items-stretch h-14 xl:pl-[76px]">
                     <div
                         class="flex my-2 mx-3 navbar-item-label items-center cursor-pointer">
                         <div class="relative">
-                            <input placeholder="Search (ctrl+k)" type="text"
-                                class="py-2 max-w-full focus:ring focus:outline-none border-gray-700 rounded w-full h-12 border-0 bg-transparent">
+                            <input placeholder="Tìm kiếm" type="text"
+                                class="px-4 shadow-inner shadow-[#0096fa2e] py-2 max-w-full border hover:border-gray-400 outline-none rounded w-full bg-transparent">
                         </div>
                     </div>
                 </div>

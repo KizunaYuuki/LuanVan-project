@@ -1,6 +1,6 @@
 <template>
     <LayoutAuthenticated>
-        <div>
+        <div v-show="userQuantity">
             <!-- Title -->
             <section class="mb-6 flex items-center justify-between">
                 <div class="flex items-center justify-start"><span

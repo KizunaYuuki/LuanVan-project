@@ -1,21 +1,20 @@
 <template>
     <LayoutAuthenticated>
-        <div>
-            <div v-show="users" class="mx-auto lg:max-w-[1024px]">
-                <div class="">
-                    <!-- Title -->
-                    <div class="flex items-center">
-                        <div class="flex-auto">
-                            <h1 class="text-[#111827] leading-[3rem] font-[600] text-[1.5rem]">Người dùng</h1>
-                            <p class="text-[#374151] text-[.875rem] leading-[1.25rem]">Hiển thị danh sách tất
-                                cả tài khoản của người dùng</p>
-                        </div>
-                        <div class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[4rem] mt-[1rem]">
-                        </div>
+        <div v-show="users" class="mx-auto lg:max-w-[1024px]">
+            <div class="">
+                <!-- Title -->
+                <div class="flex items-center">
+                    <div class="flex-auto">
+                        <h1 class="text-[#111827] leading-[3rem] font-[600] text-[1.5rem]">Người dùng</h1>
+                        <p class="text-[#374151] text-[.875rem] leading-[1.25rem]">Hiển thị danh sách tất
+                            cả tài khoản của người dùng</p>
                     </div>
+                    <div class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[4rem] mt-[1rem]">
+                    </div>
+                </div>
 
-                    <!-- Filter -->
-                    <!-- <div class="flex justify-end">
+                <!-- Filter -->
+                <!-- <div class="flex justify-end">
                         <div class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[4rem] mt-[1rem]">
                             <Menu as="div" class="relative inline-block text-left">
                                 <div>
@@ -70,79 +69,79 @@
                         </div>
                     </div> -->
 
-                    <!-- Content -->
-                    <div class="mt-[1rem] flow-root">
-                        <div class="">
-                            <div class="align-middle min-w-[100%] inline-block">
-                                <table class="min-w-[100%] indent-0 border-collapse bg-[#edeff6] border-x border-[#d3e2fd]">
-                                    <thead>
-                                        <tr class="border-b-[4px] border-[white] bg-gray-200">
-                                            <th scope="col"
-                                                class="pl-[1rem] text-gray-600 text-[.875rem] leading-[1.25rem] text-left pr-[.75rem] py-[.875rem]">
-                                                User ID</th>
-                                            <th scope="col"
-                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                                Tên</th>
-                                            <th scope="col"
-                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                                email</th>
-                                            <th scope="col"
-                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                                Vai trò</th>
-                                            <th scope="col"
-                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                                Trạng thái</th>
-                                            <th scope="col"
-                                                class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left py-[.875rem] relative">
-                                                <span class="sr-only">Xoá</span>
-                                            </th>
-                                        </tr>
-                                    </thead>
+                <!-- Content -->
+                <div class="mt-[1rem] flow-root">
+                    <div class="">
+                        <div class="align-middle min-w-[100%] inline-block">
+                            <table class="min-w-[100%] indent-0 border-collapse bg-[#edeff6] border-x border-[#d3e2fd]">
+                                <thead>
+                                    <tr class="border-b-[4px] border-[white] bg-gray-200">
+                                        <th scope="col"
+                                            class="pl-[1rem] text-gray-600 text-[.875rem] leading-[1.25rem] text-left pr-[.75rem] py-[.875rem]">
+                                            User ID</th>
+                                        <th scope="col"
+                                            class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            Tên</th>
+                                        <th scope="col"
+                                            class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            email</th>
+                                        <th scope="col"
+                                            class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            Vai trò</th>
+                                        <th scope="col"
+                                            class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                            Trạng thái</th>
+                                        <th scope="col"
+                                            class="min-[640px]:pl-0 text-gray-600 text-[.875rem] leading-[1.25rem] text-left py-[.875rem] relative">
+                                            <span class="sr-only">Xoá</span>
+                                        </th>
+                                    </tr>
+                                </thead>
 
-                                    <tbody class="">
-                                        <tr v-for="user in users" :key="user.id"
-                                            class="mx-[4px] border-b-[4px] border-[white] hover:bg-[#e1e3e9] text-slate-500 hover:text-[#5080db]">
-                                            <td
-                                                class="pl-[1rem] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ user.id }}</td>
-                                            <td
-                                                class="font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ user.name }}</td>
-                                            <td
-                                                class="font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ user.email }}</td>
-                                            <td
-                                                class="font-[600] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ (user.role ===0) ? 'Admin' : 'User' }}</td>
-                                            <td
-                                                class="font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
-                                                {{ (user.status === 0) ? 'Lock' : 'Unlock' }}</td>
-                                            <td
-                                                class="min-[640px]:pr-0 font-[500] text-[.875rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative">
-                                                <Menu as="div" class="relative inline-block text-left">
-                                                    <div>
-                                                        <MenuButton
-                                                            class="inline-flex w-full justify-center gap-x-1.5 rounded-full px-3 py-3 text-sm font-semibold hover:shadow-sm">
-                                                            <svg width="24" height="24"
-                                                                class="fill-current hover:text-white text-[#70757a] cursor-pointer"
-                                                                focusable="false" xmlns="http://www.w3.org/2000/svg"
-                                                                viewBox="0 0 24 24">
-                                                                <path
-                                                                    d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z">
-                                                                </path>
-                                                            </svg>
-                                                        </MenuButton>
-                                                    </div>
+                                <tbody class="">
+                                    <tr v-for="user in users" :key="user.id"
+                                        class="mx-[4px] border-b-[4px] border-[white] hover:bg-[#e1e3e9] text-slate-500 hover:text-[#5080db]">
+                                        <td
+                                            class="pl-[1rem] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
+                                            {{ user.id }}</td>
+                                        <td
+                                            class="font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
+                                            {{ user.name }}</td>
+                                        <td
+                                            class="font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
+                                            {{ user.email }}</td>
+                                        <td
+                                            class="font-[600] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
+                                            {{ (user.role === 0) ? 'Quản lý' : 'Khách hàng' }}</td>
+                                        <td
+                                            class="font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
+                                            {{ (user.status === 0) ? 'Khoá' : 'Mở' }}</td>
+                                        <td
+                                            class="min-[640px]:pr-0 font-[500] text-[.875rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative">
+                                            <Menu as="div" class="relative inline-block text-left">
+                                                <div>
+                                                    <MenuButton
+                                                        class="inline-flex w-full justify-center gap-x-1.5 rounded-full px-3 py-3 text-sm font-semibold hover:shadow-sm">
+                                                        <svg width="24" height="24"
+                                                            class="fill-current hover:text-white text-[#70757a] cursor-pointer"
+                                                            focusable="false" xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 24 24">
+                                                            <path
+                                                                d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z">
+                                                            </path>
+                                                        </svg>
+                                                    </MenuButton>
+                                                </div>
 
-                                                    <transition enter-active-class="transition duration-100 ease-out"
-                                                        enter-from-class="transform scale-95 opacity-0"
-                                                        enter-to-class="transform scale-100 opacity-100"
-                                                        leave-active-class="transition duration-75 ease-in"
-                                                        leave-from-class="transform scale-100 opacity-100"
-                                                        leave-to-class="transform scale-95 opacity-0">
-                                                        <MenuItems
-                                                            class="z-[1] absolute right-0 -mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                                            <!-- <div class="px-1 py-1">
+                                                <transition enter-active-class="transition duration-100 ease-out"
+                                                    enter-from-class="transform scale-95 opacity-0"
+                                                    enter-to-class="transform scale-100 opacity-100"
+                                                    leave-active-class="transition duration-75 ease-in"
+                                                    leave-from-class="transform scale-100 opacity-100"
+                                                    leave-to-class="transform scale-95 opacity-0">
+                                                    <MenuItems
+                                                        class="z-[1] absolute right-0 -mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                        <!-- <div class="px-1 py-1">
                                                                 <MenuItem v-slot="{ active }">
                                                                 <button :class="[
                                                                     active ? 'bg-sky-400 text-white' : 'text-gray-900',
@@ -154,25 +153,24 @@
                                                                 </MenuItem>
                                                             </div> -->
 
-                                                            <div class="px-1 py-1">
-                                                                <MenuItem v-slot="{ active }">
-                                                                <button :class="[
-                                                                    active ? 'bg-sky-400 text-white' : 'text-gray-900',
-                                                                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                                                                ]">
-                                                                    <div class="mr-2 h-5 w-2 text-violet-400"></div>
-                                                                    Xoá
-                                                                </button>
-                                                                </MenuItem>
-                                                            </div>
-                                                        </MenuItems>
-                                                    </transition>
-                                                </Menu>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                                        <div class="px-1 py-1">
+                                                            <MenuItem v-slot="{ active }">
+                                                            <button :class="[
+                                                                active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                            ]">
+                                                                <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                                Xoá
+                                                            </button>
+                                                            </MenuItem>
+                                                        </div>
+                                                    </MenuItems>
+                                                </transition>
+                                            </Menu>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
