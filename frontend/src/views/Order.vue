@@ -269,7 +269,7 @@
                                                 <h3>
                                                     <span>{{ service.service_name }}</span>
                                                 </h3>
-                                                <span class="ml-4" v-if="service.promotion_price">
+                                                <span class="ml-4" v-if="service.promotion_price || service.promotion_price === 0">
                                                     {{ (service.promotion_price).toLocaleString('vi-VN', {
                                                         style: 'currency',
                                                         currency: 'VND'
@@ -288,7 +288,7 @@
                                 </RouterLink>
                                 <div v-if="service" class="flex items-center justify-between pt-4">
                                     <span>Tổng giá dịch vụ</span>
-                                    <span class="" v-if="service.promotion_price">
+                                    <span class="" v-if="service.promotion_price || service.promotion_price === 0">
                                         {{ (service.promotion_price).toLocaleString('vi-VN', {
                                             style: 'currency',
                                             currency: 'VND'
@@ -409,7 +409,7 @@
                                                         </div>
                                                     </label>
 
-                                                    <label for="payment"
+                                                    <label v-if="!(service?.promotion_price === 0)" for="payment"
                                                         class="text-[14px] min-[768px]:ml-[16px] min-[768px]:mt-0 mt-[16px] flex w-[268px] cursor-pointer p-[16px] border-[1px] hover:ring-4 hover:border-[#0096fa] border-[#d1d5db] rounded-[4px]">
                                                         <div>
                                                             <span class="text-[#111827]">Paypal</span>
@@ -478,7 +478,7 @@
                                                 <h3>
                                                     <span>{{ service.service_name }}</span>
                                                 </h3>
-                                                <span class="ml-4" v-if="service.promotion_price">
+                                                <span class="ml-4" v-if="service.promotion_price || service.promotion_price === 0">
                                                     {{ (service.promotion_price).toLocaleString('vi-VN', {
                                                         style: 'currency',
                                                         currency: 'VND'
@@ -497,7 +497,7 @@
                                 </RouterLink>
                                 <div v-if="service" class="flex items-center justify-between pt-4">
                                     <span>Tổng giá dịch vụ</span>
-                                    <span v-if="service.promotion_price">
+                                    <span v-if="service.promotion_price || service.promotion_price === 0">
                                         {{ (service.promotion_price).toLocaleString('vi-VN', {
                                             style: 'currency',
                                             currency: 'VND'
@@ -702,7 +702,7 @@
                                                     <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                                                         {{ service.service_types_name }}</dd>
                                                 </div>
-                                                <div v-if="orderResutl?.total_amount"
+                                                <div v-if="orderResutl?.total_amount || orderResutl.total_amount === 0"
                                                     class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                                     <dt class="text-sm font-medium leading-6 text-gray-900">Phí dịch vụ:
                                                     </dt>
@@ -975,7 +975,7 @@ const getPromotionByServiceIdAxios = async (service_id) => {
         data.forEach(element => {
             if (getTime(new Date()) >= getTime(new Date(element.start)) && getTime(new Date()) < getTime(new Date(element.end))) {
                 console.log(element);
-                if (element.price < 100)
+                if (element.price < 100 && element.price > 0)
                     service.value.promotion_price = service.value.price - (service.value.price * element.price / 100);
                 else {
                     service.value.promotion_price = 0;
@@ -1015,7 +1015,7 @@ const createOrderAxios = async (orderData) => {
     order.value.service_id = parseInt(props.service_id);
 
     // Nếu có khuyến mãi
-    if (service.value?.promotion_price) {
+    if (service.value?.promotion_price || service.value?.promotion_price === 0) {
         order.value.total_amount = service.value.promotion_price;
     } else {
         order.value.total_amount = service.value.price;
@@ -1133,7 +1133,7 @@ onMounted(async () => {
     script.addEventListener('load', () => {
         loaded.value = true;
         let price
-        if (service.value?.promotion_price) {
+        if (service.value?.promotion_price || service.value?.promotion_price === 0) {
             price = parseFloat(service.value.promotion_price / USDToVND.value).toFixed(2);
         }
         else {
