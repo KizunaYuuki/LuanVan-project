@@ -9,7 +9,18 @@
                         <p class="text-[#374151] text-[.875rem] leading-[1.25rem]">Hiển thị danh sách tất
                             cả tài khoản của người dùng</p>
                     </div>
-                    <div class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[4rem] mt-[1rem]">
+                    <div class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[2rem] mt-[1rem]">
+                        <button @click="updateUsers()"
+                            class="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 p-1"
+                            type="button" title="Tải lại">
+                            <span class="inline-flex justify-center items-center w-6 h-6">
+                                <svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
+                                    <path fill="currentColor"
+                                        d="M2 12C2 16.97 6.03 21 11 21C13.39 21 15.68 20.06 17.4 18.4L15.9 16.9C14.63 18.25 12.86 19 11 19C4.76 19 1.64 11.46 6.05 7.05C10.46 2.64 18 5.77 18 12H15L19 16H19.1L23 12H20C20 7.03 15.97 3 11 3C6.03 3 2 7.03 2 12Z">
+                                    </path>
+                                </svg>
+                            </span>
+                        </button>
                     </div>
                 </div>
 
@@ -75,7 +86,7 @@
                         <div class="align-middle min-w-[100%] inline-block">
                             <table class="min-w-[100%] indent-0 border-collapse bg-[#edeff6] border-x border-[#d3e2fd]">
                                 <thead>
-                                    <tr class="border-b-[4px] border-[white] bg-gray-200">
+                                    <tr class="border-b-[1px] border-[white] bg-gray-300">
                                         <th scope="col"
                                             class="pl-[1rem] text-gray-600 text-[.875rem] leading-[1.25rem] text-left pr-[.75rem] py-[.875rem]">
                                             User ID</th>
@@ -100,7 +111,7 @@
 
                                 <tbody class="">
                                     <tr v-for="user in users" :key="user.id"
-                                        class="mx-[4px] border-b-[4px] border-[white] hover:bg-[#e1e3e9] text-slate-500 hover:text-[#5080db]">
+                                        class="mx-[4px] border-b-[1px] border-[white] hover:bg-[#e1e3e9] text-slate-500 hover:text-[#5080db]">
                                         <td
                                             class="pl-[1rem] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
                                             {{ user.id }}</td>
@@ -243,6 +254,11 @@ const getUserByEmailAxios = async (user) => {
     if (error) {
         // console.log(error.message);
     }
+};
+
+
+const updateUsers = async () => {
+    getUsersAxios();
 };
 
 onBeforeMount(async () => {

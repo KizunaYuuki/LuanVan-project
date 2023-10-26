@@ -1043,7 +1043,7 @@ const changeCheckBoxCompare = (service_id) => {
                         // console.log(element, index);
                     }
                 });
-                toast.warning("Dịch vụ đã xoá khỏi danh sách so sánh", { timeout: 3000 });
+                // toast.warning("Dịch vụ đã xoá khỏi danh sách so sánh", { timeout: 3000 });
             } else {
                 // Nếu nhiều hơn năm sản phầm thì thông báo lỗi
                 if (temp.length > 4) {
@@ -1056,7 +1056,7 @@ const changeCheckBoxCompare = (service_id) => {
                             // console.log(element, index);
                         }
                     });
-                    toast.success("Thêm thành công", { timeout: 3000 });
+                    // toast.success("Thêm thành công", { timeout: 3000 });
                     temp.push(service_id);
                 }
             }

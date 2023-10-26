@@ -113,7 +113,7 @@
                             <div class="align-middle min-w-[100%] inline-block">
                                 <table class="min-w-[100%] indent-0 border-collapse bg-[#edeff6] border-x border-[#d3e2fd]">
                                     <thead>
-                                        <tr class="border-b-[4px] border-[white]">
+                                        <tr class="border-b-[1px] border-[white] bg-gray-300">
                                             <th scope="col"
                                                 class="pl-[1rem] text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left pr-[.75rem] py-[.875rem]">
                                                 Mã Đơn hàng</th>
@@ -141,7 +141,7 @@
 
                                     <tbody class="">
                                         <tr v-for="order in orders" :key="order.order_id"
-                                            class="mx-[4px] border-b-[4px] border-[white] hover:bg-[#e1e3e9] text-slate-500 hover:text-[#5080db]">
+                                            class="mx-[4px] border-b-[1px] border-[white] hover:bg-[#e1e3e9] text-slate-500 hover:text-[#5080db]">
                                             <td
                                                 class="pl-[1rem] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
                                                 {{ order.order_id }}</td>
@@ -279,6 +279,11 @@ const order_root = ref('');
 // get the token
 const { getAccessTokenSilently } = useAuth0();
 
+// toast
+import { useToast } from "vue-toastification";
+// Get toast interface
+const toast = useToast();
+
 // Check role
 import { useRouter } from 'vue-router'
 const router = useRouter()
@@ -286,9 +291,9 @@ const { user } = useAuth0();
 // Xác thực người dùng đã đăng nhập chưa 
 const { isAuthenticated } = useAuth0();
 if (isAuthenticated) {
-    // D.log(user.role);
+    // console.log(user.role);
     if (user.value.role) {
-        // D.log(user);
+        // console.log(user);
     }
     else {
         router.push('/');
@@ -302,11 +307,11 @@ const getOrdersIdAxios = async () => {
     if (data) {
         orders.value = data;
         order_root.value = data;
-        // D.log(orders.value)
+        // console.log(orders.value)
     }
 
     if (error) {
-        // D.log(error)
+        // console.log(error)
     }
 };
 
@@ -320,17 +325,19 @@ const completeOrderAxios = async (order_id) => {
     const { data, error } = await cancelOrder(accessToken, orderData, order_id);
 
     if (data) {
-        // D.log(data);
+        // console.log(data);
         for (let i = 0; i < orders.value.length; i++) {
             if (orders.value[i].order_id == order_id) {
                 orders.value[i].status_name = "Hoàn thành";
                 order_root.value[i].status_name = "Hoàn thành";
             }
         }
+        // Thong bao
+        toast.success("Đã Cập nhật trạng thái Đơn hàng thành công", { timeout: 3000 });
     }
 
     if (error) {
-        // D.log(error)
+        // console.log(error)
     }
 };
 
@@ -344,17 +351,19 @@ const confirmOrderAxios = async (order_id) => {
     const { data, error } = await cancelOrder(accessToken, orderData, order_id);
 
     if (data) {
-        // D.log(data);
+        // console.log(data);
         for (let i = 0; i < orders.value.length; i++) {
             if (orders.value[i].order_id == order_id) {
                 orders.value[i].status_name = "Đã xác nhận";
                 order_root.value[i].status_name = "Đã xác nhận";
             }
         }
+        // Thong bao
+        toast.success("Đơn hàng đã được xác nhận thành công", { timeout: 3000 });
     }
 
     if (error) {
-        // D.log(error)
+        // console.log(error)
     }
 };
 
@@ -368,17 +377,19 @@ const cancelOrderAxios = async (order_id) => {
     const { data, error } = await cancelOrder(accessToken, orderData, order_id);
 
     if (data) {
-        // D.log(data);
+        // console.log(data);
         for (let i = 0; i < orders.value.length; i++) {
             if (orders.value[i].order_id == order_id) {
                 orders.value[i].status_name = "Huỷ bỏ";
                 order_root.value[i].status_name = "Huỷ bỏ";
             }
         }
+        // Thong bao
+        toast.success("Đơn hàng đã bị Huỷ bỏ", { timeout: 3000 });
     }
 
     if (error) {
-        // D.log(error)
+        // console.log(error)
     }
 };
 
@@ -387,7 +398,7 @@ const deteleOrderAxios = async (order_id) => {
     const { data, error } = await deteleOrder(accessToken, order_id);
 
     if (data) {
-        // D.log(data);
+        // console.log(data);
         let tempOrders = orders.value;
         let tempOrder_root = order_root.value;
         orders.value = [];
@@ -403,10 +414,12 @@ const deteleOrderAxios = async (order_id) => {
                 order_root.value.push(tempOrder_root[i])
             }
         }
+                // Thong bao
+        toast.success("Đã xoá Đơn hàng thành công", { timeout: 3000 });
     }
 
     if (error) {
-        // D.log(error)
+        // console.log(error)
     }
 };
 

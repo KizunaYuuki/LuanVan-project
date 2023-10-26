@@ -1,7 +1,7 @@
 <template>
     <Header></Header>
     <main>
-        <div class="content-layout max-w-[1024px] mx-auto px-0">
+        <div class="content-layout max-w-[1024px] mx-auto p-0">
             <div class="content__body">
                 <div class="profile-grid">
                     <div class="profile__header">
@@ -15,7 +15,7 @@
                         <CodeSnippet title="Thông tin cá nhân" :code="code" />
                     </div> -->
 
-                    <div class="bg-gray-300 mt-24 rounded-t-lg px-8 py-6 text-3xl font-bold">
+                    <div class="bg-gray-300 mt-8 rounded-t-lg px-8 py-6 text-3xl font-bold">
                         <span>Thông tin cá nhân</span>
                     </div>
 

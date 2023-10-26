@@ -314,6 +314,11 @@ const { getAccessTokenSilently } = useAuth0();
 // get the information user
 const { user } = useAuth0();
 
+// toast
+import { useToast } from "vue-toastification";
+// Get toast interface
+const toast = useToast();
+
 const getOrdersByUserIdAxios = async (user_id) => {
     const accessToken = await getAccessTokenSilently();
     const { data, error } = await getOrdersByUserId(accessToken, user_id);
@@ -347,6 +352,8 @@ const cancelOrderAxios = async (order_id) => {
                 order_root.value[i].status_name = "Huỷ bỏ";
             }
         }
+        // Thong bao
+        toast.success("Đã Huỷ Đơn hàng thành công", { timeout: 3000 });
     }
 
     if (error) {
@@ -375,6 +382,8 @@ const deteleOrderAxios = async (order_id) => {
                 order_root.value.push(tempOrder_root[i])
             }
         }
+        // Thong bao
+        toast.success("Đã xoá Đơn hàng thành công", { timeout: 3000 });
     }
 
     if (error) {

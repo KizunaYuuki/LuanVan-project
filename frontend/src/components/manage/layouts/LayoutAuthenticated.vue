@@ -2,7 +2,7 @@
     <div class="overflow-hidden lg:overflow-visible">
         <div
             class="xl:pl-60 ml-60 lg:ml-0 min-h-screen w-screen transition-position lg:w-auto">
-            <nav class="flex lg:items-stretch xl:mx-auto sticky top-0 bg-gray-50 z-[41] shadow-md shadow-[#0096fa2e]">
+            <nav class="flex lg:items-stretch xl:mx-auto sticky top-0 bg-white z-[41] shadow-md shadow-[#0096fa2e]">
                 <div class="flex flex-1 items-stretch h-14 xl:pl-[76px]">
                     <div
                         class="flex my-2 mx-3 navbar-item-label items-center cursor-pointer">
@@ -51,7 +51,7 @@
 
                     <!-- link -->
                     <div
-                        class="flex-1 overflow-y-auto overflow-x-hidden aside-scrollbars text-[#000000cc] bg-[#fbfbfdcc]">
+                        class="flex-1 overflow-y-auto overflow-x-hidden aside-scrollbars text-[#000000cc] bg-white">
                         <ul>
                             <li class="hover:text-[#0096fa] hover:bg-slate-100">
                                 <RouterLink to="/management/order"
