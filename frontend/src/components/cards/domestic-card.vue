@@ -2,9 +2,9 @@
     <RouterLink :to="{
         name: 'Service Details',
         params: { id: props.service.service_id },
-    }" class="">
+    }" class="card hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms] w-[50vw] sm:w-full box-border bg-white">
         <div
-            class="card bg-sky-50 hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms] w-[50vw] sm:w-full box-border">
+            class="">
             <!-- Hinh anh -->
             <div class="card-img relative" style="display: none;">
                 <div class="part-hidden " style="padding-top:35%"></div>

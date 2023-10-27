@@ -263,7 +263,7 @@
                                     dịch vụ<strong class="text-[red] ml-[8px]">*</strong></label>
                                 <div class="mt-2">
                                     <input type="text" v-model="service.name" name="service_name" id="service_name"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
@@ -274,7 +274,7 @@
                                 <div class="mt-2">
                                     <textarea v-model="service.description" id="service_description"
                                         name="service_description" rows="3"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
                                 </div>
                                 <p class="mt-3 text-sm leading-6 text-gray-600">Viết mô tả ngắn gọn về dịch vụ vận
                                     chuyển
@@ -288,40 +288,6 @@
                         <h2 class="text-base font-semibold leading-7 text-gray-900">Gói hàng được gửi từ đâu?</h2>
                         <p class="mt-1 text-sm leading-6 text-gray-600">Những thông tin này có ảnh hưởng đến giá dịch vụ
                             dịch vụ</p>
-                        <!-- <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            <div class="sm:col-span-2 sm:col-start-1">
-                                <label for="from_domain"
-                                    class="block text-sm font-medium leading-6 text-gray-900">Miền<strong
-                                        class="text-[red] ml-[8px]">*</strong></label>
-                                <div class="mt-2">
-                                    <input v-model="from.domain" type="text" name="from_domain" id="from_domain"
-                                        autocomplete="address-level3"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                </div>
-                            </div>
-
-                            <div class="sm:col-span-2">
-                                <label for="from_province" class="block text-sm font-medium leading-6 text-gray-900">Tỉnh
-                                    / Thành
-                                    phố<strong class="text-[red] ml-[8px]">*</strong></label>
-                                <div class="mt-2">
-                                    <input v-model="from.province" type="text" name="from_province" id="from_province"
-                                        autocomplete="address-level2"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                </div>
-                            </div>
-
-                            <div class="sm:col-span-2">
-                                <label for="fron_district" class="block text-sm font-medium leading-6 text-gray-900">Quận /
-                                    Huyện<strong class="text-[red] ml-[8px]">*</strong></label>
-                                <div class="mt-2">
-                                    <input v-model="from.district" type="text" name="fron_district" id="fron_district"
-                                        autocomplete="address-level1"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                </div>
-                            </div>
-                        </div> -->
-
                         <Location
                             @sendLocation="(data) => { updateFromLocation(data), from.domain = data.domain.Name, from.province = data.province.Name, from.district = data.district.Name, automaticPriceCalculation(data) }">
                         </Location>
@@ -332,38 +298,6 @@
                         <h2 class="text-base font-semibold leading-7 text-gray-900">Gói hàng được gửi đến đâu?</h2>
                         <p class="mt-1 text-sm leading-6 text-gray-600">Những thông tin này có ảnh hưởng đến giá dịch vụ
                             dịch vụ</p>
-                        <!-- <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            <div class="sm:col-span-2 sm:col-start-1">
-                                <label for="to_domain" class="block text-sm font-medium leading-6 text-gray-900">Miền<strong
-                                        class="text-[red] ml-[8px]">*</strong></label>
-                                <div class="mt-2">
-                                    <input v-model="to.domain" type="text" name="to_domain" id="to_domain"
-                                        autocomplete="address-level3"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                </div>
-                            </div>
-
-                            <div class="sm:col-span-2">
-                                <label for="to_province" class="block text-sm font-medium leading-6 text-gray-900">Tỉnh
-                                    / Thành
-                                    phố<strong class="text-[red] ml-[8px]">*</strong></label>
-                                <div class="mt-2">
-                                    <input v-model="to.province" type="text" name="to_province" id="to_province"
-                                        autocomplete="address-level2"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                </div>
-                            </div>
-
-                            <div class="sm:col-span-2">
-                                <label for="to_district" class="block text-sm font-medium leading-6 text-gray-900">Quận /
-                                    Huyện<strong class="text-[red] ml-[8px]">*</strong></label>
-                                <div class="mt-2">
-                                    <input v-model="to.district" type="text" name="to_district" id="to_district"
-                                        autocomplete="address-level1"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                </div>
-                            </div>
-                        </div> -->
                         <Location
                             @sendLocation="(data) => { to.domain = data.domain.Name, to.province = data.province.Name, to.district = data.district.Name, automaticPriceCalculation(data) }">
                         </Location>
@@ -387,7 +321,7 @@
                                     <input @change="automaticPriceCalculation()" v-model="service.weight"
                                         id="service_weight" name="service_weight" type="number"
                                         autocomplete="service_weight"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
@@ -397,7 +331,7 @@
                                     vụ<strong class="text-[red] ml-[8px]">*</strong></label>
                                 <div class="mt-2">
                                     <input v-model="service.price" id="service_price" name="service_price" type="number"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                 </div>
                                 <p class="mt-3 text-sm leading-6 text-gray-600">Giá dịch vụ được tính tự động theo bảng
                                     giá của nhà cung cấp khi đã điền đầy đủ thông tin</p>
@@ -407,9 +341,9 @@
                                     class="block text-sm font-medium leading-6 text-gray-900">Thời
                                     gian vận chuyển sớm nhất (<span class="text-[#0096fa]">Tính theo giờ</span>)</label>
                                 <div class="mt-2">
-                                    <input v-model="service.delivery_min_time" placeholder="12" type="number"
+                                    <input v-model="service.delivery_min_time" type="number"
                                         name="service_delivery_min_time" id="service_delivery_min_time"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
@@ -419,9 +353,9 @@
                                     gian vận chuyển trể nhất (<span class="text-[#0096fa]">Tính theo giờ</span>)<strong
                                         class="text-[red] ml-[8px]">*</strong></label>
                                 <div class="mt-2">
-                                    <input v-model="service.delivery_max_time" placeholder="24" type="number"
+                                    <input v-model="service.delivery_max_time" type="number"
                                         name="service_delivery_max_time" id="service_delivery_max_time"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                         </div>

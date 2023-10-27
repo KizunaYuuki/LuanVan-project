@@ -5,7 +5,7 @@
         <div class="min-h-[80vh] pt-8">
             <!-- Input -->
             <div
-                class="font-[600] shadow-xl shadow-[#0096fa6a] outline-[0.01px] outline-[#0096fa] outline border-0 border-[#0096fa] bg-white p-4 m-[16px] flex md:justify-evenly justify-center flex-wrap max-w-5xl mx-auto text-gray-600 rounded-lg">
+                class="mx-1 font-[600] shadow-xl shadow-[#0096fa6a] outline-[0.01px] outline-[#0096fa] outline border-0 border-[#0096fa] bg-white p-4 m-[16px] flex md:justify-evenly justify-center flex-wrap max-w-5xl lg:mx-auto text-gray-600 rounded-lg">
 
                 <!-- Gửi từ -->
                 <div class="m-4">
@@ -283,7 +283,7 @@
 
             <!-- Filters -->
             <div class="rounded-lg m-[16px] flex lg:justify-start mx-auto max-w-5xl lg:pt-[24px] flex-wrap justify-center">
-                <div class="relative rounded-[16px] shadow-sm text-[#1a73e8] bg-[white] m-2">
+                <div class="relative rounded-[16px] shadow-sm text-[#0096fa] bg-[white] m-2">
                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                         <span class="sm:text-sm">
                             <svg width="18" height="18" viewBox="0 0 24 24" focusable="false"
@@ -300,13 +300,12 @@
                 </div>
 
                 <!-- price filter -->
-                <Listbox as="div" v-model="priceSelected" class="w-max m-2 ml-[8px]">
-                    <!-- <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">Assigned to</ListboxLabel> -->
+                <!-- <Listbox as="div" v-model="priceSelected" class="w-max m-2 ml-[8px]">
+                    <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">Assigned to</ListboxLabel>
                     <div class="relative">
                         <ListboxButton
                             class="relative bg-[white] shadow-md hover:border-[#9aa0a6] border rounded-md border-gray-50 w-full min-w-[205px] cursor-default py-1.5 pl-3 pr-10 text-left text-gray-900 outline-none sm:text-sm sm:leading-6">
                             <span class="flex items-center">
-                                <!-- <img :src="selected.avatar" alt="" class="h-5 w-5 flex-shrink-0 rounded-full" /> -->
                                 <span class="block truncate">{{ priceSelected.name }}</span>
                             </span>
                             <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
@@ -337,10 +336,47 @@
                             </ListboxOptions>
                         </transition>
                     </div>
-                </Listbox>
+                </Listbox> -->
+
+                <div class="w-60">
+                    <Listbox v-model="priceSelected" class="m-2 ml-[8px]">
+                        <div class="relative">
+                            <ListboxButton
+                                class="hover:border-[#9aa0a6] border relative w-full cursor-default rounded-lg border-gray-50 bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                                <span class="block truncate">{{ priceSelected.name }}</span>
+                                <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                                    <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+                                </span>
+                            </ListboxButton>
+
+                            <transition leave-active-class="transition duration-100 ease-in" leave-from-class="opacity-100"
+                                leave-to-class="opacity-0">
+                                <ListboxOptions
+                                    class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                                    <ListboxOption v-slot="{ active, selected }" v-for="priceFilter in priceFilters"
+                                        :key="priceFilter.name" :value="priceFilter" as="template">
+                                        <li @click="priceFilterHandle(priceFilter)" class="m-1 rounded-md" :class="[
+                                            active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                            'relative cursor-default select-none py-2 pl-10 pr-4',
+                                        ]">
+                                            <span :class="[
+                                                selected ? 'font-medium' : 'font-normal',
+                                                'block truncate',
+                                            ]">{{ priceFilter.name }}</span>
+                                            <span v-if="selected"
+                                                class="absolute inset-y-0 left-0 flex items-center pl-3 text-sky-400">
+                                                <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                                            </span>
+                                        </li>
+                                    </ListboxOption>
+                                </ListboxOptions>
+                            </transition>
+                        </div>
+                    </Listbox>
+                </div>
 
                 <!-- time filter -->
-                <Listbox as="div" v-model="timeSelected" class="w-max m-2 ml-[8px]">
+                <!-- <Listbox as="div" v-model="timeSelected" class="w-max m-2 ml-[8px]">
                     <div class="relative">
                         <ListboxButton
                             class="relative bg-[white] shadow-md hover:border-[#9aa0a6] border rounded-md border-gray-50 w-full min-w-[205px] cursor-default py-1.5 pl-3 pr-10 text-left text-gray-900 outline-none sm:text-sm sm:leading-6">
@@ -375,7 +411,44 @@
                             </ListboxOptions>
                         </transition>
                     </div>
-                </Listbox>
+                </Listbox> -->
+
+                <div class="w-60">
+                    <Listbox v-model="timeSelected" class="m-2 ml-[8px]">
+                        <div class="relative">
+                            <ListboxButton
+                                class="hover:border-[#9aa0a6] border relative w-full cursor-default rounded-lg border-gray-50 bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                                <span class="block truncate">{{ timeSelected.name }}</span>
+                                <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                                    <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+                                </span>
+                            </ListboxButton>
+
+                            <transition leave-active-class="transition duration-100 ease-in" leave-from-class="opacity-100"
+                                leave-to-class="opacity-0">
+                                <ListboxOptions
+                                    class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                                    <ListboxOption v-slot="{ active, selected }" v-for="timeFilter in timeFilters"
+                                        :key="timeFilter.name" :value="timeFilter" as="template">
+                                        <li @click="timeFilterHandle(timeFilter)" class="m-1 rounded-md" :class="[
+                                            active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                            'relative cursor-default select-none py-2 pl-10 pr-4',
+                                        ]">
+                                            <span :class="[
+                                                selected ? 'font-medium' : 'font-normal',
+                                                'block truncate',
+                                            ]">{{ timeFilter.name }}</span>
+                                            <span v-if="selected"
+                                                class="absolute inset-y-0 left-0 flex items-center pl-3 text-sky-400">
+                                                <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                                            </span>
+                                        </li>
+                                    </ListboxOption>
+                                </ListboxOptions>
+                            </transition>
+                        </div>
+                    </Listbox>
+                </div>
             </div>
 
             <!-- Content - Dich vụ lọc được -->
@@ -417,10 +490,10 @@
                             <Menu as="div" class="relative inline-block text-left">
                                 <div>
                                     <MenuButton
-                                        class="group inline-flex justify-center text-sm font-medium text-[#1a73e8] hover:text-gray-500">
+                                        class="group inline-flex justify-center text-sm font-medium text-[#0096fa] hover:text-gray-500">
                                         Sắp xếp
                                         <ChevronDownIcon
-                                            class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-[#1a73e8] group-hover:text-gray-500"
+                                            class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-[#0096fa] group-hover:text-gray-500"
                                             aria-hidden="true" />
                                     </MenuButton>
                                 </div>
@@ -482,7 +555,7 @@
                     </div>
 
                     <!-- content -->
-                    <div class="mt-[1rem] flow-root">
+                    <div v-show="services.length !== 0" class="mt-[1rem] flow-root">
                         <div class="overflow-x-auto">
                             <div class="align-middle min-w-[100%] inline-block">
                                 <div
@@ -722,6 +795,13 @@
                             </div>
                         </div>
                     </div>
+
+                    <div v-show="services.length === 0"
+                        class="bg-white h-40 text-gray-500 flex items-center content-center justify-center rounded-md my-8 text-lg">
+                        <div class="font-[600]">
+                            <h1 class=" text-gray-500">Chưa có Dịch vụ nào! Thay đổi bộ lọc có thể giúp ích</h1>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Mobile -->
@@ -732,7 +812,7 @@
                             <domesticCard></domesticCard>
                         </template>
                     </div> -->
-                    <div class="no-scrollbar grid grid-cols-2 gap-x-1.5 gap-y-0.5">
+                    <div class="no-scrollbar grid grid-cols-2 gap-x-1 gap-y-1">
                         <template v-for="service in services">
                             <domesticCard :service="service"></domesticCard>
                         </template>
@@ -780,7 +860,7 @@ import { useGtag } from "vue-gtag-next";
 import domesticCard from "@/components/cards/domestic-card.vue";
 import banner from "@/components/banner.vue";
 import { useAuth0 } from "@auth0/auth0-vue";
-import Header from '../components/Header.vue';
+import Header from '@/components/Header.vue';
 import getTime from 'date-fns/getTime'
 
 // input ...
@@ -919,8 +999,8 @@ const priceFilters = ref([
     },
     {
         id: 4,
-        name: '> 1.000.000 VND',
-        low: 1000000,
+        name: '> 500.000 VND',
+        low: 500000,
         high: '',
     }
 ])
@@ -1076,7 +1156,7 @@ const changeCheckBoxCompare = (service_id) => {
             });
 
             temp.push(service_id)
-            toast.success("Thêm thành công", { timeout: 3000 });
+            // toast.success("Thêm thành công", { timeout: 3000 });
 
             // Chuyen sang json va luu
             localStorage.setItem('compareProductList', JSON.stringify(temp))
@@ -1439,4 +1519,5 @@ input::-webkit-inner-spin-button {
     /* IE and Edge */
     scrollbar-width: none;
     /* Firefox */
-}</style>
+}
+</style>

@@ -26,7 +26,7 @@
                                     Khuyến mãi<strong class="text-[red] ml-[8px]">*</strong></label>
                                 <div class="mt-2">
                                     <input type="text" v-model="promotion.name" name="promotion_name" id="promotion_name"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
@@ -37,7 +37,7 @@
                                 <div class="mt-2">
                                     <textarea v-model="promotion.description" id="promotion_description"
                                         name="promotion_description" rows="3"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
                                 </div>
                                 <p class="mt-3 text-sm leading-6 text-gray-600">Viết mô tả ngắn gọn về Khuyến mãi
                                 </p>
@@ -58,7 +58,7 @@
                                 <div class="mt-2">
                                     <input v-model="promotion.start" type="datetime-local" name="promotion_start"
                                         id="promotion_start"
-                                        class="px-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 px-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
@@ -68,7 +68,7 @@
                                 <div class="mt-2">
                                     <input v-model="promotion.end" type="datetime-local" name="promotion_end"
                                         id="promotion_end"
-                                        class="px-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 px-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
@@ -79,7 +79,7 @@
                                 <Combobox v-model="selectedService">
                                     <div class="relative mt-2">
                                         <div
-                                            class="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+                                            class="hover:border-[#9aa0a6] border border-gray-50 relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
                                             <ComboboxInput
                                                 class="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0 outline-none"
                                                 :displayValue="(service) => service.service_id !== undefined ? (`ID: ${service.service_id} , Tên: ${service.service_name}`) : ''"
@@ -134,7 +134,7 @@
                                 <div class="mt-2">
                                     <input v-model="promotion.price" id="promotion_price" name="promotion_price"
                                         type="number"
-                                        class="pl-[14px] block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                         </div>

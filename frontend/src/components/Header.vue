@@ -247,7 +247,8 @@ const { loginWithRedirect } = useAuth0();
 const handleLogin = () => {
     loginWithRedirect({
         appState: {
-            target: window.location.pathname,
+            // target: window.location.pathname,
+            target: "/management",
         },
     });
 };
