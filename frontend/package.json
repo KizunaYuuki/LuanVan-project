@@ -23,6 +23,7 @@
         "core-js": "^3.6.5",
         "date-fns": "^2.30.0",
         "pinia": "^2.1.4",
+        "primevue": "^3.38.1",
         "vue": "^3.3.4",
         "vue-gtag-next": "^1.14.0",
         "vue-instantsearch": "4.8.8",
