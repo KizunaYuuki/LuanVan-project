@@ -10,6 +10,11 @@
                             cả tài khoản của người dùng</p>
                     </div>
                     <div class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[2rem] mt-[1rem]">
+                        <button icon="pi pi-external-link" @click="exportCSV($event)"
+                            class="mr-4 inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 px-3 py-1">
+                            Export
+                        </button>
+
                         <button @click="updateUsers()"
                             class="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 p-1"
                             type="button" title="Tải lại">
@@ -84,7 +89,8 @@
                 <div class="mt-[1rem] flow-root">
                     <div class="">
                         <div class="align-middle min-w-[100%] inline-block">
-                            <table class="min-w-[100%] indent-0 border-collapse bg-[#edeff6] border-x border-[#d3e2fd]">
+                            <table
+                                class="hidden min-w-[100%] indent-0 border-collapse bg-[#edeff6] border-x border-[#d3e2fd]">
                                 <thead>
                                     <tr class="border-b-[1px] border-[white] bg-gray-300">
                                         <th scope="col"
@@ -182,6 +188,48 @@
                                     </tr>
                                 </tbody>
                             </table>
+
+                            <!-- DataTable PrimeVue -->
+                            <div class="card">
+                                <DataTable selectionMode="single" removableSort sortField="id" :sortOrder="1"
+                                    columnResizeMode="fit" showGridlines :value="users" dataKey="id" paginator :rows="5"
+                                    :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem" ref="user_dt"
+                                    v-model:filters="filters" filterDisplay="menu" :loading="loading"
+                                    :globalFilterFields="['id', 'name', 'email',]" stateStorage="session"
+                                    stateKey="user_dt-state-session">
+                                    <template #header>
+                                        <div
+                                            class="flex flex-wrap gap-2 align-items-center justify-content-between items-center justify-between">
+                                            <h4 class="m-0 text-xl">Quản lý Người dùng</h4>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search" />
+                                                <InputText
+                                                    class="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 p-1"
+                                                    v-model="filters['global'].value" placeholder="Tìm kiếm..." />
+                                            </span>
+                                        </div>
+                                    </template>
+                                    <Column field="id" filterField="id" sortable header="User ID">
+                                        <template #filter="{ filterModel }">
+                                            <InputNumber placeholder="Nhập User ID"
+                                                class="px-2 py-1 fo focus:shadow-none shadow-inner shadow-[#0096fa2e] border hover:border-gray-400 outline-none rounded bg-transparent"
+                                                v-model="filterModel.value" />
+                                        </template>
+                                    </Column>
+                                    <Column field="name" sortable header="Tên"></Column>
+                                    <Column field="email" sortable header="email"></Column>
+                                    <Column field="role" sortable header="Vai trò">
+                                        <template #body="{ data }">
+                                            {{ (data.role === 0) ? 'Quản lý' : 'Khách hàng' }}
+                                        </template>
+                                    </Column>
+                                    <Column field="status" sortable header="Trạng thái">
+                                        <template #body="{ data }">
+                                            {{ (data.status === 0) ? 'Khoá' : 'Mở' }}
+                                        </template>
+                                    </Column>
+                                </DataTable>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -197,7 +245,8 @@ import { useAuth0 } from "@auth0/auth0-vue";
 import { getUsers, getUserByEmail } from "@/services/user.service";
 import {
     Menu, MenuButton, MenuItem, MenuItems
-} from '@headlessui/vue'
+} from '@headlessui/vue';
+import { FilterMatchMode, FilterOperator } from 'primevue/api';
 
 // variables
 const user_id = ref('');
@@ -217,12 +266,25 @@ const { isAuthenticated } = useAuth0();
 if (isAuthenticated) {
     // console.log(user.role);
     if (user.value.role) {
-        console.log(user);
+        // console.log(user);
     }
     else {
         router.push('/');
     }
 }
+
+
+const loading = ref(true);
+const user_dt = ref();
+
+const filters = ref({
+    'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+    id: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+});
+
+const exportCSV = () => {
+    user_dt.value.exportCSV();
+};
 
 const getUsersAxios = async () => {
     const accessToken = await getAccessTokenSilently();
@@ -230,7 +292,8 @@ const getUsersAxios = async () => {
 
     if (data) {
         users.value = data;
-        console.log(data);
+        loading.value = false;
+        // console.log(data);
     }
     if (error) {
         // console.log(error.message);
@@ -268,3 +331,9 @@ onBeforeMount(async () => {
 });
 
 </script>
+
+<style>
+input:enabled:focus {
+    box-shadow: none;
+}
+</style>

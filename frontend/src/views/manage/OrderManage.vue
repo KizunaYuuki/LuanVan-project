@@ -13,7 +13,13 @@
                                 cả
                                 đơn hàng</p>
                         </div>
-                        <div class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[4rem] mt-[1rem]">
+                        <div
+                            class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[4rem] mt-[1rem] flex items-center">
+                            <button icon="pi pi-external-link" @click="exportCSV($event)"
+                                class="mr-4 inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 px-3 py-1">
+                                Export
+                            </button>
+
                             <button @click="updateOrder()"
                                 class="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 p-1"
                                 type="button" title="Tải lại">
@@ -34,7 +40,7 @@
                             <Menu as="div" class="relative inline-block text-left">
                                 <div>
                                     <MenuButton
-                                        class="inline-flex w-full justify-center gap-x-1.5 text-sm text-gray-900 shadow-sm hover:bg-[#e1e3e9] font-[600] text-[.875rem] leading-[1.25rem] text-center py-[.5rem] px-[.75rem] bg-[#edeff6] rounded-[.375rem]">
+                                        class="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 py-1 px-3">
                                         Tuỳ chọn
                                         <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
                                     </MenuButton>
@@ -111,7 +117,8 @@
                     <div v-show="orders.length !== 0" class="mt-[1rem] flow-root">
                         <div class="">
                             <div class="align-middle min-w-[100%] inline-block">
-                                <table class="min-w-[100%] indent-0 border-collapse bg-[#edeff6] border-x border-[#d3e2fd]">
+                                <table
+                                    class="hidden min-w-[100%] indent-0 border-collapse bg-[#edeff6] border-x border-[#d3e2fd]">
                                     <thead>
                                         <tr class="border-b-[1px] border-[white] bg-gray-300">
                                             <th scope="col"
@@ -244,14 +251,136 @@
                                         </tr>
                                     </tbody>
                                 </table>
+
+                                <!-- DataTable PrimeVue -->
+                                <div class="card">
+                                    <DataTable selectionMode="single" removableSort sortField="order_id" :sortOrder="1"
+                                        columnResizeMode="fit" showGridlines :value="orders" dataKey="order_id" paginator
+                                        :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem"
+                                        ref="dt" v-model:filters="filters" filterDisplay="menu" :loading="loading"
+                                        :globalFilterFields="['order_id', 'email', 'phone', 'order_created', 'total_amount', 'status_name']"
+                                        stateStorage="session" stateKey="dt-state-session">
+                                        <template #header>
+                                            <div
+                                                class="flex flex-wrap gap-2 align-items-center justify-content-between items-center justify-between">
+                                                <h4 class="m-0 text-xl">Quản lý Đơn hàng</h4>
+                                                <span class="p-input-icon-left">
+                                                    <i class="pi pi-search" />
+                                                    <InputText
+                                                        class="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 p-1"
+                                                        v-model="filters['global'].value" placeholder="Tìm kiếm..." />
+                                                </span>
+                                            </div>
+                                        </template>
+                                        <Column field="order_id" filterField="order_id" sortable header="Order ID"
+                                            dataType="numeric">
+                                            <template #filter="{ filterModel }">
+                                                <InputNumber placeholder="Nhập Order ID"
+                                                    class="px-2 py-1 fo focus:shadow-none shadow-inner shadow-[#0096fa2e] border hover:border-gray-400 outline-none rounded bg-transparent"
+                                                    v-model="filterModel.value" />
+                                            </template>
+                                        </Column>
+                                        <Column field="email" sortable header="Email"></Column>
+                                        <Column field="phone" sortable header="Số điện thoại"></Column>
+                                        <Column field="order_created" sortable header="Ngày tạo" dataType="date">
+                                            <template #body="{ data }">
+                                                {{ format(new Date(data.order_created), 'dd/MM/yyyy') }}
+                                            </template>
+                                        </Column>
+                                        <Column field="total_amount" sortable header="Giá">
+                                            <template #body="{ data }">
+                                                {{ (data.total_amount).toLocaleString('vi-VN',
+                                                    {
+                                                        style: 'currency',
+                                                        currency: 'VND'
+                                                    }) }}
+                                            </template>
+                                        </Column>
+                                        <Column field="status_name" sortable header="Trạng thái"></Column>
+                                        <Column style="flex: 0 0 4rem" header="">
+                                            <template #body="{ data }">
+                                                <Menu as="div" class="relative inline-block text-left">
+                                                    <div>
+                                                        <MenuButton
+                                                            class="inline-flex w-full justify-center gap-x-1.5 rounded-full px-3 py-3 text-sm font-semibold hover:shadow-sm">
+                                                            <svg width="24" height="24"
+                                                                class="fill-current hover:text-sky-500 text-[#70757a] cursor-pointer"
+                                                                focusable="false" xmlns="http://www.w3.org/2000/svg"
+                                                                viewBox="0 0 24 24">
+                                                                <path
+                                                                    d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z">
+                                                                </path>
+                                                            </svg>
+                                                        </MenuButton>
+                                                    </div>
+
+                                                    <transition enter-active-class="transition duration-100 ease-out"
+                                                        enter-from-class="transform scale-95 opacity-0"
+                                                        enter-to-class="transform scale-100 opacity-100"
+                                                        leave-active-class="transition duration-75 ease-in"
+                                                        leave-from-class="transform scale-100 opacity-100"
+                                                        leave-to-class="transform scale-95 opacity-0">
+                                                        <MenuItems
+                                                            class="z-[1000] absolute right-[-1px] -mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                            <div class="px-1 py-1">
+                                                                <MenuItem v-show="data.status_name === 'Đã đăng ký'"
+                                                                    v-slot="{ active }">
+                                                                <button @click="confirmOrderAxios(data.order_id)" :class="[
+                                                                    active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                                ]">
+                                                                    <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                                    Xác nhận
+                                                                </button>
+                                                                </MenuItem>
+
+                                                                <MenuItem v-show="data.status_name === 'Đã xác nhận'"
+                                                                    v-slot="{ active }">
+                                                                <button @click="completeOrderAxios(data.order_id)" :class="[
+                                                                    active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                                ]">
+                                                                    <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                                    Hoàn thành
+                                                                </button>
+                                                                </MenuItem>
+
+                                                                <MenuItem v-show="data.status_name === 'Đã đăng ký'"
+                                                                    v-slot="{ active }">
+                                                                <button @click="cancelOrderAxios(data.order_id)" :class="[
+                                                                    active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                                ]">
+                                                                    <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                                    Huỷ
+                                                                </button>
+                                                                </MenuItem>
+
+                                                                <MenuItem v-slot="{ active }">
+                                                                <button @click="deteleOrderAxios(data.order_id)" :class="[
+                                                                    active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                                ]">
+                                                                    <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                                    Xoá
+                                                                </button>
+                                                                </MenuItem>
+                                                            </div>
+                                                        </MenuItems>
+                                                    </transition>
+                                                </Menu>
+                                            </template>
+                                        </Column>
+                                    </DataTable>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div v-show="orders.length === 0"
-                        class="bg-white w-[1024px] max-h-full h-[420px] text-gray-500 flex items-center content-center justify-center">
-                        <div class="text-[32px] font-[600]">
-                            <h1 class=" text-gray-500">Chưa có đơn hàng nào</h1>
+                        class="bg-white h-40 text-gray-500 flex items-center content-center justify-center rounded-md my-8">
+                        <div class="text-xl font-[600]">
+                            <h1 class="text-gray-500">Chưa có đơn hàng nào</h1>
                         </div>
                     </div>
                 </div>
@@ -271,6 +400,7 @@ import {
     Menu, MenuButton, MenuItem, MenuItems
 } from '@headlessui/vue'
 import PageLoader from "@/components/page-loader.vue";
+import { FilterMatchMode, FilterOperator } from 'primevue/api';
 
 // variables
 const orders = ref('');
@@ -300,6 +430,18 @@ if (isAuthenticated) {
     }
 }
 
+const loading = ref(true);
+const dt = ref();
+
+const filters = ref({
+    'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+    order_id: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+});
+
+const exportCSV = () => {
+    dt.value.exportCSV();
+};
+
 const getOrdersIdAxios = async () => {
     const accessToken = await getAccessTokenSilently();
     const { data, error } = await getOrders(accessToken);
@@ -307,6 +449,7 @@ const getOrdersIdAxios = async () => {
     if (data) {
         orders.value = data;
         order_root.value = data;
+        loading.value = false;
         // console.log(orders.value)
     }
 
@@ -414,7 +557,7 @@ const deteleOrderAxios = async (order_id) => {
                 order_root.value.push(tempOrder_root[i])
             }
         }
-                // Thong bao
+        // Thong bao
         toast.success("Đã xoá Đơn hàng thành công", { timeout: 3000 });
     }
 
@@ -474,3 +617,9 @@ onBeforeMount(async () => {
     getOrdersIdAxios();
 });
 </script>
+
+<style>
+input:enabled:focus {
+    box-shadow: none;
+}
+</style>

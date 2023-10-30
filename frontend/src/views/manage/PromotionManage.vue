@@ -27,7 +27,12 @@
                         </button>
                     </div>
 
-                    <div class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[2rem] mt-[1rem]">
+                    <div class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[2rem] mt-[1rem] flex items-center">
+                        <button icon="pi pi-external-link" @click="exportCSV($event)"
+                            class="mr-4 inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 px-3 py-1">
+                            Export
+                        </button>
+
                         <button @click="updatePromotions()"
                             class="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 p-1"
                             type="button" title="Tải lại">
@@ -42,67 +47,12 @@
                     </div>
                 </div>
 
-                <!-- Filter -->
-                <!-- <div class="flex justify-end">
-                        <div class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[4rem] mt-[1rem]">
-                            <Menu as="div" class="relative inline-block text-left">
-                                <div>
-                                    <MenuButton
-                                        class="inline-flex w-full justify-center gap-x-1.5 text-sm text-gray-900 shadow-sm hover:bg-[#e6e6e685] font-[600] text-[.875rem] leading-[1.25rem] text-center py-[.5rem] px-[.75rem] bg-[#e6e6e6] rounded-[.375rem]">
-                                        Tuỳ chọn
-                                        <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
-                                    </MenuButton>
-                                </div>
-
-                                <transition enter-active-class="transition ease-out duration-100"
-                                    enter-from-class="transform opacity-0 scale-95"
-                                    enter-to-class="transform opacity-100 scale-100"
-                                    leave-active-class="transition ease-in duration-75"
-                                    leave-from-class="transform opacity-100 scale-100"
-                                    leave-to-class="transform opacity-0 scale-95">
-                                    <MenuItems
-                                        class="absolute right-0 z-10 mt-2 w-[9rem] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                        <div class="py-1">
-                                            <MenuItem v-slot="{ active }">
-                                            <button @click="Nofilter()"
-                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Tất
-                                                cả</button>
-                                            </MenuItem>
-
-                                        </div>
-                                        <div class="py-1">
-                                            <MenuItem v-slot="{ active }">
-                                            <button @click="DaDangKyfilter()"
-                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Đã
-                                                đăng ký</button>
-                                            </MenuItem>
-                                            <MenuItem v-slot="{ active }">
-                                            <button @click="HuyBofilter()"
-                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Huỷ
-                                                bỏ</button>
-                                            </MenuItem>
-                                            <MenuItem v-slot="{ active }">
-                                            <button @click="HoanThanhfilter()"
-                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Hoàn
-                                                thành</button>
-                                            </MenuItem>
-                                            <MenuItem v-slot="{ active }">
-                                            <button @click="DaXacNhanfilter()"
-                                                :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Đã
-                                                xác nhận</button>
-                                            </MenuItem>
-                                        </div>
-                                    </MenuItems>
-                                </transition>
-                            </Menu>
-                        </div>
-                    </div> -->
-
                 <!-- Content -->
                 <div v-show="promotions.length !== 0" class="mt-[1rem] flow-root">
                     <div class="">
                         <div class="align-middle min-w-[100%] inline-block">
-                            <table class="min-w-[100%] indent-0 border-collapse bg-[#edeff6] border-x border-[#d3e2fd]">
+                            <table
+                                class="hidden min-w-[100%] indent-0 border-collapse bg-[#edeff6] border-x border-[#d3e2fd]">
                                 <thead>
                                     <tr class="border-b-[1px] border-[white] bg-gray-300">
                                         <th scope="col"
@@ -206,14 +156,114 @@
                                     </tr>
                                 </tbody>
                             </table>
+
+                            <!-- DataTable PrimeVue -->
+                            <div class="card">
+                                <DataTable selectionMode="single" removableSort sortField="id" :sortOrder="1"
+                                    columnResizeMode="fit" showGridlines :value="promotions" dataKey="id" paginator
+                                    :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem"
+                                    ref="promotion_dt" v-model:filters="filters" filterDisplay="menu" :loading="loading"
+                                    :globalFilterFields="['id', 'name', 'service_id', 'start', 'end', 'price']" stateStorage="session"
+                                    stateKey="promotion_dt-state-session">
+                                    <template #header>
+                                        <div
+                                            class="flex flex-wrap gap-2 align-items-center justify-content-between items-center justify-between">
+                                            <h4 class="m-0 text-xl">Quản lý Khuyến mãi</h4>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search" />
+                                                <InputText
+                                                    class="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 p-1"
+                                                    v-model="filters['global'].value" placeholder="Tìm kiếm..." />
+                                            </span>
+                                        </div>
+                                    </template>
+                                    <Column field="id" filterField="id" sortable header="Promotion ID">
+                                        <template #filter="{ filterModel }">
+                                            <InputNumber placeholder="Nhập Promotion ID"
+                                                class="px-2 py-1 fo focus:shadow-none shadow-inner shadow-[#0096fa2e] border hover:border-gray-400 outline-none rounded bg-transparent"
+                                                v-model="filterModel.value" />
+                                        </template>
+                                    </Column>
+                                    <Column field="name" sortable header="Tên"></Column>
+                                    <Column field="service_id" sortable header="Service ID"></Column>
+                                    <Column field="start" sortable header="Bắt đầu" dataType="date">
+                                        <template #body="{ data }">
+                                            {{ format(new Date(data.start), 'dd/MM/yyyy - HH:mm:ss', { locale: vi }) }}
+                                        </template>
+                                    </Column>
+                                    <Column field="end" sortable header="Kết thúc" dataType="date">
+                                        <template #body="{ data }">
+                                            {{ format(new Date(data.end), 'dd/MM/yyyy - HH:mm:ss', { locale: vi }) }}
+                                        </template>
+                                    </Column>
+                                    <Column field="price" sortable header="Giá trị" dataType="numeric">
+                                        <template #body="{ data }">
+                                            {{ data.price }}%
+                                        </template>
+                                    </Column>
+                                    <Column style="flex: 0 0 4rem" header="">
+                                        <template #body="{ data }">
+                                            <Menu as="div" class="relative inline-block text-left">
+                                                    <div>
+                                                        <MenuButton
+                                                            class="inline-flex w-full justify-center gap-x-1.5 rounded-full px-3 py-3 text-sm font-semibold hover:shadow-sm">
+                                                            <svg width="24" height="24"
+                                                                class="fill-current hover:text-sky-500 text-[#70757a] cursor-pointer"
+                                                                focusable="false" xmlns="http://www.w3.org/2000/svg"
+                                                                viewBox="0 0 24 24">
+                                                                <path
+                                                                    d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z">
+                                                                </path>
+                                                            </svg>
+                                                        </MenuButton>
+                                                    </div>
+
+                                                    <transition enter-active-class="transition duration-100 ease-out"
+                                                        enter-from-class="transform scale-95 opacity-0"
+                                                        enter-to-class="transform scale-100 opacity-100"
+                                                        leave-active-class="transition duration-75 ease-in"
+                                                        leave-from-class="transform scale-100 opacity-100"
+                                                        leave-to-class="transform scale-95 opacity-0">
+                                                        <MenuItems
+                                                            class="z-[1] absolute right-0 -mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                            <div class="px-1 py-1">
+                                                                <MenuItem v-slot="{ active }">
+                                                                <button @click="goToEditPromotionPage(data.id)" :class="[
+                                                                    active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                                ]">
+                                                                    <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                                    Chỉnh sửa
+                                                                </button>
+                                                                </MenuItem>
+                                                            </div>
+
+                                                            <div class="px-1 py-1">
+                                                                <MenuItem v-slot="{ active }">
+                                                                <button @click="detelePromotionAxios(data.id)" :class="[
+                                                                    active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                                ]">
+                                                                    <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                                    Xoá
+                                                                </button>
+                                                                </MenuItem>
+                                                            </div>
+                                                        </MenuItems>
+                                                    </transition>
+                                                </Menu>
+                                        </template>
+                                    </Column>
+                                </DataTable>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div v-show="promotions.length === 0"
-                    class="bg-white h-40 text-gray-500 flex items-center content-center justify-center rounded-md my-8 text-lg">
-                    <div class="font-[600]">
-                        <h1 class=" text-gray-500">Chưa có khuyến mãi nào</h1>
+                    class="bg-white h-40 text-gray-500 flex items-center content-center justify-center rounded-md my-8">
+                    <div class="text-xl font-[600]">
+                        <h1 class="text-gray-500">Chưa có khuyến mãi nào</h1>
                     </div>
                 </div>
             </div>
@@ -230,8 +280,9 @@ import { getUserByEmail } from "@/services/user.service";
 import {
     Menu, MenuButton, MenuItem, MenuItems
 } from '@headlessui/vue'
-import format from 'date-fns/format'
-import { vi } from 'date-fns/locale'
+import format from 'date-fns/format';
+import { vi } from 'date-fns/locale';
+import { FilterMatchMode, FilterOperator } from 'primevue/api';
 
 const goToAddPromotionPage = async () => {
     router.push('/management/promotion/new');
@@ -271,11 +322,25 @@ import { useToast } from "vue-toastification";
 // Get toast interface
 const toast = useToast();
 
+
+const loading = ref(true);
+const promotion_dt = ref();
+
+const filters = ref({
+    'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+    id: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+});
+
+const exportCSV = () => {
+    promotion_dt.value.exportCSV();
+};
+
 const getPromotionsAxios = async () => {
     const { data, error } = await getPromotions();
 
     if (data) {
         promotions.value = data
+        loading.value = false;
         // console.log(data);
     }
     if (error) {
@@ -327,3 +392,9 @@ onBeforeMount(async () => {
 });
 
 </script>
+
+<style>
+input:enabled:focus {
+    box-shadow: none;
+}
+</style>

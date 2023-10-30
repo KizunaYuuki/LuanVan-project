@@ -20,8 +20,11 @@ import ColumnGroup from 'primevue/columngroup';   // optional
 import Row from 'primevue/row';                   // optional
 import DataView from 'primevue/dataview';
 import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions'   // optional
+import InputText from 'primevue/inputtext';
+import InputNumber from 'primevue/inputnumber';
 
 
+import Tooltip from 'primevue/tooltip';
 
 import 'primevue/resources/themes/lara-light-teal/theme.css'
 
@@ -247,6 +250,9 @@ app
     .component('ColumnGroup', ColumnGroup)
     .component('Row', Row)
     .component('DataView', DataView)
-    .component('DataViewLayoutOptions', DataViewLayoutOptions);
+    .component('DataViewLayoutOptions', DataViewLayoutOptions)
+    .component('InputText', InputText)
+    .component('InputNumber', InputNumber)
+    .directive('tooltip', Tooltip);
 
 app.mount('#app');
