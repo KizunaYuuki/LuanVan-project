@@ -4,10 +4,10 @@
         <div class="min-h-screen max-w-5xl mx-auto">
             <!-- PC -->
             <div class="min-[1024px]:block hidden mx-auto max-w-[1280px] py-[32px]">
-                <div class="flex items-center min-h-[50px] mb-[32px] pb-[32px] w-full">
+                <div class="flex items-center min-h-[50px] mb-[32px] w-full">
                     <!-- <a href="/shopping/product/7709523306101892395?q=iphone+14&amp;sca_esv=564125615&amp;rlz=1C5CHFA_enVN1030VN1031&amp;biw=1378&amp;bih=758&amp;prds=eto:11631040611031032597_0,pid:3664884782502962629,rsk:PC_8053804293482199477" tabindex="-1" data-ved="0ahUKEwidr9Cx1p-BAxUaB4gKHUzuALQQyJ0ECA4"><img class="r4m4nf" src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQV4X0Vmp5MVKv4eTBtp7lnzMCyIA0V2LsLTvhZb4Bla5X1avUvs_udIqxKOXl-44WFmG93OTBFZ33bv0pcRLAc3yfvqKS09AmTbx6IG5rskO35mp3gQIPI8Q&amp;usqp=CAY" data-atf="0" data-frt="0"></a> -->
                     <!-- Tiêu đề -->
-                    <span class="leading-[28px] text-[22px]">So sánh Dịch vụ: <strong></strong></span>
+                    <span class="leading-[28px] text-2xl text-gray-700 font-semibold">So sánh Dịch vụ: <strong></strong></span>
                 </div>
 
                 <!-- content -->
@@ -123,15 +123,36 @@
                                                         <div class="w-[15%]">
                                                         </div>
 
-                                                        <div v-if="service?.from" class="grow p-[12px] pb-4 font-[600]">
-                                                            <span class="py-4">{{ service.from.province }} ,{{
-                                                                service.from.district
-                                                            }}</span>
-                                                            <div class="py-4 font-medium">Đến</div>
-                                                            <span class="py-4">{{ service.to.province }}, {{
-                                                                service.to.district
-                                                            }}</span>
-                                                        </div>
+                                                         <div v-if="service?.from" class="grow p-[12px] pb-4 font-[600]">
+                                                                    <span class="flex items-center">
+                                                                        <span class="text-gray-500 sm:text-sm w-8">
+                                                                            <svg width="16" height="16" viewBox="0 0 24 24"
+                                                                                focusable="false"
+                                                                                class="text-inherit fill-current">
+                                                                                <path
+                                                                                    d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm10 6c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6z">
+                                                                                </path>
+                                                                            </svg>
+                                                                        </span>
+                                                                        {{ service.from.province }},
+                                                                        {{ service.from.district }}
+                                                                    </span>
+                                                                    <div class="py-2 font-medium">Đến</div>
+                                                                    <span class="flex items-center">
+                                                                        <span class="text-gray-500 sm:text-sm w-8">
+                                                                            <svg width="24" height="24" viewBox="0 0 24 24"
+                                                                                focusable="false"
+                                                                                class="text-inherit fill-current">
+                                                                                <path
+                                                                                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z">
+                                                                                </path>
+                                                                                <circle cx="12" cy="9" r="2.5"></circle>
+                                                                            </svg>
+                                                                        </span>
+                                                                        {{ service.to.province }},
+                                                                        {{ service.to.district }}
+                                                                    </span>
+                                                                </div>
 
                                                         <!-- Them vao gio -->
                                                         <div class="hidden">

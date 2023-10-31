@@ -1,6 +1,5 @@
 <template>
     <Header></Header>
-    
     <main>
         <!-- Tìm kiếm dịch vụ -->
         <div class="min-h-[80vh] pt-8">
@@ -274,8 +273,7 @@
                         <div class="relative mt-1 z-[1] hover:border-[#9aa0a6] border rounded-md border-gray-50">
                             <div
                                 class="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
-                                <input @change="handleChangeWeight()" @input="handleChangeWeight" v-model="filter.weight"
-                                    type="number"
+                                <input @change="handleChangeWeight()" @input="handleChangeWeight" v-model="filter.weight" type="number"
                                     class="w-72 border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-500 focus:ring-0 outline-none h-11"
                                     placeholder="Trọng lượng gói hàng (g)" />
                             </div>
@@ -400,12 +398,12 @@
 
                         <!-- Sort -->
                         <div class="flex items-center">
-                            <!-- Button So sanh dich vu -->
+                            <!-- Button So sanh dich vu --> 
                             <div class="lg:block hidden">
                                 <button @click="handleCompareService()"
                                     class="mr-3 hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms] m-[8px] inline-flex items-center px-[8px] py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-[#0096faee] hover:bg-[#0096fa]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                        stroke="currentColor" class="w-5 h-5 mr-3">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
                                     </svg>
@@ -481,7 +479,7 @@
                     </div>
 
                     <!-- content -->
-                    <div v-show="services.length !== 0" class="mt-[1rem] flow-root z-0">
+                    <div v-show="services.length !== 0" class="mt-[1rem] flow-root">
                         <div class="overflow-x-auto">
                             <div class="align-middle min-w-[100%] inline-block">
                                 <!-- DataView -->
@@ -491,19 +489,19 @@
                                         <div class="w-10"></div>
 
                                         <div class="flex grow">
-                                            <div title="Nhà cung cấp"
+                                            <div
                                                 class="w-[17%] text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                                 Nhà cung cấp</div>
-                                            <div title="Dịch vụ"
+                                            <div
                                                 class="grow text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                                 Dịch vụ</div>
-                                            <div title="Thời gian vận chuyển"
+                                            <div
                                                 class="w-[19%] text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                                 Thời gian</div>
-                                            <div title="Trọng lượng tối đa"
+                                            <div
                                                 class="w-[12%] text-[#111827] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                                 Trọng lượng</div>
-                                            <div title="Giá dịch vụ"
+                                            <div
                                                 class="w-[12%] text-[#111827] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
                                                 Giá</div>
                                             <div
@@ -525,6 +523,7 @@
                                                         <div
                                                             class="w-10 flex items-center text-ellipsis border-[#dadce0] border-t px-[.75rem] text-[#111827] font-[500] text-[.95rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
 
+                                                            
                                                             <button v-show="!slotProps.data.isInCompareArray"
                                                                 @click.prevent="changeCheckBoxCompare(slotProps.data.service_id)"
                                                                 class="hover:scale-[1.05] transition-all duration-[0.3s] ease-in-out delay-[0ms] hover:text-[#0096fa] inline-flex items-center hover:bg-slate-200 rounded-lg">
@@ -635,34 +634,13 @@
                                                             <div class="w-[17%]"></div>
 
                                                             <div class="grow p-[12px] pb-4 font-[600]">
-                                                                <span class="flex items-center">
-                                                                    <span class="text-gray-500 sm:text-sm w-8">
-                                                                        <svg width="16" height="16" viewBox="0 0 24 24"
-                                                                            focusable="false"
-                                                                            class="text-inherit fill-current">
-                                                                            <path
-                                                                                d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm10 6c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6z">
-                                                                            </path>
-                                                                        </svg>
-                                                                    </span>
-                                                                    {{ slotProps.data.district_from }},
-                                                                    {{ slotProps.data.province_from }}
-                                                                </span>
-                                                                <div class="py-2 font-medium">Đến</div>
-                                                                <span class="flex items-center">
-                                                                    <span class="text-gray-500 sm:text-sm w-8">
-                                                                        <svg width="24" height="24" viewBox="0 0 24 24"
-                                                                            focusable="false"
-                                                                            class="text-inherit fill-current">
-                                                                            <path
-                                                                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z">
-                                                                            </path>
-                                                                            <circle cx="12" cy="9" r="2.5"></circle>
-                                                                        </svg>
-                                                                    </span>
-                                                                    {{ slotProps.data.district_to }},
-                                                                    {{ slotProps.data.province_to }}
-                                                                </span>
+                                                                <span class="py-4">{{ slotProps.data.district_from }} ,{{
+                                                                    slotProps.data.province_from
+                                                                }}</span>
+                                                                <div class="py-4 font-medium">Đến</div>
+                                                                <span class="py-4">{{ slotProps.data.district_to }}, {{
+                                                                    slotProps.data.province_to
+                                                                }}</span>
                                                             </div>
 
                                                             <!-- Them vao gio -->
@@ -728,6 +706,244 @@
                                         </template>
                                     </DataView>
                                 </div>
+
+                                <!-- hidden -->
+                                <div v-show="false"
+                                    class="bg-[white] min-w-[100%] indent-0 border-[0.5px] rounded-[8px] border-separate border-spacing-0">
+                                    <!-- Service Title  -->
+                                    <section class="flex bg-gray-200 rounded-t-lg">
+                                        <div class="w-10"></div>
+
+                                        <div class="flex grow">
+                                            <div
+                                                class="w-[17%] text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                Nhà cung cấp</div>
+                                            <div
+                                                class="grow text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                Tên dịch vụ</div>
+                                            <div
+                                                class="w-[19%] text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                Thời gian vận chuyển</div>
+                                            <div
+                                                class="w-[12%] text-[#111827] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                Trọng lượng</div>
+                                            <div
+                                                class="w-[12%] text-[#111827] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                Giá dịch vụ</div>
+                                            <div
+                                                class="w-[6%] text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left pr-[1rem] py-[.875rem] relative">
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                    <!-- Service Card -->
+                                    <section class="">
+                                        <template v-for="service in services" :key="service.service_id">
+                                            <div class="hover:shadow-md hover:shadow-sky-200 hover:bg-[#0096fa0d] border-t-0 border-b-0 border-l border-r-0  hover:border-l-[#d30038]"
+                                                :class="{ 'bg-red-50/[.6]': (service.promotion_price) }">
+                                                <RouterLink :to="{
+                                                    name: 'Service Details',
+                                                    params: { id: service.service_id },
+                                                }" class="">
+                                                    <div v-show="service &&
+                                                        (removeVietnameseTones(service.province_from).toLowerCase()).includes(removeVietnameseTones(filter.province_from?.Name ? filter.province_from?.Name : '').toLowerCase()) &&
+                                                        (removeVietnameseTones(service.district_from).toLowerCase()).includes(removeVietnameseTones(filter.district_from?.Name ? filter.district_from?.Name : '').toLowerCase()) &&
+                                                        (removeVietnameseTones(service.province_to).toLowerCase()).includes(removeVietnameseTones(filter.province_to?.Name ? filter.province_to?.Name : '').toLowerCase()) &&
+                                                        (removeVietnameseTones(service.district_to).toLowerCase()).includes(removeVietnameseTones(filter.district_to?.Name ? filter.district_to?.Name : '').toLowerCase()) &&
+                                                        ((filter.weight === '') || (filter.weight && (filter.weight >= service.weight)))"
+                                                        class="flex">
+                                                        <!-- So sánh dịch vụ -->
+                                                        <div
+                                                            class="w-10 flex items-center text-ellipsis border-[#dadce0] border-t px-[.75rem] text-[#111827] font-[500] text-[.95rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
+                                                            
+                                                            <button v-show="!service.isInCompareArray"
+                                                                @click.prevent="changeCheckBoxCompare(service.service_id)"
+                                                                class="hover:scale-[1.05] transition-all duration-[0.3s] ease-in-out delay-[0ms] hover:text-[#0096fa] inline-flex items-center hover:bg-slate-200 rounded-lg">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" fill="currentColor"
+                                                                    class="bi bi-plus rounded-[50%] border"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                                </svg>
+                                                            </button>
+
+                                                            <button v-show="service.isInCompareArray"
+                                                                @click.prevent="changeCheckBoxCompare(service.service_id)"
+                                                                class="hover:scale-[1.05] transition-all duration-[0.3s] ease-in-out delay-[0ms] text-[#0096fa] inline-flex items-center hover:bg-slate-200 rounded-lg">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" fill="currentColor"
+                                                                    class="bi bi-check rounded-[50%] border"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="flex grow">
+                                                            <div
+                                                                class="w-[17%] flex items-center text-ellipsis border-[#dadce0] border-t px-[.75rem] text-[#111827] font-[500] text-[.95rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
+                                                                <div class="flex items-center text-ellipsis">
+                                                                    <img :src="service.image" alt=""
+                                                                        class="h-5 w-5 flex-shrink-0 rounded-full bg-slate-400 mr-2" />
+                                                                    <span>{{ service.provider_name }}</span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div
+                                                                class="grow flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                                {{ service.service_name }}
+                                                            </div>
+
+                                                            <div
+                                                                class="w-[19%] flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                                {{ service.delivery_date }}
+                                                            </div>
+
+                                                            <div
+                                                                class="w-[12%] flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[600] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                                {{
+                                                                    (service.weight >= 1000 ? (service.weight / 1000.0) :
+                                                                        service.weight).toLocaleString('vi-VN', {
+                                                                            minimumFractionDigits: 0,
+                                                                            maximumFractionDigits: 0,
+                                                                        })
+                                                                }}
+                                                                <span v-if="service.weight >= 1000">kg</span>
+                                                                <span v-else>g</span>
+                                                            </div>
+
+                                                            <div v-if="service?.price && service.promotion_price"
+                                                                class="w-[12%] flex items-center text-ellipsis border-[#dadce0] border-t text-sky-400 font-[600] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                                {{ (service.price - (service.price * service.promotion_price
+                                                                    /
+                                                                    100)
+                                                                    > 0
+                                                                    ?
+                                                                    (service.price - (service.price * service.promotion_price /
+                                                                        100)) :
+                                                                    0).toLocaleString('vi-VN', {
+                                                                        style: 'currency',
+                                                                        currency: 'VND'
+                                                                    }) }}</div>
+
+                                                            <div v-else-if="service?.price"
+                                                                class="w-[12%] flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                                {{ (service.price).toLocaleString('vi-VN', {
+                                                                    style: 'currency',
+                                                                    currency: 'VND'
+                                                                }) }}
+                                                            </div>
+
+                                                            <div
+                                                                class="w-[6%] flex items-center justify-between border-[#dadce0] border-t min-[640px]:pr-0 font-[500] text-[.95rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative">
+                                                                <div class="flex items-center mr-2">
+                                                                    <button
+                                                                        class="rounded-full hover:bg-gray-200 w-[48px] h-[48px] flex items-center justify-center hover:rotate-180"
+                                                                        @click.prevent="service.append = !service.append">
+                                                                        <svg focusable="false" width="24" height="24"
+                                                                            viewBox="0 0 24 24"
+                                                                            class="fill-current text-[#0096fa]">
+                                                                            <path
+                                                                                d="M12 16.41l-6.71-6.7 1.42-1.42 5.29 5.3 5.29-5.3 1.42 1.42z">
+                                                                            </path>
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div v-show="service.append &&
+                                                        (removeVietnameseTones(service.province_from).toLowerCase()).includes(removeVietnameseTones(filter.province_from?.Name ? filter.province_from?.Name : '').toLowerCase()) &&
+                                                        (removeVietnameseTones(service.district_from).toLowerCase()).includes(removeVietnameseTones(filter.district_from?.Name ? filter.district_from?.Name : '').toLowerCase()) &&
+                                                        (removeVietnameseTones(service.province_to).toLowerCase()).includes(removeVietnameseTones(filter.province_to?.Name ? filter.province_to?.Name : '').toLowerCase()) &&
+                                                        (removeVietnameseTones(service.district_to).toLowerCase()).includes(removeVietnameseTones(filter.district_to?.Name ? filter.district_to?.Name : '').toLowerCase()) &&
+                                                        ((filter.weight === '') || (filter.weight && (filter.weight >= service.weight)))"
+                                                        class="mx-auto text-[15px] text-gray-600 flex">
+                                                        <div class="w-10"></div>
+
+                                                        <div class="flex grow">
+                                                            <div class="w-[17%]"></div>
+
+                                                            <div class="grow p-[12px] pb-4 font-[600]">
+                                                                <span class="py-4">{{ service.district_from }} ,{{
+                                                                    service.province_from
+                                                                }}</span>
+                                                                <div class="py-4 font-medium">Đến</div>
+                                                                <span class="py-4">{{ service.district_to }}, {{
+                                                                    service.province_to
+                                                                }}</span>
+                                                            </div>
+
+                                                            <!-- Them vao gio -->
+                                                            <div class="hidden">
+                                                                <button @click.prevent="true"
+                                                                    class="inline-flex items-center justify-center shrink-0 flex-row py-[12px] px-[16px] m-[4px] h-[40px] w-[40px] z-10 text-white rounded-[100px] hover:bg-[#ebeff5]">
+                                                                    <span
+                                                                        class="w-[24px] h-[24px] inline-block shrink-0 relative">
+                                                                        <svg width="24" height="24" aria-hidden="true"
+                                                                            class="fill-current text-[#d83737]"
+                                                                            preserveAspectRatio="none" viewBox="0 0 24 24">
+                                                                            <path
+                                                                                d="M15.7 3c-1.4 0-2.6.4-3.7 1.2a6.1 6.1 0 0 0-8.2.8 7 7 0 0 0 0 9.2c.7 1 1.5 1.7 2.9 3l2.8 2.4.8.7c.5.5 1 .7 1.7.7.6 0 1.2-.2 1.7-.6 2-1.7 5.3-4.7 6.6-6.2a7 7 0 0 0-.1-9.2 6.2 6.2 0 0 0-4.5-2m0 1.8c1.1 0 2.3.5 3.2 1.4a5 5 0 0 1 0 6.8 88.2 88.2 0 0 1-6.9 6.2l-.6-.2-.8-.7L8 15.8c-1.4-1.2-2-2-2.8-2.8a5 5 0 0 1 0-6.8 4.5 4.5 0 0 1 6.5 0l.4.5.4-.5c1-.9 2-1.4 3.3-1.4">
+                                                                            </path>
+                                                                        </svg>
+
+                                                                        <svg width="24" height="24" aria-hidden="true"
+                                                                            class="fill-current text-[#ffd2d2] w-full h-full"
+                                                                            preserveAspectRatio="none" viewBox="0 0 24 24">
+                                                                            <path
+                                                                                d="M15.3 4.1c-1.2 0-2.3.4-3.3 1a5.6 5.6 0 00-7.4.7 6 6 0 000 8.2c.7.7 1.3 1.4 2.6 2.5l2.5 2.2.7.6a2.4 2.4 0 003.2 0c1.7-1.4 4.7-4 5.8-5.3a6 6 0 000-8.2 5.6 5.6 0 00-4.1-1.7">
+                                                                            </path>
+                                                                        </svg>
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+
+                                                            <!-- Đánh giá sao -->
+                                                            <div class="w-[12%] px-[12px] flex items-center">
+                                                                <div v-show="service?.totalCount">
+                                                                    <div :data-tooltip="service.totalCount"
+                                                                        class="tooltip text-[12px] text-[#757575] inline-flex items-center">
+                                                                        <span class="mr-[4px]">{{
+                                                                            (parseFloat(service.average_rate)).toLocaleString('vi-VN',
+                                                                                {
+                                                                                    minimumFractionDigits: 1,
+                                                                                    maximumFractionDigits: 1,
+                                                                                }) }}</span>
+                                                                        <svg width="14" height="14"
+                                                                            class="fill-current text-[#fbbc04]"
+                                                                            data-testid="star-svg"
+                                                                            preserveAspectRatio="none" viewBox="0 0 24 24">
+                                                                            <path
+                                                                                d="m12 20.6-5.86 3.23c-.7.38-1.57.1-1.94-.63-.15-.3-.2-.63-.14-.95l1.12-6.82L.43 10.6a1.55 1.55 0 0 1-.02-2.13c.22-.23.5-.39.82-.43l6.55-1 2.93-6.2a1.4 1.4 0 0 1 2.58 0l2.93 6.2 6.55 1a1.5 1.5 0 0 1 1.21 1.7c-.04.32-.19.63-.41.86l-4.75 4.83 1.12 6.82c.14.81-.39 1.59-1.17 1.73-.3.05-.63 0-.9-.15L12 20.6Z">
+                                                                            </path>
+                                                                        </svg>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div
+                                                                class="w-[18%] px-[12px] font-medium text-gray-500 flex items-center">
+                                                                <div v-show="service?.promotion_price">
+                                                                    Khuyến mãi
+                                                                    <br />
+                                                                    Giảm {{ service.promotion_price }}%
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </RouterLink>
+                                            </div>
+                                        </template>
+                                    </section>
+                                </div>
+                            </div>
+
+                            <div class="align-middle min-w-[100%] inline-block">
+
                             </div>
                         </div>
                     </div>
@@ -778,18 +994,10 @@ import getTime from 'date-fns/getTime'
 import { getServices, getInfoReviews } from "@/services/service.service";
 import { getPromotions } from "@/services/promotion.service";
 import { getAddressForCreateOrder } from "@/services/address.service";
-import { FilterMatchMode, FilterOperator } from 'primevue/api';
 // toast
 import { useToast } from "vue-toastification";
 // Get toast interface
 const toast = useToast();
-
-const service_dt_user = ref();
-
-const filters = ref({
-    'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
-    service_id: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
-});
 
 // route
 import { useRouter } from 'vue-router'
@@ -1245,31 +1453,28 @@ const priceFilterHandle = async (selected) => {
         // Nếu bộ lọc price không hoạt động
         if (selected.name === priceFilters.value[0].name) {
             services.value = result;
+
             filterServices.value = services.value;
-            changeDistrictFrom();
-            changeDistrictTo();
             return;
         } else {
             services.value = priceFilter(selected, result, priceFilters.value);
+
             filterServices.value = services.value;
-            changeDistrictFrom();
-            changeDistrictTo();
         }
     }
     else {
         // Nếu bộ lọc price không hoạt động
         if (selected.name === priceFilters.value[0].name) {
             services.value = rootServices.value;
+
             filterServices.value = services.value;
-            changeDistrictFrom();
-            changeDistrictTo();
             return;
         } else {
             services.value = priceFilter(selected, rootServices.value, priceFilters.value);
+
             filterServices.value = services.value;
-            changeDistrictFrom();
-            changeDistrictTo();
         }
+
     }
 };
 
@@ -1299,29 +1504,25 @@ const timeFilterHandle = async (selected) => {
         // Nếu bộ lọc time không hoạt động
         if (selected.name === timeFilters.value[0].name) {
             services.value = result;
+
             filterServices.value = services.value;
-            changeDistrictFrom();
-            changeDistrictTo();
             return;
         } else {
             services.value = timeFilter(selected, result, timeFilters.value);
+
             filterServices.value = services.value;
-            changeDistrictFrom();
-            changeDistrictTo();
         }
     }
     else {
         if (selected.name === timeFilters.value[0].name) {
             services.value = rootServices.value;
+
             filterServices.value = services.value;
-            changeDistrictFrom();
-            changeDistrictTo();
             return;
         } else {
             services.value = timeFilter(selected, rootServices.value, timeFilters.value);
+
             filterServices.value = services.value;
-            changeDistrictFrom();
-            changeDistrictTo();
         }
     }
 };
@@ -1394,11 +1595,17 @@ const getServicesAxios = async () => {
     if (data) {
         // console.log(data);
         services.value = data;
+        rootServices.value = data;
         let tempFrom = [];
         let tempTo = [];
         for (let i = 0; data.length > i; i++) {
             services.value[i].append = false;
             services.value[i].isInCompareArray = false;
+
+            // Tao services root
+            rootServices.value[i].append = false;
+            rootServices.value[i].isInCompareArray = false;
+
             // Lấy dữ liệu cho autocomplete input location - 
             address.value.forEach(element => {
                 // type from
@@ -1407,6 +1614,7 @@ const getServicesAxios = async () => {
                     tempFrom.push(element.Name)
                     // console.log(element);
                 }
+
                 // type to
                 if (services.value[i].province_to === element.Name && !tempTo.includes(element.Name)) {
                     provinceDataTo.value.push(element);
@@ -1415,10 +1623,15 @@ const getServicesAxios = async () => {
                 }
             });
         }
-        // Lấy thông tin promotion
+
+        filterServices.value = services.value;
+
+        await getInfoReviewsAxios();
         await getPromotionsAxios();
+
         // Load ok
         isLoading.value = false;
+
         // puhs data tu localhost neu co
         changeCheckBoxCompare();
     }
@@ -1433,9 +1646,9 @@ const getAddressForCreateOrderAxios = async () => {
     const { data, error } = await getAddressForCreateOrder();
 
     if (data) {
-        // console.log(data);        
+        // console.log(data);
+        getServicesAxios();
         address.value = data;
-        await getServicesAxios();
     }
 
     if (error) {
@@ -1448,6 +1661,14 @@ const getPromotionsAxios = async () => {
 
     if (data) {
         // console.log(data);
+        for (let i = 0; rootServices.value.length > i; i++) {
+            for (let j = 0; data.length > j; j++) {
+                if (rootServices.value[i].service_id === data[j].service_id && getTime(new Date()) >= getTime(new Date(data[j].start)) && getTime(new Date()) < getTime(new Date(data[j].end))) {
+                    rootServices.value[i].promotion_price = data[j].price;
+                }
+            }
+        }
+
         for (let i = 0; services.value.length > i; i++) {
             for (let j = 0; data.length > j; j++) {
                 if (services.value[i].service_id === data[j].service_id && getTime(new Date()) >= getTime(new Date(data[j].start)) && getTime(new Date()) < getTime(new Date(data[j].end))) {
@@ -1455,32 +1676,10 @@ const getPromotionsAxios = async () => {
                 }
             }
         }
-        // Lấy thông tin review
-        await getInfoReviewsAxios();
-    }
 
-    if (error) {
-        services.value = JSON.stringify(error, null, 2);
-    }
-};
-
-const getInfoReviewsAxios = async () => {
-    const { data, error } = await getInfoReviews();
-
-    if (data) {
-        // console.log(data);
-        for (let i = 0; services.value.length > i; i++) {
-            for (let j = 0; data.length > j; j++) {
-                if (services.value[i].service_id === data[j].service_id) {
-                    services.value[i].average_rate = data[j].average_rate;
-                    services.value[i].totalCount = data[j].totalCount;
-                }
-            }
-        }
-        // Tao rootServices và filterServices
         filterServices.value = services.value;
-        rootServices.value = services.value;
-        console.log(services.value);
+
+        // console.log(services.value);
     }
 
     if (error) {
@@ -1492,6 +1691,34 @@ onBeforeMount(() => {
     // run function
     getAddressForCreateOrderAxios();
 })
+
+
+const getInfoReviewsAxios = async () => {
+    const { data, error } = await getInfoReviews();
+
+    if (data) {
+        // console.log(data);
+        for (let i = 0; services.value.length > i; i++) {
+            for (let j = 0; data.length > j; j++) {
+                if (services.value[i].service_id === data[j].service_id) {
+                    services.value[i].average_rate = data[j].average_rate;
+                    services.value[i].totalCount = data[j].totalCount;
+
+                    // Tao services root
+                    rootServices.value[i].average_rate = data[j].average_rate;
+                    rootServices.value[i].totalCount = data[j].totalCount;
+                }
+            }
+        }
+        // console.log(services.value);
+
+        filterServices.value = services.value;
+    }
+
+    if (error) {
+        services.value = JSON.stringify(error, null, 2);
+    }
+};
 </script>
 
 <style>
