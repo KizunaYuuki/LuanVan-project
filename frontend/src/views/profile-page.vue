@@ -87,6 +87,7 @@ const getUserByEmailAxios = async (user) => {
         const { data, error } = await createUser(accessToken, userData);
         if (data) {
             // console.log(data);
+            userDataMySQL.value = data;
         }
     }
 
