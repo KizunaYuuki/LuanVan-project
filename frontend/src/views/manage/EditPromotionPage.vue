@@ -11,4 +11,19 @@ import EditPromotionForm from '../../components/manage/form/EditPromotionForm.vu
 const props = defineProps({
     promotion_id: '' // Promotion Id
 })
+// Check role
+import { useAuth0 } from "@auth0/auth0-vue";
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const { isAuthenticated } = useAuth0();
+const { user } = useAuth0();
+if (isAuthenticated) {
+    // console.log(user.role);
+    if (user.value.role) {
+        // console.log(user);
+    }
+    else {
+        router.push('/');
+    }
+}
 </script>
