@@ -5,15 +5,24 @@ const {
     getProviders,
     getProviderById,
     deleteProviderById,
-    createProviders } = require("../controllers/providers.controller.js");
+    createProviders,
+    updateProvidersById } = require("../controllers/providers.controller.js");
 
 const providersRouter = express.Router();
 
 // Tạo providers
 providersRouter.post("/", validateAccessToken, async (req, res) => {
-    const { name, phone, email, address, image_url } = req.body;
-    const providers = await createProviders(name, phone, email, address, image_url);
-    res.status(201).json(providers);
+    const { name, phone, email, address, image, } = req.body;
+    const result = await createProviders(name, phone, email, address, image,);
+    res.status(201).json(result);
+});
+
+// Update mot provider theo id
+providersRouter.put("/:id", validateAccessToken, async (req, res) => {
+    const id = req.params.id;
+    const { name, phone, email, address, image } = req.body;
+    const result = await updateProvidersById(name, phone, email, address, image, id);
+    res.status(200).json(result);
 });
 
 // Lấy tất cả providers

@@ -16,6 +16,20 @@ async function getProviderById(id) {
     return rows[0]
 }
 
+// Cap nhat mot providers theo id
+async function updateProvidersById(name, phone, email, address, image, id) {
+    try {
+        const [rows] = await pool.query(`
+        UPDATE providers
+        SET name = ?, phone = ?, email = ?, address = ?, image = ?
+        WHERE id = ?
+        `, [name, phone, email, address, image, id])
+        return "Cập nhật Nhà cung cấp thành công"
+    } catch (error) {
+        return error;
+    }
+}
+
 // Xoa mot providers theo id
 async function deleteProviderById(id) {
     try {
@@ -31,11 +45,11 @@ async function deleteProviderById(id) {
 }
 
 // Tao providers
-async function createProviders(name, phone, email, address, image_url) {
+async function createProviders(name, phone, email, address, image) {
     const [result] = await pool.query(`
-    INSERT INTO providers (name, phone, email, address, image_url)
+    INSERT INTO providers (name, phone, email, address, image)
     VALUES (?, ?, ?, ?, ?)
-    `, [name, phone, email, address, image_url])
+    `, [name, phone, email, address, image])
     const id = result.insertId;
     return getProviderById(id);
 }
@@ -44,5 +58,6 @@ module.exports = {
     getProviders,
     getProviderById,
     deleteProviderById,
-    createProviders
+    createProviders,
+    updateProvidersById
 };

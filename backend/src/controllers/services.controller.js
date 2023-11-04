@@ -24,7 +24,8 @@ async function getServices() {
     SELECT services.id as service_id, services.name as service_name, services.delivery_date, services.delivery_max_time, services.delivery_min_time, services.weight, services.price, services.created,
     providers.id as provider_id, providers.name as provider_name, providers.image,
     location_from.domain as domain_from, location_from.province as province_from, location_from.district as district_from,
-    location_to.domain as domain_to, location_to.province as province_to, location_to.district as district_to
+    location_to.domain as domain_to, location_to.province as province_to, location_to.district as district_to,
+    service_types.name as service_types_name
     FROM services
     JOIN service_types ON services.service_type_id = service_types.id
     JOIN providers ON service_types.providers_id = providers.id

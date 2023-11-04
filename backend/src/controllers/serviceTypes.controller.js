@@ -27,13 +27,25 @@ async function getServiceTypeById(id) {
 }
 
 // Cap nhat mot service_type theo id
-async function updateServiceTypeById(basic_time, id) {
+async function updateServiceTypeById(providers_id, name, area, break_weight,
+    intra_province_min_time, intra_province_max_time,
+    inter_provincial_min_time, inter_provincial_max_time,
+    inter_domain_min_time, inter_domain_max_time,
+    intra_province_extra_price, inter_provincial_extra_price, inter_domain_extra_price, id) {
     try {
         const [rows] = await pool.query(`
     UPDATE service_types
-    SET basic_time = ?
+    SET providers_id = ?, name = ?, area = ?, break_weight = ?, 
+    intra_province_min_time = ?, intra_province_max_time = ?,
+    inter_provincial_min_time = ?, inter_provincial_max_time = ?,
+    inter_domain_min_time = ?, inter_domain_max_time = ?,
+    intra_province_extra_price = ?, inter_provincial_extra_price = ?, inter_domain_extra_price = ?
     WHERE id = ?
-    `, [basic_time, id])
+    `, [providers_id, name, area, break_weight,
+            intra_province_min_time, intra_province_max_time,
+            inter_provincial_min_time, inter_provincial_max_time,
+            inter_domain_min_time, inter_domain_max_time,
+            intra_province_extra_price, inter_provincial_extra_price, inter_domain_extra_price, id])
         return "Cập nhật Loại dịch vụ thành công"
     } catch (error) {
         return error;
@@ -55,17 +67,23 @@ async function deleteServiceTypeById(id) {
 }
 
 // Tao service_type
-async function createServiceType(providers_id, name, area, break_weight, basic_time,
-    intra_province_time, inter_provincial_time, inter_domain_time,
+async function createServiceType(providers_id, name, area, break_weight,
+    intra_province_min_time, intra_province_max_time,
+    inter_provincial_min_time, inter_provincial_max_time,
+    inter_domain_min_time, inter_domain_max_time,
     intra_province_extra_price, inter_provincial_extra_price, inter_domain_extra_price) {
     const [result] = await pool.query(`
     INSERT INTO service_types 
-    (providers_id, name, area, break_weight, basic_time, 
-    intra_province_time, inter_provincial_time, inter_domain_time,
+    (providers_id, name, area, break_weight,
+    intra_province_min_time, intra_province_max_time,
+    inter_provincial_min_time, inter_provincial_max_time,
+    inter_domain_min_time, inter_domain_max_time,
     intra_province_extra_price, inter_provincial_extra_price, inter_domain_extra_price)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `, [providers_id, name, area, break_weight, basic_time,
-        intra_province_time, inter_provincial_time, inter_domain_time,
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `, [providers_id, name, area, break_weight,
+        intra_province_min_time, intra_province_max_time,
+        inter_provincial_min_time, inter_provincial_max_time,
+        inter_domain_min_time, inter_domain_max_time,
         intra_province_extra_price, inter_provincial_extra_price, inter_domain_extra_price])
     const id = result.insertId;
     return getServiceTypeById(id);

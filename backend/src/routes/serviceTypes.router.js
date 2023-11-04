@@ -1,7 +1,7 @@
 const express = require("express");
 const { validateAccessToken } = require("../middleware/auth0.middleware.js");
 
-const { 
+const {
     getServiceTypes,
     getServiceTypesByProviderId,
     getServiceTypeById,
@@ -13,11 +13,17 @@ const serviceTypesRouter = express.Router();
 
 // Tạo service_type
 serviceTypesRouter.post("/", validateAccessToken, async (req, res) => {
-    const { providers_id, name, area, break_weight, basic_time,
-        intra_province_time, inter_provincial_time, inter_domain_time,
+    const {
+        providers_id, name, area, break_weight,
+        intra_province_min_time, intra_province_max_time,
+        inter_provincial_min_time, inter_provincial_max_time,
+        inter_domain_min_time, inter_domain_max_time,
         intra_province_extra_price, inter_provincial_extra_price, inter_domain_extra_price } = req.body;
-    const result = await createServiceType(providers_id, name, area, break_weight, basic_time,
-        intra_province_time, inter_provincial_time, inter_domain_time,
+    const result = await createServiceType(
+        providers_id, name, area, break_weight,
+        intra_province_min_time, intra_province_max_time,
+        inter_provincial_min_time, inter_provincial_max_time,
+        inter_domain_min_time, inter_domain_max_time,
         intra_province_extra_price, inter_provincial_extra_price, inter_domain_extra_price);
     res.status(201).json(result);
 });
@@ -45,8 +51,19 @@ serviceTypesRouter.get("/:id", validateAccessToken, async (req, res) => {
 // Cap nhat mot service_type theo id
 serviceTypesRouter.put("/:id", validateAccessToken, async (req, res) => {
     const id = req.params.id;
-    const { basic_time } = req.body;
-    const result = await updateServiceTypeById(basic_time, id);
+    const {
+        providers_id, name, area, break_weight,
+        intra_province_min_time, intra_province_max_time,
+        inter_provincial_min_time, inter_provincial_max_time,
+        inter_domain_min_time, inter_domain_max_time,
+        intra_province_extra_price, inter_provincial_extra_price, inter_domain_extra_price
+    } = req.body;
+    const result = await updateServiceTypeById(
+        providers_id, name, area, break_weight,
+        intra_province_min_time, intra_province_max_time,
+        inter_provincial_min_time, inter_provincial_max_time,
+        inter_domain_min_time, inter_domain_max_time,
+        intra_province_extra_price, inter_provincial_extra_price, inter_domain_extra_price, id);
     res.status(200).json(result);
 });
 
