@@ -2,9 +2,9 @@ import { callExternalApi } from "./external-api.service";
 
 const apiServerUrl = import.meta.env.VITE_API_SERVER_URL;
 
-export const getServiceTypesByProviderId = async (accessToken, provider_id) => {
+export const getServiceTypesByProviderId = async (accessToken, id) => {
     const config = {
-        url: `${apiServerUrl}/api/service-type/provider/${provider_id}`,
+        url: `${apiServerUrl}/api/service-type/provider/${id}`,
         method: "GET",
         headers: {
             "content-type": "application/json",
@@ -20,9 +20,9 @@ export const getServiceTypesByProviderId = async (accessToken, provider_id) => {
     };
 };
 
-export const getProviders = async (accessToken) => {
+export const getServiceTypes = async (accessToken) => {
     const config = {
-        url: `${apiServerUrl}/api/provider`,
+        url: `${apiServerUrl}/api/service-type`,
         method: "GET",
         headers: {
             "content-type": "application/json",
@@ -38,9 +38,9 @@ export const getProviders = async (accessToken) => {
     };
 };
 
-export const getServiceById = async (accessToken, service_id) => {
+export const getServiceTypeById = async (accessToken, id) => {
     const config = {
-        url: `${apiServerUrl}/api/service/${service_id}`,
+        url: `${apiServerUrl}/api/service-type/${id}`,
         method: "GET",
         headers: {
             "content-type": "application/json",
@@ -57,15 +57,15 @@ export const getServiceById = async (accessToken, service_id) => {
 };
 
 
-export const createService = async (accessToken, serviceData) => {
+export const createServiceType = async (accessToken, input) => {
     const config = {
-        url: `${apiServerUrl}/api/service`,
+        url: `${apiServerUrl}/api/service-type`,
         method: "POST",
         headers: {
             "content-type": "application/json",
             Authorization: `Bearer ${accessToken}`,
         },
-        data: serviceData,
+        data: input,
     };
 
     const { data, error } = await callExternalApi({ config });
@@ -76,15 +76,15 @@ export const createService = async (accessToken, serviceData) => {
     };
 };
 
-export const updateService = async (accessToken, serviceData, service_id) => {
+export const updateServiceType = async (accessToken, input, id) => {
     const config = {
-        url: `${apiServerUrl}/api/service/${service_id}`,
+        url: `${apiServerUrl}/api/service-type/${id}`,
         method: "PUT",
         headers: {
             "content-type": "application/json",
             Authorization: `Bearer ${accessToken}`,
         },
-        data: serviceData,
+        data: input,
     };
 
     const { data, error } = await callExternalApi({ config });
@@ -95,9 +95,9 @@ export const updateService = async (accessToken, serviceData, service_id) => {
     };
 };
 
-export const deteleService = async (accessToken, service_id) => {
+export const deteleServiceType = async (accessToken, id) => {
     const config = {
-        url: `${apiServerUrl}/api/service/${service_id}`,
+        url: `${apiServerUrl}/api/service-type/${id}`,
         method: "DELETE",
         headers: {
             "content-type": "application/json",

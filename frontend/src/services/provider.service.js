@@ -20,53 +20,17 @@ export const getProviders = async (accessToken) => {
     };
 };
 
-export const getServiceById = async (accessToken, service_id) => {
+
+
+export const updateProvider = async (accessToken, formData, id) => {
     const config = {
-        url: `${apiServerUrl}/api/service/${service_id}`,
-        method: "GET",
-        headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-        },
-    };
-
-    const { data, error } = await callExternalApi({ config });
-
-    return {
-        data: data || null,
-        error,
-    };
-};
-
-
-export const createService = async (accessToken, serviceData) => {
-    const config = {
-        url: `${apiServerUrl}/api/service`,
-        method: "POST",
-        headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-        },
-        data: serviceData,
-    };
-
-    const { data, error } = await callExternalApi({ config });
-
-    return {
-        data: data || null,
-        error,
-    };
-};
-
-export const updateService = async (accessToken, serviceData, service_id) => {
-    const config = {
-        url: `${apiServerUrl}/api/service/${service_id}`,
+        url: `${apiServerUrl}/api/provider/${id}`,
         method: "PUT",
         headers: {
             "content-type": "application/json",
             Authorization: `Bearer ${accessToken}`,
         },
-        data: serviceData,
+        data: formData,
     };
 
     const { data, error } = await callExternalApi({ config });
@@ -77,14 +41,33 @@ export const updateService = async (accessToken, serviceData, service_id) => {
     };
 };
 
-export const deteleService = async (accessToken, service_id) => {
+export const deteleProvider = async (accessToken, id) => {
     const config = {
-        url: `${apiServerUrl}/api/service/${service_id}`,
+        url: `${apiServerUrl}/api/provider/${id}`,
         method: "DELETE",
         headers: {
             "content-type": "application/json",
             Authorization: `Bearer ${accessToken}`,
         }
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
+
+export const createProvider = async (accessToken, providerData) => {
+    const config = {
+        url: `${apiServerUrl}/api/provider`,
+        method: "POST",
+        headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+        },
+        data: providerData,
     };
 
     const { data, error } = await callExternalApi({ config });

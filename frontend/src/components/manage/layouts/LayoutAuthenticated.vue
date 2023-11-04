@@ -1,36 +1,32 @@
 <template>
     <div class="overflow-hidden lg:overflow-visible">
-        <div
-            class="xl:pl-60 ml-60 lg:ml-0 min-h-screen w-screen transition-position lg:w-auto">
-            <nav class="flex lg:items-stretch xl:mx-auto sticky top-0 bg-white z-[41] shadow-md shadow-[#0096fa2e]">
-                <div class="flex flex-1 items-stretch h-14 xl:pl-[76px]">
-                    <div
-                        class="flex my-2 mx-3 navbar-item-label items-center cursor-pointer">
-                        <div class="relative">
-                            <input placeholder="Tìm kiếm" type="text"
-                                class="px-4 shadow-inner shadow-[#0096fa2e] py-2 max-w-full border hover:border-gray-400 outline-none rounded w-full bg-transparent">
-                        </div>
+        <nav class="xl:pl-60 ml-60 lg:ml-0 flex lg:items-stretch xl:mx-auto bg-white z-[40] shadow-md shadow-[#0096fa2e]">
+            <div class="flex flex-1 items-stretch h-14 xl:pl-[76px]">
+                <div class="flex my-2 mx-3 navbar-item-label items-center cursor-pointer">
+                    <div class="relative">
+                        <input placeholder="Tìm kiếm" type="text"
+                            class="px-4 shadow-inner shadow-[#0096fa2e] py-1 max-w-full border hover:border-gray-400 outline-none rounded w-full bg-transparent">
                     </div>
                 </div>
+            </div>
 
-                <div
-                    class="xl:pr-[76px] max-h-screen-menu overflow-y-auto lg:overflow-visible absolute w-screen top-14 left-0 bg-gray-50 shadow-lg lg:w-auto lg:flex lg:static lg:shadow-none hidden">
-                    <div
-                        class="block lg:flex items-center relative cursor-pointer navbar-item-label lg:py-2 lg:px-3">
-                        <div
-                            class="flex items-center bg-gray-100 lg:bg-transparent p-3 lg:p-0">
-                            <div class="w-6 h-6 mr-3 inline-flex">
-                                <img :src="user.picture" alt="Profile" class="profile__avatar w-[24px] h-[24px]" />
-                            </div>
-
-                            <span class="px-2 transition-colors">{{ user.name }}</span>
+            <div
+                class="xl:pr-[76px] max-h-screen-menu overflow-y-auto lg:overflow-visible absolute w-screen top-14 left-0 shadow-lg lg:w-auto lg:flex lg:static lg:shadow-none hidden">
+                <div class="block lg:flex items-center relative cursor-pointer navbar-item-label lg:py-2 lg:px-3">
+                    <div class="flex items-center lg:bg-transparent p-3 lg:p-0">
+                        <div class="w-6 h-6 mr-3 inline-flex">
+                            <img :src="user.picture" alt="Profile" class="profile__avatar w-[24px] h-[24px]" />
                         </div>
+
+                        <span class="px-2 font-[600] text-[18px] transition-colors">{{ user.name }}</span>
                     </div>
                 </div>
-            </nav>
+            </div>
+        </nav>
 
+        <div class="xl:pl-60 ml-60 lg:ml-0 min-h-screen w-screen z-[41] transition-position lg:w-auto">
             <aside id="aside"
-                class="lg:py-2 lg:pl-2 w-60 fixed flex z-40 top-0 h-screen transition-position overflow-hidden left-0 lg:hidden xl:flex">
+                class="lg:py-2 lg:pl-2 w-60 fixed flex z-[41] top-0 h-screen transition-position overflow-hidden left-0 lg:hidden xl:flex">
                 <div class="aside lg:rounded-2xl flex-1 flex flex-col overflow-hidden">
                     <div
                         class="hover:text-[#0096fa] hover:bg-slate-300 aside-brand flex flex-row items-center justify-between bg-gray-500 text-white">
@@ -50,12 +46,10 @@
                     </div>
 
                     <!-- link -->
-                    <div
-                        class="flex-1 overflow-y-auto overflow-x-hidden aside-scrollbars text-[#000000cc] bg-white">
+                    <div class="flex-1 overflow-y-auto overflow-x-hidden aside-scrollbars text-[#000000cc] bg-white">
                         <ul>
                             <li class="hover:text-[#0096fa] hover:bg-slate-100">
-                                <RouterLink to="/management/order"
-                                    class="flex cursor-pointer py-3 aside-menu-item">
+                                <RouterLink to="/management/order" class="flex cursor-pointer py-3 aside-menu-item">
                                     <span class="inline-flex justify-center items-center w-16 h-6 flex-none">
                                         <svg viewBox="0 0 24 24" width="18" height="18" class="inline-block">
                                             <path fill="currentColor"
@@ -69,8 +63,7 @@
                             </li>
 
                             <li class="hover:text-[#0096fa] hover:bg-slate-100">
-                                <RouterLink to="/management/service"
-                                    class="flex cursor-pointer py-3 aside-menu-item">
+                                <RouterLink to="/management/service" class="flex cursor-pointer py-3 aside-menu-item">
                                     <span class="inline-flex justify-center items-center w-16 h-6 flex-none">
                                         <svg viewBox="0 0 24 24" width="18" height="18" class="inline-block">
                                             <path fill="currentColor"
@@ -84,8 +77,7 @@
                             </li>
 
                             <li class="hover:text-[#0096fa] hover:bg-slate-100">
-                                <RouterLink to="/management/promotion"
-                                    class="flex cursor-pointer py-3 aside-menu-item">
+                                <RouterLink to="/management/promotion" class="flex cursor-pointer py-3 aside-menu-item">
                                     <span class="inline-flex justify-center items-center w-16 h-6 flex-none">
                                         <svg viewBox="0 0 24 24" width="18" height="18" class="inline-block">
                                             <path fill="currentColor"
@@ -98,8 +90,7 @@
                             </li>
 
                             <li class="hover:text-[#0096fa] hover:bg-slate-100">
-                                <RouterLink to="/management/user"
-                                    class="flex cursor-pointer py-3 aside-menu-item">
+                                <RouterLink to="/management/user" class="flex cursor-pointer py-3 aside-menu-item">
                                     <span class="inline-flex justify-center items-center w-16 h-6 flex-none">
                                         <svg width="18" height="18" viewBox="0 0 48 48" fill="currentColor"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -116,6 +107,45 @@
                                         </svg>
                                     </span>
                                     <span class="grow text-ellipsis line-clamp-1 pr-12">Người dùng</span>
+                                </RouterLink>
+                            </li>
+
+                            <li class="hover:text-[#0096fa] hover:bg-slate-100">
+                                <RouterLink to="/management/provider" class="flex cursor-pointer py-3 aside-menu-item">
+                                    <span class="inline-flex justify-center items-center w-16 h-6 flex-none">
+                                        <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.016a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72m-13.5 8.65h3.75a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H6.75a.75.75 0 00-.75.75v3.75c0 .415.336.75.75.75z" />
+                                        </svg>
+                                    </span>
+                                    <span class="grow text-ellipsis line-clamp-1 pr-12">Nhà cung cấp</span>
+                                </RouterLink>
+                            </li>
+
+                            <li class="hover:text-[#0096fa] hover:bg-slate-100">
+                                <RouterLink to="/management/service-type" class="flex cursor-pointer py-3 aside-menu-item">
+                                    <span class="inline-flex justify-center items-center w-16 h-6 flex-none">
+                                        <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                        </svg>
+                                    </span>
+                                    <span class="grow text-ellipsis line-clamp-1 pr-12">Loại dịch vụ</span>
+                                </RouterLink>
+                            </li>
+
+                            <li class="hover:text-[#0096fa] hover:bg-slate-100">
+                                <RouterLink to="/management/provider" class="flex cursor-pointer py-3 aside-menu-item">
+                                    <span class="inline-flex justify-center items-center w-16 h-6 flex-none">
+                                        <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0112 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5" />
+                                        </svg>
+                                    </span>
+                                    <span class="grow text-ellipsis line-clamp-1 pr-12">Bảng giá</span>
                                 </RouterLink>
                             </li>
                         </ul>
