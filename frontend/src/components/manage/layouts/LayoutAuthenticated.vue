@@ -137,7 +137,7 @@
                             </li>
 
                             <li class="hover:text-[#0096fa] hover:bg-slate-100">
-                                <RouterLink to="/management/provider" class="flex cursor-pointer py-3 aside-menu-item">
+                                <RouterLink to="/management/price-list" class="flex cursor-pointer py-3 aside-menu-item">
                                     <span class="inline-flex justify-center items-center w-16 h-6 flex-none">
                                         <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" fill="none"
                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

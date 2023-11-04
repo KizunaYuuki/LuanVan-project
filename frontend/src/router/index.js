@@ -47,17 +47,17 @@ const router = createRouter({
                 title: "Chi tiết dịch vụ",
             }
         },
-        {
-            path: '/about',
-            name: 'about',
-            // route level code-splitting
-            // this generates a separate chunk (About.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
-            component: () => import('../views/AboutView.vue'),
-            meta: {
-                title: "Thông tin về chúng tôi",
-            }
-        },
+        // {
+        //     path: '/about',
+        //     name: 'about',
+        //     // route level code-splitting
+        //     // this generates a separate chunk (About.[hash].js) for this route
+        //     // which is lazy-loaded when the route is visited.
+        //     component: () => import('../views/AboutView.vue'),
+        //     meta: {
+        //         title: "Thông tin về chúng tôi",
+        //     }
+        // },
         {
             path: '/track',
             name: 'track',
@@ -75,16 +75,16 @@ const router = createRouter({
                 title: "So sánh dịch vụ",
             }
         },
-        {
-            path: '/support',
-            name: 'support',
-            // component: () => import('../views/AboutView.vue')
-        },
-        {
-            path: '/moving',
-            name: 'moving',
-            // component: () => import('../views/AboutView.vue')
-        },
+        // {
+        //     path: '/support',
+        //     name: 'support',
+        //     // component: () => import('../views/AboutView.vue')
+        // },
+        // {
+        //     path: '/moving',
+        //     name: 'moving',
+        //     // component: () => import('../views/AboutView.vue')
+        // },
         {
             path: "/profile",
             name: "profile",
@@ -200,11 +200,85 @@ const router = createRouter({
             }
         },
         {
-            path: "/admin",
-            name: "admin",
-            component: AdminPage,
+            path: '/management/provider',
+            name: 'Provider - Management',
+            component: () => import('../views/manage/ProviderManage.vue'),
             beforeEnter: authGuard,
+            meta: {
+                title: "Quản lý Nhà cung cấp",
+            }
         },
+        {
+            path: '/management/provider/new',
+            name: 'Add Provider - Management',
+            component: () => import('../views/manage/NewProviderPage.vue'),
+            beforeEnter: authGuard,
+            meta: {
+                title: "Thêm Nhà cung cấp",
+            }
+        },
+        {
+            path: '/management/service-type',
+            name: 'Service Type - Management',
+            component: () => import('../views/manage/ServiceTypeManage.vue'),
+            beforeEnter: authGuard,
+            meta: {
+                title: "Quản lý Loại dịch vụ",
+            }
+        },
+        {
+            path: '/management/service-type/new',
+            name: 'Add Service Type - Management',
+            component: () => import('../views/manage/NewServiceTypePage.vue'),
+            beforeEnter: authGuard,
+            meta: {
+                title: "Thêm Loại dịch vụ mới",
+            }
+        },
+        {
+            path: '/management/service-type/edit/:id',
+            name: 'Edit Service Type - Management',
+            component: () => import('../views/manage/EditServiceTypePage.vue'),
+            props: true,
+            beforeEnter: authGuard,
+            meta: {
+                title: "Cập nhật Loại dịch vụ",
+            }
+        },
+        {
+            path: '/management/price-list',
+            name: 'Price list - Management',
+            component: () => import('../views/manage/PriceListManage.vue'),
+            beforeEnter: authGuard,
+            meta: {
+                title: "Quản lý Bảng giá",
+            }
+        },
+        {
+            path: '/management/price-list/new',
+            name: 'Add Price list - Management',
+            component: () => import('../views/manage/NewPriceListPage.vue'),
+            beforeEnter: authGuard,
+            meta: {
+                title: "Thêm Bảng giá",
+            }
+        },
+        {
+            path: '/management/price-list/edit/:id',
+            name: 'Edit Price list - Management',
+            component: () => import('../views/manage/EditPriceListPage.vue'),
+            props: true,
+            beforeEnter: authGuard,
+            meta: {
+                title: "Cập nhật Bảng giá",
+            }
+        },
+        // {
+        //     path: "/admin",
+        //     name: "admin",
+        //     component: AdminPage,
+        //     beforeEnter: authGuard,
+        // },
         {
             path: "/callback",
             name: "callback",
