@@ -34,7 +34,7 @@ async function updatePriceListById(service_type_id, start_weight, end_weight, ba
         const [rows] = await pool.query(`
     UPDATE price_lists
     SET service_type_id = ?, start_weight = ?, end_weight = ?, basic_price = ?, special_price = ?, 
-    intra_province_price = ?, intra_province_price = ?, intra_province_price = ?
+    intra_province_price = ?, inter_provincial_price = ?, inter_domain_price = ?
     WHERE id = ?
     `, [service_type_id, start_weight, end_weight, basic_price, special_price,
             intra_province_price, inter_provincial_price, inter_domain_price, id])
