@@ -1,7 +1,6 @@
 CREATE DATABASE freight_service_app;
 USE freight_service_app;
 
-
 CREATE TABLE users (
   id INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
@@ -579,7 +578,7 @@ VALUES
 -- (93, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'TO'),
 -- (94, 'Miền Trung', 'Thành phố Đà Nẵng', 'Quận Sơn Trà', 'FROM'),
 -- (94, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'TO'),
--- (85, 'Miền Trung', 'Thành phố Đà Nẵng', 'Quận Sơn Trà', 'FROM'),
+-- (95, 'Miền Trung', 'Thành phố Đà Nẵng', 'Quận Sơn Trà', 'FROM'),
 -- (95, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'TO'),
 -- (96, 'Miền Trung', 'Thành phố Đà Nẵng', 'Quận Sơn Trà', 'FROM'),
 -- (96, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'TO'),
@@ -1336,7 +1335,7 @@ VALUES
 (4, 'Chuyển phát Nhanh - DHL EXPRESS', '', '1 - 2 ngày', 48, 24, 2500, 21000),
 
 -- (292, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Huyện Phong Điền', 'FROM'),
--- (282, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'TO'),
+-- (292, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'TO'),
 -- (293, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Huyện Phong Điền', 'FROM'),
 -- (293, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'TO'),
 -- (294, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Huyện Phong Điền', 'FROM'),
@@ -2599,7 +2598,7 @@ VALUES
 (93, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'TO'),
 (94, 'Miền Trung', 'Thành phố Đà Nẵng', 'Quận Sơn Trà', 'FROM'),
 (94, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'TO'),
-(85, 'Miền Trung', 'Thành phố Đà Nẵng', 'Quận Sơn Trà', 'FROM'),
+(95, 'Miền Trung', 'Thành phố Đà Nẵng', 'Quận Sơn Trà', 'FROM'),
 (95, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'TO'),
 (96, 'Miền Trung', 'Thành phố Đà Nẵng', 'Quận Sơn Trà', 'FROM'),
 (96, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'TO'),
@@ -3062,7 +3061,7 @@ VALUES
 (291, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Huyện Phong Điền', 'TO'),
 
 (292, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Huyện Phong Điền', 'FROM'),
-(282, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'TO'),
+(292, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'TO'),
 (293, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Huyện Phong Điền', 'FROM'),
 (293, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'TO'),
 (294, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Huyện Phong Điền', 'FROM'),
@@ -3750,12 +3749,30 @@ VALUES
 
 INSERT INTO orders (user_id, status_id, service_id, payment_id, total_amount, email, phone, user_name, created)
 VALUES 
-(1, 1, 1, 1, 800000, 'me@gmail.com', '0332006710', 'Tim', '2023-10-15'),
-(1, 2, 1, 1, 800000, 'me@gmail.com', '0332006710', 'Tim', '2023-10-01'),
-(3, 3, 1, 1, 800000, 'abc@gmail.com', '0332006710', 'Tim', '2023-10-06'),
-(3, 4, 1, 1, 800000, 'abc@gmail.com', '0332006710', 'Tim', '2023-10-17'),
-(2, 2, 1, 2, 5600000, 'me@gmail.com', '0332006710', 'Tim', '2023-10-11'),
-(2, 1, 2, 1, 5800000, 'time@gmail.com', '0332006710', 'Tim', '2023-10-12');
+(1, 1, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 1 DAY)),
+(2, 1, 8, 1, 29000, 'time@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 2 DAY)),
+ 
+(1, 2, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY)),
+(2, 2, 6, 2, 25000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 4 DAY)),
+
+(4, 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 0 DAY)),
+(3, 3, 3, 1, 13000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 1 DAY)),
+(2, 3, 8, 1, 29000, 'time@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 2 DAY)),
+(1, 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY)),
+(3, 3, 5, 1, 21000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 4 DAY)),
+(1, 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 5 DAY)),
+(2, 3, 6, 2, 25000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 6 DAY)),
+(4, 3, 3, 1, 13000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 7 DAY)),
+(5, 3, 8, 1, 29000, 'time@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 8 DAY)),
+(4, 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 9 DAY)),
+(4, 3, 5, 1, 21000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 10 DAY)),
+(5, 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 11 DAY)),
+(5, 3, 6, 2, 25000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 12 DAY)),
+
+(1, 4, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY)),
+(3, 4, 5, 1, 21000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY));
+
+
 
 INSERT INTO address (order_id, province, district, ward, type)
 VALUES 
@@ -3764,7 +3781,28 @@ VALUES
 (2, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Nguyễn Trung Trực', 'FROM'), 
 (2, 'Thành phố Hà Nội', 'Quận Hoàn Kiếm', 'Phường Đồng Xuân', 'TO'), 
 (3, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Nguyễn Trung Trực', 'FROM'), 
-(3, 'Thành phố Hà Nội', 'Quận Hoàn Kiếm', 'Phường Đồng Xuân', 'TO');
+(3, 'Thành phố Hà Nội', 'Quận Hoàn Kiếm', 'Phường Đồng Xuân', 'TO'),
+
+(4, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
+(4, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
+(5, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
+(5, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
+(6, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
+(6, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
+
+(7, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
+(7, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
+(8, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
+(8, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
+(9, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
+(9, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
+
+(10, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
+(10, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
+(11, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
+(11, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
+(12, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
+(12, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO');
 
 INSERT INTO packages (order_id, lenght, width, height, weight, price, description)
 VALUES 
@@ -3773,7 +3811,20 @@ VALUES
 (3, 20, 80, 10, 5000, 300000, 'Hoá Chất'),
 (4, 20, 80, 10, 5000, 400000, 'Hoá Chất'),
 (5, 20, 80, 10, 5000, 3090000, 'Hoá Chất'),
-(6, 20, 80, 10, 5000, 4005000, 'Hoá Chất');
+(6, 20, 80, 10, 5000, 4005000, 'Hoá Chất'),
+(7, 20, 80, 10, 2000, 100000, 'Quần Áo'),
+(8, 20, 80, 10, 3000, 200000, 'Nông Sản'),
+(9, 20, 80, 10, 5000, 300000, 'Hoá Chất'),
+(10, 20, 80, 10, 5000, 400000, 'Hoá Chất'),
+(11, 20, 80, 10, 5000, 3090000, 'Hoá Chất'),
+(12, 20, 80, 10, 5000, 4005000, 'Hoá Chất'),
+(13, 20, 80, 10, 5000, 4005000, 'Hoá Chất'),
+(14, 20, 80, 10, 2000, 100000, 'Quần Áo'),
+(15, 20, 80, 10, 3000, 200000, 'Nông Sản'),
+(16, 20, 80, 10, 5000, 300000, 'Hoá Chất'),
+(17, 20, 80, 10, 5000, 400000, 'Hoá Chất'),
+(18, 20, 80, 10, 5000, 3090000, 'Hoá Chất'),
+(19, 20, 80, 10, 5000, 4005000, 'Hoá Chất');
 
 INSERT INTO reviews (user_id, service_id, rate, comment)
 VALUES 
