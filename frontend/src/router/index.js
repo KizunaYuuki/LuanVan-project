@@ -15,7 +15,8 @@ const router = createRouter({
         {
             path: '/',
             name: 'Home',
-            component: HomeView,
+            // component: HomeView,
+            component: () => import('../views/TestMain.vue'),
             meta: {
                 title: "Trang chủ",
             }
@@ -107,14 +108,14 @@ const router = createRouter({
         },
 
         // Các trang của Management
-        {
-            path: '/testing',
-            name: 'test',
-            component: () => import('../views/TestMain.vue'),
-            meta: {
-                title: "test",
-            }
-        },
+        // {
+        //     path: '/testing',
+        //     name: 'test',
+        //     component: () => import('../views/TestMain.vue'),
+        //     meta: {
+        //         title: "test",
+        //     }
+        // },
         {
             path: '/management',
             name: 'Home Page - Management',
