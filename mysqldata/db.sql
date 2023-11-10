@@ -254,7 +254,7 @@ VALUES
 INSERT INTO services (service_type_id, name, description, delivery_date, delivery_max_time, delivery_min_time, weight, price)
 VALUES 
 -- Viettel Chuyen phat nhanh - Noi tinh. Thành phố Hà Nội, Quận Cầu Giấy -> Thành phố Hà Nội, Quận Hoàn Kiếm
-(1, 'Chuyển phát Nhanh - VIETTEL POST', '', '12h - 24h', 24, 12, 50, 11000),
+(1, 'Chuyển phát Nhanh - VIETTEL POST', 'Chuyển phát nhanh: Thời gian vận chuyển từ 2-3 ngày đối với các tỉnh thành trong cùng khu vực, 3-5 ngày đối với các tỉnh thành khác khu vực.', '12h - 24h', 24, 12, 50, 11000),
 (1, 'Chuyển phát Nhanh - VIETTEL POST', '', '12h - 24h', 24, 12, 100, 11000),
 (1, 'Chuyển phát Nhanh - VIETTEL POST', '', '12h - 24h', 24, 12, 250, 13000),
 (1, 'Chuyển phát Nhanh - VIETTEL POST', '', '12h - 24h', 24, 12, 500, 16000),

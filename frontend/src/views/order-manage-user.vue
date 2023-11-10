@@ -106,7 +106,7 @@
                                     <table
                                         class="min-w-[100%] indent-0 border-collapse bg-[#edeff6] border-x border-[#d3e2fd]">
                                         <thead>
-                                            <tr class="border-b-[4px] border-[white] text-slate-500 hover:text-[#5080db]">
+                                            <tr class="border-b-[0.5px] border-gray-200 text-slate-500 hover:text-[#5080db]">
                                                 <th scope="col"
                                                     class="pl-[1rem] text-[#111827] font-[600] text-[.875rem] leading-[1.25rem] text-left pr-[.75rem] py-[.875rem]">
                                                     Mã Đơn hàng</th>
@@ -134,7 +134,7 @@
 
                                         <tbody class="">
                                             <tr v-for="order in orders" :key="order.order_id"
-                                                class="mx-[4px] bg-white border-b-[4px] border-[white] hover:bg-[#e1e3e9] text-slate-500 hover:text-[#5080db]">
+                                                class="mx-[4px] bg-white border-b-[0.5px] border-gray-200 hover:bg-[#e1e3e9] text-slate-500 hover:text-[#5080db]">
                                                 <td
                                                     class="pl-[1rem] font-[500] text-[.875rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
                                                     {{ order.order_id }}</td>

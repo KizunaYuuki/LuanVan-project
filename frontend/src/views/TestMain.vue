@@ -477,7 +477,7 @@
                 <div class="mx-auto max-w-5xl lg:block hidden">
                     <!-- TITLE -->
                     <div
-                        class="flex items-baseline lg:justify-between justify-end shadow-md lg:px-[8px] lg:pb-5 lg:pt-5 pb-4 px-4 bg-[white] rounded-[8px]">
+                        class="flex items-baseline lg:justify-between justify-end shadow-md lg:px-[8px] p-1.5 bg-[white] rounded-[8px]">
                         <h1 class="text-xl font-bold tracking-tight text-gray-900 hidden lg:block">Vận chuyển hàng hoá</h1>
                         <!-- SORT AND COMPARE -->
                         <div class="flex items-center">
@@ -595,7 +595,7 @@
 
                                     <DataView :value="filtered" paginator :rows="5">
                                         <template #list="slotProps">
-                                            <div class="hover:shadow-md hover:shadow-sky-200 hover:bg-[#0096fa0d] border-t-0 border-b-0 border-l border-r-0  hover:border-l-[#d30038]"
+                                            <div class="hover:shadow-md hover:shadow-sky-200 hover:bg-[#0096fa0d] border-t-0 border-b-0 border-l-2 border-r-0  hover:border-l-[#d30038]"
                                                 :class="{ 'bg-red-50/[.6]': (slotProps.data.promotion_price) }">
                                                 <RouterLink :to="{
                                                     name: 'Service Details',
@@ -690,10 +690,10 @@
                                                             </div>
 
                                                             <div
-                                                                class="w-[6%] flex items-center justify-between border-[#dadce0] border-t min-[640px]:pr-0 font-[500] text-[.95rem] leading-[1.25rem] text-right pr-[1rem] py-[1rem] whitespace-nowrap relative">
+                                                                class="w-[6%] flex items-center justify-between border-[#dadce0] border-t min-[640px]:pr-0 font-[500] text-[.95rem] leading-[1.25rem] text-right pr-[1rem] py-[0.75rem] whitespace-nowrap relative">
                                                                 <div class="flex items-center mr-2">
                                                                     <button
-                                                                        class="rounded-full hover:bg-gray-200 w-[48px] h-[48px] flex items-center justify-center hover:rotate-180"
+                                                                        class="rounded-full hover:bg-gray-200 w-[54px] h-[54px] flex items-center justify-center"
                                                                         @click.prevent="slotProps.data.append = !slotProps.data.append">
                                                                         <svg focusable="false" width="24" height="24"
                                                                             viewBox="0 0 24 24"

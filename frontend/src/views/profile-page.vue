@@ -3,7 +3,7 @@
     <main>
         <div class="content-layout max-w-[1024px] mx-auto p-0">
             <div class="content__body">
-                <div class="profile-grid">
+                <div v-if="userDataMySQL" class="profile-grid">
                     <div class="profile__header">
                         <img :src="user.picture" alt="Profile" class="profile__avatar" />
                         <div class="profile__headline">
@@ -19,7 +19,7 @@
                         <span>Thông tin cá nhân</span>
                     </div>
 
-                    <div v-if="userDataMySQL" class="bg-white p-8">
+                    <div class="bg-white p-8">
                         <!-- <div class="px-4 sm:px-0">
                             <h3 class="text-base font-semibold leading-7 text-gray-900">Applicant Information</h3>
                             <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Personal details and application.</p>

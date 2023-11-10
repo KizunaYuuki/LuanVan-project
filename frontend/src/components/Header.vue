@@ -215,7 +215,7 @@ import LoginButton from "@/components/buttons/login-button.vue";
 import LogoutButton from "@/components/buttons/logout-button.vue";
 import SignupButton from "@/components/buttons/signup-button.vue";
 import { useAuth0 } from "@auth0/auth0-vue";
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import {
     Dialog,
     DialogPanel,
@@ -262,6 +262,9 @@ const handleLogout = () =>
         }
     });
 
+const props = defineProps({
+    addToCart: {}
+})
 // San pham trong gio hang
 const cartProducts = [
     {
@@ -372,5 +375,7 @@ onMounted(() => {
         getUserByEmailAxios(user);
     }
 })
-
+watch(props?.addToCart, async () => {
+    await getUserByEmailAxios(user);
+})
 </script>
