@@ -196,7 +196,7 @@
                                     :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem" ref="user_dt"
                                     v-model:filters="filters" filterDisplay="menu" :loading="loading"
                                     :globalFilterFields="['id', 'name', 'email',]" stateStorage="session"
-                                    stateKey="user_dt-state-session">
+                                    stateKey="user_dt-state-session" class="text-sm">
                                     <template #header>
                                         <div
                                             class="flex flex-wrap gap-2 align-items-center justify-content-between items-center justify-between">

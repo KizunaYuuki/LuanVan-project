@@ -259,7 +259,7 @@
                                         :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem"
                                         ref="dt" v-model:filters="filters" filterDisplay="menu" :loading="loading"
                                         :globalFilterFields="['order_id', 'email', 'phone', 'order_created', 'total_amount', 'status_name']"
-                                        stateStorage="session" stateKey="dt-state-session">
+                                        stateStorage="session" stateKey="dt-state-session" class="text-sm">
                                         <template #header>
                                             <div
                                                 class="flex flex-wrap gap-2 align-items-center justify-content-between items-center justify-between">
