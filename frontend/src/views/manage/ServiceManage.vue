@@ -1,6 +1,6 @@
 <template>
     <LayoutAuthenticated>
-        <div v-show="services" class="mx-auto lg:max-w-[1024px]">
+        <div v-show="services" class="mx-auto lg:max-w-[1024px] overflow-auto">
             <div class="">
                 <!-- Title -->
                 <div class="flex items-center">
@@ -188,23 +188,23 @@
                                             </span>
                                         </div>
                                     </template>
-                                    <Column field="service_id" filterField="service_id" sortable header="Service ID">
+                                    <Column class="py-2" field="service_id" filterField="service_id" sortable header="Service ID">
                                         <template #filter="{ filterModel }">
                                             <InputNumber placeholder="Nhập Service ID"
                                                 class="px-2 py-1 fo focus:shadow-none shadow-inner shadow-[#0096fa2e] border hover:border-gray-400 outline-none rounded bg-transparent"
                                                 v-model="filterModel.value" />
                                         </template>
                                     </Column>
-                                    <Column field="service_name" sortable header="Dịch vụ"></Column>
-                                    <Column field="provider_id" sortable header="Provider ID"></Column>
-                                    <Column field="provider_name" sortable header="Nhà cung cấp"></Column>
-                                    <Column field="weight" sortable header="TL tối đa" dataType="numeric"
+                                    <Column class="py-2" field="service_name" sortable header="Dịch vụ"></Column>
+                                    <Column class="py-2" field="provider_id" sortable header="Provider ID"></Column>
+                                    <Column class="py-2" field="provider_name" sortable header="Nhà cung cấp"></Column>
+                                    <Column class="py-2" field="weight" sortable header="TL tối đa" dataType="numeric"
                                         title="Trọng lượng tối đa">
                                         <template #body="{ data }">
                                             {{ data.weight }} g
                                         </template>
                                     </Column>
-                                    <Column field="price" sortable header="Giá">
+                                    <Column class="py-2" field="price" sortable header="Giá">
                                         <template #body="{ data }">
                                             {{
                                                 (data.price).toLocaleString('vi-VN',
@@ -215,7 +215,7 @@
                                             }}
                                         </template>
                                     </Column>
-                                    <Column header="">
+                                    <Column class="py-2" header="">
                                         <template #body="{ data }">
                                             <Menu as="div" class="relative inline-block text-left">
                                                 <div>

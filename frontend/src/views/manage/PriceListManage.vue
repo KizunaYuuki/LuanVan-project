@@ -1,6 +1,6 @@
 <template>
     <LayoutAuthenticated>
-        <div v-show="priceLists" class="mx-auto lg:max-w-[1024px]">
+        <div v-show="priceLists" class="mx-auto lg:max-w-[1024px] overflow-auto">
             <div class="">
                 <!-- Title -->
                 <div class="flex items-center">
@@ -53,7 +53,7 @@
                         <div class="align-middle min-w-[100%] inline-block">
                             <!-- DataTable PrimeVue -->
                             <div class="card">
-                                <DataTable removableSort sortField="id" :sortOrder="1"
+                                <DataTable selectionMode="single" removableSort sortField="id" :sortOrder="1"
                                     columnResizeMode="fit" showGridlines :value="priceLists" dataKey="id" paginator
                                     :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem"
                                     ref="priceList_dt" v-model:filters="filters" filterDisplay="menu" :loading="loading"
@@ -71,31 +71,31 @@
                                             </span>
                                         </div>
                                     </template>
-                                    <Column field="id" filterField="id" sortable header="Price List ID" class="w-44">
+                                    <Column class="py-2 h-14 w-44" field="id" filterField="id" sortable header="Price List ID">
                                         <template #filter="{ filterModel }">
                                             <InputNumber placeholder="Nhập Price List ID"
                                                 class="px-2 py-1 fo focus:shadow-none shadow-inner shadow-[#0096fa2e] border hover:border-gray-400 outline-none rounded bg-transparent"
                                                 v-model="filterModel.value" />
                                         </template>
                                     </Column>
-                                    <Column field="service_type_id" filterField="service_type_id" sortable header="Service Type ID" class="w-48">
+                                    <Column class="py-2 h-14 w-48" field="service_type_id" filterField="service_type_id" sortable header="Service Type ID">
                                         <template #filter="{ filterModel }">
                                             <InputNumber placeholder="Nhập Service Type ID"
                                                 class="px-2 py-1 fo focus:shadow-none shadow-inner shadow-[#0096fa2e] border hover:border-gray-400 outline-none rounded bg-transparent"
                                                 v-model="filterModel.value" />
                                         </template>
                                     </Column>
-                                    <Column field="start_weight" sortable header="TL nhỏ nhất">
+                                    <Column class="py-2 h-14" field="start_weight" sortable header="TL nhỏ nhất">
                                         <template #body="{ data }">
                                             {{ data.start_weight }}g
                                         </template>
                                     </Column>
-                                    <Column field="end_weight" sortable header="TL lớn nhất">
+                                    <Column class="py-2 h-14" field="end_weight" sortable header="TL lớn nhất">
                                         <template #body="{ data }">
                                             {{ data.end_weight }}g
                                         </template>
                                     </Column>
-                                    <Column field="intra_province_price" sortable header="Nội tỉnh">
+                                    <Column class="py-2 h-14" field="intra_province_price" sortable header="Nội tỉnh">
                                         <template #body="{ data }">
                                             {{ (data.intra_province_price).toLocaleString('vi-VN', {
                                                 style: 'currency',
@@ -103,7 +103,7 @@
                                             }) }}
                                         </template>
                                     </Column>
-                                    <Column field="inter_provincial_price" sortable header="Nội miền">
+                                    <Column class="py-2 h-14" field="inter_provincial_price" sortable header="Nội miền">
                                         <template #body="{ data }">
                                             {{ (data.inter_provincial_price).toLocaleString('vi-VN', {
                                                 style: 'currency',
@@ -111,7 +111,7 @@
                                             }) }}
                                         </template>
                                     </Column>
-                                    <Column field="inter_domain_price" sortable header="Liên miền">
+                                    <Column class="py-2 h-14" field="inter_domain_price" sortable header="Liên miền">
                                         <template #body="{ data }">
                                             {{ (data.inter_domain_price).toLocaleString('vi-VN', {
                                                 style: 'currency',
@@ -119,7 +119,7 @@
                                             }) }}
                                         </template>
                                     </Column>
-                                    <Column header="">
+                                    <Column class="py-2 h-14" header="">
                                         <template #body="{ data }">
                                             <Menu as="div" class="relative inline-block text-left">
                                                 <div>

@@ -1,6 +1,6 @@
 <template>
     <LayoutAuthenticated>
-        <div v-show="users" class="mx-auto lg:max-w-[1024px]">
+        <div v-show="users" class="mx-auto lg:max-w-[1024px] overflow-auto">
             <div class="">
                 <!-- Title -->
                 <div class="flex items-center">
@@ -9,7 +9,7 @@
                         <p class="text-[#374151] text-[.875rem] leading-[1.25rem]">Hiển thị danh sách tất
                             cả tài khoản của người dùng</p>
                     </div>
-                    <div class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[2rem] mt-[1rem]">
+                    <div class="min-[640px]:mt-0 min-[640px]:ml-[2rem] mt-[1rem] flex items-center">
                         <button icon="pi pi-external-link" @click="exportCSV($event)"
                             class="mr-4 inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 px-3 py-1">
                             Export
@@ -209,21 +209,21 @@
                                             </span>
                                         </div>
                                     </template>
-                                    <Column field="id" filterField="id" sortable header="User ID">
+                                    <Column class="py-2 h-14" field="id" filterField="id" sortable header="User ID">
                                         <template #filter="{ filterModel }">
                                             <InputNumber placeholder="Nhập User ID"
                                                 class="px-2 py-1 fo focus:shadow-none shadow-inner shadow-[#0096fa2e] border hover:border-gray-400 outline-none rounded bg-transparent"
                                                 v-model="filterModel.value" />
                                         </template>
                                     </Column>
-                                    <Column field="name" sortable header="Tên"></Column>
-                                    <Column field="email" sortable header="email"></Column>
-                                    <Column field="role" sortable header="Vai trò">
+                                    <Column class="py-2 h-14" field="name" sortable header="Tên"></Column>
+                                    <Column class="py-2 h-14" field="email" sortable header="email"></Column>
+                                    <Column class="py-2 h-14" field="role" sortable header="Vai trò">
                                         <template #body="{ data }">
                                             {{ (data.role === 0) ? 'Quản lý' : 'Khách hàng' }}
                                         </template>
                                     </Column>
-                                    <Column field="status" sortable header="Trạng thái">
+                                    <Column class="py-2 h-14" field="status" sortable header="Trạng thái">
                                         <template #body="{ data }">
                                             {{ (data.status === 0) ? 'Khoá' : 'Mở' }}
                                         </template>

@@ -1,6 +1,6 @@
 <template>
     <LayoutAuthenticated>
-        <div v-show="providers" class="mx-auto lg:max-w-[1024px]">
+        <div v-show="providers" class="mx-auto lg:max-w-[1024px] overflow-auto">
             <!-- Modal -->
             <TransitionRoot as="template" :show="isOpen" v-if="providerSelected?.id">
                 <Dialog as="div" class="relative z-10" @close="isOpen = false">
@@ -9,7 +9,7 @@
                         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
                     </TransitionChild>
                     <div
-                        class="fixed inset-0 z-10 overflow-y-auto xl:pl-60 ml-60 lg:ml-0 min-h-screen w-screen transition-position lg:w-auto">
+                        class="fixed inset-0 z-10 overflow-y-auto min-h-screen w-screen transition-position lg:w-auto">
                         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                             <TransitionChild as="template" enter="ease-out duration-300"
                                 enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -255,7 +255,7 @@
                                             </span>
                                         </div>
                                     </template>
-                                    <Column field="id" filterField="id" sortable header="Provider ID" class="w-44">
+                                    <Column class="py-2 h-14 w-44" field="id" filterField="id" sortable header="Provider ID">
                                         <template #filter="{ filterModel }">
                                             <InputNumber placeholder="Nhập Provider ID"
                                                 class="px-2 py-1 fo focus:shadow-none shadow-inner shadow-[#0096fa2e] border hover:border-gray-400 outline-none rounded bg-transparent"
@@ -269,9 +269,9 @@
                                             </div>
                                         </template>
                                     </Column>
-                                    <Column field="name" sortable header="Nhà cung cấp"></Column>
-                                    <Column field="email" sortable header="Email"></Column>
-                                    <Column field="phone" sortable header="Số điện thoại"></Column>
+                                    <Column class="py-2 h-14" field="name" sortable header="Nhà cung cấp"></Column>
+                                    <Column class="py-2 h-14" field="email" sortable header="Email"></Column>
+                                    <Column class="py-2 h-14" field="phone" sortable header="Số điện thoại"></Column>
                                 </DataTable>
                             </div>
                         </div>

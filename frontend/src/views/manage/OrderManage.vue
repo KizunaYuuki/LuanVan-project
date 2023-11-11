@@ -3,7 +3,7 @@
         <PageLoader v-show="!orders" />
 
         <div v-show="orders">
-            <div class="mx-auto lg:max-w-[1024px]">
+            <div class="mx-auto lg:max-w-[1024px] overflow-auto">
                 <div class="">
                     <!-- Title -->
                     <div class="flex items-center">
@@ -19,9 +19,9 @@
                                 class="mr-4 inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 px-3 py-1">
                                 Export
                             </button>
-
+                            <!-- RELOAD - RESET -->
                             <button @click="updateOrder()"
-                                class="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 p-1"
+                                class="mr-4 inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 p-1"
                                 type="button" title="Tải lại">
                                 <span class="inline-flex justify-center items-center w-6 h-6">
                                     <svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
@@ -31,87 +31,88 @@
                                     </svg>
                                 </span>
                             </button>
-                        </div>
-                    </div>
+                            <!-- Filter -->
+                            <div class="flex justify-end">
+                                <div class="min-[640px]:flex-none min-[640px]:mt-0 mt-[1rem]">
+                                    <Menu as="div" class="relative inline-block text-left">
+                                        <div>
+                                            <MenuButton
+                                                class="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 py-1 px-3">
+                                                Tuỳ chọn
+                                                <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+                                            </MenuButton>
+                                        </div>
 
-                    <!-- Filter -->
-                    <div class="flex justify-end">
-                        <div class="min-[640px]:flex-none min-[640px]:mt-0 min-[640px]:ml-[4rem] mt-[1rem]">
-                            <Menu as="div" class="relative inline-block text-left">
-                                <div>
-                                    <MenuButton
-                                        class="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded border-white ring-gray-200 bg-white text-black hover:bg-gray-100 py-1 px-3">
-                                        Tuỳ chọn
-                                        <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
-                                    </MenuButton>
+                                        <transition enter-active-class="transition duration-100 ease-out"
+                                            enter-from-class="transform scale-95 opacity-0"
+                                            enter-to-class="transform scale-100 opacity-100"
+                                            leave-active-class="transition duration-75 ease-in"
+                                            leave-from-class="transform scale-100 opacity-100"
+                                            leave-to-class="transform scale-95 opacity-0">
+                                            <MenuItems
+                                                class="z-[1] absolute right-0 mt-2 w-44 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                <div class="px-1 py-1">
+                                                    <MenuItem v-slot="{ active }">
+                                                    <button @click="Nofilter()" :class="[
+                                                        active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                    ]">
+                                                        <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                        Tất cả
+                                                    </button>
+                                                    </MenuItem>
+                                                </div>
+
+                                                <div class="px-1 py-1">
+                                                    <MenuItem v-slot="{ active }">
+                                                    <button @click="DaDangKyfilter()" :class="[
+                                                        active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                    ]">
+                                                        <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                        Đã đăng ký
+                                                    </button>
+                                                    </MenuItem>
+
+                                                    <MenuItem v-slot="{ active }">
+                                                    <button @click="HuyBofilter()" :class="[
+                                                        active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                    ]">
+                                                        <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                        Huỷ bỏ
+                                                    </button>
+                                                    </MenuItem>
+
+                                                    <MenuItem v-slot="{ active }">
+                                                    <button @click="HoanThanhfilter()" :class="[
+                                                        active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                    ]">
+                                                        <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                        Hoàn thành
+                                                    </button>
+                                                    </MenuItem>
+
+                                                    <MenuItem v-slot="{ active }">
+                                                    <button @click="DaXacNhanfilter()" :class="[
+                                                        active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                    ]">
+                                                        <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                        Đã xác nhận
+                                                    </button>
+                                                    </MenuItem>
+                                                </div>
+                                            </MenuItems>
+                                        </transition>
+                                    </Menu>
                                 </div>
-
-                                <transition enter-active-class="transition duration-100 ease-out"
-                                    enter-from-class="transform scale-95 opacity-0"
-                                    enter-to-class="transform scale-100 opacity-100"
-                                    leave-active-class="transition duration-75 ease-in"
-                                    leave-from-class="transform scale-100 opacity-100"
-                                    leave-to-class="transform scale-95 opacity-0">
-                                    <MenuItems
-                                        class="z-[1] absolute right-0 mt-2 w-44 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                        <div class="px-1 py-1">
-                                            <MenuItem v-slot="{ active }">
-                                            <button @click="Nofilter()" :class="[
-                                                active ? 'bg-sky-400 text-white' : 'text-gray-900',
-                                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                                            ]">
-                                                <div class="mr-2 h-5 w-2 text-violet-400"></div>
-                                                Tất cả
-                                            </button>
-                                            </MenuItem>
-                                        </div>
-
-                                        <div class="px-1 py-1">
-                                            <MenuItem v-slot="{ active }">
-                                            <button @click="DaDangKyfilter()" :class="[
-                                                active ? 'bg-sky-400 text-white' : 'text-gray-900',
-                                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                                            ]">
-                                                <div class="mr-2 h-5 w-2 text-violet-400"></div>
-                                                Đã đăng ký
-                                            </button>
-                                            </MenuItem>
-
-                                            <MenuItem v-slot="{ active }">
-                                            <button @click="HuyBofilter()" :class="[
-                                                active ? 'bg-sky-400 text-white' : 'text-gray-900',
-                                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                                            ]">
-                                                <div class="mr-2 h-5 w-2 text-violet-400"></div>
-                                                Huỷ bỏ
-                                            </button>
-                                            </MenuItem>
-
-                                            <MenuItem v-slot="{ active }">
-                                            <button @click="HoanThanhfilter()" :class="[
-                                                active ? 'bg-sky-400 text-white' : 'text-gray-900',
-                                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                                            ]">
-                                                <div class="mr-2 h-5 w-2 text-violet-400"></div>
-                                                Hoàn thành
-                                            </button>
-                                            </MenuItem>
-
-                                            <MenuItem v-slot="{ active }">
-                                            <button @click="DaXacNhanfilter()" :class="[
-                                                active ? 'bg-sky-400 text-white' : 'text-gray-900',
-                                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                                            ]">
-                                                <div class="mr-2 h-5 w-2 text-violet-400"></div>
-                                                Đã xác nhận
-                                            </button>
-                                            </MenuItem>
-                                        </div>
-                                    </MenuItems>
-                                </transition>
-                            </Menu>
+                            </div>
                         </div>
                     </div>
+
+
 
                     <!-- Content -->
                     <div v-show="orders.length !== 0" class="mt-[1rem] flow-root">
@@ -272,22 +273,23 @@
                                                 </span>
                                             </div>
                                         </template>
-                                        <Column field="order_id" filterField="order_id" sortable header="Order ID"
-                                            dataType="numeric">
+                                        <Column class="py-2" field="order_id" filterField="order_id" sortable
+                                            header="Order ID" dataType="numeric">
                                             <template #filter="{ filterModel }">
                                                 <InputNumber placeholder="Nhập Order ID"
                                                     class="px-2 py-1 fo focus:shadow-none shadow-inner shadow-[#0096fa2e] border hover:border-gray-400 outline-none rounded bg-transparent"
                                                     v-model="filterModel.value" />
                                             </template>
                                         </Column>
-                                        <Column field="email" sortable header="Email"></Column>
-                                        <Column field="phone" sortable header="Số điện thoại"></Column>
-                                        <Column field="order_created" sortable header="Ngày tạo" dataType="date">
+                                        <Column class="py-2" field="email" sortable header="Email"></Column>
+                                        <Column class="py-2" field="phone" sortable header="Số điện thoại"></Column>
+                                        <Column class="py-2" field="order_created" sortable header="Ngày tạo"
+                                            dataType="date">
                                             <template #body="{ data }">
                                                 {{ format(new Date(data.order_created), 'dd/MM/yyyy') }}
                                             </template>
                                         </Column>
-                                        <Column field="total_amount" sortable header="Giá">
+                                        <Column class="py-2" field="total_amount" sortable header="Giá">
                                             <template #body="{ data }">
                                                 {{ (data.total_amount).toLocaleString('vi-VN',
                                                     {
@@ -296,8 +298,8 @@
                                                     }) }}
                                             </template>
                                         </Column>
-                                        <Column field="status_name" sortable header="Trạng thái"></Column>
-                                        <Column style="flex: 0 0 4rem" header="">
+                                        <Column class="py-2" field="status_name" sortable header="Trạng thái"></Column>
+                                        <Column class="py-2" style="flex: 0 0 4rem" header="">
                                             <template #body="{ data }">
                                                 <Menu as="div" class="relative inline-block text-left">
                                                     <div>

@@ -1,6 +1,6 @@
 <template>
     <LayoutAuthenticated>
-        <div v-show="serviceTypes" class="mx-auto lg:max-w-[1024px]">
+        <div v-show="serviceTypes" class="mx-auto lg:max-w-[1024px] overflow-auto">
             <div class="">
                 <!-- Title -->
                 <div class="flex items-center">
@@ -71,28 +71,28 @@
                                             </span>
                                         </div>
                                     </template>
-                                    <Column field="id" filterField="id" sortable header="Service type ID" class="w-48">
+                                    <Column class="py-2 h-14 w-48" field="id" filterField="id" sortable header="Service type ID">
                                         <template #filter="{ filterModel }">
                                             <InputNumber placeholder="Nhập Service type ID"
                                                 class="px-2 py-1 fo focus:shadow-none shadow-inner shadow-[#0096fa2e] border hover:border-gray-400 outline-none rounded bg-transparent"
                                                 v-model="filterModel.value" />
                                         </template>
                                     </Column>
-                                    <Column field="name" sortable header="Loại dịch vụ"></Column>
-                                    <Column field="providers_id" sortable header="Provider ID"></Column>
-                                    <Column field="area" sortable header="Khu vực">
+                                    <Column class="py-2 h-14" field="name" sortable header="Loại dịch vụ"></Column>
+                                    <Column class="py-2 h-14" field="providers_id" sortable header="Provider ID"></Column>
+                                    <Column class="py-2 h-14" field="area" sortable header="Khu vực">
                                         <template #body="{ data }">
                                             {{ data.area === 0 ? "Trong nước" : "Quốc tế" }}
                                         </template>
                                     </Column>
-                                    <Column field="break_weight" sortable header="Trọng lượng"
+                                    <Column class="py-2 h-14" field="break_weight" sortable header="Trọng lượng"
                                         title="Nếu dịch vụ có trọng lượng lớn hơn trọng mức này sẽ được tính tự động theo bảng giá của từng khu vực dựa vào giá trị tăng thêm">
                                         <template #body="{ data }">
                                             {{ data.break_weight }} g
                                         </template>
                                     </Column>
 
-                                    <Column header="">
+                                    <Column class="py-2 h-14" header="">
                                         <template #body="{ data }">
                                             <Menu as="div" class="relative inline-block text-left">
                                                 <div>

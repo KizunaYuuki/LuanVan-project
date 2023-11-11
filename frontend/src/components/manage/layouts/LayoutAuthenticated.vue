@@ -1,37 +1,54 @@
 <template>
     <div class="overflow-hidden lg:overflow-visible">
-        <nav v-if="false"
-            class="xl:pl-60 ml-60 lg:ml-0 flex lg:items-stretch xl:mx-auto z-[40] shadow-md shadow-[#0096fa2e]">
-            <div class="flex flex-1 items-stretch h-16 xl:pl-[76px]">
-                <div class="flex my-2 mx-3 navbar-item-label items-center cursor-pointer">
-                    <div class="relative">
+        <nav class="flex lg:items-stretch shadow-md shadow-[#0096fa2e]">
+            <!-- NAV AND INPUT -->
+            <div class="flex flex-1 items-stretch h-16">
+                <div class="flex my-2 mx-3 navbar-item-label items-center text-2xl">
+                    <button @click="isOpenAside = !isOpenAside"
+                        class="text-[#0096fa] hover:text-white hover:bg-[#4e4e4e] rounded-full w-10 h-10 flex justify-center items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </button>
+                    <RouterLink to="/" class="flex cursor-pointer py-3 aside-menu-item text-[#0096fa] hover:text-[#7a7a7a]">
+                        <span class="grow text-ellipsis line-clamp-1 aside-menu-item-active font-bold">BestChoice</span>
+                    </RouterLink>
+                    <!-- <div class="relative">
                         <input placeholder="Tìm kiếm" type="text"
                             class="px-4 shadow-inner shadow-[#0096fa2e] py-1 max-w-full border hover:border-gray-400 outline-none rounded w-full bg-transparent">
-                    </div>
+                    </div> -->
                 </div>
             </div>
-
-            <!-- <div
+            <!-- ICON -->
+            <div
                 class="xl:pr-[76px] max-h-screen-menu overflow-y-auto lg:overflow-visible absolute w-screen top-14 left-0 shadow-lg lg:w-auto lg:flex lg:static lg:shadow-none hidden">
-                <div class="block lg:flex items-center relative cursor-pointer navbar-item-label lg:py-2 lg:px-3">
+                <div class="block lg:flex items-center relative navbar-item-label lg:py-2 lg:px-3">
                     <div class="flex items-center lg:bg-transparent p-3 lg:p-0">
                         <div class="w-6 h-6 mr-3 inline-flex">
                             <img :src="user.picture" alt="Profile" class="profile__avatar w-[24px] h-[24px]" />
                         </div>
-
                         <span class="px-2 font-[600] text-[18px] transition-colors">{{ user.name }}</span>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </nav>
 
-        <div class="xl:pl-60 ml-60 lg:ml-0 min-h-screen w-screen z-[41] transition-position lg:w-auto">
-            <aside id="aside"
+        <div class="z-1 transition-position lg:w-auto">
+            <aside v-show="isOpenAside" id="aside" ref="side"
                 class="w-60 fixed flex z-[41] top-0 h-screen transition-position overflow-hidden left-0 xl:flex border-r border-r-[#383838]">
                 <div class="aside flex-1 flex flex-col overflow-hidden bg-[#191919]">
-                    <div
-                        class="aside-brand flex flex-row items-center text-center h-16 text-[#0096fa] hover:text-white mx-3 text-2xl">
-                        <RouterLink to="/" class="flex cursor-pointer py-3 aside-menu-item">
+                    <div class="aside-brand flex flex-row items-center text-center h-16 mx-3 text-2xl">
+                        <button @click="isOpenAside = !isOpenAside"
+                            class="text-[#0096fa] hover:text-white hover:bg-[#4e4e4e] rounded-full w-10 h-10 flex justify-center items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
+                        </button>
+                        <RouterLink to="/" class="flex cursor-pointer py-3 aside-menu-item text-[#0096fa] hover:text-[#7a7a7a]">
                             <span class="grow text-ellipsis line-clamp-1 aside-menu-item-active font-bold">BestChoice</span>
                         </RouterLink>
                     </div>
@@ -166,7 +183,7 @@
                     <ul class="text-sm">
                         <li>
                             <div
-                                class="block lg:flex items-center relative cursor-pointer navbar-item-label lg:py-2 lg:px-3 border-b border-[#383838]">
+                                class="block lg:flex items-center relative navbar-item-label lg:py-2 lg:px-3 border-b border-[#383838]">
                                 <div class="lg:bg-transparent p-3 lg:p-0">
                                     <div class="text-[#7a7a7a]">
                                         SIGNED AS
@@ -204,12 +221,12 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { useAuth0 } from "@auth0/auth0-vue";
-
+import { ref } from 'vue';
+// VARIABLE
+const isOpenAside = ref(false);
 // get the information user
 const { user } = useAuth0();
-
 const { logout } = useAuth0();
-
 const handleLogout = () =>
     logout({
         logoutParams: {

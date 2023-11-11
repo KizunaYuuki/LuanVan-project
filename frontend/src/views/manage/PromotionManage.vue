@@ -1,6 +1,6 @@
 <template>
     <LayoutAuthenticated>
-        <div class="mx-auto lg:max-w-[1024px]">
+        <div class="mx-auto lg:max-w-[1024px] overflow-auto">
             <div class="">
                 <!-- Title -->
                 <div class="flex items-center">
@@ -177,31 +177,31 @@
                                             </span>
                                         </div>
                                     </template>
-                                    <Column field="id" filterField="id" sortable header="Promotion ID">
+                                    <Column class="py-2" field="id" filterField="id" sortable header="Promotion ID">
                                         <template #filter="{ filterModel }">
                                             <InputNumber placeholder="Nhập Promotion ID"
                                                 class="px-2 py-1 fo focus:shadow-none shadow-inner shadow-[#0096fa2e] border hover:border-gray-400 outline-none rounded bg-transparent"
                                                 v-model="filterModel.value" />
                                         </template>
                                     </Column>
-                                    <Column field="name" sortable header="Tên"></Column>
-                                    <Column field="service_id" sortable header="Service ID"></Column>
-                                    <Column field="start" sortable header="Bắt đầu" dataType="date">
+                                    <Column class="py-2" field="name" sortable header="Tên"></Column>
+                                    <Column class="py-2" field="service_id" sortable header="Service ID"></Column>
+                                    <Column class="py-2" field="start" sortable header="Bắt đầu" dataType="date">
                                         <template #body="{ data }">
                                             {{ format(new Date(data.start), 'dd/MM/yyyy - HH:mm:ss', { locale: vi }) }}
                                         </template>
                                     </Column>
-                                    <Column field="end" sortable header="Kết thúc" dataType="date">
+                                    <Column class="py-2" field="end" sortable header="Kết thúc" dataType="date">
                                         <template #body="{ data }">
                                             {{ format(new Date(data.end), 'dd/MM/yyyy - HH:mm:ss', { locale: vi }) }}
                                         </template>
                                     </Column>
-                                    <Column field="price" sortable header="Giá trị" dataType="numeric">
+                                    <Column class="py-2" field="price" sortable header="Giá trị" dataType="numeric">
                                         <template #body="{ data }">
                                             {{ data.price }}%
                                         </template>
                                     </Column>
-                                    <Column style="flex: 0 0 4rem" header="">
+                                    <Column class="py-2" style="flex: 0 0 4rem" header="">
                                         <template #body="{ data }">
                                             <Menu as="div" class="relative inline-block text-left">
                                                     <div>
