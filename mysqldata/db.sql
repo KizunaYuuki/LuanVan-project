@@ -172,9 +172,9 @@ INSERT INTO users (id, name, email, role, status)
 VALUES 
 ('auth0|64f15be4634c0df5fc5f565b', 'Tim', 'time0009000@gmail.com', 0, 1),
 ('auth0|6523b7c841993bd888047c89', 'Thanh', 'thanh@gmail.com', 1, 1),
-('auth0|6523b79c9c5325403aa83b97', 'Phú', 'phu@gmail.com', 1, 1),
-('auth0|6523b7865d31d4975864bb51', 'Hoa', 'hoa@gmail.com', 1, 0),
-('auth0|6523b76f1f034d7ba70d3497', 'Trương', 'truong@gmail.com', 1, 0),
+('auth0|6550c38d3e05dd89a15733ec', 'Phú', 'phu@gmail.com', 1, 1),
+('auth0|6550c3581e68fa37f8d019a6', 'Hoa', 'hoa@gmail.com', 1, 0),
+('auth0|6550c2f51e68fa37f8d01965', 'Trương', 'truong@gmail.com', 1, 0),
 ('auth0|6523b4d841993bd888047a5f', 'Tuấn', 'tuan@gmail.com', 1, 1);
 
 INSERT INTO providers (name, phone, email, address, image)
@@ -3756,19 +3756,19 @@ VALUES
 ('auth0|64f15be4634c0df5fc5f565b', 2, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY)),
 ('auth0|6523b7c841993bd888047c89', 2, 6, 2, 25000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 4 DAY)),
 
-('auth0|6523b7865d31d4975864bb51', 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 0 DAY)),
-('auth0|6523b79c9c5325403aa83b97', 3, 3, 1, 13000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 1 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 0 DAY)),
+('auth0|6550c38d3e05dd89a15733ec', 3, 3, 1, 13000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 1 DAY)),
 ('auth0|6523b7c841993bd888047c89', 3, 8, 1, 29000, 'time@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 2 DAY)),
 ('auth0|64f15be4634c0df5fc5f565b', 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY)),
-('auth0|6523b79c9c5325403aa83b97', 3, 5, 1, 21000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 4 DAY)),
+('auth0|6550c38d3e05dd89a15733ec', 3, 5, 1, 21000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 4 DAY)),
 ('auth0|64f15be4634c0df5fc5f565b', 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 5 DAY)),
 ('auth0|6523b7c841993bd888047c89', 3, 6, 2, 25000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 6 DAY)),
-('auth0|6523b7865d31d4975864bb51', 3, 3, 1, 13000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 7 DAY)),
-('auth0|6523b76f1f034d7ba70d3497', 3, 8, 1, 29000, 'time@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 8 DAY)),
-('auth0|6523b7865d31d4975864bb51', 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 9 DAY)),
-('auth0|6523b7865d31d4975864bb51', 3, 5, 1, 21000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 10 DAY)),
-('auth0|6523b76f1f034d7ba70d3497', 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 11 DAY)),
-('auth0|6523b76f1f034d7ba70d3497', 3, 6, 2, 25000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 12 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 3, 1, 13000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 7 DAY)),
+('auth0|6550c2f51e68fa37f8d01965', 3, 8, 1, 29000, 'time@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 8 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 9 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 5, 1, 21000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 10 DAY)),
+('auth0|6550c2f51e68fa37f8d01965', 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 11 DAY)),
+('auth0|6550c2f51e68fa37f8d01965', 3, 6, 2, 25000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 12 DAY)),
 
 ('auth0|64f15be4634c0df5fc5f565b', 4, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY)),
 ('auth0|6523b7c841993bd888047c89', 4, 5, 1, 21000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY));
@@ -3830,12 +3830,12 @@ INSERT INTO reviews (user_id, service_id, rate, comment)
 VALUES 
 ('auth0|6523b7c841993bd888047c89', 1, 5, 'Viettel Post luôn đáng tin cậy với tôi trong việc giao hàng. Họ tuân thủ thời gian và có dịch vụ khách hàng xuất sắc. Tôi đã sử dụng Viettel Post trong nhiều năm và chưa bao giờ gặp vấn đề lớn'),
 ('auth0|6523b7c841993bd888047c89', 1, 4, 'Đáng tin cậy với tôi trong việc giao hàng'),
-('auth0|6523b79c9c5325403aa83b97', 2, 5, 'Đúng giờ, nhanh'),
-('auth0|6523b79c9c5325403aa83b97', 3, 3, '');
+('auth0|6550c38d3e05dd89a15733ec', 2, 5, 'Đúng giờ, nhanh'),
+('auth0|6550c38d3e05dd89a15733ec', 3, 3, '');
 
 INSERT INTO carts (user_id, service_id)
 VALUES 
-('auth0|6523b79c9c5325403aa83b97', 1), ('auth0|6523b79c9c5325403aa83b97', 2), ('auth0|6523b79c9c5325403aa83b97', 8), ('auth0|6523b7c841993bd888047c89', 3), ('auth0|6523b7c841993bd888047c89', 1);
+('auth0|6550c38d3e05dd89a15733ec', 1), ('auth0|6550c38d3e05dd89a15733ec', 2), ('auth0|6550c38d3e05dd89a15733ec', 8), ('auth0|6523b7c841993bd888047c89', 3), ('auth0|6523b7c841993bd888047c89', 1);
 
 INSERT INTO promotions (service_id, name, description, price, start, end)
 VALUES 
