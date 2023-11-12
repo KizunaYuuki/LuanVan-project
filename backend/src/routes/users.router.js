@@ -10,7 +10,10 @@ const {
     validateStatus,
     validateRole,
     getUsers,
-    getQuantityUser } = require("../controllers/users.controller.js");
+    getQuantityUser,
+    unblockUser,
+    blockUser,
+    deleteUser } = require("../controllers/users.controller.js");
 
 const usersRouter = express.Router();
 
@@ -28,13 +31,32 @@ usersRouter.get("/quantity", validateAccessToken, async (req, res) => {
 
 // Đăng ký người dùng
 usersRouter.post("/", validateAccessToken, async (req, res) => {
-    const { name, email } = req.body;
+    const { id, name, email, phone } = req.body;
     // Theo mặc định tài khoản mới tạo sẽ có role là 1, chỉ có quyền của Khách hàng
     // status mặc định là 1, cho biết tài khoản được kích hoạt/mở
     const role = 1;
     const status = 1;
-    const user = await createUser(name, email, role, status);
+    const user = await createUser(id, name, email, role, status, phone);
     res.status(201).json(user);
+});
+
+// BLOCK USER
+usersRouter.get("/user-blocks/block/:id", validateAccessToken, async (req, res) => {
+    const id = req.params.id;
+    const result = await blockUser(id);
+    res.status(200).json(result);
+});
+// UNBLOCK USER
+usersRouter.get("/user-blocks/unblock/:id", validateAccessToken, async (req, res) => {
+    const id = req.params.id;
+    const result = await unblockUser(id);
+    res.status(200).json(result);
+});
+// DELETE USER
+usersRouter.delete("/:id", validateAccessToken, async (req, res) => {
+    const id = req.params.id;
+    const result = await deleteUser(id);
+    res.status(200).json(result);
 });
 
 // Xác thực quyền qua role

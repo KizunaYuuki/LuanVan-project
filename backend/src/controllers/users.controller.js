@@ -67,13 +67,190 @@ async function validateRole(email) {
     }
 }
 
-async function createUser(name, email, role, status) {
+async function createUser(id, name, email, role, status, phone) {
     const [result] = await pool.query(`
-    INSERT INTO users(name, email, role, status)
-    VALUES (?, ?, ?, ?)
-    `, [name, email, role, status])
-    const id = result.insertId;
+    INSERT INTO users(id, name, email, role, status, phone)
+    VALUES (?, ?, ?, ?, ?, ?)
+    `, [id, name, email, role, status, phone])
     return getUserById(id);
+}
+
+const axios = require('axios');
+// UNBLOCK USER
+async function unblockUser(identifier) {
+    let token = ''
+    let result = false;
+    let options = {
+        method: 'POST',
+        url: 'https://freight-service.us.auth0.com/oauth/token',
+        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        data: new URLSearchParams({
+            grant_type: 'client_credentials',
+            client_id: 'VD0N6ZtZODkIfyolqZbmWarv9dqFRZ8K',
+            client_secret: 'k7tuYdvkiyBA5m0wf4WCByNSWEm3E9J7zL6mDLuIX4RVIiq0rvhu6udpvsjc8e2_',
+            audience: 'https://freight-service.us.auth0.com/api/v2/'
+        })
+    };
+    // GET TOKEN
+    await axios.default.request(options).then(async function (response) {
+        
+        // console.log(response.data.access_token);
+        token = response.data.access_token;
+        // UNBLOCK USER
+        let data = JSON.stringify({
+            "blocked": false
+        });
+        let config = {
+            method: 'patch',
+            maxBodyLength: Infinity,
+            url: `https://freight-service.us.auth0.com/api/v2/users/${identifier}`,
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            data: data
+        };
+        await axios.request(config)
+            .then(async (response) => {
+                // console.log(JSON.stringify(response.data));
+                // UPDATE DATA ON MYSQL
+                try {
+                    await pool.query(`
+                    UPDATE users
+                    SET status = ?
+                    WHERE id = ?
+                    `, [1, identifier])
+                    result = true;
+                } catch (error) {
+                    console.log(error);
+                    result = false;
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                result = false;
+            });
+    }).catch(function (error) {
+        console.error(error);
+        result = false;
+    });
+    return result;
+}
+// BLOCK USER
+async function blockUser(identifier) {
+    let token = ''
+    let result = false;
+    let options = {
+        method: 'POST',
+        url: 'https://freight-service.us.auth0.com/oauth/token',
+        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        data: new URLSearchParams({
+            grant_type: 'client_credentials',
+            client_id: 'VD0N6ZtZODkIfyolqZbmWarv9dqFRZ8K',
+            client_secret: 'k7tuYdvkiyBA5m0wf4WCByNSWEm3E9J7zL6mDLuIX4RVIiq0rvhu6udpvsjc8e2_',
+            audience: 'https://freight-service.us.auth0.com/api/v2/'
+        })
+    };
+    // GET TOKEN
+    await axios.default.request(options).then(async function (response) {
+
+        // console.log(response.data.access_token);
+        token = response.data.access_token;
+        // UNBLOCK USER
+        let data = JSON.stringify({
+            "blocked": true
+        });
+        let config = {
+            method: 'patch',
+            maxBodyLength: Infinity,
+            url: `https://freight-service.us.auth0.com/api/v2/users/${identifier}`,
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            data: data
+        };
+        await axios.request(config)
+            .then(async (response) => {
+                // console.log(JSON.stringify(response.data));
+                // UPDATE DATA ON MYSQL
+                try {
+                    await pool.query(`
+                    UPDATE users
+                    SET status = ?
+                    WHERE id = ?
+                    `, [0, identifier])
+                    result = true;
+                } catch (error) {
+                    console.log(error);
+                    result = false;
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                result = false;
+            });
+    }).catch(function (error) {
+        console.error(error);
+        result = false;
+    });
+    return result;
+}
+// DELETE USER
+async function deleteUser(identifier) {
+    let token = ''
+    let result = false;
+    let options = {
+        method: 'POST',
+        url: 'https://freight-service.us.auth0.com/oauth/token',
+        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        data: new URLSearchParams({
+            grant_type: 'client_credentials',
+            client_id: 'VD0N6ZtZODkIfyolqZbmWarv9dqFRZ8K',
+            client_secret: 'k7tuYdvkiyBA5m0wf4WCByNSWEm3E9J7zL6mDLuIX4RVIiq0rvhu6udpvsjc8e2_',
+            audience: 'https://freight-service.us.auth0.com/api/v2/'
+        })
+    };
+    // GET TOKEN
+    await axios.default.request(options).then(async function (response) {
+        // console.log(response.data.access_token);
+        token = response.data.access_token;
+        let config = {
+            method: 'delete',
+            maxBodyLength: Infinity,
+            url: `https://freight-service.us.auth0.com/api/v2/users/${identifier}`,
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        };
+        await axios.request(config)
+            .then(async (response) => {
+                // console.log(JSON.stringify(response.data));
+                // UPDATE DATA ON MYSQL
+                try {
+                    await pool.query(`
+                    DELETE
+                    FROM users
+                    WHERE id = ?
+                    `, [identifier])
+                    result = true;
+                } catch (error) {
+                    console.log(error);
+                    result = false;
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                result = false;
+            });
+
+    }).catch(function (error) {
+        console.error(error);
+        result = false;
+    });
+    return result;
 }
 
 module.exports = {
@@ -85,5 +262,8 @@ module.exports = {
     validateStatus,
     validateRole,
     getUsers,
-    getQuantityUser
+    getQuantityUser,
+    unblockUser,
+    blockUser,
+    deleteUser
 };
