@@ -1,5 +1,5 @@
 <template>
-    <Header></Header>
+    <Header :addToCart="addToCart"></Header>
     <main>
         <div class="content-layout max-w-[1024px] mx-auto p-0">
             <div class="content__body">
@@ -11,19 +11,12 @@
                             <span class="profile__description">{{ user.email }}</span>
                         </div>
                     </div>
-                    <!-- <div class="profile__details">
-                        <CodeSnippet title="Thông tin cá nhân" :code="code" />
-                    </div> -->
 
                     <div class="bg-gray-300 mt-8 rounded-t-lg px-8 py-6 text-3xl font-bold">
                         <span>Thông tin cá nhân</span>
                     </div>
 
                     <div class="bg-white p-8">
-                        <!-- <div class="px-4 sm:px-0">
-                            <h3 class="text-base font-semibold leading-7 text-gray-900">Applicant Information</h3>
-                            <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Personal details and application.</p>
-                        </div> -->
                         <div class="mt-6">
                             <dl class="divide-y divide-gray-100">
                                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -50,7 +43,6 @@
                             </dl>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -58,27 +50,29 @@
 </template>
   
 <script setup>
-import CodeSnippet from "@/components/code-snippet.vue";
-import Header from '../components/Header.vue';
+import Header from '@/components/Header.vue';
 import { useAuth0 } from "@auth0/auth0-vue";
-import { getUserByEmail, createUser, getUsersByAuth0Api } from "@/services/user.service";
-import { onBeforeMount, ref } from "vue";
+import { getUserByEmail, createUser } from "@/services/user.service";
+import { onBeforeMount, reactive, ref } from "vue";
 
 const { user } = useAuth0();
 const code = user ? JSON.stringify(user.value, null, 2) : "";
 const { getAccessTokenSilently } = useAuth0();
 const userDataMySQL = ref();
+let addToCart = reactive({
+    value: false
+});
 
 const getUserByEmailAxios = async (user) => {
     // edit data
     const userData = {
+        id: user.value.sub,
         email: user.value?.email,
-        name: user.value?.name
+        name: user.value?.username,
+        phone: null
     }
-
     const accessToken = await getAccessTokenSilently();
     const { data, error } = await getUserByEmail(accessToken, userData);
-
     if (data) {
         // console.log(user);
         // console.log(data);
@@ -90,19 +84,6 @@ const getUserByEmailAxios = async (user) => {
             userDataMySQL.value = data;
         }
     }
-
-    if (error) {
-        // console.log(error.message);
-    }
-};
-
-const getUsersByAuth0ApiAxios = async () => {
-    const accessToken = await getAccessTokenSilently();
-    const { data, error } = await getUsersByAuth0Api(accessToken);
-
-    if (data) {
-        // console.log(data);
-    }
     if (error) {
         // console.log(error.message);
     }
@@ -111,7 +92,5 @@ const getUsersByAuth0ApiAxios = async () => {
 onBeforeMount(() => {
     // run function
     getUserByEmailAxios(user);
-    // getUsersByAuth0ApiAxios();
 })
-
 </script>

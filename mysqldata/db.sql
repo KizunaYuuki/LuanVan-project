@@ -1,15 +1,16 @@
 CREATE DATABASE freight_service_app;
 USE freight_service_app;
 
+-- USER
 CREATE TABLE users (
-  id INT PRIMARY KEY AUTO_INCREMENT,
+  id VARCHAR(255) PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL UNIQUE,
   phone VARCHAR(20),
   role INT NOT NULL,
   status INT NOT NULL
 );
-
+-- PROVIDER
  CREATE TABLE providers (
   id INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
@@ -18,7 +19,7 @@ CREATE TABLE users (
   address VARCHAR(255) NOT NULL,
   image VARCHAR(1000)
 );
-
+-- SERVICE TYPE
  CREATE TABLE service_types (
   id INT PRIMARY KEY AUTO_INCREMENT,
   providers_id INT NOT NULL,
@@ -41,7 +42,7 @@ CREATE TABLE users (
   inter_provincial_extra_price FLOAT NOT NULL,
   inter_domain_extra_price FLOAT NOT NULL
 );
-
+-- SERVICE
 CREATE TABLE services (
   id INT PRIMARY KEY AUTO_INCREMENT,
   service_type_id INT NOT NULL,
@@ -56,7 +57,7 @@ CREATE TABLE services (
   price INT NOT NULL,
   created TIMESTAMP NOT NULL DEFAULT NOW()
 );
-
+-- PRICE LIST
  CREATE TABLE price_lists (
   id INT PRIMARY KEY AUTO_INCREMENT,
   service_type_id INT NOT NULL,
@@ -70,20 +71,20 @@ CREATE TABLE services (
   inter_provincial_price FLOAT NOT NULL,
   inter_domain_price FLOAT NOT NULL
 );
-
+-- STATUS
  CREATE TABLE status (
   id integer PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL UNIQUE
 );
-
+-- PAYMENT
  CREATE TABLE payments (
   id integer PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL UNIQUE
 );
-									  
+-- ORDER   
 CREATE TABLE orders (
   id integer PRIMARY KEY AUTO_INCREMENT,
-  user_id INT NOT NULL,
+  user_id VARCHAR(255) NOT NULL,
   status_id INT NOT NULL,
   service_id INT NOT NULL,
   payment_id INT NOT NULL,
@@ -98,7 +99,7 @@ CREATE TABLE orders (
   user_name VARCHAR(20),
   created TIMESTAMP NOT NULL DEFAULT NOW()
 );
-
+-- ADDRESS
 CREATE TABLE address (
   id INT PRIMARY KEY AUTO_INCREMENT,
   order_id INT NOT NULL,
@@ -109,7 +110,7 @@ CREATE TABLE address (
   ward VARCHAR(255) NOT NULL,
   type VARCHAR(255) NOT NULL
 );
-
+-- PACKAGE
 CREATE TABLE packages (
   id integer PRIMARY KEY AUTO_INCREMENT,
   order_id INT NOT NULL,
@@ -122,27 +123,27 @@ CREATE TABLE packages (
   price FLOAT,
   description VARCHAR(1000)
 );
-
+-- REVIEW
 CREATE TABLE reviews (
   id INT PRIMARY KEY AUTO_INCREMENT,  
-  user_id INT NOT NULL,
+  user_id VARCHAR(255) NOT NULL,
   service_id INT NOT NULL,
   FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE,
-  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   
   rate INT NOT NULL,
   comment VARCHAR(1000),
   created TIMESTAMP NOT NULL DEFAULT NOW()
 );
-
+-- CART
 CREATE TABLE carts (
   id INT PRIMARY KEY AUTO_INCREMENT,
-  user_id INT NOT NULL,
+  user_id VARCHAR(255) NOT NULL,
   service_id INT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE
 );
-
+-- LOCATION
 CREATE TABLE locations (
   id INT PRIMARY KEY AUTO_INCREMENT,
   service_id INT NOT NULL,
@@ -153,7 +154,7 @@ CREATE TABLE locations (
   district VARCHAR(255) NOT NULL,
   type VARCHAR(255) NOT NULL
 );
-
+-- PROMOTION
 CREATE TABLE promotions (
   id INT PRIMARY KEY AUTO_INCREMENT,
   service_id INT NOT NULL,
@@ -167,14 +168,14 @@ CREATE TABLE promotions (
   created TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
-INSERT INTO users (name, email, role, status)
+INSERT INTO users (id, name, email, role, status)
 VALUES 
-('Tim', 'time0009000@gmail.com', 0, 1),
-('Thanh', 'thanh@gmail.com', 1, 1),
-('Phú', 'phu@gmail.com', 1, 1),
-('Hoa', 'hoa@gmail.com', 1, 0),
-('Trương', 'truong@gmail.com', 1, 0),
-('Tuấn', 'tuan@gmail.com', 1, 1);
+('auth0|64f15be4634c0df5fc5f565b', 'Tim', 'time0009000@gmail.com', 0, 1),
+('auth0|6523b7c841993bd888047c89', 'Thanh', 'thanh@gmail.com', 1, 1),
+('auth0|6523b79c9c5325403aa83b97', 'Phú', 'phu@gmail.com', 1, 1),
+('auth0|6523b7865d31d4975864bb51', 'Hoa', 'hoa@gmail.com', 1, 0),
+('auth0|6523b76f1f034d7ba70d3497', 'Trương', 'truong@gmail.com', 1, 0),
+('auth0|6523b4d841993bd888047a5f', 'Tuấn', 'tuan@gmail.com', 1, 1);
 
 INSERT INTO providers (name, phone, email, address, image)
 VALUES 
@@ -3749,29 +3750,28 @@ VALUES
 
 INSERT INTO orders (user_id, status_id, service_id, payment_id, total_amount, email, phone, user_name, created)
 VALUES 
-(1, 1, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 1 DAY)),
-(2, 1, 8, 1, 29000, 'time@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 2 DAY)),
+('auth0|64f15be4634c0df5fc5f565b', 1, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 1 DAY)),
+('auth0|6523b7c841993bd888047c89', 1, 8, 1, 29000, 'time@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 2 DAY)),
  
-(1, 2, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY)),
-(2, 2, 6, 2, 25000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 4 DAY)),
+('auth0|64f15be4634c0df5fc5f565b', 2, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY)),
+('auth0|6523b7c841993bd888047c89', 2, 6, 2, 25000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 4 DAY)),
 
-(4, 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 0 DAY)),
-(3, 3, 3, 1, 13000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 1 DAY)),
-(2, 3, 8, 1, 29000, 'time@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 2 DAY)),
-(1, 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY)),
-(3, 3, 5, 1, 21000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 4 DAY)),
-(1, 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 5 DAY)),
-(2, 3, 6, 2, 25000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 6 DAY)),
-(4, 3, 3, 1, 13000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 7 DAY)),
-(5, 3, 8, 1, 29000, 'time@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 8 DAY)),
-(4, 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 9 DAY)),
-(4, 3, 5, 1, 21000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 10 DAY)),
-(5, 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 11 DAY)),
-(5, 3, 6, 2, 25000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 12 DAY)),
+('auth0|6523b7865d31d4975864bb51', 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 0 DAY)),
+('auth0|6523b79c9c5325403aa83b97', 3, 3, 1, 13000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 1 DAY)),
+('auth0|6523b7c841993bd888047c89', 3, 8, 1, 29000, 'time@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 2 DAY)),
+('auth0|64f15be4634c0df5fc5f565b', 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY)),
+('auth0|6523b79c9c5325403aa83b97', 3, 5, 1, 21000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 4 DAY)),
+('auth0|64f15be4634c0df5fc5f565b', 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 5 DAY)),
+('auth0|6523b7c841993bd888047c89', 3, 6, 2, 25000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 6 DAY)),
+('auth0|6523b7865d31d4975864bb51', 3, 3, 1, 13000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 7 DAY)),
+('auth0|6523b76f1f034d7ba70d3497', 3, 8, 1, 29000, 'time@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 8 DAY)),
+('auth0|6523b7865d31d4975864bb51', 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 9 DAY)),
+('auth0|6523b7865d31d4975864bb51', 3, 5, 1, 21000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 10 DAY)),
+('auth0|6523b76f1f034d7ba70d3497', 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 11 DAY)),
+('auth0|6523b76f1f034d7ba70d3497', 3, 6, 2, 25000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 12 DAY)),
 
-(1, 4, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY)),
-(3, 4, 5, 1, 21000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY));
-
+('auth0|64f15be4634c0df5fc5f565b', 4, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY)),
+('auth0|6523b7c841993bd888047c89', 4, 5, 1, 21000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY));
 
 
 INSERT INTO address (order_id, province, district, ward, type)
@@ -3828,14 +3828,14 @@ VALUES
 
 INSERT INTO reviews (user_id, service_id, rate, comment)
 VALUES 
-(2, 1, 5, 'Viettel Post luôn đáng tin cậy với tôi trong việc giao hàng. Họ tuân thủ thời gian và có dịch vụ khách hàng xuất sắc. Tôi đã sử dụng Viettel Post trong nhiều năm và chưa bao giờ gặp vấn đề lớn'),
-(2, 1, 4, 'Đáng tin cậy với tôi trong việc giao hàng'),
-(3, 2, 5, 'Đúng giờ, nhanh'),
-(3, 3, 3, '');
+('auth0|6523b7c841993bd888047c89', 1, 5, 'Viettel Post luôn đáng tin cậy với tôi trong việc giao hàng. Họ tuân thủ thời gian và có dịch vụ khách hàng xuất sắc. Tôi đã sử dụng Viettel Post trong nhiều năm và chưa bao giờ gặp vấn đề lớn'),
+('auth0|6523b7c841993bd888047c89', 1, 4, 'Đáng tin cậy với tôi trong việc giao hàng'),
+('auth0|6523b79c9c5325403aa83b97', 2, 5, 'Đúng giờ, nhanh'),
+('auth0|6523b79c9c5325403aa83b97', 3, 3, '');
 
 INSERT INTO carts (user_id, service_id)
 VALUES 
-(3, 1), (3, 2), (3, 8), (2, 3), (2, 1);
+('auth0|6523b79c9c5325403aa83b97', 1), ('auth0|6523b79c9c5325403aa83b97', 2), ('auth0|6523b79c9c5325403aa83b97', 8), ('auth0|6523b7c841993bd888047c89', 3), ('auth0|6523b7c841993bd888047c89', 1);
 
 INSERT INTO promotions (service_id, name, description, price, start, end)
 VALUES 

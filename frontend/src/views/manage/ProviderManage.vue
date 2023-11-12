@@ -255,7 +255,7 @@
                                             </span>
                                         </div>
                                     </template>
-                                    <Column class="py-2 h-14 w-44" field="id" filterField="id" sortable header="Provider ID">
+                                    <Column class="py-2 h-16 w-44" field="id" filterField="id" sortable header="Provider ID">
                                         <template #filter="{ filterModel }">
                                             <InputNumber placeholder="Nhập Provider ID"
                                                 class="px-2 py-1 fo focus:shadow-none shadow-inner shadow-[#0096fa2e] border hover:border-gray-400 outline-none rounded bg-transparent"
@@ -269,9 +269,9 @@
                                             </div>
                                         </template>
                                     </Column>
-                                    <Column class="py-2 h-14" field="name" sortable header="Nhà cung cấp"></Column>
-                                    <Column class="py-2 h-14" field="email" sortable header="Email"></Column>
-                                    <Column class="py-2 h-14" field="phone" sortable header="Số điện thoại"></Column>
+                                    <Column class="py-2 h-16" field="name" sortable header="Nhà cung cấp"></Column>
+                                    <Column class="py-2 h-16" field="email" sortable header="Email"></Column>
+                                    <Column class="py-2 h-16" field="phone" sortable header="Số điện thoại"></Column>
                                 </DataTable>
                             </div>
                         </div>

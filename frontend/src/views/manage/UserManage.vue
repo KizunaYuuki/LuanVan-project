@@ -209,23 +209,87 @@
                                             </span>
                                         </div>
                                     </template>
-                                    <Column class="py-2 h-14" field="id" filterField="id" sortable header="User ID">
+                                    <Column class="py-2 h-16" field="id" filterField="id" sortable header="User ID">
                                         <template #filter="{ filterModel }">
                                             <InputNumber placeholder="Nhập User ID"
                                                 class="px-2 py-1 fo focus:shadow-none shadow-inner shadow-[#0096fa2e] border hover:border-gray-400 outline-none rounded bg-transparent"
                                                 v-model="filterModel.value" />
                                         </template>
                                     </Column>
-                                    <Column class="py-2 h-14" field="name" sortable header="Tên"></Column>
-                                    <Column class="py-2 h-14" field="email" sortable header="email"></Column>
-                                    <Column class="py-2 h-14" field="role" sortable header="Vai trò">
+                                    <Column class="py-2 h-16" field="name" sortable header="Tên"></Column>
+                                    <Column class="py-2 h-16" field="email" sortable header="email"></Column>
+                                    <Column class="py-2 h-16" field="role" sortable header="Vai trò">
                                         <template #body="{ data }">
                                             {{ (data.role === 0) ? 'Quản lý' : 'Khách hàng' }}
                                         </template>
                                     </Column>
-                                    <Column class="py-2 h-14" field="status" sortable header="Trạng thái">
+                                    <Column class="py-2 h-16" field="status" sortable header="Trạng thái">
                                         <template #body="{ data }">
                                             {{ (data.status === 0) ? 'Khoá' : 'Mở' }}
+                                        </template>
+                                    </Column>
+                                    <Column class="py-2 h-16" header="">
+                                        <template #body="{ data }">
+                                            <Menu as="div" class="relative inline-block text-left">
+                                                <div>
+                                                    <MenuButton
+                                                        class="inline-flex w-full justify-center gap-x-1.5 rounded-full px-3 py-3 text-sm font-semibold hover:shadow-sm">
+                                                        <svg width="24" height="24"
+                                                            class="fill-current hover:text-sky-500 text-[#70757a] cursor-pointer"
+                                                            focusable="false" xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 24 24">
+                                                            <path
+                                                                d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z">
+                                                            </path>
+                                                        </svg>
+                                                    </MenuButton>
+                                                </div>
+                                                <transition enter-active-class="transition duration-100 ease-out"
+                                                    enter-from-class="transform scale-95 opacity-0"
+                                                    enter-to-class="transform scale-100 opacity-100"
+                                                    leave-active-class="transition duration-75 ease-in"
+                                                    leave-from-class="transform scale-100 opacity-100"
+                                                    leave-to-class="transform scale-95 opacity-0">
+                                                    <MenuItems
+                                                        class="z-[1] absolute right-0 -mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                        <div v-if="data.status !== 0" class="px-1 py-1">
+                                                            <MenuItem v-slot="{ active }">
+                                                            <button @click="handleBlockUser(data.id)" :class="[
+                                                                active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                            ]">
+                                                                <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                                Khoá
+                                                            </button>
+                                                            </MenuItem>
+                                                        </div>
+
+                                                        <div v-else class="px-1 py-1">
+                                                            <MenuItem v-slot="{ active }">
+                                                            <button @click="handleUnblockUser(data.id)" :class="[
+                                                                active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                            ]">
+                                                                <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                                Mở
+                                                            </button>
+                                                            </MenuItem>
+                                                        </div>
+
+                                                        <div class="px-1 py-1">
+                                                            <MenuItem v-slot="{ active }">
+                                                            <button @click="handleDeleteUser(data.id)" :class="[
+                                                                active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                            ]">
+                                                                <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                                Xoá
+                                                            </button>
+                                                            </MenuItem>
+                                                        </div>
+                                                    </MenuItems>
+                                                </transition>
+                                            </Menu>
                                         </template>
                                     </Column>
                                 </DataTable>
@@ -242,7 +306,7 @@
 import LayoutAuthenticated from '../../components/manage/layouts/LayoutAuthenticated.vue'
 import { onMounted, ref, onBeforeMount } from "vue";
 import { useAuth0 } from "@auth0/auth0-vue";
-import { getUsers, getUserByEmail } from "@/services/user.service";
+import { getUsers, blockUser, unblockUser, deleteUser } from "@/services/user.service";
 import {
     Menu, MenuButton, MenuItem, MenuItems
 } from '@headlessui/vue';
@@ -272,10 +336,12 @@ if (isAuthenticated) {
         router.push('/');
     }
 }
-
-
 const loading = ref(true);
 const user_dt = ref();
+// toast
+import { useToast } from "vue-toastification";
+// Get toast interface
+const toast = useToast();
 
 const filters = ref({
     'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -300,25 +366,44 @@ const getUsersAxios = async () => {
     }
 };
 
-const getUserByEmailAxios = async (user) => {
-    // edit data
-    const userData = {
-        email: user.value?.email,
-        name: user.value?.name
-    }
-
+const handleUnblockUser = async (id) => {
     const accessToken = await getAccessTokenSilently();
-    const { data, error } = await getUserByEmail(accessToken, userData);
-
+    const { data, error } = await unblockUser(accessToken, id);
     if (data) {
-        user_id.value = data.id;
         // console.log(data);
+        toast.success("Đã mở lại tài khoản thành công", { timeout: 3000 });
+        getUsersAxios();
     }
     if (error) {
-        // console.log(error.message);
+        console.log(error.message);
     }
 };
 
+const handleBlockUser = async (id) => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await blockUser(accessToken, id);
+    if (data) {
+        // console.log(data);
+        toast.success("Đã Khoá tài khoản thành công", { timeout: 3000 });
+        getUsersAxios();
+    }
+    if (error) {
+        console.log(error.message);
+    }
+};
+
+const handleDeleteUser = async (id) => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await deleteUser(accessToken, id);
+    if (data) {
+        // console.log(data);
+        toast.success("Đã Xoá tài khoản thành công", { timeout: 3000 });
+        getUsersAxios();
+    }
+    if (error) {
+        console.log(error.message);
+    }
+};
 
 const updateUsers = async () => {
     getUsersAxios();
@@ -326,7 +411,6 @@ const updateUsers = async () => {
 
 onBeforeMount(async () => {
     // run function
-    // getUserByEmailAxios(user);
     getUsersAxios();
 });
 
