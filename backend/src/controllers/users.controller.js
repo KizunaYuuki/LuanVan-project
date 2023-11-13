@@ -93,7 +93,7 @@ async function unblockUser(identifier) {
     };
     // GET TOKEN
     await axios.default.request(options).then(async function (response) {
-        
+
         // console.log(response.data.access_token);
         token = response.data.access_token;
         // UNBLOCK USER
@@ -294,12 +294,22 @@ async function updateUser(name, phone, identifier) {
                 // console.log(JSON.stringify(response.data));
                 // UPDATE DATA ON MYSQL
                 try {
-                    await pool.query(`
-                    UPDATE users
-                    SET name = ?, phone = ?
-                    WHERE id = ?
-                    `, [name, phone, identifier])
-                    result = true;
+                    if (name) {
+                        await pool.query(`
+                        UPDATE users
+                        SET name = ?, phone = ?
+                        WHERE id = ?
+                        `, [name, phone, identifier])
+                        result = true;
+                    }
+                    else {
+                        await pool.query(`
+                        UPDATE users
+                        SET  phone = ?
+                        WHERE id = ?
+                        `, [phone, identifier])
+                            result = true;
+                    }
                 } catch (error) {
                     console.log(error);
                     result = false;
