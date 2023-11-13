@@ -13,7 +13,8 @@ const {
     getQuantityUser,
     unblockUser,
     blockUser,
-    deleteUser } = require("../controllers/users.controller.js");
+    deleteUser,
+    updateUser } = require("../controllers/users.controller.js");
 
 const usersRouter = express.Router();
 
@@ -58,6 +59,13 @@ usersRouter.delete("/:id", validateAccessToken, async (req, res) => {
     const result = await deleteUser(id);
     res.status(200).json(result);
 });
+// UPDATE USER
+usersRouter.put("/:id", validateAccessToken, async (req, res) => {
+    const id = req.params.id;
+    const { name, phone } = req.body;
+    const result = await updateUser(name, phone, id);
+    res.status(200).json(result);
+});
 
 // Xác thực quyền qua role
 usersRouter.get("/auth-role", validateAccessToken, async (req, res) => {
@@ -69,11 +77,6 @@ usersRouter.get("/auth-role", validateAccessToken, async (req, res) => {
 // Kiểm tra trạng thái của người dùng
 usersRouter.post("/check-status", validateAccessToken, (req, res) => {
     res.status(200).json('Kiểm tra trạng thái của người dùng');
-});
-
-// Cập nhật thông tin người dùng
-usersRouter.put("/update-user", validateAccessToken, (req, res) => {
-    res.status(200).json('Cập nhật thông tin người dùng');
 });
 
 // Tìm người dùng theo email

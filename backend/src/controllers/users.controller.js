@@ -252,6 +252,69 @@ async function deleteUser(identifier) {
     });
     return result;
 }
+// UPDATE USER
+async function updateUser(name, phone, identifier) {
+    let token = ''
+    let result = false;
+    let options = {
+        method: 'POST',
+        url: 'https://freight-service.us.auth0.com/oauth/token',
+        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        data: new URLSearchParams({
+            grant_type: 'client_credentials',
+            client_id: 'VD0N6ZtZODkIfyolqZbmWarv9dqFRZ8K',
+            client_secret: 'k7tuYdvkiyBA5m0wf4WCByNSWEm3E9J7zL6mDLuIX4RVIiq0rvhu6udpvsjc8e2_',
+            audience: 'https://freight-service.us.auth0.com/api/v2/'
+        })
+    };
+    // GET TOKEN
+    await axios.default.request(options).then(async function (response) {
+        // console.log(response.data.access_token);
+        token = response.data.access_token;
+        // UPDATE USER
+        let data = JSON.stringify({
+            "user_metadata": {
+                "phone": phone
+            },
+            "name": name
+        });
+        let config = {
+            method: 'patch',
+            maxBodyLength: Infinity,
+            url: `https://freight-service.us.auth0.com/api/v2/users/${identifier}`,
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            data: data
+        };
+        await axios.request(config)
+            .then(async (response) => {
+                // console.log(JSON.stringify(response.data));
+                // UPDATE DATA ON MYSQL
+                try {
+                    await pool.query(`
+                    UPDATE users
+                    SET name = ?, phone = ?
+                    WHERE id = ?
+                    `, [name, phone, identifier])
+                    result = true;
+                } catch (error) {
+                    console.log(error);
+                    result = false;
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                result = false;
+            });
+    }).catch(function (error) {
+        console.error(error);
+        result = false;
+    });
+    return result;
+}
 
 module.exports = {
     getUserById,
@@ -265,5 +328,6 @@ module.exports = {
     getQuantityUser,
     unblockUser,
     blockUser,
-    deleteUser
+    deleteUser,
+    updateUser
 };
