@@ -77,6 +77,26 @@ export const deleteUser = async (accessToken, id) => {
     };
 };
 
+export const updateUser = async (accessToken, userData, id) => {
+    const config = {
+        url: `${apiServerUrl}/api/user/${id}`,
+        method: "PUT",
+        maxBodyLength: Infinity,
+        headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+        },
+        data: userData,
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
+
 export const getQuantityUser = async (accessToken) => {
     const config = {
         url: `${apiServerUrl}/api/user/quantity`,

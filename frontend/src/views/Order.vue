@@ -940,7 +940,10 @@ const getServiceByIdAxios = async (id) => {
 
     if (data) {
         service.value = data;
-        console.log(service.value);
+        // console.log(service.value);
+        // PUHS DATA TO ORDER
+        order.value.user_name = (user.value?.name === undefined) ? '' : user.value?.name;
+        order.value.phone = (user.value?.phone === undefined) ? '' : user.value?.phone;
     }
 
     if (error) {
@@ -974,7 +977,7 @@ const getPromotionByServiceIdAxios = async (service_id) => {
         // console.log(data);
         data.forEach(element => {
             if (getTime(new Date()) >= getTime(new Date(element.start)) && getTime(new Date()) < getTime(new Date(element.end))) {
-                console.log(element);
+                // console.log(element);
                 if (element.price < 100 && element.price > 0)
                     service.value.promotion_price = service.value.price - (service.value.price * element.price / 100);
                 else {
@@ -1001,11 +1004,11 @@ const getUserByEmailAxios = async (user) => {
 
     if (data) {
         user_id.value = data.id;
-        console.log(data);
-        console.log(user_id.value);
+        // console.log(data);
+        // console.log(user_id.value);
     }
     if (error) {
-        console.log(error.message);
+        // console.log(error.message);
     }
 };
 
@@ -1024,7 +1027,7 @@ const createOrderAxios = async (orderData) => {
     const { data, error } = await createOrder(accessToken, orderData);
 
     if (data) {
-        console.log(data);
+        // console.log(data);
         toast.success("Đã tạo đơn hàng thành công", { timeout: 3000 });
         orderResutl.value = data;
 
@@ -1043,7 +1046,7 @@ const createOrderAxios = async (orderData) => {
         createAddressToAxios();
     }
     if (error) {
-        console.log(error);
+        // console.log(error);
     }
     completeStep.value = !completeStep.value, paymentStep.value = !paymentStep.value;
 };
@@ -1054,11 +1057,11 @@ const createAddressFromAxios = async () => {
 
     if (data) {
         addressFromResutl.value = data;
-        console.log(data);
+        // console.log(data);
     }
 
     if (error) {
-        console.log(error);
+        // console.log(error);
     }
 };
 
@@ -1068,11 +1071,11 @@ const createAddressToAxios = async () => {
 
     if (data) {
         addressToResutl.value = data;
-        console.log(data);
+        // console.log(data);
     }
 
     if (error) {
-        console.log(error);
+        // console.log(error);
     }
 };
 
@@ -1082,11 +1085,11 @@ const createPackageAxios = async () => {
 
     if (data) {
         packageResutl.value = data;
-        console.log(data);
+        // console.log(data);
     }
 
     if (error) {
-        console.log(error);
+        // console.log(error);
     }
 };
 
@@ -1122,7 +1125,7 @@ onMounted(async () => {
                 USDToVND.value = parseFloat(exchangeRate, 10) * 1000;
             }
         })
-    console.log(USDToVND.value);
+    // console.log(USDToVND.value);
 
     let script = document.createElement('script');
     script.setAttribute("data-namespace", "paypal_sdk");
@@ -1183,10 +1186,10 @@ onMounted(async () => {
                     const result = await actions.order.capture();
                     paidFor.value = true;
                     createOrderAxios(order.value)
-                    console.log(result);
+                    // console.log(result);
                 },
                 onError: err => {
-                    console.log(err);
+                    // console.log(err);
                 }
             })
             .render(paypal.value)
