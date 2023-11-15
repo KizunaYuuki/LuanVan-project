@@ -136,7 +136,8 @@
                                     <RouterLink target="_blank" :to="{
                                         name: 'Service Details',
                                         params: { id: relatedProduct?.service_id },
-                                    }" class="flex p-2 bg-white rounded-md border border-separate hover:border-gray-700 hover:bg-gray-100">
+                                    }"
+                                        class="flex p-2 bg-white rounded-md border border-separate hover:border-gray-700 hover:bg-gray-100">
                                         <!-- <div
                                             class="flex items-center h-10 w-10 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                             <img :src="relatedProduct?.image" class="w-full flex-shrink-0 bg-[#607d8b]" />
@@ -171,8 +172,7 @@
                         </div>
                     </div>
 
-                    <div
-                        class="py-10 lg:col-span-2 lg:col-start-1 lg:pb-16 lg:pr-8 lg:pt-6">
+                    <div class="py-10 lg:col-span-2 lg:col-start-1 lg:pb-16 lg:pr-8 lg:pt-6">
                         <!-- Thông tin dịch vụ -->
                         <section class="flex flex-wrap content-center">
                             <div class="text-[#757575]">
@@ -227,7 +227,7 @@
                                     <h1 class="text-[24px] font-[500] py-[8px] flex justify-between items-center">Xếp hạng
                                         và Đánh giá
                                         <button @click="openReviewForm()"
-                                            class="hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms] my-[8px] inline-flex items-center px-[8px] py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-[#0096faee] hover:bg-[#0096fa]">
+                                            class="hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms] my-[8px] inline-flex items-center px-[8px] py-1 font-semibold leading-6 text-sm shadow rounded-md text-white bg-[#0096faee] hover:bg-[#0096fa]">
                                             <span class="md:inline-flex hidden items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
@@ -302,39 +302,47 @@
                                             <Menu as="div" class="relative inline-block text-left">
                                                 <div>
                                                     <MenuButton
-                                                        class="inline-flex w-full justify-center gap-x-1.5 rounded-full px-3 py-3 text-sm font-semibold hover:shadow-sm hover:bg-[#cfcfcf]">
+                                                        class="inline-flex w-full justify-center gap-x-1.5 rounded-full px-3 py-3 text-sm font-semibold hover:shadow-sm">
                                                         <svg width="24" height="24"
-                                                            class="fill-current text-[#70757a] cursor-pointer"
+                                                            class="fill-current hover:text-sky-500 text-[#70757a] cursor-pointer"
                                                             focusable="false" xmlns="http://www.w3.org/2000/svg"
                                                             viewBox="0 0 24 24">
                                                             <path
                                                                 d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z">
                                                             </path>
                                                         </svg>
-                                                        <!-- <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" /> -->
                                                     </MenuButton>
                                                 </div>
 
-                                                <transition enter-active-class="transition ease-out duration-100"
-                                                    enter-from-class="transform opacity-0 scale-95"
-                                                    enter-to-class="transform opacity-100 scale-100"
-                                                    leave-active-class="transition ease-in duration-75"
-                                                    leave-from-class="transform opacity-100 scale-100"
-                                                    leave-to-class="transform opacity-0 scale-95">
+                                                <transition enter-active-class="transition duration-100 ease-out"
+                                                    enter-from-class="transform scale-95 opacity-0"
+                                                    enter-to-class="transform scale-100 opacity-100"
+                                                    leave-active-class="transition duration-75 ease-in"
+                                                    leave-from-class="transform scale-100 opacity-100"
+                                                    leave-to-class="transform scale-95 opacity-0">
                                                     <MenuItems
-                                                        class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                                        <div class="py-1">
+                                                        class="z-[1] absolute right-0 -mt-2 w-60 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                        <div class="px-1 py-1">
                                                             <MenuItem v-slot="{ active }">
-                                                            <a href="#"
-                                                                :class="[active ? 'bg-gray-100 text-gray-700' : 'text-gray-700', 'block px-4 py-2 text-sm']">Báo
-                                                                bài đánh giá vi phạm</a>
+                                                            <button :class="[
+                                                                active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                            ]">
+                                                                <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                                Báo bài đánh giá vi phạm
+                                                            </button>
                                                             </MenuItem>
                                                         </div>
-                                                        <div class="py-1"
-                                                            v-if="isAuthenticated && user.email === review.email">
+
+                                                        <div class="px-1 py-1" v-if="isAuthenticated && user.email === review.email">
                                                             <MenuItem v-slot="{ active }">
-                                                            <button @click="deteleReviewAxios(review.review_id)"
-                                                                :class="[active ? 'bg-gray-100 text-gray-700' : 'text-gray-700', 'block px-4 py-2 text-sm']">Xoá</button>
+                                                            <button @click="deteleReviewAxios(review.review_id)" :class="[
+                                                                active ? 'bg-sky-400 text-white' : 'text-gray-900',
+                                                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                            ]">
+                                                                <div class="mr-2 h-5 w-2 text-violet-400"></div>
+                                                                Xoá
+                                                            </button>
                                                             </MenuItem>
                                                         </div>
                                                     </MenuItems>
@@ -428,10 +436,9 @@
                                 <div class="bg-gray-50 px-4 py-[0.25px] sm:flex sm:flex-row-reverse sm:px-6">
                                     <button @click="submitCreateReviewHandle(review, user_id)" type="button"
                                         class="inline-flex w-full justify-center rounded-md text-sm font-semibold text-white sm:ml-3 sm:w-auto
-                                        my-[8px] items-center px-[8px] py-2 leading-6 shadow bg-[#0096faee] hover:bg-[#0096fa]">Submit</button>
-                                    <button type="button"
-                                        class="inline-flex w-full justify-center rounded-md text-sm font-semibold text-gray-700 sm:ml-3 sm:w-auto
-                                        my-[8px] items-center px-[8px] py-2 leading-6 shadow"
+                                        my-[8px] items-center px-[8px] py-1 leading-6 shadow bg-[#0096faee] hover:bg-[#0096fa]">Submit</button>
+                                    <button type="button" class="inline-flex w-full justify-center rounded-md text-sm font-semibold text-gray-700 sm:ml-3 sm:w-auto
+                                        my-[8px] items-center px-[8px] py-1 leading-6 shadow"
                                         @click="openWriteReviewModal = false" ref="cancelButtonRef">Huỷ</button>
                                 </div>
                             </DialogPanel>
@@ -561,13 +568,14 @@ const deteleReviewAxios = async (id) => {
 
     if (data) {
         // console.log(data);
-        let tempData = reviews.value
-        reviews.value = []
-        for (let i = 0; i < tempData.length; i++) {
-            if (tempData[i].review_id !== id) {
-                reviews.value.push(tempData[i])
-            }
-        }
+        // let tempData = reviews.value
+        // reviews.value = []
+        // for (let i = 0; i < tempData.length; i++) {
+        //     if (tempData[i].review_id !== id) {
+        //         reviews.value.push(tempData[i])
+        //     }
+        // }
+        getReviewByServiceIdAxios(props.id);
     }
 
     if (error) {

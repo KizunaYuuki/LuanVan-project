@@ -13,7 +13,7 @@
                     </div>
 
                     <div class="bg-gray-300 mt-8 rounded-t-lg px-8 py-4 text-3xl font-bold">
-                        <span>Thông tin cá nhân{{ userDataMySQL.phone }}</span>
+                        <span>Thông tin cá nhân</span>
                     </div>
 
                     <div class="bg-white px-8">

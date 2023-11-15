@@ -1,5 +1,5 @@
 <template>
-    <Header></Header>
+        <Header :addToCart="addToCart"></Header>
 
     <main>
         <div class="min-h-[80vh] pt-8">
@@ -484,7 +484,7 @@
                             <!-- Button So sanh dich vu -->
                             <div class="lg:block hidden">
                                 <button @click="handleCompareService()"
-                                    class="mr-3 hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms] m-[8px] inline-flex items-center px-[8px] py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-[#0096faee] hover:bg-[#0096fa]">
+                                    class="mr-3 hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms] m-[8px] inline-flex items-center px-[8px] py-1 font-semibold leading-6 text-sm shadow rounded-md text-white bg-[#0096faee] hover:bg-[#0096fa]">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-3">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -595,7 +595,7 @@
 
                                     <DataView :value="filtered" paginator :rows="5">
                                         <template #list="slotProps">
-                                            <div class="hover:shadow-md hover:shadow-sky-200 hover:bg-[#0096fa0d] border-t-0 border-b-0 border-l-2 border-r-0  hover:border-l-[#d30038]"
+                                            <div class="hover:shadow-md hover:shadow-sky-200 hover:bg-[#0096fa0d] border-t-0 border-b-0 border-l-2 border-r-0 hover:border-l-[#d30038]"
                                                 :class="{ 'bg-red-50/[.6]': (slotProps.data.promotion_price) }">
                                                 <RouterLink :to="{
                                                     name: 'Service Details',
@@ -836,7 +836,7 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, computed } from "vue";
+import { ref, onBeforeMount, computed, reactive } from "vue";
 // FUNCTION
 import { getServices, getInfoReviews } from "@/services/service.service";
 import { getPromotions } from "@/services/promotion.service";
@@ -867,6 +867,9 @@ import { useToast } from "vue-toastification";
 // Get toast interface
 const toast = useToast();
 // DEFINE VARIABLE
+let addToCart = reactive({
+    value: false
+});
 const loading = ref(true);
 const services = ref();
 const address = ref();

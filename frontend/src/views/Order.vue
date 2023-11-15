@@ -248,7 +248,7 @@
                                                 Về Trang chủ
                                             </RouterLink>
                                             <button @click="stepTwo()" type="button"
-                                                class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Tiếp
+                                                class="hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms] my-[8px] inline-flex items-center px-[8px] py-1 font-semibold leading-6 text-sm shadow rounded-md text-white bg-[#0096faee] hover:bg-[#0096fa]">Tiếp
                                                 tục</button>
                                         </div>
                                     </div>
@@ -457,7 +457,7 @@
                                                 type="button" class="text-sm font-semibold leading-6 text-gray-900">Trở
                                                 lại</button>
                                             <button @click="createOrderAxios(order)" type="button"
-                                                class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Đăng
+                                                class="hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms] my-[8px] inline-flex items-center px-[8px] py-1 font-semibold leading-6 text-sm shadow rounded-md text-white bg-[#0096faee] hover:bg-[#0096fa]">Đăng
                                                 ký</button>
                                         </div>
                                     </div>
@@ -802,7 +802,7 @@
                             <div class="space-y-12 mx-auto max-w-4xl">
                                 <div class="mt-6 flex items-center justify-end gap-x-6">
                                     <RouterLink to="/"
-                                        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                        class="hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms] my-[8px] inline-flex items-center px-[8px] py-1 font-semibold leading-6 text-sm shadow rounded-md text-white bg-[#0096faee] hover:bg-[#0096fa]">
                                         <span class="sr-only">Moving Service</span>
                                         <!-- <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt=""> -->
                                         Về Trang chủ

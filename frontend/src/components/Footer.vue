@@ -46,19 +46,19 @@
                     </div>
                     <ul class="flex flex-wrap justify-center text-sm gap-x-6 gap-y-2"><!--[-->
                         <li><a href="/support"
-                                class="font-medium u-text-gray-500 hover:u-text-gray-900 focus:u-text-gray-900">Vận
+                                class="font-medium u-text-gray-500 hover:u-text-gray-900 focus:u-text-gray-900 hover:bg-slate-100 p-2 rounded-md">Vận
                                 chuyển</a>
                         </li>
                         <li><a href="/tracking"
-                                class="font-medium u-text-gray-500 hover:u-text-gray-900 focus:u-text-gray-900">Theo dõi</a>
+                                class="font-medium u-text-gray-500 hover:u-text-gray-900 focus:u-text-gray-900 hover:bg-slate-100 p-2 rounded-md">Theo dõi</a>
                         </li>
                         <li><a href="/support" rel="noopener noreferrer"
-                                class="font-medium u-text-gray-500 hover:u-text-gray-900 focus:u-text-gray-900">Trợ giúp &
+                                class="font-medium u-text-gray-500 hover:u-text-gray-900 focus:u-text-gray-900 hover:bg-slate-100 p-2 rounded-md">Trợ giúp &
                                 Hỗ
                                 trợ</a>
                         </li>
                         <li><a href="/contact" rel="noopener noreferrer"
-                                class="font-medium u-text-gray-500 hover:u-text-gray-900 focus:u-text-gray-900">Liên hệ với
+                                class="font-medium u-text-gray-500 hover:u-text-gray-900 focus:u-text-gray-900 hover:bg-slate-100 p-2 rounded-md">Liên hệ với
                                 chúng tôi</a>
                         </li><!--]-->
                     </ul>
@@ -119,8 +119,9 @@
             <address class="mx-auto w-full max-w-container px-4 sm:px-6 lg:px-8">
                 <div
                     class="not-italic text-center flex items-center justify-center space-x-4 text-sm font-semibold leading-6 text-slate-700 ">
-                    <a href="/terms-of-use ">Điều khoản sử dụng</a>
-                    <div class="h-4 w-px bg-slate-500/20"></div><a href="/privacy-policy">Chính sách bảo mật</a>
+                    <a class="hover:bg-slate-100 p-2 rounded-md" href="/terms-of-use ">Điều khoản sử dụng</a>
+                    <div class="h-4 w-px bg-slate-500/20"></div>
+                    <a class="hover:bg-slate-100 p-2 rounded-md" href="/privacy-policy">Chính sách bảo mật</a>
                 </div>
                 <p class="mt-[16px] text-center text-sm leading-6 text-slate-500">
                     Địa chỉ: Toà nhà XXX, Ngõ 15 XXX, Quận 1, Thành Phố Hồ Chí Minh - Email: cskh@movingservice.com.vn -

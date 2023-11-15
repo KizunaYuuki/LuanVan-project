@@ -1,4 +1,4 @@
-<template>
+<template v-show="services">
     <Header></Header>
     <main class="leading-[131%]">
         <div class="min-h-screen max-w-5xl mx-auto">
@@ -45,7 +45,7 @@
                                     <!-- Service Card -->
                                     <section class="bg-white">
                                         <template v-for="service in services" :key="service.service_id">
-                                            <div class="flex hover:shadow hover:bg-[#0096fa0d] border-t-0 border-b-0 border-l border-r-0 hover:border-l-[#d30038]"
+                                            <div class="hover:shadow-md hover:shadow-sky-200 hover:bg-[#0096fa0d] border-t-0 border-b-0 border-l-2 border-r-0 hover:border-l-[#d30038]"
                                                 :class="{ 'bg-red-50/[.6]': (service.promotion_price) }">
                                                 <RouterLink :to="{
                                                     name: 'Service Details',

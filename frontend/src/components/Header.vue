@@ -16,9 +16,11 @@
                 </button>
             </div>
             <PopoverGroup class="hidden lg:flex lg:gap-x-12 items-center">
-                <RouterLink to="/profile" class="text-[.95rem] font-semibold leading-6 text-[#0096fa]"
+                <RouterLink to="/profile"
+                    class="text-[.95rem] font-semibold leading-6 text-[#0096fa] hover:bg-slate-100 p-2 rounded-md"
                     title="Quản lý đơn hàng của bạn">Thông tin tài khoản</RouterLink>
-                <RouterLink to="/track" class="text-[.94rem] font-semibold leading-6 text-[#0096fa]"
+                <RouterLink to="/track"
+                    class="text-[.94rem] font-semibold leading-6 text-[#0096fa] hover:bg-slate-100 p-2 rounded-md"
                     title="Quản lý đơn hàng của bạn">Theo dõi đơn hàng</RouterLink>
             </PopoverGroup>
             <div class="hidden lg:flex lg:flex-1 lg:justify-end">
