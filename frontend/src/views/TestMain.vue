@@ -593,7 +593,7 @@
                                         </div>
                                     </section>
 
-                                    <DataView :value="filtered" paginator :rows="5">
+                                    <DataView :value="filtered" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]">
                                         <template #list="slotProps">
                                             <div class="hover:shadow-md hover:shadow-sky-200 hover:bg-[#0096fa0d] border-t-0 border-b-0 border-l-2 border-r-0 hover:border-l-[#d30038]"
                                                 :class="{ 'bg-red-50/[.6]': (slotProps.data.promotion_price) }">

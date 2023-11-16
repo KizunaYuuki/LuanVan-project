@@ -29,20 +29,84 @@
                     <LoginButton />
                 </template>
                 <template v-if="isAuthenticated">
-                    <!-- Cart -->
-                    <button @click="cartOpen = true"
-                        class="group flex items-center p-2 mr-[4px] hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
-                        <svg class="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" fill="none"
-                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z">
-                            </path>
-                        </svg>
-                        <span v-if="carts" class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800"> {{
-                            carts.length }} </span>
-                        <span class="sr-only">items in cart, view bag</span>
-                    </button>
-                    <LogoutButton />
+                    <div class="flex items-center">
+                        <!-- Cart -->
+                        <button @click="cartOpen = true"
+                            class="group flex items-center p-2 mr-[4px] hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
+                            <svg class="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z">
+                                </path>
+                            </svg>
+                            <span v-if="carts" class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800"> {{
+                                carts.length }} </span>
+                            <span class="sr-only">items in cart, view bag</span>
+                        </button>
+                        <div>
+                            <!-- Profile dropdown -->
+                            <Menu as="div" class="relative mx-3">
+                                <div>
+                                    <MenuButton
+                                        class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">
+                                        <span class="absolute -inset-1.5" />
+                                        <span class="sr-only">Open user menu</span>
+                                        <img class="h-8 w-8 rounded-full" :src="user.picture" alt="" />
+                                    </MenuButton>
+                                </div>
+                                <transition enter-active-class="transition ease-out duration-100"
+                                    enter-from-class="transform opacity-0 scale-95"
+                                    enter-to-class="transform opacity-100 scale-100"
+                                    leave-active-class="transition ease-in duration-75"
+                                    leave-from-class="transform opacity-100 scale-100"
+                                    leave-to-class="transform opacity-0 scale-95">
+                                    <MenuItems
+                                        class="absolute right-0 z-10 mt-2 w-52 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                        <MenuItem v-slot="{ active }">
+                                        <RouterLink to="/profile"
+                                            :class="[active ? 'bg-sky-400 text-white' : 'text-gray-900', 'px-4 py-2 mx-1 text-sm text-gray-700 rounded-md flex items-center']">
+                                            <span class="mr-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                </svg>
+                                            </span>
+                                            <span>Thông tin cá nhân</span>
+                                        </RouterLink>
+                                        </MenuItem>
+                                        <MenuItem v-slot="{ active }">
+                                        <RouterLink to="/#"
+                                            :class="[active ? 'bg-sky-400 text-white' : 'text-gray-900', 'px-4 py-2 mx-1 text-sm text-gray-700 rounded-md flex items-center']">
+                                            <span class="mr-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077l1.41-.513m14.095-5.13l1.41-.513M5.106 17.785l1.15-.964m11.49-9.642l1.149-.964M7.501 19.795l.75-1.3m7.5-12.99l.75-1.3m-6.063 16.658l.26-1.477m2.605-14.772l.26-1.477m0 17.726l-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205L12 12m6.894 5.785l-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864l-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
+                                                </svg>
+                                            </span>
+                                            <span>Cài đặt</span>
+                                        </RouterLink>
+                                        </MenuItem>
+                                        <MenuItem v-slot="{ active }">
+                                        <a @click.prevent="handleLogout"
+                                            :class="[active ? 'bg-sky-400 text-white' : 'text-gray-900', 'px-4 py-2 mx-1 text-sm text-gray-700 rounded-md flex items-center']">
+                                            <span class="mr-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+                                                </svg>
+                                            </span>
+                                            <span>Đăng xuất</span>
+                                        </a>
+                                        </MenuItem>
+                                    </MenuItems>
+                                </transition>
+                            </Menu>
+                        </div>
+                        <!-- <LogoutButton /> -->
+                    </div>
                 </template>
             </div>
         </nav>
@@ -231,6 +295,7 @@ import {
     PopoverButton,
     PopoverGroup,
     PopoverPanel,
+    Menu, MenuButton, MenuItem, MenuItems
 } from '@headlessui/vue'
 import {
     ArrowPathIcon,
