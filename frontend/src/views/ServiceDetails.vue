@@ -179,7 +179,7 @@
                                 <div class="text-[16px] my-[24px] leading-loose">
                                     <h2 class="font-[500]">Thông tin dịch vụ</h2>
                                     <div v-if="service" class="mt-4">
-                                        <ul role="list" class="list-disc space-y-2 pl-4 text-gray-700">
+                                        <ul role="list" class="list-disc space-y-2 pl-4 text-gray-600 marker:text-sky-400">
                                             <li class="">
                                                 Nhà cung cấp:
                                                 <span class="font-[500]">{{

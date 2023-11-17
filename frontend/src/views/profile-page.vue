@@ -45,10 +45,14 @@
                                 <dt class="text-base font-medium leading-6 text-gray-900">Số điện thoại</dt>
                                 <dd v-if="!edit" class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{
                                     userDataMySQL.phone }}</dd>
-
-                                <dd v-else class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                    <input type="text" v-model="editData.phone" name="phone" id="phone"
-                                        class="w-64 outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-base sm:leading-6">
+                                <dd v-else
+                                    class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0 flex items-center">
+                                    <input type="tel" v-model="editData.phone" name="phone" id="phone"
+                                        pattern="((09|03|07|08|05)+([0-9]{8})\b)"
+                                        class="peer w-64 outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-base sm:leading-6">
+                                    <p class="ml-3 invisible peer-invalid:visible text-pink-600 text-sm">
+                                        Hãy nhập một Số điện thoại hợp lệ
+                                    </p>
                                 </dd>
                             </div>
                             <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0 h-16 flex items-center">
@@ -126,7 +130,7 @@ const getUserByEmailAxios = async (user) => {
         const { data, error } = await createUser(accessToken, userData);
         if (data) {
             // console.log(data);
-            userDataMySQL.value = data; 
+            userDataMySQL.value = data;
             // ERROR, userDataMySQL và editData tự động cập nhật khi mặt dù không dùng v-model hay hàm cập nhật nào (Xảy ra khi  editData.value = data || editData.value = userDataMySQL.value)
             // editData.value = data;
             editData.value.name = data.name;

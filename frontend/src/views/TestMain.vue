@@ -1,11 +1,16 @@
 <template>
-        <Header :addToCart="addToCart"></Header>
+    <Header :addToCart="addToCart"></Header>
 
     <main>
         <div class="min-h-[80vh] pt-8">
+            <!-- IMAGE -->
+            <div class="bg-white">
+                <!-- <img src="https://www.gstatic.com/travel-frontend/animation/hero/flights_nc_4.svg" alt="" class="mx-auto max-w-5xl rounded-md"> -->
+                <!-- <div class="mx-auto max-w-5xl bg-white h-[50vh]" style="background-image:url(https://www.gstatic.com/travel-frontend/animation/hero/flights_nc_4.svg)"></div> -->
+            </div>
             <!-- INPUT - SEARCH BY LOCATION -->
             <div
-                class="mx-1 font-[600] shadow-xl shadow-[#0096fa6a] outline-[0.01px] outline-[#0096fa] outline border-0 border-[#0096fa] bg-white p-4 m-[16px] flex md:justify-evenly justify-center flex-wrap max-w-5xl lg:mx-auto text-gray-600 rounded-lg">
+                class="mx-1 font-[600] shadow-xl shadow-[#0096fa6a] outline-[0.01px] outline-[#0096fa] outline border-0 border-[#0096fa] bg-white p-4 m-[16px] mt-0 flex md:justify-evenly justify-center flex-wrap max-w-5xl lg:mx-auto text-gray-600 rounded-lg">
                 <!-- Gửi từ -->
                 <div class="m-4">
                     <div class="flex items-center justify-between mb-2">
@@ -477,7 +482,7 @@
                 <div class="mx-auto max-w-5xl lg:block hidden">
                     <!-- TITLE -->
                     <div
-                        class="flex items-baseline lg:justify-between justify-end shadow-md lg:px-[8px] p-1.5 bg-[white] rounded-[8px]">
+                        class="flex items-center lg:justify-between justify-end shadow-md lg:px-[8px] p-1.5 bg-[white] rounded-[8px] h-16">
                         <h1 class="text-xl font-bold tracking-tight text-gray-900 hidden lg:block">Vận chuyển hàng hoá</h1>
                         <!-- SORT AND COMPARE -->
                         <div class="flex items-center">
@@ -568,34 +573,37 @@
                                 <!-- DataView -->
                                 <div class="card max-w-5xl mx-auto">
                                     <!-- Service Title  -->
-                                    <section class="flex bg-gray-200 rounded-t-lg">
-                                        <div class="w-10"></div>
+                                    <section class="bg-gray-200 rounded-t-lg">
+                                        <div class="flex mx-2">
+                                            <div class="w-10"></div>
 
-                                        <div class="flex grow">
-                                            <div title="Nhà cung cấp"
-                                                class="w-[17%] text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                                Nhà cung cấp</div>
-                                            <div title="Dịch vụ"
-                                                class="grow text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                                Dịch vụ</div>
-                                            <div title="Thời gian vận chuyển"
-                                                class="w-[19%] text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                                Thời gian</div>
-                                            <div title="Trọng lượng tối đa"
-                                                class="w-[12%] text-[#111827] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                                Trọng lượng</div>
-                                            <div title="Giá dịch vụ"
-                                                class="w-[12%] text-[#111827] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
-                                                Giá</div>
-                                            <div
-                                                class="w-[6%] text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left pr-[1rem] py-[.875rem] relative">
+                                            <div class="flex grow">
+                                                <div title="Nhà cung cấp"
+                                                    class="w-[17%] text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                    Nhà cung cấp</div>
+                                                <div title="Dịch vụ"
+                                                    class="grow text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                    Dịch vụ</div>
+                                                <div title="Thời gian vận chuyển"
+                                                    class="w-[19%] text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                    Thời gian</div>
+                                                <div title="Trọng lượng tối đa"
+                                                    class="w-[12%] text-[#111827] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                    Trọng lượng</div>
+                                                <div title="Giá dịch vụ"
+                                                    class="w-[12%] text-[#111827] font-[600] text-[.95rem] leading-[1.25rem] text-left px-[.75rem] py-[.875rem]">
+                                                    Giá</div>
+                                                <div
+                                                    class="w-[6%] text-[#70757a] font-[600] text-[.95rem] leading-[1.25rem] text-left pr-[1rem] py-[.875rem] relative">
+                                                </div>
                                             </div>
                                         </div>
+
                                     </section>
 
                                     <DataView :value="filtered" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]">
                                         <template #list="slotProps">
-                                            <div class="hover:shadow-md hover:shadow-sky-200 hover:bg-[#0096fa0d] border-t-0 border-b-0 border-l-2 border-r-0 hover:border-l-[#d30038]"
+                                            <div class="hover:scale-[1.008] transition-all duration-[0.15s] ease-in-out delay-[0ms] hover:shadow-md hover:shadow-sky-200 hover:bg-[#0096fa0d] border-gray-200 border-y border-r hover:border-y-[#ffffff00] hover:border-r-[#ffffff00] border-l-[1.5px] hover:border-l-[#d30038] m-2 rounded-lg"
                                                 :class="{ 'bg-red-50/[.6]': (slotProps.data.promotion_price) }">
                                                 <RouterLink :to="{
                                                     name: 'Service Details',
@@ -604,7 +612,7 @@
                                                     <div class="flex">
                                                         <!-- So sánh -->
                                                         <div
-                                                            class="w-10 flex items-center text-ellipsis border-[#dadce0] border-t px-[.75rem] text-[#111827] font-[500] text-[.95rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
+                                                            class="w-10 flex items-center text-ellipsis px-[.75rem] text-[#111827] font-[500] text-[.95rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
 
                                                             <button v-show="!slotProps.data.isInCompareArray"
                                                                 @click.prevent="changeCheckBoxCompare(slotProps.data.service_id)"
@@ -633,7 +641,7 @@
 
                                                         <div class="flex grow">
                                                             <div
-                                                                class="w-[17%] flex items-center text-ellipsis border-[#dadce0] border-t px-[.75rem] text-[#111827] font-[500] text-[.95rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
+                                                                class="w-[17%] flex items-center text-ellipsis px-[.75rem] text-[#111827] font-[500] text-[.95rem] leading-[1.25rem] pr-[.75rem] py-[1rem] whitespace-nowrap">
                                                                 <div class="flex items-center text-ellipsis">
                                                                     <img :src="slotProps.data.image" alt=""
                                                                         class="h-5 w-5 flex-shrink-0 rounded-full bg-slate-400 mr-2" />
@@ -642,17 +650,17 @@
                                                             </div>
 
                                                             <div
-                                                                class="grow flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                                class="grow flex items-center text-ellipsis text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
                                                                 {{ slotProps.data.service_name }}
                                                             </div>
 
                                                             <div
-                                                                class="w-[19%] flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                                class="w-[19%] flex items-center text-ellipsis text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
                                                                 {{ slotProps.data.delivery_date }}
                                                             </div>
 
                                                             <div
-                                                                class="w-[12%] flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[600] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                                class="w-[12%] flex items-center text-ellipsis text-[#6b7280] font-[600] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
                                                                 {{
                                                                     (slotProps.data.weight >= 1000 ? (slotProps.data.weight /
                                                                         1000.0) :
@@ -666,7 +674,7 @@
                                                             </div>
 
                                                             <div v-if="slotProps.data?.price && slotProps.data.promotion_price"
-                                                                class="w-[12%] flex items-center text-ellipsis border-[#dadce0] border-t text-sky-400 font-[600] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                                class="w-[12%] flex items-center text-ellipsis text-sky-400 font-[600] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
                                                                 {{ (slotProps.data.price - (slotProps.data.price *
                                                                     slotProps.data.promotion_price
                                                                     /
@@ -682,7 +690,7 @@
                                                                     }) }}</div>
 
                                                             <div v-else-if="slotProps.data?.price"
-                                                                class="w-[12%] flex items-center text-ellipsis border-[#dadce0] border-t text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
+                                                                class="w-[12%] flex items-center text-ellipsis text-[#6b7280] font-[500] text-[.95rem] leading-[1.25rem] px-[.75rem] py-[1rem] whitespace-nowrap">
                                                                 {{ (slotProps.data.price).toLocaleString('vi-VN', {
                                                                     style: 'currency',
                                                                     currency: 'VND'
@@ -690,10 +698,12 @@
                                                             </div>
 
                                                             <div
-                                                                class="w-[6%] flex items-center justify-between border-[#dadce0] border-t min-[640px]:pr-0 font-[500] text-[.95rem] leading-[1.25rem] text-right pr-[1rem] py-[0.75rem] whitespace-nowrap relative">
+                                                                class="w-[6%] flex items-center justify-between min-[640px]:pr-0 font-[500] text-[.95rem] leading-[1.25rem] text-right pr-[1rem] py-[0.75rem] whitespace-nowrap relative">
                                                                 <div class="flex items-center mr-2">
-                                                                    <button
-                                                                        class="rounded-full hover:bg-gray-200 w-[54px] h-[54px] flex items-center justify-center"
+                                                                    <button :class="[
+                                                                        slotProps.data.append ? 'rotate-270' : '-rotate-90',
+                                                                        'hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms] rounded-full hover:bg-gray-200 w-[48px] h-[48px] flex items-center justify-center focus:outline-none focus:ring-[0.5px] border cursor-pointer border-white ring-[#0096fa] bg-gray-50',
+                                                                    ]"
                                                                         @click.prevent="slotProps.data.append = !slotProps.data.append">
                                                                         <svg focusable="false" width="24" height="24"
                                                                             viewBox="0 0 24 24"

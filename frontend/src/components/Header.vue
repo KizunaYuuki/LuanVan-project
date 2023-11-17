@@ -30,6 +30,15 @@
                 </template>
                 <template v-if="isAuthenticated">
                     <div class="flex items-center">
+                        <button
+                            class="group flex items-center p-2 mr-[4px] hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                            </svg>
+                            <span class="sr-only">NOCITE</span>
+                        </button>
                         <!-- Cart -->
                         <button @click="cartOpen = true"
                             class="group flex items-center p-2 mr-[4px] hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
@@ -190,8 +199,8 @@
                                                 </button>
                                             </div>
                                         </div>
-
-                                        <div class="mt-8">
+                                        <!-- CART CONTENT -->
+                                        <div v-show="carts.length !== 0" class="mt-8">
                                             <div class="flow-root">
                                                 <ul role="list" class="-my-6 divide-y divide-gray-200">
                                                     <li v-for="cart in carts" :key="cart.id">
@@ -238,6 +247,15 @@
 
                                                     </li>
                                                 </ul>
+                                            </div>
+                                        </div>
+                                        <!-- NO SERVICE IN CART -->
+                                        <div v-show="carts.length === 0"
+                                            class="bg-white text-gray-500 flex items-center content-center justify-center rounded-md my-8 text-lg">
+                                            <div class="font-[600]">
+                                                <h1 class=" text-gray-500">
+                                                    Chưa có dịch vụ nào trong Giỏ hàng
+                                                </h1>
                                             </div>
                                         </div>
                                     </div>

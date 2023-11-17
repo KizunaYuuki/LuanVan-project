@@ -95,7 +95,7 @@
                                                         :class="{ 'border-red-600 border': (isValidationError && order.user_name === '') }"
                                                         v-model="order.user_name" type="text" name="name" id="name"
                                                         autocomplete="given-name"
-                                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 px-2 block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                                 </div>
                                             </div>
 
@@ -108,7 +108,10 @@
                                                         :class="{ 'border-red-600 border': (isValidationError && order.email === '') }"
                                                         v-model="order.email" id="email" name="email" type="email"
                                                         autocomplete="email"
-                                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                                                        class="peer outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 px-2 block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                                                    <p class="mt-2 invisible peer-invalid:visible text-pink-600 text-sm">
+                                                        Hãy nhập một Email hợp lệ
+                                                    </p>
                                                 </div>
                                             </div>
 
@@ -120,8 +123,11 @@
                                                 </label>
                                                 <div class="mt-2">
                                                     <input v-model="order.phone" id="tel" name="tel" type="tel"
-                                                        autocomplete="tel"
-                                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                                                        autocomplete="tel" pattern="((09|03|07|08|05)+([0-9]{8})\b)" 
+                                                        class="peer outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 px-2 block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                                                    <p class="mt-2 invisible peer-invalid:visible text-pink-600 text-sm">
+                                                        Hãy nhập một Số điện thoại hợp lệ
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -147,7 +153,7 @@
                                                 <div class="mt-2">
                                                     <input @change="weightCal()" v-model="packageData.height" type="number"
                                                         name="height" id="height" autocomplete="height"
-                                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 px-2 block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                                 </div>
                                             </div>
 
@@ -158,7 +164,7 @@
                                                 <div class="mt-2">
                                                     <input @change="weightCal()" v-model="packageData.width" type="number"
                                                         name="width" id="width" autocomplete="width"
-                                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 px-2 block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                                 </div>
                                             </div>
 
@@ -169,7 +175,7 @@
                                                 <div class="mt-2">
                                                     <input @change="weightCal()" v-model="packageData.lenght" type="number"
                                                         name="lenght" id="lenght" autocomplete="lenght"
-                                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 px-2 block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                                 </div>
                                             </div>
 
@@ -183,7 +189,7 @@
                                                         :class="{ 'border-red-600 border': (isValidationError && packageData.weight === '') }"
                                                         v-model="packageData.weight" type="number" name="volume" id="volume"
                                                         autocomplete="volume"
-                                                        class="rounded-l-md outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                                                        class="rounded-l-md outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 px-2 block w-full py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                                     <span v-if="service"
                                                         class="px-4 bg-gray-300 whitespace-nowrap rounded-r-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 border border-gray-200">&le;
                                                         {{ service.weight }}</span>
@@ -198,7 +204,7 @@
                                                 <div class="mt-2 flex items-center">
                                                     <input v-model="packageData.price" type="text" name="price" id="price"
                                                         autocomplete="price"
-                                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 px-2 block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                                 </div>
                                             </div>
 
@@ -210,7 +216,7 @@
                                                 <div class="mt-2 flex items-center">
                                                     <input v-model="packageData.description" type="text" name="description"
                                                         id="description" autocomplete="description"
-                                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 px-2 block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                                 </div>
                                             </div>
                                         </div>
@@ -269,7 +275,8 @@
                                                 <h3>
                                                     <span>{{ service.service_name }}</span>
                                                 </h3>
-                                                <span class="ml-4" v-if="service.promotion_price || service.promotion_price === 0">
+                                                <span class="ml-4"
+                                                    v-if="service.promotion_price || service.promotion_price === 0">
                                                     {{ (service.promotion_price).toLocaleString('vi-VN', {
                                                         style: 'currency',
                                                         currency: 'VND'
@@ -478,7 +485,8 @@
                                                 <h3>
                                                     <span>{{ service.service_name }}</span>
                                                 </h3>
-                                                <span class="ml-4" v-if="service.promotion_price || service.promotion_price === 0">
+                                                <span class="ml-4"
+                                                    v-if="service.promotion_price || service.promotion_price === 0">
                                                     {{ (service.promotion_price).toLocaleString('vi-VN', {
                                                         style: 'currency',
                                                         currency: 'VND'
