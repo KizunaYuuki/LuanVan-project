@@ -18,7 +18,7 @@
         "@headlessui/vue": "^1.7.16",
         "@heroicons/vue": "^2.0.18",
         "algoliasearch": "4.16.0",
-        "axios": "^1.4.0",
+        "axios": "^1.6.2",
         "chart.js": "^4.4.0",
         "core-js": "^3.6.5",
         "date-fns": "^2.30.0",
