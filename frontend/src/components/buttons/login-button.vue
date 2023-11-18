@@ -11,8 +11,8 @@ const { user } = useAuth0();
 const handleLogin = () => {
     loginWithRedirect({
         appState: {
-            // target: window.location.pathname,
-            target: "/profile",
+            target: window.location.pathname,
+            // target: "/",
         },
     });
 };

@@ -54,7 +54,7 @@
                         </button>
                         <div>
                             <!-- Profile dropdown -->
-                            <Menu as="div" class="relative mx-3">
+                            <Menu as="div" class="relative mx-3 z-20">
                                 <div>
                                     <MenuButton
                                         class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">

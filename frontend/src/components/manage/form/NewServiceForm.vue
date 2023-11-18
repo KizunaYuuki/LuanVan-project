@@ -120,7 +120,7 @@
                                     </div>
                                 </Combobox>
 
-                                <button type="button" class="flex items-center mt-4">
+                                <button @click="goToAddProviderPage()" type="button" class="flex items-center mt-4">
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                             aria-hidden="true" width="20" height="20"
@@ -234,7 +234,7 @@
                                     </div>
                                 </Combobox>
 
-                                <button type="button" class="flex items-center mt-4">
+                                <button @click="goToAddServiceTypePage()" type="button" class="flex items-center mt-4">
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                             aria-hidden="true" width="20" height="20"
@@ -500,6 +500,13 @@ const getLocationsForCreateServiceAxios = async () => {
 function updateFromLocation(data) {
     // console.log(data);
 }
+const goToAddProviderPage = async () => {
+    router.push('/management/provider/new');
+};
+
+const goToAddServiceTypePage = async () => {
+    router.push('/management/service-type/new');
+};
 
 // Tính giá dịch vụ đựa vào bảng giá của nhà cung cấp
 function automaticPriceCalculation(data) {
