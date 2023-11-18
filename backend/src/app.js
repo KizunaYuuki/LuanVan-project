@@ -97,9 +97,8 @@ app.get('/related-product', cors(), (req, res) => {
     python.stdout.on('data', async function (data) {
         console.log('Pipe data from python script ...');
         let relatedProductArray = [];
-        let relatedProductIdArray = convertStringToArray(data.toString());
-
         if (data.toString() !== 'False\n') {
+            let relatedProductIdArray = convertStringToArray(data.toString());
             let result = []
             for (let index = 0; index < relatedProductIdArray.length; index++) {
                 result = await getServiceById(relatedProductIdArray[index]);
@@ -110,7 +109,8 @@ app.get('/related-product', cors(), (req, res) => {
             }
             res.status(200).json(relatedProductArray);
         } else {
-            res.json(data.toString())
+            // console.log(data.toString());
+            res.json(false)
         }
     });
 

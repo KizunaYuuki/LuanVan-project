@@ -147,6 +147,6 @@ def printRelatedProduct(data):
     elif(data==37):
         print([494, 501, 508, 515])
     else:
-        print([])
+        print(False)
 
 printRelatedProduct(result[0])
