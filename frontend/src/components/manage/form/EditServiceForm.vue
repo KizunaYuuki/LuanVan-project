@@ -734,7 +734,7 @@ const updateServiceAxios = async () => {
     // edit data service
     if (service.value.delivery_min_time === '' && service.value.delivery_max_time !== '') {
         if (service.value.delivery_max_time > 24) {
-            service.value.delivery_date = `${service.value.delivery_max_time / 24.0} ngày`
+            service.value.delivery_date = `${(service.value.delivery_max_time / 24.0).toFixed(1)} ngày`
         }
         else {
             service.value.delivery_date = `${service.value.delivery_max_time}h`
@@ -743,7 +743,7 @@ const updateServiceAxios = async () => {
     }
     else if (service.value.delivery_min_time !== '' && service.value.delivery_max_time !== '') {
         if (service.value.delivery_min_time >= 24) {
-            service.value.delivery_date = `${service.value.delivery_min_time / 24.0} - ${service.value.delivery_max_time / 24.0} ngày`
+            service.value.delivery_date = `${(service.value.delivery_min_time / 24.0).toFixed(1)} - ${(service.value.delivery_max_time / 24.0).toFixed(1)} ngày`
         }
         else {
             service.value.delivery_date = `${service.value.delivery_min_time} - ${service.value.delivery_max_time}h`
