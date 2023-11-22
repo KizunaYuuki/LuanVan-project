@@ -24,7 +24,7 @@ let dataDrop = ref({
         labels: [],
         datasets: [
             {
-                label: "Line",
+                label: "Doanh thu",
                 type: "line",
                 data: [],
                 backgroundColor: '#0096fa',
@@ -41,14 +41,14 @@ let dataDrop = ref({
                 borderWidth: 3,
             },
             {
-                label: "Bar",
+                label: "Doanh thu",
                 type: "bar",
                 data: [],
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 205, 86, .5)',
                 ],
                 borderColor: [
-                    'rgb(255, 99, 132, 0.1)',
+                    'rgba(255, 205, 86, .2)',
                 ],
                 pointBackgroundColor: [
                     'rgb(255, 99, 132, 0.5)',
@@ -62,7 +62,31 @@ let dataDrop = ref({
         responsive: true,
         lineTension: 0.4,
         scales: {
+            y: {
+                ticks: {
+                    // Include a dollar sign in the ticks
+                    callback: function (value, index, ticks) {
+                        return value + ' đ';
+                    }
+                }
+            }
         },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function (context) {
+                        let label = context.dataset.label || ''; // Nhãn của dataset
+                        if (label) {
+                            label += ': ';
+                        }
+                        if (context.parsed.y !== null) {
+                            label += context.parsed.y + ' đ'; // Thêm giá trị và đơn vị vào tooltip
+                        }
+                        return label;
+                    }
+                }
+            }
+        }
     }
 })
 

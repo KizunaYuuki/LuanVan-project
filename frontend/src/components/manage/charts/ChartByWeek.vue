@@ -41,7 +41,7 @@ let dataDrop = ref({
         labels: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"],
         datasets: [
             {
-                label: "Line",
+                label: "Doanh thu",
                 type: "line",
                 data: [],
                 backgroundColor: '#0096fa',
@@ -59,7 +59,7 @@ let dataDrop = ref({
                 // fill: 'start'
             },
             {
-                label: "Bar",
+                label: "Doanh thu",
                 type: "bar",
                 data: [],
                 backgroundColor: [
@@ -98,8 +98,31 @@ let dataDrop = ref({
         responsive: true,
         lineTension: 0.4,
         scales: {
+            y: {
+                ticks: {
+                    // Include a dollar sign in the ticks
+                    callback: function (value, index, ticks) {
+                        return  value + ' đ';
+                    }
+                }
+            }
         },
-
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function (context) {
+                        let label = context.dataset.label || ''; // Nhãn của dataset
+                        if (label) {
+                            label += ': ';
+                        }
+                        if (context.parsed.y !== null) {
+                            label += context.parsed.y + ' đ'; // Thêm giá trị và đơn vị vào tooltip
+                        }
+                        return label;
+                    }
+                }
+            }
+        }
     }
 })
 

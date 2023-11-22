@@ -666,7 +666,7 @@
                                                                         1000.0) :
                                                                         slotProps.data.weight).toLocaleString('vi-VN', {
                                                                             minimumFractionDigits: 0,
-                                                                            maximumFractionDigits: 0,
+                                                                            maximumFractionDigits: 1,
                                                                         })
                                                                 }}
                                                                 <span v-if="slotProps.data.weight >= 1000">kg</span>
@@ -846,11 +846,12 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, computed, reactive } from "vue";
+import { ref, onBeforeMount, computed, reactive, onMounted } from "vue";
 // FUNCTION
 import { getServices, getInfoReviews } from "@/services/service.service";
 import { getPromotions } from "@/services/promotion.service";
 import { getAddressForCreateOrder } from "@/services/address.service";
+import { getUserByEmail, createUser } from "@/services/user.service";
 import getTime from 'date-fns/getTime';
 // COMPONENT
 import Header from '@/components/Header.vue';
@@ -1526,7 +1527,38 @@ const getInfoReviewsAxios = async () => {
         filtered.value = services.value;
     }
 };
+// SIGNUP.....
+import { useAuth0 } from "@auth0/auth0-vue";
+const { user } = useAuth0();
+const { getAccessTokenSilently } = useAuth0();
+const handleGetUserByEmail = async (user) => {
+    // edit data
+    const userData = {
+        id: user.value.sub,
+        email: user.value?.email,
+        name: (user.value?.username) ? user.value?.username : user.value.name,
+        phone: null
+    }
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await getUserByEmail(accessToken, userData);
+    if (data) {
+        console.log("Get User By Email");
+    } else {
+        const { data, error } = await createUser(accessToken, userData);
+        if (data) {
+            console.log("Create User");
+        }
+    }
+    if (error) {
+        // console.log(error.message);
+    }
+};
 // GET DATA
+onMounted(() => {
+    if (user.value?.sub) { 
+        handleGetUserByEmail(user);
+    }
+})
 onBeforeMount(() => {
     // run function
     handleGetAddress();

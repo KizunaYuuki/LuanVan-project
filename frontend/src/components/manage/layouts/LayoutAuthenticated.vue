@@ -22,7 +22,7 @@
                 </div>
             </div>
             <!-- ICON -->
-            <div
+            <!-- <div
                 class="xl:pr-[76px] max-h-screen-menu overflow-y-auto lg:overflow-visible absolute w-screen top-14 left-0 shadow-lg lg:w-auto lg:flex lg:static lg:shadow-none hidden">
                 <div class="block lg:flex items-center relative navbar-item-label lg:py-2 lg:px-3">
                     <div class="flex items-center lg:bg-transparent p-3 lg:p-0">
@@ -32,7 +32,7 @@
                         <span class="px-2 font-[600] text-[18px] transition-colors">{{ user.name }}</span>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </nav>
 
         <div class="z-1 transition-position lg:w-auto">
@@ -262,7 +262,7 @@
                                                                     class="block lg:flex items-center relative navbar-item-label lg:py-2 lg:px-3 border-b border-[#383838]">
                                                                     <div class="lg:bg-transparent p-3 lg:p-0">
                                                                         <div class="text-[#7a7a7a]">
-                                                                            SIGNED AS
+                                                                            Đăng nhập bởi
                                                                         </div>
                                                                         <div class="font-[500] text-white">{{ user.email }}
                                                                         </div>
@@ -273,8 +273,7 @@
                                                             <li>
                                                                 <button @click="handleLogout"
                                                                     class="w-full flex cursor-pointer px-3 py-5 text-[#7a7a7a] font-semibold hover:text-white">
-                                                                    <span class="text-ellipsis line-clamp-1 mr-3">Log
-                                                                        out</span>
+                                                                    <span class="text-ellipsis line-clamp-1 mr-3">Đăng xuất</span>
                                                                     <span
                                                                         class="inline-flex justify-center items-center h-6">
                                                                         <svg viewBox="0 0 24 24" width="18" height="18"

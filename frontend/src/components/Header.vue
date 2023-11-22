@@ -30,7 +30,8 @@
                 </template>
                 <template v-if="isAuthenticated">
                     <div class="flex items-center">
-                        <button
+                        <!-- NOTICE -->
+                        <!-- <button
                             class="group flex items-center p-2 mr-[4px] hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500">
@@ -38,7 +39,7 @@
                                     d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
                             </svg>
                             <span class="sr-only">NOCITE</span>
-                        </button>
+                        </button> -->
                         <!-- Cart -->
                         <button @click="cartOpen = true"
                             class="group flex items-center p-2 mr-[4px] hover:scale-[1.03] transition-all duration-[0.3s] ease-in-out delay-[0ms]">
@@ -54,7 +55,7 @@
                         </button>
                         <div>
                             <!-- Profile dropdown -->
-                            <Menu as="div" class="relative mx-3 z-20">
+                            <Menu as="div" class="relative mx-3 z-[102]">
                                 <div>
                                     <MenuButton
                                         class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">
@@ -84,7 +85,7 @@
                                             <span>Thông tin cá nhân</span>
                                         </RouterLink>
                                         </MenuItem>
-                                        <MenuItem v-slot="{ active }">
+                                        <MenuItem v-show="false" v-slot="{ active }">
                                         <RouterLink to="/#"
                                             :class="[active ? 'bg-sky-400 text-white' : 'text-gray-900', 'px-4 py-2 mx-1 text-sm text-gray-700 rounded-md flex items-center']">
                                             <span class="mr-2">
@@ -95,6 +96,19 @@
                                                 </svg>
                                             </span>
                                             <span>Cài đặt</span>
+                                        </RouterLink>
+                                        </MenuItem>
+                                        <MenuItem v-slot="{ active }">
+                                        <RouterLink to="/track"
+                                            :class="[active ? 'bg-sky-400 text-white' : 'text-gray-900', 'px-4 py-2 mx-1 text-sm text-gray-700 rounded-md flex items-center']">
+                                            <span class="mr-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z" />
+                                                </svg>
+                                            </span>
+                                            <span>Theo dõi Đơn hàng</span>
                                         </RouterLink>
                                         </MenuItem>
                                         <MenuItem v-slot="{ active }">
