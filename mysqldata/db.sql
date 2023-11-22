@@ -259,7 +259,7 @@ VALUES
 
 (7, 0, 500, 0, 0, 30000, 35000, 40000),
 
-(8, 0, 500, 0, 0, 29000, 34000, 39000);
+(8, 0, 500, 0, 0, 29000, 34000, 36000);
  
 INSERT INTO services (service_type_id, name, description, delivery_date, delivery_max_time, delivery_min_time, weight, price)
 VALUES 
@@ -3748,6 +3748,98 @@ VALUES
 (591, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận 1', 'TO'), 
 (592, 'Miền Trung', 'Thành phố Đà Nẵng', 'Quận Sơn Trà', 'FROM'),
 (592, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận 1', 'TO');
+
+INSERT INTO services (service_type_id, name, description, delivery_date, delivery_max_time, delivery_min_time, weight, price)
+VALUES 
+-- GHTK
+(7, 'Dịch vụ chuyển phát Tiêu chuẩn - GHTK', '', '3 - 5 ngày', 120, 72, 500, 40000),
+(7, 'Dịch vụ chuyển phát Tiêu chuẩn - GHTK', '', '3 - 5 ngày', 120, 72, 500, 40000),
+(7, 'Dịch vụ chuyển phát Tiêu chuẩn - GHTK', '', '3 - 5 ngày', 120, 72, 500, 40000),
+(7, 'Dịch vụ chuyển phát Tiêu chuẩn - GHTK', '', '3 - 5 ngày', 120, 72, 500, 40000),
+
+(7, 'Dịch vụ chuyển phát Tiêu chuẩn - GHTK', '', '1 - 2 ngày', 48, 24, 500, 35000),
+(7, 'Dịch vụ chuyển phát Tiêu chuẩn - GHTK', '', '1 - 2 ngày', 48, 24, 500, 35000),
+(7, 'Dịch vụ chuyển phát Tiêu chuẩn - GHTK', '', '1 - 2 ngày', 48, 24, 500, 35000),
+(7, 'Dịch vụ chuyển phát Tiêu chuẩn - GHTK', '', '1 - 2 ngày', 48, 24, 500, 35000),
+
+(7, 'Dịch vụ chuyển phát Tiêu chuẩn - GHTK', '', '6h', 6, 0, 500, 30000),
+(7, 'Dịch vụ chuyển phát Tiêu chuẩn - GHTK', '', '6h', 6, 0, 500, 30000),
+(7, 'Dịch vụ chuyển phát Tiêu chuẩn - GHTK', '', '6h', 6, 0, 500, 30000),
+(7, 'Dịch vụ chuyển phát Tiêu chuẩn - GHTK', '', '6h', 6, 0, 500, 30000),
+
+-- GHN
+(8, 'Dịch vụ chuyển phát Tiêu chuẩn - GHN', '', '3 - 4 ngày', 96, 72, 500, 36000),
+(8, 'Dịch vụ chuyển phát Tiêu chuẩn - GHN', '', '3 - 4 ngày', 96, 72, 500, 36000),
+(8, 'Dịch vụ chuyển phát Tiêu chuẩn - GHN', '', '3 - 4 ngày', 96, 72, 500, 36000),
+(8, 'Dịch vụ chuyển phát Tiêu chuẩn - GHN', '', '3 - 4 ngày', 96, 72, 500, 36000),
+
+(8, 'Dịch vụ chuyển phát Tiêu chuẩn - GHN', '', '2 - 3 ngày', 72, 48, 500, 34000),
+(8, 'Dịch vụ chuyển phát Tiêu chuẩn - GHN', '', '2 - 3 ngày', 72, 48, 500, 34000),
+(8, 'Dịch vụ chuyển phát Tiêu chuẩn - GHN', '', '2 - 3 ngày', 72, 48, 500, 34000),
+(8, 'Dịch vụ chuyển phát Tiêu chuẩn - GHN', '', '2 - 3 ngày', 72, 48, 500, 34000),
+
+(8, 'Dịch vụ chuyển phát Tiêu chuẩn - GHN', '', '24h', 24, 0, 500, 29000),
+(8, 'Dịch vụ chuyển phát Tiêu chuẩn - GHN', '', '24h', 24, 0, 500, 29000),
+(8, 'Dịch vụ chuyển phát Tiêu chuẩn - GHN', '', '24h', 24, 0, 500, 29000),
+(8, 'Dịch vụ chuyển phát Tiêu chuẩn - GHN', '', '24h', 24, 0, 500, 29000);
+
+INSERT INTO locations (service_id, domain, province, district, type)
+VALUES 
+-- GHTK
+(593, 'Miền Trung', 'Thành phố Đà Nẵng', 'Quận Sơn Trà', 'FROM'),
+(593, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận 1', 'TO'), 
+(594, 'Miền Trung', 'Thành phố Đà Nẵng', 'Quận Sơn Trà', 'FROM'),
+(594, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận 1', 'TO'), 
+(595, 'Miền Bắc', 'Thành phố Hà Nội', 'Quận Cầu Giấy', 'FROM'),
+(595, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận 1', 'TO'),
+(596, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận 1', 'FROM'), 
+(596, 'Miền Bắc', 'Thành phố Hà Nội', 'Quận Cầu Giấy', 'TO'),
+
+(597, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận 1', 'FROM'),
+(597, 'Miền Nam', 'Tỉnh Vĩnh Long', 'Thành phố Vĩnh Long', 'TO'),
+(598, 'Miền Nam', 'Tỉnh Vĩnh Long', 'Thành phố Vĩnh Long', 'FROM'),
+(598, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận 1', 'TO'),
+(599, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'FROM'),
+(599, 'Miền Trung', 'Thành phố Đà Nẵng', 'Quận Sơn Trà', 'TO'),
+(600, 'Miền Trung', 'Thành phố Đà Nẵng', 'Quận Sơn Trà', 'FROM'),
+(600, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'TO'),
+
+(601, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'FROM'),
+(601, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Huyện Phong Điền', 'TO'),
+(602, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Huyện Phong Điền', 'FROM'),
+(602, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'TO'),
+(603, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận 1', 'FROM'),
+(603, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận Thủ Đức', 'TO'), 
+(604, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận Thủ Đức', 'FROM'),
+(604, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận 1', 'TO'), 
+
+-- GHN
+(605, 'Miền Trung', 'Thành phố Đà Nẵng', 'Quận Sơn Trà', 'FROM'),
+(605, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận 1', 'TO'), 
+(606, 'Miền Trung', 'Thành phố Đà Nẵng', 'Quận Sơn Trà', 'FROM'),
+(606, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận 1', 'TO'), 
+(607, 'Miền Bắc', 'Thành phố Hà Nội', 'Quận Cầu Giấy', 'FROM'),
+(607, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận 1', 'TO'),
+(608, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận 1', 'FROM'), 
+(608, 'Miền Bắc', 'Thành phố Hà Nội', 'Quận Cầu Giấy', 'TO'),
+
+(609, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận 1', 'FROM'),
+(609, 'Miền Nam', 'Tỉnh Vĩnh Long', 'Thành phố Vĩnh Long', 'TO'),
+(610, 'Miền Nam', 'Tỉnh Vĩnh Long', 'Thành phố Vĩnh Long', 'FROM'),
+(610, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận 1', 'TO'),
+(611, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'FROM'),
+(611, 'Miền Trung', 'Thành phố Đà Nẵng', 'Quận Sơn Trà', 'TO'),
+(612, 'Miền Trung', 'Thành phố Đà Nẵng', 'Quận Sơn Trà', 'FROM'),
+(612, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'TO'),
+
+(613, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'FROM'),
+(613, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Huyện Phong Điền', 'TO'),
+(614, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Huyện Phong Điền', 'FROM'),
+(614, 'Miền Trung', 'Tỉnh Thừa Thiên Huế', 'Thành phố Huế', 'TO'),
+(615, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận 1', 'FROM'),
+(615, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận Thủ Đức', 'TO'), 
+(616, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận Thủ Đức', 'FROM'),
+(616, 'Miền Nam', 'Thành phố Hồ Chí Minh', 'Quận 1', 'TO');
 
 INSERT INTO status (name)
 VALUES 

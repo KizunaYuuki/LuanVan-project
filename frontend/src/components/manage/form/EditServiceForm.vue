@@ -73,7 +73,7 @@
                                     </div>
                                 </Combobox>
 
-                                <button type="button" class="flex items-center mt-4">
+                                <button @click="goToAddProviderPage()" type="button" class="flex items-center mt-4">
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                             aria-hidden="true" width="20" height="20"
@@ -145,7 +145,7 @@
                                     </div>
                                 </Combobox>
 
-                                <button type="button" class="flex items-center mt-4">
+                                <button @click="goToAddServiceTypePage()" type="button" class="flex items-center mt-4">
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                             aria-hidden="true" width="20" height="20"
@@ -174,7 +174,7 @@
                                     dịch vụ<strong class="text-[red] ml-[8px]">*</strong></label>
                                 <div class="mt-2">
                                     <input type="text" v-model="service.name" name="service_name" id="service_name"
-                                         class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
@@ -185,7 +185,7 @@
                                 <div class="mt-2">
                                     <textarea v-model="service.description" id="service_description"
                                         name="service_description" rows="3"
-                                         class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
+                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
                                 </div>
                                 <p class="mt-3 text-sm leading-6 text-gray-600">Viết mô tả ngắn gọn về dịch vụ vận
                                     chuyển
@@ -232,7 +232,7 @@
                                     <input @change="automaticPriceCalculation()" v-model="service.weight"
                                         id="service_weight" name="service_weight" type="number"
                                         autocomplete="service_weight"
-                                         class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
@@ -242,7 +242,7 @@
                                     vụ<strong class="text-[red] ml-[8px]">*</strong></label>
                                 <div class="mt-2">
                                     <input v-model="service.price" id="service_price" name="service_price" type="number"
-                                         class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                 </div>
                                 <p class="mt-3 text-sm leading-6 text-gray-600">Giá dịch vụ được tính tự động theo bảng
                                     giá của nhà cung cấp khi đã điền đầy đủ thông tin</p>
@@ -254,7 +254,7 @@
                                 <div class="mt-2">
                                     <input v-model="service.delivery_min_time" type="number"
                                         name="service_delivery_min_time" id="service_delivery_min_time"
-                                         class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
@@ -266,7 +266,7 @@
                                 <div class="mt-2">
                                     <input v-model="service.delivery_max_time" type="number"
                                         name="service_delivery_max_time" id="service_delivery_max_time"
-                                         class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                                        class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                         </div>
@@ -784,6 +784,14 @@ const updateLocationAxios = async (location, location_id) => {
     if (error) {
         // console.log(error);
     }
+};
+// Redic...->
+const goToAddProviderPage = async () => {
+    router.push('/management/provider/new');
+};
+
+const goToAddServiceTypePage = async () => {
+    router.push('/management/service-type/new');
 };
 
 // Submit
