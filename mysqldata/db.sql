@@ -192,7 +192,6 @@ inter_provincial_min_time, inter_provincial_max_time,
 inter_domain_min_time, inter_domain_max_time,
 intra_province_extra_price, inter_provincial_extra_price, inter_domain_extra_price)
 VALUES   
-
 -- VIETTEL
 (1, 'Dịch vụ chuyển phát Nhanh', 0, 2000, 
 12, 24, 24, 48, 48, 72,
@@ -203,7 +202,6 @@ VALUES
 (1, 'Dịch vụ chuyển phát Tiêu chuẩn', 0, 2000, 
 48, 72, 72, 96, 72, 96,
 2100, 3000, 4000),
-
 -- DHL
 (4, 'Dịch vụ chuyển phát Nhanh', 0, 2000,
 72, 96, 72, 120, 120, 144,
@@ -213,8 +211,15 @@ VALUES
 4000, 5000, 17000),
 (4, 'Dịch vụ chuyển phát Tiêu chuẩn', 0, 2000, 
 72, 96, 96, 144, 144, 192,
-3000, 5000, 8000);
-
+3000, 5000, 8000),
+-- GHTK
+(6, 'Dịch vụ chuyển phát Tiêu chuẩn', 0, 500, 
+0, 6, 24, 48, 72, 120,
+2500, 2500, 5000),
+-- GHN
+(5, 'Dịch vụ chuyển phát Tiêu chuẩn', 0, 500, 
+0, 24, 48, 72, 72, 96,
+2500, 2500, 5000);
 
 INSERT INTO price_lists (service_type_id, start_weight, end_weight, basic_price, special_price,
 intra_province_price, inter_provincial_price, inter_domain_price)
@@ -250,19 +255,23 @@ VALUES
 (6, 0, 500, 0, 0, 15000, 18000, 26000),
 (6, 500, 1000, 0, 0, 18000, 22000, 30000),
 (6, 1000, 1500, 0, 0, 18000, 25000, 36000),
-(6, 1500, 2000, 0, 0, 18000, 30000, 44000);
+(6, 1500, 2000, 0, 0, 18000, 30000, 44000),
+
+(7, 0, 500, 0, 0, 30000, 35000, 40000),
+
+(8, 0, 500, 0, 0, 29000, 34000, 39000);
  
 INSERT INTO services (service_type_id, name, description, delivery_date, delivery_max_time, delivery_min_time, weight, price)
 VALUES 
 -- Viettel Chuyen phat nhanh - Noi tinh. Thành phố Hà Nội, Quận Cầu Giấy -> Thành phố Hà Nội, Quận Hoàn Kiếm
 (1, 'Chuyển phát Nhanh - VIETTEL POST', 'Chuyển phát nhanh: Thời gian vận chuyển từ 2-3 ngày đối với các tỉnh thành trong cùng khu vực, 3-5 ngày đối với các tỉnh thành khác khu vực.', '12h - 24h', 24, 12, 50, 11000),
-(1, 'Chuyển phát Nhanh - VIETTEL POST', '', '12h - 24h', 24, 12, 100, 11000),
-(1, 'Chuyển phát Nhanh - VIETTEL POST', '', '12h - 24h', 24, 12, 250, 13000),
-(1, 'Chuyển phát Nhanh - VIETTEL POST', '', '12h - 24h', 24, 12, 500, 16000),
-(1, 'Chuyển phát Nhanh - VIETTEL POST', '', '12h - 24h', 24, 12, 1000, 21000),
-(1, 'Chuyển phát Nhanh - VIETTEL POST', '', '12h - 24h', 24, 12, 1500, 25000),
-(1, 'Chuyển phát Nhanh - VIETTEL POST', '', '12h - 24h', 24, 12, 2000, 27000),
-(1, 'Chuyển phát Nhanh - VIETTEL POST', '', '12h - 24h', 24, 12, 2500, 29000),
+(1, 'Chuyển phát Nhanh - VIETTEL POST', 'Chuyển phát nhanh: Thời gian vận chuyển từ 2-3 ngày đối với các tỉnh thành trong cùng khu vực, 3-5 ngày đối với các tỉnh thành khác khu vực.', '12h - 24h', 24, 12, 100, 11000),
+(1, 'Chuyển phát Nhanh - VIETTEL POST', 'Chuyển phát nhanh: Thời gian vận chuyển từ 2-3 ngày đối với các tỉnh thành trong cùng khu vực, 3-5 ngày đối với các tỉnh thành khác khu vực.', '12h - 24h', 24, 12, 250, 13000),
+(1, 'Chuyển phát Nhanh - VIETTEL POST', 'Chuyển phát nhanh: Thời gian vận chuyển từ 2-3 ngày đối với các tỉnh thành trong cùng khu vực, 3-5 ngày đối với các tỉnh thành khác khu vực.', '12h - 24h', 24, 12, 500, 16000),
+(1, 'Chuyển phát Nhanh - VIETTEL POST', 'Chuyển phát nhanh: Thời gian vận chuyển từ 2-3 ngày đối với các tỉnh thành trong cùng khu vực, 3-5 ngày đối với các tỉnh thành khác khu vực.', '12h - 24h', 24, 12, 1000, 21000),
+(1, 'Chuyển phát Nhanh - VIETTEL POST', 'Chuyển phát nhanh: Thời gian vận chuyển từ 2-3 ngày đối với các tỉnh thành trong cùng khu vực, 3-5 ngày đối với các tỉnh thành khác khu vực.', '12h - 24h', 24, 12, 1500, 25000),
+(1, 'Chuyển phát Nhanh - VIETTEL POST', 'Chuyển phát nhanh: Thời gian vận chuyển từ 2-3 ngày đối với các tỉnh thành trong cùng khu vực, 3-5 ngày đối với các tỉnh thành khác khu vực.', '12h - 24h', 24, 12, 2000, 27000),
+(1, 'Chuyển phát Nhanh - VIETTEL POST', 'Chuyển phát nhanh: Thời gian vận chuyển từ 2-3 ngày đối với các tỉnh thành trong cùng khu vực, 3-5 ngày đối với các tỉnh thành khác khu vực.', '12h - 24h', 24, 12, 2500, 29000),
 
 -- (1, 'Miền Bắc', 'Thành phố Hà Nội', 'Quận Cầu Giấy', 'FROM'), 
 -- (1, 'Miền Bắc', 'Thành phố Hà Nội', 'Quận Hoàn Kiếm', 'TO'),
@@ -3750,59 +3759,117 @@ VALUES
 
 INSERT INTO orders (user_id, status_id, service_id, payment_id, total_amount, email, phone, user_name, created)
 VALUES 
-('auth0|64f15be4634c0df5fc5f565b', 1, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 1 DAY)),
-('auth0|6523b7c841993bd888047c89', 1, 8, 1, 29000, 'time@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 2 DAY)),
+('auth0|64f15be4634c0df5fc5f565b', 1, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 1 DAY)),
+('auth0|6523b7c841993bd888047c89', 1, 8, 1, 29000, 'time@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 2 DAY)),
+('auth0|6523b7c841993bd888047c89', 1, 8, 1, 29000, 'time@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 9 DAY)),
  
-('auth0|64f15be4634c0df5fc5f565b', 2, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY)),
-('auth0|6523b7c841993bd888047c89', 2, 6, 2, 25000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 4 DAY)),
+('auth0|64f15be4634c0df5fc5f565b', 2, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY)),
+('auth0|6523b7c841993bd888047c89', 2, 6, 2, 25000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 4 DAY)),
 
-('auth0|6550c3581e68fa37f8d019a6', 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 0 DAY)),
-('auth0|6550c38d3e05dd89a15733ec', 3, 3, 1, 13000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 1 DAY)),
-('auth0|6523b7c841993bd888047c89', 3, 8, 1, 29000, 'time@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 2 DAY)),
-('auth0|64f15be4634c0df5fc5f565b', 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY)),
-('auth0|6550c38d3e05dd89a15733ec', 3, 5, 1, 21000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 4 DAY)),
-('auth0|64f15be4634c0df5fc5f565b', 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 5 DAY)),
-('auth0|6523b7c841993bd888047c89', 3, 6, 2, 25000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 6 DAY)),
-('auth0|6550c3581e68fa37f8d019a6', 3, 3, 1, 13000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 7 DAY)),
-('auth0|6550c2f51e68fa37f8d01965', 3, 8, 1, 29000, 'time@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 8 DAY)),
-('auth0|6550c3581e68fa37f8d019a6', 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 9 DAY)),
-('auth0|6550c3581e68fa37f8d019a6', 3, 5, 1, 21000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 10 DAY)),
-('auth0|6550c2f51e68fa37f8d01965', 3, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 11 DAY)),
-('auth0|6550c2f51e68fa37f8d01965', 3, 6, 2, 25000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 12 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 0 DAY)),
+('auth0|6550c38d3e05dd89a15733ec', 3, 3, 1, 13000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 1 DAY)),
+('auth0|6523b7c841993bd888047c89', 3, 8, 1, 29000, 'time@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 2 DAY)),
+('auth0|64f15be4634c0df5fc5f565b', 3, 238, 1, 44000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY)),
+('auth0|6550c38d3e05dd89a15733ec', 3, 5, 1, 21000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 4 DAY)),
+('auth0|64f15be4634c0df5fc5f565b', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 5 DAY)),
+('auth0|6523b7c841993bd888047c89', 3, 6, 2, 25000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 6 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 3, 1, 13000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 7 DAY)),
+('auth0|6550c2f51e68fa37f8d01965', 3, 8, 1, 29000, 'time@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 8 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 9 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 5, 1, 21000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 10 DAY)),
+('auth0|6550c2f51e68fa37f8d01965', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 11 DAY)),
+('auth0|6550c2f51e68fa37f8d01965', 3, 6, 2, 25000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 12 DAY)),
 
-('auth0|64f15be4634c0df5fc5f565b', 4, 1, 1, 11000, 'me@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY)),
-('auth0|6523b7c841993bd888047c89', 4, 5, 1, 21000, 'abc@gmail.com', '0332006710', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY));
+('auth0|6550c3581e68fa37f8d019a6', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 0 DAY)),
+('auth0|6550c38d3e05dd89a15733ec', 3, 3, 1, 13000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 1 DAY)),
+('auth0|6523b7c841993bd888047c89', 3, 8, 1, 29000, 'time@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 2 DAY)),
+('auth0|64f15be4634c0df5fc5f565b', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY)),
+('auth0|6550c38d3e05dd89a15733ec', 3, 5, 1, 21000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 4 DAY)),
+('auth0|64f15be4634c0df5fc5f565b', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 5 DAY)),
+('auth0|6523b7c841993bd888047c89', 3, 6, 2, 25000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 6 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 3, 1, 13000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 7 DAY)),
+('auth0|6550c2f51e68fa37f8d01965', 3, 8, 1, 29000, 'time@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 8 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 9 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 5, 1, 21000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 10 DAY)),
+('auth0|6550c2f51e68fa37f8d01965', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 11 DAY)),
+('auth0|6550c2f51e68fa37f8d01965', 3, 6, 2, 25000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 12 DAY)),
+
+-- ADD DATA
+('auth0|6550c3581e68fa37f8d019a6', 3, 154, 1, 233000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 13 DAY)),
+('auth0|6550c38d3e05dd89a15733ec', 3, 3, 1, 13000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 14 DAY)),
+('auth0|6523b7c841993bd888047c89', 3, 8, 1, 29000, 'time@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 15 DAY)),
+('auth0|64f15be4634c0df5fc5f565b', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 16 DAY)),
+('auth0|6550c38d3e05dd89a15733ec', 3, 5, 1, 21000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 17 DAY)),
+('auth0|64f15be4634c0df5fc5f565b', 3, 154, 1, 233000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 18 DAY)),
+('auth0|6523b7c841993bd888047c89', 3, 6, 2, 25000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 19 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 3, 1, 13000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 20 DAY)),
+('auth0|6550c2f51e68fa37f8d01965', 3, 8, 1, 29000, 'time@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 21 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 22 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 5, 1, 21000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 23 DAY)),
+('auth0|6550c2f51e68fa37f8d01965', 3, 154, 1, 233000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 24 DAY)),
+('auth0|6550c2f51e68fa37f8d01965', 3, 6, 2, 25000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 25 DAY)),
+
+('auth0|6550c3581e68fa37f8d019a6', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 26 DAY)),
+('auth0|6550c38d3e05dd89a15733ec', 3, 3, 1, 13000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 27 DAY)),
+('auth0|6523b7c841993bd888047c89', 3, 8, 1, 29000, 'time@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 28 DAY)),
+('auth0|64f15be4634c0df5fc5f565b', 3, 238, 1, 44000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 29 DAY)),
+('auth0|6550c38d3e05dd89a15733ec', 3, 5, 1, 21000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 30 DAY)),
+('auth0|64f15be4634c0df5fc5f565b', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 31 DAY)),
+('auth0|6523b7c841993bd888047c89', 3, 55, 2, 64000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 32 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 3, 1, 13000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 33 DAY)),
+('auth0|6550c2f51e68fa37f8d01965', 3, 8, 1, 29000, 'time@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 34 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 35 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 5, 1, 21000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 36 DAY)),
+('auth0|6550c2f51e68fa37f8d01965', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 37 DAY)),
+('auth0|6550c2f51e68fa37f8d01965', 3, 6, 2, 25000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 38 DAY)),
+
+('auth0|6550c3581e68fa37f8d019a6', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 39 DAY)),
+('auth0|6550c38d3e05dd89a15733ec', 3, 3, 1, 13000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 40 DAY)),
+('auth0|6523b7c841993bd888047c89', 3, 8, 1, 29000, 'time@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 41 DAY)),
+('auth0|64f15be4634c0df5fc5f565b', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 42 DAY)),
+('auth0|6550c38d3e05dd89a15733ec', 3, 5, 1, 21000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 43 DAY)),
+('auth0|64f15be4634c0df5fc5f565b', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 44 DAY)),
+('auth0|6523b7c841993bd888047c89', 3, 143, 2, 127000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 45 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 3, 1, 13000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 46 DAY)),
+('auth0|6550c2f51e68fa37f8d01965', 3, 8, 1, 29000, 'time@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 47 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 48 DAY)),
+('auth0|6550c3581e68fa37f8d019a6', 3, 5, 1, 21000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 49 DAY)),
+('auth0|6550c2f51e68fa37f8d01965', 3, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 50 DAY)),
+('auth0|6550c2f51e68fa37f8d01965', 3, 6, 2, 25000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 51 DAY)),
+
+('auth0|64f15be4634c0df5fc5f565b', 4, 1, 1, 11000, 'me@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY)),
+('auth0|6523b7c841993bd888047c89', 4, 5, 1, 21000, 'abc@gmail.com', '', 'Tim', DATE_SUB(NOW(), INTERVAL 3 DAY));
 
 
-INSERT INTO address (order_id, province, district, ward, type)
-VALUES 
-(1, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
-(1, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
-(2, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Nguyễn Trung Trực', 'FROM'), 
-(2, 'Thành phố Hà Nội', 'Quận Hoàn Kiếm', 'Phường Đồng Xuân', 'TO'), 
-(3, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Nguyễn Trung Trực', 'FROM'), 
-(3, 'Thành phố Hà Nội', 'Quận Hoàn Kiếm', 'Phường Đồng Xuân', 'TO'),
+-- INSERT INTO address (order_id, province, district, ward, type)
+-- VALUES 
+-- (1, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
+-- (1, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
+-- (2, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Nguyễn Trung Trực', 'FROM'), 
+-- (2, 'Thành phố Hà Nội', 'Quận Hoàn Kiếm', 'Phường Đồng Xuân', 'TO'), 
+-- (3, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Nguyễn Trung Trực', 'FROM'), 
+-- (3, 'Thành phố Hà Nội', 'Quận Hoàn Kiếm', 'Phường Đồng Xuân', 'TO'),
 
-(4, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
-(4, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
-(5, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
-(5, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
-(6, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
-(6, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
+-- (4, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
+-- (4, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
+-- (5, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
+-- (5, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
+-- (6, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
+-- (6, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
 
-(7, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
-(7, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
-(8, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
-(8, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
-(9, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
-(9, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
+-- (7, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
+-- (7, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
+-- (8, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
+-- (8, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
+-- (9, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
+-- (9, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
 
-(10, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
-(10, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
-(11, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
-(11, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
-(12, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
-(12, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO');
+-- (10, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
+-- (10, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
+-- (11, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
+-- (11, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO'),
+-- (12, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Phúc Xá', 'FROM'), 
+-- (12, 'Thành phố Hà Nội', 'Quận Ba Đình', 'Phường Điện Biên', 'TO');
 
 INSERT INTO packages (order_id, lenght, width, height, weight, price, description)
 VALUES 
@@ -3824,7 +3891,60 @@ VALUES
 (16, 20, 80, 10, 5000, 300000, 'Hoá Chất'),
 (17, 20, 80, 10, 5000, 400000, 'Hoá Chất'),
 (18, 20, 80, 10, 5000, 3090000, 'Hoá Chất'),
-(19, 20, 80, 10, 5000, 4005000, 'Hoá Chất');
+(19, 20, 80, 10, 5000, 4005000, 'Hoá Chất'),
+(20, 20, 80, 10, 2000, 100000, 'Quần Áo'),
+(21, 20, 80, 10, 3000, 200000, 'Nông Sản'),
+(22, 20, 80, 10, 5000, 300000, 'Hoá Chất'),
+(23, 20, 80, 10, 5000, 400000, 'Hoá Chất'),
+(24, 20, 80, 10, 5000, 3090000, 'Hoá Chất'),
+(25, 20, 80, 10, 5000, 4005000, 'Hoá Chất'),
+(26, 20, 80, 10, 2000, 100000, 'Quần Áo'),
+(27, 20, 80, 10, 3000, 200000, 'Nông Sản'),
+(28, 20, 80, 10, 5000, 300000, 'Hoá Chất'),
+(29, 20, 80, 10, 5000, 400000, 'Hoá Chất'),
+(30, 20, 80, 10, 5000, 3090000, 'Hoá Chất'),
+(31, 20, 80, 10, 5000, 4005000, 'Hoá Chất'),
+(32, 20, 80, 10, 5000, 4005000, 'Hoá Chất'),
+(33, 20, 80, 10, 2000, 100000, 'Quần Áo'),
+(34, 20, 80, 10, 3000, 200000, 'Nông Sản'),
+(35, 20, 80, 10, 5000, 300000, 'Hoá Chất'),
+(36, 20, 80, 10, 5000, 400000, 'Hoá Chất'),
+(37, 20, 80, 10, 5000, 3090000, 'Hoá Chất'),
+(38, 20, 80, 10, 5000, 4005000, 'Hoá Chất'),
+(39, 20, 80, 10, 2000, 100000, 'Quần Áo'),
+(40, 20, 80, 10, 3000, 200000, 'Nông Sản'),
+(41, 20, 80, 10, 5000, 300000, 'Hoá Chất'),
+(42, 20, 80, 10, 5000, 400000, 'Hoá Chất'),
+(43, 20, 80, 10, 5000, 3090000, 'Hoá Chất'),
+(44, 20, 80, 10, 5000, 4005000, 'Hoá Chất'),
+(45, 20, 80, 10, 2000, 100000, 'Quần Áo'),
+(46, 20, 80, 10, 3000, 200000, 'Nông Sản'),
+(47, 20, 80, 10, 5000, 300000, 'Hoá Chất'),
+(48, 20, 80, 10, 5000, 400000, 'Hoá Chất'),
+(49, 20, 80, 10, 5000, 3090000, 'Hoá Chất'),
+(50, 20, 80, 10, 5000, 4005000, 'Hoá Chất'),
+(51, 20, 80, 10, 5000, 4005000, 'Hoá Chất'),
+(52, 20, 80, 10, 2000, 100000, 'Quần Áo'),
+(53, 20, 80, 10, 3000, 200000, 'Nông Sản'),
+(54, 20, 80, 10, 5000, 300000, 'Hoá Chất'),
+(55, 20, 80, 10, 5000, 400000, 'Hoá Chất'),
+(56, 20, 80, 10, 5000, 3090000, 'Hoá Chất'),
+(57, 20, 80, 10, 5000, 4005000, 'Hoá Chất'),
+(58, 20, 80, 10, 2000, 100000, 'Quần Áo'),
+(59, 20, 80, 10, 3000, 200000, 'Nông Sản'),
+(60, 20, 80, 10, 5000, 300000, 'Hoá Chất'),
+(61, 20, 80, 10, 5000, 400000, 'Hoá Chất'),
+(62, 20, 80, 10, 5000, 3090000, 'Hoá Chất'),
+(63, 20, 80, 10, 5000, 4005000, 'Hoá Chất'),
+(64, 20, 80, 10, 2000, 100000, 'Quần Áo'),
+(65, 20, 80, 10, 3000, 200000, 'Nông Sản'),
+(66, 20, 80, 10, 5000, 300000, 'Hoá Chất'),
+(67, 20, 80, 10, 5000, 400000, 'Hoá Chất'),
+(68, 20, 80, 10, 5000, 3090000, 'Hoá Chất'),
+(69, 20, 80, 10, 5000, 4005000, 'Hoá Chất'),
+(70, 20, 80, 10, 5000, 4005000, 'Hoá Chất'),
+(71, 20, 80, 10, 2000, 100000, 'Quần Áo'),
+(72, 20, 80, 10, 2000, 100000, 'Quần Áo');
 
 INSERT INTO reviews (user_id, service_id, rate, comment)
 VALUES 
@@ -3839,70 +3959,4 @@ VALUES
 
 INSERT INTO promotions (service_id, name, description, price, start, end)
 VALUES 
-(1, '30/4', 'Khuyến mãi lớn dịp 30/3', '80', '9999-12-31 23:59:59', '9999-12-31 23:59:59');
-
-SELECT AVG(reviews.rate) as average_rate, COUNT(reviews.id) as totalCount, total.service_id, total.service_name, 
-total.description, total.delivery_date, total.weight, total.price, total.provider_id, total.provider_name, total.image,
-location_from.domain as domain_from, location_from.province as province_from, location_from.district as district_from
-FROM
-(SELECT services.id as service_id, services.name as service_name, services.description, 
-services.delivery_date, services.weight, services.price,
-providers.id as provider_id, providers.name as provider_name, providers.image
-FROM services
-JOIN service_types ON services.service_type_id = service_types.id
-JOIN providers ON service_types.providers_id = providers.id
-ORDER BY services.id) AS total
-JOIN locations as location_from ON total.service_id = location_from.service_id
-JOIN locations as location_to ON total.service_id = location_to.service_id
-LEFT JOIN reviews ON reviews.service_id = total.service_id
-WHERE location_from.type = 'FROM' AND location_to.type = 'TO'
-GROUP BY total.service_id, total.service_name
-ORDER BY total.service_id;
-
-USE freight_service_app;
-SELECT services.id as service_id, services.name as service_name, services.delivery_date, services.delivery_max_time, services.delivery_min_time, services.weight, services.price, services.created,
-providers.id as provider_id, providers.name as provider_name, providers.image,
-location_from.domain as domain_from, location_from.province as province_from, location_from.district as district_from,
-location_to.domain as domain_to, location_to.province as province_to, location_to.district as district_to
-FROM services
-JOIN service_types ON services.service_type_id = service_types.id
-JOIN providers ON service_types.providers_id = providers.id
-JOIN locations as location_from ON services.id = location_from.service_id
-JOIN locations as location_to ON services.id = location_to.service_id
-WHERE location_from.type = 'FROM' AND location_to.type = 'TO'
-ORDER BY services.created DESC;
-
-
-
-
-SELECT orders.id as order_id, orders.created as order_created, orders.total_amount, payments.name as payments_name, 
-status.name as status_name, orders.email, orders.phone, packages.weight, packages.price as package_price
-FROM orders
-JOIN status ON orders.status_id = status.id
-JOIN payments ON orders.payment_id = payments.id
-JOIN packages ON orders.id = packages.order_id
-ORDER BY orders.created DESC;
-
-
-USE freight_service_app;
-SELECT services.id as service_id, services.name as service_name, services.description, services.delivery_date, services.weight, services.price,
-services.delivery_min_time, services.delivery_max_time,
-providers.id as provider_id, providers.name as provider_name, providers.image,
-service_types.name as service_types_name, service_types.id as service_types_id
-FROM services
-JOIN service_types ON services.service_type_id = service_types.id
-JOIN providers ON service_types.providers_id = providers.id
-WHERE services.id = 1;
-
-
-SELECT *
-FROM orders
-WHERE created BETWEEN '2023-10-01' AND '2023-10-31' AND orders.status_id = 3
-ORDER BY created ASC;
-
-
-SELECT SUM(orders.total_amount) AS doanhthu_thang
-FROM orders
-WHERE YEAR(created) = YEAR(CURRENT_DATE())
-AND MONTH(created) = MONTH(CURRENT_DATE());
-
+(1, '30/4', 'Khuyến mãi lớn dịp 30/3', '80', '2023-10-23 23:59:59', '2023-12-31 23:59:59');

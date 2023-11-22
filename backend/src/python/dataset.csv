@@ -1,43 +1,49 @@
 provider,service_type,weight,related_product
-VIETTEL POST,Dịch vụ chuyển phát Nhanh,50,1
-VIETTEL POST,Dịch vụ chuyển phát Nhanh,100,2
-VIETTEL POST,Dịch vụ chuyển phát Nhanh,250,3
-VIETTEL POST,Dịch vụ chuyển phát Nhanh,500,4
-VIETTEL POST,Dịch vụ chuyển phát Nhanh,1000,5
-VIETTEL POST,Dịch vụ chuyển phát Nhanh,1500,6
-VIETTEL POST,Dịch vụ chuyển phát Nhanh,2000,7
-VIETTEL POST,Dịch vụ chuyển phát Nhanh,2500,8
+VIETTEL POST,Dịch vụ chuyển phát Nhanh,50,9
+VIETTEL POST,Dịch vụ chuyển phát Nhanh,100,10
+VIETTEL POST,Dịch vụ chuyển phát Nhanh,250,11
+VIETTEL POST,Dịch vụ chuyển phát Nhanh,500,12
+VIETTEL POST,Dịch vụ chuyển phát Nhanh,1000,13
+VIETTEL POST,Dịch vụ chuyển phát Nhanh,1500,14
+VIETTEL POST,Dịch vụ chuyển phát Nhanh,2000,15
+VIETTEL POST,Dịch vụ chuyển phát Nhanh,2500,16
 
-VIETTEL POST,Dịch vụ chuyển phát Tối ưu,2000,9
-VIETTEL POST,Dịch vụ chuyển phát Tối ưu,2500,10
+VIETTEL POST,Dịch vụ chuyển phát Tối ưu,100,134
+VIETTEL POST,Dịch vụ chuyển phát Tối ưu,250,135
+VIETTEL POST,Dịch vụ chuyển phát Tối ưu,500,136
+VIETTEL POST,Dịch vụ chuyển phát Tối ưu,1000,137
+VIETTEL POST,Dịch vụ chuyển phát Tối ưu,1500,138
+VIETTEL POST,Dịch vụ chuyển phát Tối ưu,2000,131
+VIETTEL POST,Dịch vụ chuyển phát Tối ưu,2500,132
 
-VIETTEL POST,Dịch vụ chuyển phát Tiêu chuẩn,250,11
-VIETTEL POST,Dịch vụ chuyển phát Tiêu chuẩn,500,12
-VIETTEL POST,Dịch vụ chuyển phát Tiêu chuẩn,1000,13
-VIETTEL POST,Dịch vụ chuyển phát Tiêu chuẩn,1500,14
-VIETTEL POST,Dịch vụ chuyển phát Tiêu chuẩn,2000,15
-VIETTEL POST,Dịch vụ chuyển phát Tiêu chuẩn,2500,16
+VIETTEL POST,Dịch vụ chuyển phát Tiêu chuẩn,100,172
+VIETTEL POST,Dịch vụ chuyển phát Tiêu chuẩn,250,178
+VIETTEL POST,Dịch vụ chuyển phát Tiêu chuẩn,500,180
+VIETTEL POST,Dịch vụ chuyển phát Tiêu chuẩn,1000,169
+VIETTEL POST,Dịch vụ chuyển phát Tiêu chuẩn,1500,170
+VIETTEL POST,Dịch vụ chuyển phát Tiêu chuẩn,2000,171
+VIETTEL POST,Dịch vụ chuyển phát Tiêu chuẩn,2500,184
 
-DHL EXPRESS,Dịch vụ chuyển phát Nhanh,100,17
-DHL EXPRESS,Dịch vụ chuyển phát Nhanh,250,18
-DHL EXPRESS,Dịch vụ chuyển phát Nhanh,500,19
-DHL EXPRESS,Dịch vụ chuyển phát Nhanh,1000,20
-DHL EXPRESS,Dịch vụ chuyển phát Nhanh,1500,21
-DHL EXPRESS,Dịch vụ chuyển phát Nhanh,2000,22
-DHL EXPRESS,Dịch vụ chuyển phát Nhanh,2500,23
+DHL EXPRESS,Dịch vụ chuyển phát Nhanh,100,264
+DHL EXPRESS,Dịch vụ chuyển phát Nhanh,250,265
+DHL EXPRESS,Dịch vụ chuyển phát Nhanh,500,266
+DHL EXPRESS,Dịch vụ chuyển phát Nhanh,1000,267
+DHL EXPRESS,Dịch vụ chuyển phát Nhanh,1500,268
+DHL EXPRESS,Dịch vụ chuyển phát Nhanh,2000,269
+DHL EXPRESS,Dịch vụ chuyển phát Nhanh,2500,270
 
-DHL EXPRESS,Dịch vụ chuyển phát Tối ưu,100,24
-DHL EXPRESS,Dịch vụ chuyển phát Tối ưu,250,25
-DHL EXPRESS,Dịch vụ chuyển phát Tối ưu,500,26
-DHL EXPRESS,Dịch vụ chuyển phát Tối ưu,1000,27
-DHL EXPRESS,Dịch vụ chuyển phát Tối ưu,1500,28
-DHL EXPRESS,Dịch vụ chuyển phát Tối ưu,2000,29
-DHL EXPRESS,Dịch vụ chuyển phát Tối ưu,2500,30
+DHL EXPRESS,Dịch vụ chuyển phát Tối ưu,100,369
+DHL EXPRESS,Dịch vụ chuyển phát Tối ưu,250,370
+DHL EXPRESS,Dịch vụ chuyển phát Tối ưu,500,371
+DHL EXPRESS,Dịch vụ chuyển phát Tối ưu,1000,372
+DHL EXPRESS,Dịch vụ chuyển phát Tối ưu,1500,373
+DHL EXPRESS,Dịch vụ chuyển phát Tối ưu,2000,374
+DHL EXPRESS,Dịch vụ chuyển phát Tối ưu,2500,375
 
-DHL EXPRESS,Dịch vụ chuyển phát Tiêu chuẩn,100,31
-DHL EXPRESS,Dịch vụ chuyển phát Tiêu chuẩn,250,32
-DHL EXPRESS,Dịch vụ chuyển phát Tiêu chuẩn,500,33
-DHL EXPRESS,Dịch vụ chuyển phát Tiêu chuẩn,1000,34
-DHL EXPRESS,Dịch vụ chuyển phát Tiêu chuẩn,1500,35
-DHL EXPRESS,Dịch vụ chuyển phát Tiêu chuẩn,2000,36
-DHL EXPRESS,Dịch vụ chuyển phát Tiêu chuẩn,2500,37
+DHL EXPRESS,Dịch vụ chuyển phát Tiêu chuẩn,100,488
+DHL EXPRESS,Dịch vụ chuyển phát Tiêu chuẩn,250,489
+DHL EXPRESS,Dịch vụ chuyển phát Tiêu chuẩn,500,490
+DHL EXPRESS,Dịch vụ chuyển phát Tiêu chuẩn,1000,491
+DHL EXPRESS,Dịch vụ chuyển phát Tiêu chuẩn,1500,492
+DHL EXPRESS,Dịch vụ chuyển phát Tiêu chuẩn,2000,493
+DHL EXPRESS,Dịch vụ chuyển phát Tiêu chuẩn,2500,494
