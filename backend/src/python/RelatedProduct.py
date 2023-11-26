@@ -73,9 +73,9 @@ inputs_n = inputs.drop(['provider','service_type','weight'],axis='columns')
 # print(inputs_n)
 
 # Dừng chương trình khi không tìm thấy index
-if (index_provider == '' or index_service_type == '' or index_weight == ''):
+# if (index_provider == '' or index_service_type == '' or index_weight == ''):
 # if (index_provider == '' or index_service_type == '' or int(sys.argv[3]) == ''):
-# if (index_provider == '' or index_service_type == '' or weight == ''):
+if (index_provider == '' or index_service_type == '' or weight == ''):
     print(False)
     sys.exit()
 
@@ -87,22 +87,28 @@ if index_weight != (len(arr_weight) + 1):
     index_weight = inputs_n['weight_n'][index_weight]
 
 # Tạo model
-model = tree.DecisionTreeClassifier(ccp_alpha=0.01, max_depth=5)
-model2 = tree.DecisionTreeClassifier(ccp_alpha=0.01, max_depth=6)
-model3 = tree.DecisionTreeClassifier(ccp_alpha=0.01, max_depth=7)
-model4 = tree.DecisionTreeClassifier(ccp_alpha=0.01, max_depth=8)
-# model5 = tree.DecisionTreeClassifier(ccp_alpha=0.01, max_depth=9)
-# model6 = tree.DecisionTreeClassifier(ccp_alpha=0.01, max_depth=10)
-# model7 = tree.DecisionTreeClassifier(ccp_alpha=0.01, max_depth=11)
+model = tree.DecisionTreeClassifier(ccp_alpha=0.01, max_depth=1)
+model2 = tree.DecisionTreeClassifier(ccp_alpha=0.01, max_depth=2)
+model3 = tree.DecisionTreeClassifier(ccp_alpha=0.01, max_depth=3)
+model4 = tree.DecisionTreeClassifier(ccp_alpha=0.01, max_depth=4)
+model5 = tree.DecisionTreeClassifier(ccp_alpha=0.01, max_depth=5)
+model6 = tree.DecisionTreeClassifier(ccp_alpha=0.01, max_depth=6)
+model7 = tree.DecisionTreeClassifier(ccp_alpha=0.01, max_depth=7)
+model8 = tree.DecisionTreeClassifier(ccp_alpha=0.01, max_depth=8)
+model9 = tree.DecisionTreeClassifier(ccp_alpha=0.01, max_depth=9)
+model10 = tree.DecisionTreeClassifier(ccp_alpha=0.01, max_depth=10)
 
 # Huấn luyện model
 model.fit(inputs_n.values, target)
 model2.fit(inputs_n.values, target)
 model3.fit(inputs_n.values, target)
 model4.fit(inputs_n.values, target)
-# model5.fit(inputs_n.values, target)
-# model6.fit(inputs_n.values, target)
-# model7.fit(inputs_n.values, target)
+model5.fit(inputs_n.values, target)
+model6.fit(inputs_n.values, target)
+model7.fit(inputs_n.values, target)
+model8.fit(inputs_n.values, target)
+model9.fit(inputs_n.values, target)
+model10.fit(inputs_n.values, target)
 
 # Tính điểm model
 # model.score(inputs_n.values,target)
@@ -113,18 +119,24 @@ result = model.predict([[index_provider,index_service_type,weight]]).tolist()
 result2 = model2.predict([[index_provider,index_service_type,weight]]).tolist()
 result3 = model3.predict([[index_provider,index_service_type,weight]]).tolist()
 result4 = model4.predict([[index_provider,index_service_type,weight]]).tolist()
-# result5 = model5.predict([[index_provider,index_service_type,weight]]).tolist()
-# result6 = model4.predict([[index_provider,index_service_type,weight]]).tolist()
-# result7 = model5.predict([[index_provider,index_service_type,weight]]).tolist()
+result5 = model5.predict([[index_provider,index_service_type,weight]]).tolist()
+result6 = model6.predict([[index_provider,index_service_type,weight]]).tolist()
+result7 = model7.predict([[index_provider,index_service_type,weight]]).tolist()
+result8 = model8.predict([[index_provider,index_service_type,weight]]).tolist()
+result9 = model9.predict([[index_provider,index_service_type,weight]]).tolist()
+result10 = model10.predict([[index_provider,index_service_type,weight]]).tolist()
 
 data = set()
-data.add(result[0])
+# data.add(result[0])
 data.add(result2[0])
 data.add(result3[0])
 data.add(result4[0])
 # data.add(result5[0])
-# data.add(result6[0])
+data.add(result6[0])
 # data.add(result7[0])
+data.add(result8[0])
+# data.add(result9[0])
+data.add(result10[0])
 
 # In kết quả 
 # print(json.dumps(result))
