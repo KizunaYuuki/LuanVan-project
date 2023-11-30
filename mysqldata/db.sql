@@ -28,6 +28,7 @@ CREATE TABLE users (
   name VARCHAR(255) NOT NULL,
   area INT NOT NULL,    
   break_weight FLOAT NOT NULL,
+  basic_time INT,
   
   intra_province_min_time INT,
   intra_province_max_time INT,
@@ -63,8 +64,8 @@ CREATE TABLE services (
   service_type_id INT NOT NULL,
   FOREIGN KEY (service_type_id) REFERENCES service_types(id) ON DELETE CASCADE,
   
-  start_weight FLOAT NOT NULL,
-  end_weight FLOAT NOT NULL,
+  start_weight INT NOT NULL,
+  end_weight INT NOT NULL,
   basic_price FLOAT NOT NULL,
   special_price FLOAT NOT NULL,
   intra_province_price FLOAT NOT NULL,
