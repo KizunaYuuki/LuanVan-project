@@ -50,14 +50,14 @@
                                 <label for="address" class="block text-sm font-medium leading-6 text-gray-900">Địa
                                     chỉ<strong class="text-[red] ml-[8px]">*</strong></label>
                                 <div class="mt-2">
-                                    <input v-model="providerData.address" type="address" name="address" id="address"
+                                    <input v-model="providerData.address" type="address" name="address" id="address" autocomplete="address-level1"
                                         class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 px-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
                             <div class="sm:col-span-4">
                                 <label for="image" class="block text-sm font-medium leading-6 text-gray-900">Logo nhà cung
-                                    cấp</label>
+                                    cấp<strong class="text-[red] ml-[8px]">*</strong></label>
                                 <div class="mt-2">
                                     <textarea v-model="providerData.image" id="image" name="image" rows="3"
                                         class="outline-none hover:border-[#9aa0a6] shadow-inner border border-gray-200 pl-[14px] block w-full rounded-md py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6" />

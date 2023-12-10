@@ -336,7 +336,7 @@
                                                                 </button>
                                                                 </MenuItem>
 
-                                                                <MenuItem v-show="data.status_name === 'Đã xác nhận'"
+                                                                <MenuItem
                                                                     v-slot="{ active }">
                                                                 <button @click="completeOrderAxios(data.order_id)" :class="[
                                                                     active ? 'bg-sky-400 text-white' : 'text-gray-900',

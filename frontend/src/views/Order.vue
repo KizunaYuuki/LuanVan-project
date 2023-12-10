@@ -952,6 +952,7 @@ const getServiceByIdAxios = async (id) => {
         // PUHS DATA TO ORDER
         order.value.user_name = (user.value?.name === undefined) ? '' : user.value?.name;
         order.value.phone = (user.value?.phone === undefined) ? '' : user.value?.phone;
+        order.value.email = (user.value?.email === undefined) ? '' : user.value?.email;
     }
 
     if (error) {
